@@ -263,7 +263,7 @@ require 'php/conexion.php';
                <a class="nav-item nav-link" id="menu-torneos-fifa" data-toggle="pill" href="#torneos-fifa" role="tab" aria-controls="torneos-fifa" aria-selected="false">FIFA</a>
                <a class="nav-item nav-link" id="menu-torneos-volley" data-toggle="pill" href="#torneos-volley" role="tab" aria-controls="torneos-volley" aria-selected="false">Voleibol</a>
                <a class="nav-item nav-link" id="menu-torneos-basquet" data-toggle="pill" href="#torneos-basquet" role="tab" aria-controls="torneos-basquet" aria-selected="false">Basquétbol</a>
-               <a class="nav-item nav-link" id="menu-torneos-otros" data-toggle="pill" href="#torneos-otros" role="tab" aria-controls="torneos-otros" aria-selected="false">  Otros</a>
+               <a class="nav-item nav-link" id="menu-torneos-otros" data-toggle="pill" href="#torneos-otros" role="tab" aria-controls="torneos-otros" aria-selected="false">  Otros torneos</a>
                <a class="nav-item nav-link" id="menu-torneos-equipos" data-toggle="pill" href="#torneos-equipos" role="tab" aria-controls="torneos-equipos" aria-selected="false">Equipos</a>
             </div>
             <br>
@@ -557,95 +557,235 @@ require 'php/conexion.php';
                </div>
 
                <!--OTROS TORNEOS-->
-               <div class="tab-pane fade" id="torneos-otros" role="tabpanel" aria-labelledby="menu-torneos-otros">
-                  <table class="table table-hover">
-                      <tr>
-                          <th>Nombre del Equipo</th>
-                          <th>Disciplina</th>
-                      </tr>
-                      <tbody>
+                <div class="tab-pane fade" id="torneos-otros" role="tabpanel" aria-labelledby="menu-torneos-otros">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Nombre del Equipo</th>
+                            <th>Disciplina</th>
+                        </tr>
+                        <tbody>
+                        <form method="post" id="registraEquipo" name="registraEquipo">
+                            <?php
+                            $sql= "select id,nombre_torneo, fecha_inicio from creacion_torneo where disciplina = 'otro'";
+                            $result=mysqli_query($conexion,$sql);
+                            while($mostrar=mysqli_fetch_array($result)){
 
-                      <?php
-                      $sql= "select nombre_torneo, fecha_inicio from creacion_torneo where disciplina = 'otro'";
-                      $result=mysqli_query($conexion,$sql);
-                      while($mostrar=mysqli_fetch_array($result)){
-
-                          ?>
-                          <tr>
-                              <td><?php echo $mostrar['nombre_torneo'] ?></td>
-                              <td><?php echo $mostrar['fecha_inicio'] ?></td>
-                          </tr>
-                          <?php
-                      }
-                      ?>
-                      </tbody>
-                  </table>
-               </div>
+                                ?>
+                                <tr>
+                                    <td><?php echo $mostrar['nombre_torneo'] ?></td>
+                                    <td><?php echo $mostrar['fecha_inicio'] ?>
+                                        <input type="hidden" value="<?php echo $mostrar['id'] ?>" name="idtorneo">
+                                    </td>
+                                    <td><button type="submit" class="btn btn-outline-primary" data-toggle="modal" name="unirse" >Ingresar</button></td>
 
 
-               <!--EQUIPOS-->
-               <div class="tab-pane fade" id="torneos-equipos" role="tabpanel" aria-labelledby="menu-torneos-equipos">
-                   <form action="php/registro-usuario-a-equipo.php" method="post"></form>
-                      <table class="table table-hover">
-                          <tr>
-                              <th>Nombre del Equipo</th>
-                              <th>Disciplina</th>
-                              <th></th>
-                          </tr>
-                          </thead>
-                          <tbody>
-                          <?php
-                          $sql= "select * from equipos";
-                          $result=mysqli_query($conexion,$sql);
+                                </tr>
+                                <?php
+                            }
+                            ?>
+                        </form>
+                        </tbody>
 
-                          $pop = 0;
+                    </table>
+                </div>
 
-                          while($mostrar=mysqli_fetch_array($result)){
+                <!--EQUIPOS-->
+                <div class="tab-pane fade" id="torneos-equipos" role="tabpanel" aria-labelledby="menu-torneos-equipos">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Nombre del Equipo</th>
+                            <th>Disciplina</th>
+                            <th>Tipo de equipo</th>
+                            <th></th>
+                        </tr>
+                        <tbody>
+                        <form method="post" id="registraInt" name="registraInt">
+                            <?php
+                            $sql= "SELECT `equipos`.`id`,`equipos`.`integrantes`, `equipos`.`contrasena`, 
+                                `equipos`.`nombre_equipo`, `equipos`.`creacion`, `equipos`.`id_lider`, 
+                                `equipos`.`privado`, `equipos`.`torneo`, `equipos`.`id_torneo`, 
+                                `creacion_torneo`.`nombre_torneo` FROM `equipos` INNER JOIN `creacion_torneo` 
+                                ON `equipos`.`id_torneo` = creacion_torneo.id";
+                            $result=mysqli_query($conexion,$sql);
 
-                              $pop = $mostrar['id'];
+                            $pop = 0;
 
+                            while($mostrar=mysqli_fetch_array($result)){
+                            $pop = $mostrar['id'];
+                            ?>
+                            <tr>
+                                <td><?php echo $mostrar['nombre_equipo'] ?></td>
+                                <td><?php echo $mostrar['nombre_torneo'] ?></td>
+                                <td><?php if($mostrar['privado']==0){echo "publico";}else{echo "privado";} ?></td>
+                                <?php
+                                if ($mostrar['privado'] == 0){
+                                    ?>
+                                    <!--BOTON PUBLICO-->
 
+                                    <td><button type="submit" class="btn btn-outline-primary" name="unirse">Ingresar</button>
+                                        <input type="hidden" name="estatus" value="0">
+                                        <input type="hidden" name="idEquipo" value="<?php echo $mostrar['id'] ?>">
+                                    </td>
 
-                          ?>
-                          <tr>
-                              <td><?php echo $mostrar['nombre_equipo'] ?></td>
-                              <td><?php echo $mostrar['torneo'] ?></td>
-                              <?php
-                              if ($mostrar['privado'] == 0){
+                                    <?php
+                                }else{
+                                    ?>
+                                    <td><button type="button" class="btn btn-outline-primary" data-toggle="modal" name="unirse" value="<?php echo $mostrar['id'] ?>" data-target="#AgregarContraEquipo">Ingresar</button></td>
+                                    <?php
+                                }
+                                ?>
 
-                              ?>
-                                      <!--BOTON PUBLICO-->
-                                  <form method="post" action="php/registro-usuario-a-equipo.php">
-                                      <td><button type="submit" class="btn btn-outline-primary" onclick="ingreso()" name="unirse">Ingresar</button></td>
-                                      <input type="hidden" name="estatus" value="0">
-                                      <input type="hidden" name="idEquipo" value="<?php echo $mostrar['id'] ?>">
-                                  </form>
-                              <?php
-                              }else{
-                                  ?>
-                                  <td><button type="submit" class="btn btn-outline-primary" data-toggle="modal" name="unirse" value="<?php echo $mostrar['id'] ?>" data-target="#AgregarContraEquipo">Ingresar</button></td>
-                              <?php
-                              }
-                              ?>
-                          </tr>
-                              <?php
-                          }
-                          ?>
-                          </tbody>
-                      </table>
-               </form>
-               </div>
+                                <?php
+                                }
+                                ?>
+                            </tr>
+                        </form>
+                        </tbody>
+                    </table>
+
+                </div>
 
                 <script>
-                    function ingreso (){
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Te has inscrito',
-                            text: 'recuerda registrar tu salida',
-                            timer: 2000,
-                            showConfirmButton: false,
+                    $(document).ready(function() {
+                        $("#registraEquipo").on('submit', function (e) {
+                            e.preventDefault();
+                            $.ajax({
+                                type: 'POST',
+                                url: 'php/otoneos.php',
+                                data: $('#registraEquipo').serialize(),
+                                cache: false,
+                                dataType: 'json',
+                                success: function (data) {
+                                    if (data.status == "entra") {///////registro exitoso
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Estas registrado',
+                                            text: 'Se te enviará un correo para ver los detalles del torneo',
+                                            timer: 2000,
+                                            showConfirmButton: false,
+                                        });
+                                    } else if (data.status == "ya") {///////registrado
+                                        Swal.fire({
+                                            icon: 'info',
+                                            title: 'Ya estas registrado',
+                                            text: 'No puedes registrate de nuevo',
+
+                                            showConfirmButton: false,
+                                        });
+                                    } else if (data.status == "error") {///////registrado
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Inicia sesión',
+                                            text: 'Debes iniciar sesión para poder inscribirte',
+                                            timer: 2000,
+                                            showConfirmButton: false,
+                                        });
+                                    }else if (data.status == "salida") {///////registrado
+                                        Swal.fire({
+                                            icon: 'info',
+                                            title: 'El torneo ya llego a su maximo de participantes',
+                                            text: 'Debes iniciar sesión para poder inscribirte',
+                                            timer: 2000,
+                                            showConfirmButton: false,
+                                        });
+                                    }
+                                }
+                            });
                         });
-                    }
+
+/////////torneos publicos
+                        $("#registraInt").on('submit', function (e) {
+                            e.preventDefault();
+                            $.ajax({
+                                type: 'POST',
+                                url: 'php/registro-usuario-a-equipo.php',
+                                data: $('#registraInt').serialize(),
+                                cache: false,
+                                dataType: 'json',
+                                success: function (data) {
+                                    if (data.status == "ya") {///////registrado
+                                        Swal.fire({
+                                            icon: 'info',
+                                            title: 'Ya estás registrado',
+                                            text: 'No puedes registrate a otro equipo en el mismo torneo',
+                                            timer: 2000,
+                                            showConfirmButton: false,
+                                        });
+                                    } else if (data.status == "entrapublico") {///////registrado
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Ya estás registrado',
+                                            text: 'Tu capitan te avisara sobre los partidos',
+                                            timer: 2000,
+                                            showConfirmButton: false,
+                                        });
+                                    }else if (data.status == "salida") {///////registrado
+                                        Swal.fire({
+                                            icon: 'info',
+                                            title: 'El equipo ya llego a su maximo de participantes',
+                                            text: 'Debes iniciar sesión para poder inscribirte'
+                                            timer: 2000,
+                                            showConfirmButton: false,
+                                        });
+                                    }else if (data.status == "no") {///////registrado
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Inicia sesión',
+                                            text: 'Debes iniciar sesión para poder inscribirte',
+                                            timer: 2000,
+                                            showConfirmButton: false,
+                                        });
+                                    }
+                                }
+                            });
+                        });
+////////torneos privados
+                        $("#prueba").on('submit', function (e) {
+                            e.preventDefault();
+                            $.ajax({
+                                type: 'POST',
+                                url: 'php/registro-usuario-a-equipo.php',
+                                data: $('#prueba').serialize(),
+                                cache: false,
+                                dataType: 'json',
+                                success: function (data) {
+                                    if (data.status == "entraprivado") {///////registro exitoso
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Estás registrado',
+                                            text: 'Tu capitan te informara sobre los partidos',
+                                            timer: 2000,
+                                            showConfirmButton: false,
+                                        });
+                                    } else if (data.status == "ya") {///////registrado
+                                        Swal.fire({
+                                            icon: 'info',
+                                            title: 'Ya estás registrado',
+                                            text: 'No puedes registrate de nuevo',
+                                            timer: 2000,
+                                            showConfirmButton: false,
+                                        });
+                                    } else if (data.status == "no") {///////registrado
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Inicia sesión',
+                                            text: 'Debes iniciar sesión para poder inscribirte',
+                                            timer: 2000,
+                                            showConfirmButton: false,
+                                        });
+                                    } else if (data.status == "equivocado") {///////registrado
+                                        Swal.fire({
+                                            icon: 'info',
+                                            title: 'Contraseña incorrecta',
+                                            text: 'Revisa la contraseña',
+                                            timer: 2000,
+                                            showConfirmButton: false,
+                                        });
+                                    }
+                                }
+                            });
+                        });
+                    });
                 </script>
 
 
