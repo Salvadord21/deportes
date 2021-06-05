@@ -16,19 +16,36 @@ if (!empty($idusu)){
             $torneosselect = $torneos[$i];
         }
 
-        $registro = "INSERT INTO equipos (id_lider, nombre_equipo, integrantes, torneo, contrasena,privado, creacion) 
+        if ($estatuspriv==0){
+            $registro = "INSERT INTO equipos (id_lider, nombre_equipo, integrantes, id_torneo, contrasena,privado, creacion) 
                       VALUES ('$idusu', '$nomequipo',0,'$torneosselect','$pwdequipo','$estatuspriv', NOW())";
 
-        $query = mysqli_query($conexion, $registro);
+            $query = mysqli_query($conexion, $registro);
 
-        if ($query){
-            header('location: ../torneo.php');
-        }else {
-            echo mysqli_error($conexion);
-            $_SESSION['msg_error'] = 'Error en sentencia sql: ' . mysqli_error($conexion);
+            if ($query){
+                header('location: ../torneo.php');
+            }else {
+                echo mysqli_error($conexion);
+                $_SESSION['msg_error'] = 'Error en sentencia sql: ' . mysqli_error($conexion);
+            }
+        }else if ($estatuspriv==1){
+            $registro1 = "INSERT INTO equipos (id_lider, nombre_equipo, integrantes, id_torneo, contrasena,privado, creacion) 
+                      VALUES ('$idusu', '$nomequipo',1,'$torneosselect','$pwdequipo','$estatuspriv', NOW())";
+
+            $query2 = mysqli_query($conexion, $registro1);
+
+            if ($query2){
+                header('location: ../torneo.php');
+            }else {
+                echo mysqli_error($conexion);
+                $_SESSION['msg_error'] = 'Error en sentencia sql: ' . mysqli_error($conexion);
+            }
         }
 
-}else{
+
+
+
+    }else{
         $_SESSION['msg_error'] = 'Complete todos los campos';
     }
 }else{

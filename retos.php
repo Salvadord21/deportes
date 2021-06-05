@@ -50,7 +50,7 @@ include 'php/conexion.php';
                      <?php
                      $sql= "SELECT * FROM `creacion_reto` WHERE fecha_inicio = ( SELECT MAX(fecha_inicio)  FROM creacion_reto)";
                      $result= mysqli_query($conexion,$sql);
-                     while($mostrar=mysqli_fetch_array($result)){
+                     if($mostrar=mysqli_fetch_array($result)){
 
                          ?>
                          <h4><?php echo $mostrar['nombre_reto'] ?></h4>
@@ -111,8 +111,13 @@ include 'php/conexion.php';
                              </div>
                          </form>
 
-                         <?php
 
+                         <?php
+                     }else{
+                     ?>
+                     <h4>Pronto tendremos retos disponobles</h4>
+                     <h6>Revisa nuestras redes sociales para saber mas</h6>
+                         <?php
                      }
                      ?>
 
@@ -146,7 +151,7 @@ include 'php/conexion.php';
                          <?php
                          $sql= "SELECT * FROM `creacion_reto` WHERE fecha_inicio = ( SELECT MAX(fecha_inicio) FROM `creacion_reto`)";
                          $result= mysqli_query($conexion,$sql);
-                         while($mostrar=mysqli_fetch_array($result)){
+                         if($mostrar=mysqli_fetch_array($result)){
                              $url=$mostrar['url'];
                              $xt=parse_url($url, PHP_URL_QUERY);
                              $arr1 = str_split($xt);;
@@ -165,6 +170,11 @@ include 'php/conexion.php';
                              }
 
                              ?>
+                             <?php
+                         }else{
+                             ?>
+                             <iframe width="560" height="315" src="https://www.youtube.com/embed/aeQg_ZE2-7s"  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
                              <?php
                          }
                          ?>
