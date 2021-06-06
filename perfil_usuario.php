@@ -75,19 +75,19 @@ $idprueba=$_SESSION['id_usuario'];;
                     $resultado = mysqli_query($conexion, $sql);
 
                     if($resultado){
-                    $encontrados = mysqli_num_rows($resultado);
+                        $encontrados = mysqli_num_rows($resultado);
 
                         if($encontrados == 1){
 
-                        $fila = mysqli_fetch_assoc($resultado);
+                            $fila = mysqli_fetch_assoc($resultado);
 
-                        $nombre = $fila['nombre'];
-                        $apellidopat = $fila['apellido_paterno'];
+                            $nombre = $fila['nombre'];
+                            $apellidopat = $fila['apellido_paterno'];
                             $apellidomat = $fila['apellido_materno'];
-                        $matricula = $fila['matricula'];
-                        $telefono = $fila['telefono'];
-                        $area = $fila['area'];
-                        $correo = $fila['correo'];
+                            $matricula = $fila['matricula'];
+                            $telefono = $fila['telefono'];
+                            $area = $fila['area'];
+                            $correo = $fila['correo'];
 
                         }
                     }
@@ -248,7 +248,7 @@ $idprueba=$_SESSION['id_usuario'];;
                                             <td><?php echo $mostrar['estatura'] ?></td>
                                             <td><?php $x=(10000*(($mostrar['peso']/($mostrar['estatura']*$mostrar['estatura']))));
 
-                                            echo round($x, 2);
+                                                echo round($x, 2);
                                                 if($x<=17){
                                                     echo " Infrapeso";
                                                 }
@@ -304,129 +304,45 @@ $idprueba=$_SESSION['id_usuario'];;
                                         <th>nota</th>
                                     </tr>
                                     <?php
-                                    $sql= "select retos_subidos.usuarios_id, creacion_reto.nombre_reto, retos_subidos.estado, 
-                                            retos_subidos.calificacion, retos_subidos.nota from retos_subidos INNER join creacion_reto 
-                                            on creacion_reto.id= retos_subidos.id_reto WHERE retos_subidos.usuarios_id= '$_SESSION[id_usuario]'";
+                                    $sql= "select retos_subidos.usuarios_id, creacion_reto.nombre_reto, retos_subidos.estado, retos_subidos.calificacion, retos_subidos.nota from retos_subidos INNER join creacion_reto on creacion_reto.id= retos_subidos.creacion_reto_id WHERE retos_subidos.usuarios_id= '$_SESSION[id_usuario]'";
 
                                     $result=mysqli_query($conexion,$sql);
 
                                     while($mostrar=mysqli_fetch_array($result)){
                                         $cali=$mostrar['calificacion'];
 
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $mostrar['nombre_reto'] ?></td>
+                                            <td><?php
+                                                if ($mostrar['estado']==0){
+                                                    echo 'Revisando';
+                                                }elseif($mostrar['estado']==1){
+                                                    echo 'Revisado';
+                                                }
+                                                ?>
+                                            </td>
+                                            <td><?php
+                                                if ($cali=='1'){
+                                                    echo '<img src="imgs/christmas-star_112199.png" alt="" width="30px">';
+                                                }elseif ($cali=='2'){
+                                                    echo '<img src="imgs/christmas-star_112199.png" alt="" width="30px"> <img src="imgs/christmas-star_112199.png" alt="" width="30px">';
+                                                }elseif ($cali=='3'){
+                                                    echo '<img src="imgs/christmas-star_112199.png" alt="" width="30px">  <img src="imgs/christmas-star_112199.png" alt="" width="30px"> <img src="imgs/christmas-star_112199.png" alt="" width="30px">';
+                                                }elseif ($cali=='4'){
+                                                    echo 'tu reto fue rechazado';
+                                                }
+                                                ?></td>
+                                            <td><?php echo $mostrar['nota'] ?></td>
+                                        </tr>
+                                        <?php
+                                    }
                                     ?>
-                                    <tr>
-                                        <td><?php echo $mostrar['nombre_reto'] ?></td>
-                                        <td><?php
-                                            if ($mostrar['estado']==0){
-                                                echo 'Revisando';
-                                            }elseif($mostrar['estado']==1){
-                                                echo 'Revisado';
-                                            }
-                                            ?>
-                                        </td>
-                                        <td><?php
-                                            if ($cali=='1'){
-                                                echo '<img src="imgs/christmas-star_112199.png" alt="" width="30px">';
-                                            }elseif ($cali=='2'){
-                                                echo '<img src="imgs/christmas-star_112199.png" alt="" width="30px"> <img src="imgs/christmas-star_112199.png" alt="" width="30px">';
-                                            }elseif ($cali=='3'){
-                                                echo '<img src="imgs/christmas-star_112199.png" alt="" width="30px">  <img src="imgs/christmas-star_112199.png" alt="" width="30px"> <img src="imgs/christmas-star_112199.png" alt="" width="30px">';
-                                            }elseif ($cali=='4'){
-                                                echo 'tu reto fue rechazado';
-                                            }
-                                            ?></td>
-                                        <td><?php echo $mostrar['nota'] ?></td>
-                                    </tr>
-                                    <?php
-                                                            }
-                                                            ?>
                                 </table>
                             </div>
                         </div>
                     </div>
-                    <!--Equipos-->
-                    <div class="card">
-                        <div class="card-header" id="headingTwo">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                                    Equipo
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="collapse3" class="collapse" aria-labelledby="heading3" data-parent="#accordion">
-                            <div class="card-body">
-                                <ul class="nav nav-tabs" id="tab-futbol" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="tab-futbol-general" data-toggle="tab" href="#futbol-general" role="tab" aria-controls="futbol-general" aria-selected="true">Equipos</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="tab-futbol-jugadores" data-toggle="tab" href="#futbol-jugadores" role="tab" aria-controls="futbol-jugadores" aria-selected="false">Jugadores</a>
-                                    </li>
-                                </ul>
-                                <!--SUBMENU gym-->
-                                <div class="tab-content" id="tab-futbol-contenido">
-                                    <!--Equipos creados -->
-                                    <div class="tab-pane fade show active" id="futbol-general" role="tabpanel" aria-labelledby="tab-futbol-general">
-                                        <br>
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
-                                            <tr>
-                                                <th>Nombre del equipo</th>
-                                                <th>Numero de integrantes</th>
-                                                <th>Disciplina</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <?php
-                                            $sql= "SELECT nombre, numero_integrantes, categoria from equipos where id_lider=$idprueba";
 
-                                            $result2= mysqli_query($conexion,$sql);
-                                            while($mostrar2=mysqli_fetch_array($result2)){
-                                                ?>
-                                                <tr>
-                                                    <td><?php echo $mostrar2['nombre'] ?></td>
-                                                    <td><?php echo $mostrar2['numero_integrantes'] ?></td>
-                                                    <td><?php echo $mostrar2['categoria'] ?></td>
-                                                </tr>
-                                                <?php
-                                            }
-                                            ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!--Jugadores de su equipo -->
-                                    <div class="tab-pane fade" id="futbol-jugadores" role="tabpanel" aria-labelledby="tab-futbol-jugadores">
-                                        <br>
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
-                                            <tr>
-                                                <th>Nombre</th>
-                                                <th>Equipo</th>
-                                                <th>Disciplina</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <?php
-                                            $sql= "SELECT nombre, numero_integrantes, categoria from equipos where id_lider=$idprueba";
-
-                                            $result2= mysqli_query($conexion,$sql);
-                                            while($mostrar2=mysqli_fetch_array($result2)){
-                                                ?>
-                                                <tr>
-                                                        <td><input type="text" value="<?php echo $mostrar2['nombre'] ?> "name="matri" readonly></td>
-                                                        <td><input type="text" value="<?php echo $mostrar2['numero_integrantes'] ?>" readonly></td>
-                                                        <td><input type="text" value="<?php echo $mostrar2['categoria'] ?>" readonly></td>
-                                                </tr>
-                                                <?php
-                                            }
-                                            ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
