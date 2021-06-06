@@ -79,13 +79,13 @@ $matri = $_SESSION['matricula'];
 
         <li class="nav-item">
             <a class="nav-link" href="crear_torneo.php">
-                <i class="fas fa-fw fa-chart-area"></i>
+                <i class="fa fa-trophy" aria-hidden="true"></i>
                 <span>Crear Torneo</span></a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="otorneos.php">
-                <i class="fas fa-fw fa-chart-area"></i>
+                <i class="fas fa-puzzle-piece"></i>
                 <span>Otros Torneos</span></a>
         </li>
         <li class="nav-item">
