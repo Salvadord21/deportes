@@ -4,7 +4,7 @@ session_start();
 include 'conexion.php';
 
 $usuarioid = $_SESSION['id_usuario'];
-$torneo = $_POST['idtorneo'];
+$torneo = $_POST['torneo'];
 $data = array();
 
 

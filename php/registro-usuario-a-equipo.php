@@ -4,13 +4,11 @@ require 'conexion.php';
 $contra="";
 
 $usuarioid = $_SESSION['id_usuario'];
-$idequipo = $_POST['idEquipo'];
-$torneo= $_POST['idTor'];
+$idequipo = $_POST['equipo'];
+$torneo= $_POST['torneo'];
 $estatusequipo = $_POST['estatus'];
 
 
-$data['valor']=$idequipo;
-$data['valor2']=$torneo;
 if ($estatusequipo == 1){///compara equipo es privado
     $pwdequipo = $_POST['contraequipo'];
 }
@@ -26,7 +24,7 @@ if (!empty($usuarioid)){///usuario no es vacio
     $comparacion2 = "SELECT * FROM usuariotorneo WHERE usuarios_id ='$usuarioid' AND id_torneo = '$torneo'";
     $query2 = mysqli_query($conexion, $comparacion2);///mysqli fetch
     ///validamos que tenga mas de uno
-    if (mysqli_fetch_array($query2)==null){
+    if (mysqli_fetch_array($query2)){
         $data['status']="ya";///ya esta registrado en ese torneo
     }else {///no esta registrado
         if ($estatusequipo==0){

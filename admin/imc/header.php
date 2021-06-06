@@ -62,9 +62,9 @@ $matri = $_SESSION['matricula'];
             <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
                aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-cog"></i>
-                <span>Torneos</span>
+                <span>Jornadas</span>
             </a>
-            <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo"
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="fut.php">Fútbol</a>
@@ -80,7 +80,13 @@ $matri = $_SESSION['matricula'];
         <li class="nav-item">
             <a class="nav-link" href="crear_torneo.php">
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>Torneo</span></a>
+                <span>Crear Torneo</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="otorneos.php">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Otros Torneos</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="equipos.php">
@@ -105,11 +111,6 @@ $matri = $_SESSION['matricula'];
             <a class="nav-link" href="gym.php">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Área de Pesas</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="carreras.php">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Carreras</span></a>
         </li>
     </ul>
 

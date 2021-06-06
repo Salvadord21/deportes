@@ -3,70 +3,36 @@ session_start();
 include 'imc/header.php';
 include '../php/conexion.php';
 ?>
-<!-- Begin Page Content -->
 <div class="container-fluid">
 
-    <!--FORMULARIO carrera-->
-    <div class="modal fade" id="crearEquipo" tabindex="-1" role="dialog" aria-labelledby="crearEquipoTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="crearEquipoTitle">Agregar Carrera</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="imc/ncarrera.php" method="post">
-                        <div class="form-group">
-                            <label class="control-label col-sm-10" for="email">Nombre de la carrera:</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="ncarrera"  name="ncarrera" required >
-                            </div>
-                        </div>
-                        <div class="modal-footer justify-content-center">
-                            <button type="submit" class="btn btn-outline-primary">agregar carrera</button>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
 
     <!-- crear torneo -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">carreras</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Participantes</h6>
         </div>
         <!--tablas-->
         <div class="card-body">
-            <button type="submit" class="btn btn-dark" data-toggle="modal" data-target="#crearEquipo">agregar carrera</button>
-            <br>
             <div class="table-responsive">
                 <br>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                     <tr>
-                        <th>Nombre de la carrera</th>
-                        <th></th>
+                        <th>Participante</th>
+                        <th>Nombre del Torneo</th>
 
                     </tr>
                     </thead>
                     <tbody>
                     <?php
-                    $sql= "select id, nombre_carrera from carrera";
+                    $sql= "SELECT CONCAT(usuarios.nombre, ' ', usuarios.apellido_paterno,' ',usuarios.apellido_materno)as nombre, creacion_torneo.nombre_torneo from usuarios INNER JOIN otros_torneos on usuarios.id=otros_torneos.usuarios_id INNER JOIN creacion_torneo on creacion_torneo.id=otros_torneos.torneo_id";
                     $result= mysqli_query($conexion,$sql);
                     while($mostrar=mysqli_fetch_array($result)){
 
                         ?>
                         <tr>
-                            <td><?php echo $mostrar['nombre_carrera'] ?></td>
-                            <form action="imc/eliminar_carrera.php" method="post">
-                                <input type="hidden" value="<?php echo $mostrar['id'] ?>"name="eliminar">
-                                <td><button type="submit"  class="btn btn-primary">Eliminar</button></td>
-                            </form>
-
+                            <td><?php echo $mostrar['nombre'] ?></td>
+                            <td><?php echo $mostrar['nombre_torneo'] ?></td>
                         </tr>
                         <?php
                     }

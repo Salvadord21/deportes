@@ -47,7 +47,7 @@ include '../php/conexion.php';
                                 creacion_reto.nombre_reto, retos_subidos.url, retos_subidos.estado, 
                                 retos_subidos.calificacion FROM retos_subidos INNER JOIN usuarios
                                 on usuarios.id=retos_subidos.usuarios_id INNER JOIN creacion_reto
-                                on retos_subidos.id_reto= creacion_reto.id WHERE retos_subidos.estado=0";
+                                on retos_subidos.creacion_reto_id= creacion_reto.id WHERE retos_subidos.estado=0";
 
                                 $result= mysqli_query($conexion,$sql);
                                 while($mostrar=mysqli_fetch_array($result)){
@@ -104,7 +104,7 @@ include '../php/conexion.php';
                                 </thead>
                                 <tbody>
                                 <?php
-                                $sql= "SELECT retos_subidos.id, CONCAT(usuarios.nombre,' ',usuarios.apellido_paterno,' ', usuarios.apellido_materno) as nombre, creacion_reto.nombre_reto, retos_subidos.url, retos_subidos.estado,retos_subidos.calificacion, retos_subidos.nota FROM retos_subidos INNER JOIN usuarios on usuarios.id= retos_subidos.usuarios_id INNER JOIN creacion_reto on creacion_reto.id= retos_subidos.id_reto WHERE estado=1";
+                                $sql= "SELECT retos_subidos.id, CONCAT(usuarios.nombre,' ',usuarios.apellido_paterno,' ', usuarios.apellido_materno) as nombre, creacion_reto.nombre_reto, retos_subidos.url, retos_subidos.estado,retos_subidos.calificacion, retos_subidos.nota FROM retos_subidos INNER JOIN usuarios on usuarios.id= retos_subidos.usuarios_id INNER JOIN creacion_reto on creacion_reto.id= retos_subidos.creacion_reto_id WHERE estado=1";
 
                                 $result= mysqli_query($conexion,$sql);
                                 while($mostrar=mysqli_fetch_array($result)){
