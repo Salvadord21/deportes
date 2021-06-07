@@ -1,3 +1,4 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <?php
 
 echo "
@@ -81,62 +82,26 @@ echo "
                         <input type="email" class="form-control border" name="email" id="correo-registro" required>
                         <div class="invalid-feedback">Complete el campo</div>
                     </div>
-
+                    <!--SELECT-->
                     <div class="form-group">
-                        <label for="carrera-registro">Carrera</label>
+                        <label for="select-carrera">Sección</label>
+                        <select class="form-control border" name="select-carrera" id="select-carrera" required>
+                            <option>Seleccione un departamento</option>
+                            <option value="Estudiante">Estudiante</option>
+                            <option value="Empleado">Empleado</option>
+                            <option value="MOV">MOV</option>
+                            <option value="Egresado">Egresado</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="ingresa-carrera" style="display: none;">
+                        <label for="carrera-registro">Especifica tu sección</label>
                         <input type="text" class="form-control border" name="carrera" id="carrera-registro" required>
                         <div class="invalid-feedback">Complete el campo</div>
                     </div>
-                    <!--<div class="form-group" aria-required="true">
-                        <label for="area-registro">Área</label><br>
+                    <!--SCRIPT-->
 
-                        <div class="form-check form-check-inline" id="ejemplo">
-                            <input class="form-check-input" type="radio" name="radioAreas" id="radioEstudiante" value="estudiante" data-toggle="collapse" data-target="#collapseBotonInput" aria-expanded="false" aria-controls="collapseBotonInput">
-                            <label class="form-check-label" for="radioEstudiante">Estudiante</label>
-                        </div>
-                        <div class="form-check form-check-inline" id="ejemplo">
-                            <input class="form-check-input" type="radio" name="radioAreas" id="radioEmpleado" value="empleado" data-toggle="collapse" data-target="#collapseBotonSelect" aria-expanded="false" aria-controls="collapseBotonSelect">
-                            <label class="form-check-label" for="radioEmpleado">Empleado</label>
-                        </div>
-                        <div class="form-check form-check-inline" id="ejemplo">
-                            <input class="form-check-input" type="radio" name="radioAreas" id="radioMOV" value="MOV" data-toggle="collapse" data-target="#collapseBotonSelect" aria-expanded="false" aria-controls="collapseBotonSelect">
-                            <label class="form-check-label" for="radioMOV">MOV</label>
-                        </div>
-                        <div class="form-check form-check-inline" id="ejemplo">
-                            <input class="form-check-input" type="radio" name="radioAreas" id="radioEgresado" value="egresado" data-toggle="collapse" data-target="#collapseBotonInput" aria-expanded="false" aria-controls="collapseBotonInput">
-                            <label class="form-check-label" for="radioEgresado">Egresado</label>
-                        </div><br><br>-->
-                        <!--MODAAL ESTUDIANTE Y EGRESADO-->
-                       <!-- <div class="collapse " id="collapseBotonInput">
-                            <div class="card card-body">
-
-                                <label for="nombre-equipo-registro">Ingresa tu carrera</label>
-                                <input type="text" minlength="4" class="form-control border" name="contra" id="contrasena-equipo-registro">
-
-                            </div>
-                        </div>
-                        <-MODAAL EMPLEADO Y MOV-
-                        <div class="collapse " id="collapseBotonSelect">
-                            <div class="card card-body">
-
-                                <label for="nombre-equipo-registro">Selecciona tu area</label>
-                                <input type="text" minlength="4" class="form-control border" name="contra" id="contrasena-equipo-registro">
-
-                            </div>
-                        </div>-->
-
-
-                      <!--  <?php
-                        //if
-
-                        ?>
-                        <select id="area-registro" class="form-control" name="area[]">
-                            <option value="">Selecciona tu área</option>
-                            <?php
-                            require 'php/select-carreras.php';
-                            ?>
-                        </select>
-                    </div>-->
+                    <!--FIN DE SCRIPT-->
 
                     <div class="form-group">
                         <label for="contrasena-registro">Contraseña</label>
@@ -163,9 +128,16 @@ echo "
 </div>
 
 
-
-
 <script>
+
+    $(document).ready(function (){
+        $('select#select-carrera').on('change', function () {
+            var valor = $(this).val();
+            console.log(valor);
+            $('#ingresa-carrera').show();
+        });
+    });
+
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     (function() {
         'use strict';
@@ -185,4 +157,6 @@ echo "
         }, false);
     })();
 </script>
+
+
 
