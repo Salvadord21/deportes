@@ -20,12 +20,13 @@ include '../php/conexion.php';
                     <tr>
                         <th>Participante</th>
                         <th>Nombre del Torneo</th>
+                        <th>Correo</th>
 
                     </tr>
                     </thead>
                     <tbody>
                     <?php
-                    $sql= "SELECT CONCAT(usuarios.nombre, ' ', usuarios.apellido_paterno,' ',usuarios.apellido_materno)as nombre, creacion_torneo.nombre_torneo from usuarios INNER JOIN otros_torneos on usuarios.id=otros_torneos.usuarios_id INNER JOIN creacion_torneo on creacion_torneo.id=otros_torneos.torneo_id";
+                    $sql= "SELECT CONCAT(usuarios.nombre, ' ', usuarios.apellido_paterno,' ',usuarios.apellido_materno)as nombre, creacion_torneo.nombre_torneo,usuarios.correo from usuarios INNER JOIN otros_torneos on usuarios.id=otros_torneos.usuarios_id INNER JOIN creacion_torneo on creacion_torneo.id=otros_torneos.torneo_id";
                     $result= mysqli_query($conexion,$sql);
                     while($mostrar=mysqli_fetch_array($result)){
 
@@ -33,6 +34,7 @@ include '../php/conexion.php';
                         <tr>
                             <td><?php echo $mostrar['nombre'] ?></td>
                             <td><?php echo $mostrar['nombre_torneo'] ?></td>
+                            <td><?php echo $mostrar['correo'] ?></td>
                         </tr>
                         <?php
                     }
