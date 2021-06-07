@@ -20,12 +20,12 @@ include '../php/conexion.php';
                                 </div>
                                 <!-- llama al torneo -->
                                 <?php
-                                $sql= "SELECT * FROM `torneos` WHERE diciplina='Futbol bardas' AND fecha_creacion = ( SELECT MAX(fecha_creacion) FROM `torneos` WHERE diciplina = 'Futbol bardas')";
+                                $sql= "SELECT * FROM creacion_torneo WHERE creacion_torneo.disciplina='Futbol bardas' AND fecha_creacion = ( SELECT MAX(fecha_creacion) FROM `creacion_torneo` WHERE disciplina = 'Futbol bardas')";
                                 $result=mysqli_query($conexion,$sql);
                                 while($mostrar=mysqli_fetch_array($result)) {
                                     $id_torn=$mostrar['id'];
                                     $jornadas = $mostrar['jornadas'];
-                                    $y= $mostrar['num_equipos'];
+                                    $y= $mostrar['numero_equipos'];
                                     if (($y%2)==0){
                                         $partidos=($y/2);
                                     }else{
@@ -240,15 +240,13 @@ include '../php/conexion.php';
                                             <th>ver jugadores</th>
                                         </tr>
                                         <?php
-                                        $sql= "SELECT equipos.id, equipos.nombre FROM equipos_participantes LEFT JOIN equipos 
-                                        ON equipos.id = equipos_participantes.id_equipo LEFT JOIN torneos ON 
-                                        equipos_participantes.id_torneo = torneos.id WHERE torneos.id = 15";
+                                        $sql= "SELECT equipos.id, equipos.nombre_equipo, creacion_torneo.nombre_torneo FROM equipos INNER JOIN creacion_torneo on creacion_torneo.id=equipos.id_torneo WHERE creacion_torneo.nombre_torneo='Torneo Bardas'";
                                         $result=mysqli_query($conexion,$sql);
                                         while($mostrar=mysqli_fetch_array($result)) {
                                         ?>
                                         <tr>
                                             <form action="golFut.php" method="post">
-                                            <td><?php echo $mostrar['nombre']?></td>
+                                            <td><?php echo $mostrar['nombre_equipo']?></td>
                                             <td>
                                                 <input type="hidden" name="id_tor" value="<?php echo $mostrar['id']?>">
                                                 <button type="submit" class="btn btn-primary justify-content-md-end" data-toggle="modal" data-target="#crearEquipo"data-toggle="modal" data-target="#crearEquipo">

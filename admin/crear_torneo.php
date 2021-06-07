@@ -100,7 +100,7 @@ include '../php/conexion.php';
                             <tr>
                                 <th>Nombre del torneo</th>
                                 <th>Disciplina</th>
-                                <th>Numero de equipos</th>
+                                <th>Numero de participantes</th>
                                 <th>Fecha inicio de torneo</th>
                                 <th>Fecha limite inscripcion</th>
                                 <th>Numero de jornadas</th>

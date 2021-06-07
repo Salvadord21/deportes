@@ -16,7 +16,7 @@ if ($areaselect=='Usuario'){
 }elseif ($areaselect=='Revisor'){
     $x=2;
 }
-$insert = "UPDATE `usuarios` SET admin = '$x' WHERE id = '$id'";
+$insert = "UPDATE `usuarios` SET administrador = '$x' WHERE id = '$id'";
 
 $resultado = mysqli_query($conexion, $insert);
 if ($resultado) {

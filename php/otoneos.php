@@ -17,7 +17,23 @@ if ($usuarioid!=null and $torneo!=null){
         $comparacion = "INSERT INTO `otros_torneos`(`usuarios_id`, `torneo_id`)VALUES ('$usuarioid','$torneo')";
         $query = mysqli_query($conexion, $comparacion);
         if ($query){
-             $data['status']="entra";
+            $comparacion3 = "SELECT * FROM creacion_torneo where id='$torneo'";
+            $query3 = mysqli_query($conexion, $comparacion3);
+            if ($query3){
+                $fila3 = mysqli_fetch_assoc($query3);
+                $numero = $fila3['numero_equipos'];
+                $numero2=$numero+1;
+                $comparacion4 ="UPDATE `creacion_torneo` SET `numero_equipos`='$numero2' WHERE id='$torneo' ";
+                $query4 = mysqli_query($conexion, $comparacion4);
+                if ($query4){
+                    $data['status']="entra";
+                }else{
+                    $data['status']="falla actualizar";
+                }
+            }else{
+                $data['status']="falla enconctar equipos";
+            }
+            
         }else{
              $data['status']="salida";
         }
