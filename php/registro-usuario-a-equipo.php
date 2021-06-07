@@ -31,7 +31,23 @@ if (!empty($usuarioid)){///usuario no es vacio
             $comparacion = "INSERT INTO `integrantes`(`usuarios_id`, `equipos_id`)VALUES ('$usuarioid','$idequipo')";
             $query = mysqli_query($conexion, $comparacion);
             if ($query){
-                $data['status']="entrapublico";
+                $comparacion3 = "SELECT * FROM equipos where id='$idequipo'";
+                $query3 = mysqli_query($conexion, $comparacion3);
+                if ($query3){
+                    $fila3 = mysqli_fetch_assoc($query3);
+                    $numero = $fila3['integrantes'];
+                    $numero2=$numero+1;
+                    $comparacion4 ="UPDATE `equipos` SET `integrantes`='$numero2' WHERE id='$idequipo' ";
+                    $query4 = mysqli_query($conexion, $comparacion4);
+                    if ($query4){
+                        $data['status']="entrapublico";
+                    }else{
+                        $data['status']="falla actualizar";
+                    }
+                }else{
+                    $data['status']="falla enconctar equipos";
+                }
+
             }else{
                 $data['status']="salida";
             }
@@ -40,7 +56,22 @@ if (!empty($usuarioid)){///usuario no es vacio
                 $comparacion = "INSERT INTO `integrantes`(`usuarios_id`, `equipos_id`)VALUES ('$usuarioid','$idequipo')";
                 $query = mysqli_query($conexion, $comparacion);
                 if ($query){
-                    $data['status']="entrapriv";
+                    $comparacion3 = "SELECT * FROM equipos where id='$idequipo'";
+                    $query3 = mysqli_query($conexion, $comparacion3);
+                    if ($query3){
+                        $fila3 = mysqli_fetch_assoc($query3);
+                        $numero = $fila3['integrantes'];
+                        $numero2=$numero+1;
+                        $comparacion4 ="UPDATE `equipos` SET `integrantes`='$numero2' WHERE id='$idequipo' ";
+                        $query4 = mysqli_query($conexion, $comparacion4);
+                        if ($query4){
+                            $data['status']="entrapriv";
+                        }else{
+                            $data['status']="falla actualizar";
+                        }
+                    }else{
+                        $data['status']="falla enconctar equipos";
+                    }
                 }else{
                     $data['status']="salidapriv";
 
