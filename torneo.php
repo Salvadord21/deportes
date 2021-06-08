@@ -193,7 +193,7 @@ require 'php/conexion.php';
 
                                             <span class="slider round"></span>
                                         </label>
-                                        <input type="text" id="invisible" name="invisible" value="0">
+                                        <input type="hidden" id="invisible" name="invisible" value="0">
                                     </div>
                                 </div>
 
