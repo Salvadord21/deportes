@@ -101,7 +101,7 @@ require 'php/conexion.php';
                         <p>¡No te quedes con las ganas y cuentanos tus ideas de torneo!</p>
                         <p>¡Envianos tu solicutud!</p>
 
-                        <form action="php/solicitud-torneo.php" method="post" class="needs-validation">
+                        <form id="solicitud" method="post" class="needs-validation">
                             <div class="form-group">
                                 <label for="disciplina-torneo-registro">Nombre del torneo</label>
                                 <input type="text" class="form-control" name="torneonombre" id="disciplina-torneo-registro" required>
@@ -834,6 +834,37 @@ require 'php/conexion.php';
                         Swal.fire({
                             icon: 'info',
                             title: 'Ya Tienes un equipo en el mismo torneo',
+                            timer: 2000,
+                            showConfirmButton: false,
+                        });
+                    }
+                    else if (data.status == "no") {///////registrado
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Inicia sesión',
+                            text: 'Debes iniciar sesión para poder inscribirte',
+                            timer: 2000,
+                            showConfirmButton: false,
+                        });
+                    }
+                }
+            });
+        });
+////////solicitud torneo
+        $("#solicitud").on('submit', function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: 'php/solicitud-torneo.php',
+                data: $('#solicitud').serialize(),
+                cache: false,
+                dataType: 'json',
+                success: function (data) {
+
+                    if (data.status == "ya") {///////registrado
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Se envio tu solicitud',
                             timer: 2000,
                             showConfirmButton: false,
                         });

@@ -18,9 +18,7 @@ $descripcion = $_POST['torneodescrip'];
             $query = mysqli_query($conexion, $solicitud);
 
             if ($query) {
-
-                header('location: ../torneo.php');
-
+                $data['status']="ya";
             } else {
 
                 echo mysqli_error($conexion);
@@ -34,5 +32,8 @@ $descripcion = $_POST['torneodescrip'];
     }else{
         $_SESSION['msg_error'] = 'Debes iniciar sesión para poder participar';
     }
+
+
+echo json_encode($data);
 
 ?>
