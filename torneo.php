@@ -151,7 +151,7 @@ require 'php/conexion.php';
                     </div>
 
                     <div class="modal-body">
-                        <form action="php/registro-de-equipos.php" method="post" class="needs-validation">
+                        <form id="registrar-equipo" method="post" class="needs-validation">
                             <div class="form-group">
                                 <?php $nombre = $_SESSION['nombre']?>
 
@@ -781,10 +781,6 @@ require 'php/conexion.php';
 
 
     $(document).ready(function() {
-
-
-/////////torneos publicos
-
 ////////torneos privados
         $("#prueba").on('submit', function (e) {
             e.preventDefault();
@@ -812,6 +808,37 @@ require 'php/conexion.php';
                             showConfirmButton: false,
                         });
                     } else if (data.status == "no") {///////registrado
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Inicia sesión',
+                            text: 'Debes iniciar sesión para poder inscribirte',
+                            timer: 2000,
+                            showConfirmButton: false,
+                        });
+                    }
+                }
+            });
+        });
+////////crearEquipo
+        $("#registrar-equipo").on('submit', function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: 'php/registro-de-equipos.php',
+                data: $('#registrar-equipo').serialize(),
+                cache: false,
+                dataType: 'json',
+                success: function (data) {
+
+                    if (data.status == "ya") {///////registrado
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'Ya Tienes un equipo en el mismo torneo',
+                            timer: 2000,
+                            showConfirmButton: false,
+                        });
+                    }
+                    else if (data.status == "no") {///////registrado
                         Swal.fire({
                             icon: 'error',
                             title: 'Inicia sesión',
