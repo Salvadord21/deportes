@@ -670,7 +670,7 @@ require 'php/conexion.php';
                             <?php
                         }else{
                             ?>
-                            <button type="button" class="btn btn-outline-info justify-content-md-end" data-dismiss="modal" data-toggle="modal" data-target="#errorsesion">
+                            <button type="button" id="cerrarbtn" class="btn btn-outline-info justify-content-md-end close" data-dismiss="modal" data-toggle="modal" data-target="#errorsesion">
                                 ENVIAR SOLICITUD
                             </button>
                             <?php
@@ -779,6 +779,11 @@ require 'php/conexion.php';
         });
     }
 
+    function cerrarCrearTorneo(){
+        $('#crearTorneo').modal('hide');
+        $('#disciplina-torneo-registro').val('');
+        $('#descripcion-torneo-registro').val('')
+    }
 
     $(document).ready(function() {
 ////////torneos privados
@@ -860,7 +865,6 @@ require 'php/conexion.php';
                 cache: false,
                 dataType: 'json',
                 success: function (data) {
-
                     if (data.status == "ya") {///////registrado
                         Swal.fire({
                             icon: 'success',
@@ -868,7 +872,9 @@ require 'php/conexion.php';
                             timer: 2000,
                             showConfirmButton: false,
                         });
+                        setTimeout(cerrarCrearTorneo, 2000);
                     }
+
                     else if (data.status == "no") {///////registrado
                         Swal.fire({
                             icon: 'error',
@@ -885,24 +891,7 @@ require 'php/conexion.php';
 </script>
 
 <script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function() {
-        'use strict';
-        window.addEventListener('load', function() {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
+
 </script>
 </body>
 
