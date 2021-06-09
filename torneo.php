@@ -789,7 +789,9 @@ require 'php/conexion.php';
         $('#crearEquipo').modal('hide');
         $('#privado').val('');
         $('#nombre-equipo-registro').val('')
-        $('#privado').val('')
+        $('#privado').val('false')
+        $('#contrasena-equipo-registro').val('')
+
     }
 
     $(document).ready(function() {
@@ -844,8 +846,8 @@ require 'php/conexion.php';
 
                     if (data.status == "ya") {///////registrado
                         Swal.fire({
-                            icon: 'info',
-                            title: 'Ya Tienes un equipo en el mismo torneo',
+                            icon: 'success',
+                            title: 'Tu equipo fue regristrado',
                             timer: 2000,
                             showConfirmButton: false,
                         });
@@ -856,6 +858,14 @@ require 'php/conexion.php';
                             icon: 'error',
                             title: 'Inicia sesión',
                             text: 'Debes iniciar sesión para poder inscribirte',
+                            timer: 2000,
+                            showConfirmButton: false,
+                        });
+                        setTimeout(cerrarCrearEquipo, 2000);
+                    }else if (data.status == "ok") {///////registrado
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'Ya tienes equipo en el torneo',
                             timer: 2000,
                             showConfirmButton: false,
                         });

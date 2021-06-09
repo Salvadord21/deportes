@@ -14,11 +14,10 @@ if (!empty($idusu)) {
     for ($i = 0; $i < count($torneos); $i ++){
         $torneosselect = $torneos[$i];
     }
-        $ver="SELECT * FROM `equipos` WHERE `id`='$idusu' AND`id_torneo`='$torneosselect'";
+        $ver="SELECT * FROM `equipos` WHERE `id_lider`='$idusu' AND`id_torneo`='$torneosselect'";
         $verquery=mysqli_query($conexion, $ver);
-
         if(mysqli_fetch_array($verquery)){
-            $data['status']="ya";
+            $data['status']="ok";
         }else{
             if ($estatuspriv == 0) {
                 $registro = "INSERT INTO equipos (id_lider, nombre_equipo, integrantes, id_torneo, contrasena,privado, creacion) 
@@ -45,9 +44,7 @@ if (!empty($idusu)) {
             } else if ($estatuspriv == 1) {
                 $registro1 = "INSERT INTO equipos (id_lider, nombre_equipo, integrantes, id_torneo, contrasena,privado, creacion) 
                       VALUES ('$idusu', '$nomequipo',1,'$torneosselect','$pwdequipo','$estatuspriv', NOW())";
-
                 $query1 = mysqli_query($conexion, $registro1);
-
                 if ($query1) {
                     $registro2 = "SELECT MAX(id) as id FROM `equipos`";
                     $query2 = mysqli_query($conexion, $registro2);
