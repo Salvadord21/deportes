@@ -785,6 +785,13 @@ require 'php/conexion.php';
         $('#descripcion-torneo-registro').val('')
     }
 
+    function cerrarCrearEquipo(){
+        $('#crearEquipo').modal('hide');
+        $('#privado').val('');
+        $('#nombre-equipo-registro').val('')
+        $('#privado').val('')
+    }
+
     $(document).ready(function() {
 ////////torneos privados
         $("#prueba").on('submit', function (e) {
@@ -842,6 +849,7 @@ require 'php/conexion.php';
                             timer: 2000,
                             showConfirmButton: false,
                         });
+                        setTimeout(cerrarCrearEquipo, 2000);
                     }
                     else if (data.status == "no") {///////registrado
                         Swal.fire({
@@ -851,6 +859,7 @@ require 'php/conexion.php';
                             timer: 2000,
                             showConfirmButton: false,
                         });
+                        setTimeout(cerrarCrearEquipo, 2000);
                     }
                 }
             });
