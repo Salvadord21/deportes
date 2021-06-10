@@ -32,7 +32,18 @@ if (!empty($idusu)) {
                         $registro3 = "INSERT INTO `integrantes`( `usuarios_id`, `equipos_id`) VALUES ('$idusu','$numero')";
                         $query3 = mysqli_query($conexion, $registro3);
                         if ($query3) {
-                            $data['status']="ya";
+                            $actualiza="SELECT * from creacion_torneo WHERE `id`='$torneosselect'";
+                            $queryact=mysqli_query($conexion, $actualiza);
+                            if ($queryact){
+                                $filaact = mysqli_fetch_assoc($queryact);
+                                $numero = $filaact['numero_equipos'];
+                                $numero2=$numero+1;
+                                $fin="UPDATE `creacion_torneo` SET `numero_equipos`='$numero2' WHERE id='$torneosselect'";
+                                $queryfin=mysqli_query($conexion, $fin);
+                                if ($queryfin){
+                                    $data['status']="ya";
+                                }
+                            }
                         }
 
                     }
@@ -54,7 +65,18 @@ if (!empty($idusu)) {
                         $registro3 = "INSERT INTO `integrantes`( `usuarios_id`, `equipos_id`) VALUES ('$idusu','$numero')";
                         $query3 = mysqli_query($conexion, $registro3);
                         if ($query3) {
-                            $data['status']="ya";
+                            $actualiza="SELECT * from creacion_torneo WHERE `id`='$torneosselect'";
+                            $queryact=mysqli_query($conexion, $actualiza);
+                            if ($queryact){
+                                $filaact = mysqli_fetch_assoc($queryact);
+                                $numero = $filaact['numero_equipos'];
+                                $numero2=$numero+1;
+                                $fin="UPDATE `creacion_torneo` SET `numero_equipos`='$numero2' WHERE id='$torneosselect'";
+                                $queryfin=mysqli_query($conexion, $fin);
+                                if ($queryfin){
+                                    $data['status']="ya";
+                                }
+                            }
                         }
                     } else {
                         echo mysqli_error($conexion);

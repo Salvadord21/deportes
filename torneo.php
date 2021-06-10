@@ -636,7 +636,7 @@ require 'php/conexion.php';
 </div>
 
 <!--MODAL INGRESAR CONTRASEÑA DE EQUIPO-->
-<div class="modal fade" id="AgregarContraEquipo" tabindex="-1" role="dialog" aria-labelledby="ingresaContraEquipo" aria-hidden="true">
+<div class="modal fade" id="AgregarContraEquipo" tabindex="-1" role="dialog" aria-labelledby="ingresaContraEquipo" aria-hidden="true"e>
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
