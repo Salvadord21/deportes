@@ -47,18 +47,6 @@ include '../php/conexion.php';
                             <div class="invalid-feedback">Complete el campo</div>
                         </div>
 
-                        <!--SCRIPT-->
-
-                        <script>
-                            function otrajornada(value){
-                                if (value == 'otro'){
-                                    document.getElementById('nojornadas').value = 1;
-                                    $('#nojornadas').attr('readonly','true');
-                                }
-                            }
-                        </script>
-                        <!--FIN SCRIPT-->
-
                         <div class="form-group">
                             <label class="control-label col-sm-10" for="email">Fecha de inicio:</label>
                             <div class="col-sm-10">
@@ -217,6 +205,18 @@ include '../php/conexion.php';
 
 <!-- Page level custom scripts -->
 <script src="js/demo/datatables-demo.js"></script>
+
+<script>
+    function otrajornada(value){
+        if (value == 'otro'){
+            document.getElementById('nojornadas').value = 1;
+            $('#nojornadas').attr('readonly','true');
+        }else{
+            document.getElementById('nojornadas').value = "";
+            $('#nojornadas').prop('readonly', false);
+        }
+    }
+</script>
 
 </body>
 </html>
