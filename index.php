@@ -28,8 +28,9 @@ if(!empty($_SESSION['msg_error'])){
 
 }
 ?>
+
+<!--BARRA DE MENU-->
 <div class="top_section">
-    <!--BARRA DE MENU-->
     <div class="top_inner">
         <div id="header" class="header">
             <?php
@@ -47,9 +48,12 @@ if(!empty($_SESSION['msg_error'])){
             ?>
         </div>
     </div>
+</div>
+<!--FIN BARRA DE MENU-->
+
+<div class="top_section">
     <div id="main_slider" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
-
             <li data-target="#main_slider" data-slide-to="0" class="active"></li>
             <li data-target="#main_slider" data-slide-to="1"></li>
             <li data-target="#main_slider" data-slide-to="2"></li>
@@ -84,8 +88,8 @@ if(!empty($_SESSION['msg_error'])){
                 <h2 style="margin-bottom: 65px;">Torneos</h2>
             </div>
         </div>
-        <div class="row">
 
+        <div class="row">
             <div class="col-md-3">
                 <div class="full dance_form_name">
                     <a href="torneo.php"><img src="imgs/futbol-bardas-2020-banner.jpg" alt="#" /></a>
@@ -112,6 +116,7 @@ if(!empty($_SESSION['msg_error'])){
         </div>
     </div>
 </div>
+
 <!-- PARTE pesas-->
 <div id="classes" class="layout_padding" style="background: rgb(0,127,175);">
     <div class="container">
@@ -121,8 +126,10 @@ if(!empty($_SESSION['msg_error'])){
                 <h3 class="text_align_left">Área de pesas</h3>
                 <br>
                 <h6>
-                    En el área de pesas podrás desarrollar tus capacidades físicas de forma recreativa o mejorar tu condición física como parte de la
-                    disciplina deportiva que realizas. El ejercicio es una parte importante de un estilo de vida saludable, el cual te dará los siguientes beneficios:
+                    En el área de pesas podrás desarrollar tus capacidades físicas de forma recreativa
+                    o mejorar tu condición física como parte de la disciplina deportiva que realizas.
+                    El ejercicio es una parte importante de un estilo de vida saludable, el cual te dará
+                    los siguientes beneficios:
                     <br>
                     <ul>
                         <li>Desarrollo de las capacidades físicas</li>
@@ -131,11 +138,8 @@ if(!empty($_SESSION['msg_error'])){
                         <li>Incrementa la autoestima</li>
                         <li>Conciliar el sueño</li>
                     </ul>
-
                 </h6><br>
-
                 <a class="btn btn-info" href="gym.php" role="button">Inscríbete</a>
-
             </div>
             <div class="col-md-7 video_img">
                 <img class="img-responsive" src="imgs/ÁreaDePesas440x450.jpg" width="450px" alt="#" />
@@ -148,34 +152,35 @@ if(!empty($_SESSION['msg_error'])){
 <div id="trainings_blog" class="layout_padding" style="background: #F2F2F2">
     <div class="container">
         <div class="row">
+
+            <div class="col-md-7 video_img">
+                <img class="img-responsive" src="imgs/RetoSemanal440x450.jpg" width="450px" alt="#" />
+            </div>
+
             <div class="col-md-5">
                 <?php
                 $sql= "SELECT * FROM `creacion_reto` WHERE fecha_inicio = ( SELECT MAX(fecha_inicio)  FROM creacion_reto)";
                 $result= mysqli_query($conexion,$sql);
                 if($mostrar=mysqli_fetch_array($result)){
                     ?>
-                    <h2 class="text_align_left">#RETOS</h2>
+                    <h3 class="text_align_left">RETOS</h3>
                     <br><br>
                     <h4><?php echo $mostrar['nombre_reto'] ?></h4>
                     <h6> <?php echo $mostrar['descripcion'] ?><br><br><br>¿Te atreves a retarte a ti mismo?<br></h6>
                     <br>
                     <h6>¿Te atreves a retarte a ti mismo?<br></h6>
-                    <a class="btn btn-info" href="retos.php" role="button">INICIAR RETO</a>
+                    <a class="btn btn-info" href="retos.php" role="button">Iniciar retos</a>
                     <?php
                 }else{
                     ?>
-                    <h4>Reto<br><br></h4>
+                    <h3 class="text_align_left">RETOS<br><br></h3>
                     <h6>Sabemos que no puedes esperar a ponerte a prueba<br><br><br></h6>
                     <h6>¡Se paciente! Pronto se publicará un reto<br><br><br></h6>
                     <br>
-                    <a class="btn btn-info" href="retos.php" role="button">VER RETOS</a>
+                    <a class="btn btn-info" href="retos.php" role="button">Ver retos</a>
                     <?php
                 }
                 ?>
-
-            </div>
-            <div class="col-md-7 video_img">
-                <img class="img-responsive" src="imgs/RetoSemanal440x450.jpg" width="450px" alt="#" />
             </div>
         </div>
     </div>
@@ -187,7 +192,7 @@ if(!empty($_SESSION['msg_error'])){
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 text_align_center layout_padding" style="background: rgb(0,127,175);; min-height: 450px">
-                <h2 style="margin-bottom: 30px;">facebook</h2><br>
+                <h3>FACEBOOK<br><br></h3>
                 <div class="fb-page" data-href="https://www.facebook.com/AguilasUCC/" data-tabs="timeline" data-width="900" data-height="400" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/AguilasUCC/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/AguilasUCC/">UCC Educación Deportiva</a></blockquote></div>
             </div>
         </div>
