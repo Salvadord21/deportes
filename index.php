@@ -123,9 +123,9 @@ if(!empty($_SESSION['msg_error'])){
 
         <div class="row">
             <div class="col-md-5">
-                <h3 class="text_align_left">Área de pesas</h3>
+                <h3 class="text_align_left white_font">Área de pesas</h3>
                 <br>
-                <h6>
+                <h6 class="white_font">
                     En el área de pesas podrás desarrollar tus capacidades físicas de forma recreativa
                     o mejorar tu condición física como parte de la disciplina deportiva que realizas.
                     El ejercicio es una parte importante de un estilo de vida saludable, el cual te dará
@@ -139,7 +139,7 @@ if(!empty($_SESSION['msg_error'])){
                         <li>Conciliar el sueño</li>
                     </ul>
                 </h6><br>
-                <a class="btn btn-info" href="gym.php" role="button">Inscríbete</a>
+                <a class="btn btn-outline-light" href="gym.php" role="button">Inscríbete</a>
             </div>
             <div class="col-md-7 video_img">
                 <img class="img-responsive" src="imgs/ÁreaDePesas440x450.jpg" width="450px" alt="#" />
@@ -177,7 +177,7 @@ if(!empty($_SESSION['msg_error'])){
                     <h6>Sabemos que no puedes esperar a ponerte a prueba<br><br><br></h6>
                     <h6>¡Se paciente! Pronto se publicará un reto<br><br><br></h6>
                     <br>
-                    <a class="btn btn-info" href="retos.php" role="button">Ver retos</a>
+                    <a class="btn btn-outline-info" href="retos.php" role="button">Ver retos</a>
                     <?php
                 }
                 ?>
@@ -192,7 +192,7 @@ if(!empty($_SESSION['msg_error'])){
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 text_align_center layout_padding" style="background: rgb(0,127,175);; min-height: 450px">
-                <h3>FACEBOOK<br><br></h3>
+                <h3 class="white_font">FACEBOOK<br><br></h3>
                 <div class="fb-page" data-href="https://www.facebook.com/AguilasUCC/" data-tabs="timeline" data-width="900" data-height="400" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/AguilasUCC/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/AguilasUCC/">UCC Educación Deportiva</a></blockquote></div>
             </div>
         </div>
@@ -208,6 +208,4 @@ if(!empty($_SESSION['msg_error'])){
 <?php
 require 'php/footer.php'
 ?>
-
-
 </html>
