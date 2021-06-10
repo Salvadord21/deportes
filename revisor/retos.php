@@ -35,7 +35,6 @@ include '../php/conexion.php';
                                     <th>Nombre</th>
                                     <th>Reto</th>
                                     <th>URL</th>
-                                    <th>estado del reto</th>
                                     <th>calificacion</th>
                                     <th>nota</th>
                                     <th></th>
@@ -59,10 +58,6 @@ include '../php/conexion.php';
                                             <td><?php echo $mostrar['nombre'] ?></td>
                                             <td><?php echo $mostrar['nombre_reto'] ?></td>
                                             <td><a href="<?php echo $mostrar['url'] ?>">link</a></td>
-                                            <td><select name="diciplinas[]" class="form-control" id="disciplinas">
-                                                    <option value="0"<?php echo $areas2 == '0' ? 'selected="selected"'  : '' ?>>Pendiente</option>
-                                                    <option value="1"<?php echo $areas2 == '1' ? 'selected="selected"'  : '' ?>>Revisado</option>
-                                                </select></td>
                                             <td><select name="diciplinas2[]" class="form-control" id="disciplinas">
                                                     <option value="0"<?php echo $areas == '0' ? 'selected="selected"'  : '' ?>>Calificacion</option>
                                                     <option value="1"<?php echo $areas == '1' ? 'selected="selected"'  : '' ?>>1</option>
@@ -73,7 +68,7 @@ include '../php/conexion.php';
                                             <td><input type="text" id="notaret"  name="notas"></td>
                                             <td>
                                                 <input type="hidden" value="<?php echo $mostrar['id'] ?>" name="actualizar">
-                                                <button type="submit" class="btn btn-primary">actualizar</button>
+                                                <button type="submit" class="btn btn-primary">Calificar</button>
                                             </td>
                                         </form>
                                     </tr>
@@ -99,7 +94,6 @@ include '../php/conexion.php';
                                     <th>estado del reto</th>
                                     <th>calificacion</th>
                                     <th>nota</th>
-                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -120,7 +114,7 @@ include '../php/conexion.php';
                                                     <option value="0"<?php echo $areas2 == '0' ? 'selected="selected"'  : '' ?>>Pendiente</option>
                                                     <option value="1"<?php echo $areas2 == '1' ? 'selected="selected"'  : '' ?>>Revisado</option>
                                                 </select></td>
-                                            <td><select name="diciplinas2[]" class="form-control" id="disciplinas" readonly="">
+                                            <td><select name="diciplinas2[]" class="form-control" id="disciplinas">
                                                     <option value="0"<?php echo $areas == '0' ? 'selected="selected"'  : '' ?>>Calificacion</option>
                                                     <option value="1"<?php echo $areas == '1' ? 'selected="selected"'  : '' ?>>1</option>
                                                     <option value="2"<?php echo $areas == '2' ? 'selected="selected"'  : '' ?>>2</option>
@@ -128,10 +122,6 @@ include '../php/conexion.php';
                                                     <option value="4"<?php echo $areas == '4' ? 'selected="selected"'  : '' ?>>Rechazado</option>
                                                 </select></td>
                                             <td><?php echo $mostrar['nota'] ?></td>
-                                            <td>
-                                                <input type="hidden" value="<?php echo $mostrar['id'] ?>" name="actualizar">
-                                                <button type="submit" class="btn btn-primary">actualizar</button>
-                                            </td>
                                         </form>
                                     </tr>
                                     <?php
