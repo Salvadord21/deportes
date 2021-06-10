@@ -173,7 +173,7 @@ include 'php/conexion.php';
                              <?php
                          }else{
                              ?>
-                             <iframe width="560" height="315" src="https://www.youtube.com/embed/aeQg_ZE2-7s"  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                             <iframe width="560" height="315" src="https://www.youtube.com/embed/TduKEw__QBU"  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
                              <?php
                          }
@@ -193,9 +193,8 @@ include 'php/conexion.php';
                             <th style="text-align: center">Calificacion <img src="imgs/christmas-star_112199.png" alt="" width="30px"> <img src="imgs/christmas-star_112199.png" alt="" width="30px"> <img src="imgs/christmas-star_112199.png" alt="" width="30px"> </th>
                         </tr>
                         <?php
-                        $sql= "SELECT usuarios.nombre, creacion_reto.nombre_reto, retos_subidos.calificacion 
-FROM retos_subidos INNER JOIN usuarios on usuarios.id=retos_subidos.usuarios_id INNER JOIN creacion_reto 
-    on creacion_reto.id=retos_subidos.creacion_reto_id";
+                        $sql= "SELECT usuarios.nombre, creacion_reto.nombre_reto, retos_subidos.calificacion FROM retos_subidos INNER JOIN usuarios on usuarios.id=retos_subidos.usuarios_id INNER JOIN creacion_reto on creacion_reto.id=retos_subidos.creacion_reto_id WHERE retos_subidos.calificacion !=0
+";
                         $result= mysqli_query($conexion,$sql);
                         while($mostrar=mysqli_fetch_array($result)){
                             $x=$mostrar['calificacion'];

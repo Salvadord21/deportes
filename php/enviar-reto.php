@@ -11,7 +11,7 @@ if (!empty($idusu)){
 
     if (!empty($video)) {
 
-        $enviar = "INSERT INTO retos_subidos (id_reto, usuarios_id, url, estado, calificacion, fecha_subida) VALUES ('$idreto', '$idusu','$video', 0, 0, NOW())";
+        $enviar = "INSERT INTO retos_subidos (creacion_reto_id, usuarios_id, url, estado, calificacion, fecha_subida,revisor_id) VALUES ('$idreto', '$idusu','$video', 0, 0, NOW(),1)";
 
         $query = mysqli_query($conexion, $enviar);
 

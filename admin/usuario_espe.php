@@ -215,9 +215,7 @@ if ($admin==0){
                                                             </thead>
                                                             <tbody>
                                                             <?php
-                                                            $sql= "SELECT creacion_reto.nombre_reto, retos_subidos.nota, retos_subidos.calificacion, 
-                                                            retos_subidos.fecha_subida FROM retos_subidos INNER JOIN creacion_reto on retos_subidos.id_reto= 
-                                                            creacion_reto.id INNER JOIN usuarios on retos_subidos.usuarios_id=usuarios.id WHERE usuarios.id='$id_usua'";
+                                                            $sql= "SELECT creacion_reto.nombre_reto, retos_subidos.nota, retos_subidos.calificacion, retos_subidos.fecha_subida FROM retos_subidos INNER JOIN creacion_reto on retos_subidos.creacion_reto_id= creacion_reto.id INNER JOIN usuarios on retos_subidos.usuarios_id=usuarios.id WHERE usuarios.id='$id_usua'";
                                                             $result=mysqli_query($conexion,$sql);
                                                             while($mostrar=mysqli_fetch_array($result)){
                                                                 $x=$mostrar['calificacion'];
