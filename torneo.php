@@ -653,7 +653,7 @@ require 'php/conexion.php';
                     <input type="hidden" name="estatus" value="1">
                     <div class="form-group">
                         <label for="disciplina-torneo-registro"></label>
-                        <input type="text" minlength="4" class="form-control" name="contraequipo" id="pwd-equipo">
+                        <input type="text" minlength="4" class="form-control" name="contraequipo" id="pwd-equipo" required>
                         <input type="hidden" value="1" name="estatus">
                         <input type="text" class="form-control" name="equipo" value="<?php echo $pop ?>" hidden>
                         <input type="hidden" name="torneo" value="<?php echo $pop2 ?>">
@@ -785,6 +785,11 @@ require 'php/conexion.php';
         $('#descripcion-torneo-registro').val('')
     }
 
+    function cerrarPirvado(){
+        $('#AgregarContraEquipo').modal('hide');
+        $('#pwd-equipo').val('');
+    }
+
     function cerrarCrearEquipo(){
         $('#crearEquipo').modal('hide');
         $('#privado').val('');
@@ -813,6 +818,7 @@ require 'php/conexion.php';
                             timer: 2000,
                             showConfirmButton: false,
                         });
+                        setTimeout(cerrarPirvado, 2000);
                     } else if (data.status == "ya") {///////registrado
                         Swal.fire({
                             icon: 'info',
@@ -821,6 +827,7 @@ require 'php/conexion.php';
                             timer: 2000,
                             showConfirmButton: false,
                         });
+                        setTimeout(cerrarPirvado, 2000);
                     } else if (data.status == "no") {///////registrado
                         Swal.fire({
                             icon: 'error',
