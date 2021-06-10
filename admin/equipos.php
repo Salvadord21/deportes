@@ -66,7 +66,7 @@ include '../php/conexion.php'
                                         <td><?php echo $mostrar['integrantes'] ?></td>
                                         <td>
                                             <input type="hidden" value="<?php echo $mostrar['id'] ?>" name="eliminar" size="0px">
-                                            <button type="submit" class="btn btn-default">Eliminar equipo</button>
+                                            <button type="submit" class="btn btn-primary">Eliminar equipo</button>
                                         </td>
                                         </form>
                                     </tr>

@@ -60,9 +60,9 @@ include '../php/conexion.php';
                                             <td><a href="<?php echo $mostrar['url'] ?>">link</a></td>
                                             <td><select name="diciplinas2[]" class="form-control" id="disciplinas">
                                                     <option value="0"<?php echo $areas == '0' ? 'selected="selected"'  : '' ?>>Calificacion</option>
-                                                    <option value="1"<?php echo $areas == '1' ? 'selected="selected"'  : '' ?>>1</option>
-                                                    <option value="2"<?php echo $areas == '2' ? 'selected="selected"'  : '' ?>>2</option>
-                                                    <option value="3"<?php echo $areas == '3' ? 'selected="selected"'  : '' ?>>3</option>
+                                                    <option value="1"<?php echo $areas == '1' ? 'selected="selected"'  : '' ?>>Regular</option>
+                                                    <option value="2"<?php echo $areas == '2' ? 'selected="selected"'  : '' ?>>Bien</option>
+                                                    <option value="3"<?php echo $areas == '3' ? 'selected="selected"'  : '' ?>>Excelente</option>
                                                     <option value="4"<?php echo $areas == '4' ? 'selected="selected"'  : '' ?>>Rechazado</option>
                                                 </select></td>
                                             <td><input type="text" id="notaret"  name="notas"></td>
@@ -91,7 +91,6 @@ include '../php/conexion.php';
                                     <th>Nombre</th>
                                     <th>Reto</th>
                                     <th>URL</th>
-                                    <th>estado del reto</th>
                                     <th>calificacion</th>
                                     <th>nota</th>
                                 </tr>
@@ -104,23 +103,22 @@ include '../php/conexion.php';
                                 while($mostrar=mysqli_fetch_array($result)){
                                     $areas = $mostrar['calificacion'];
                                     $areas2 = $mostrar['estado'];
+                                    $x=$mostrar['calificacion'];
                                     ?>
                                     <tr>
                                         <form action="imc/calificar_reto.php" method="post">
                                             <td><?php echo $mostrar['nombre'] ?></td>
                                             <td><?php echo $mostrar['nombre_reto'] ?></td>
-                                            <td><a href="<?php echo $mostrar['url'] ?>">link</a></td>
-                                            <td><select name="diciplinas[]" class="form-control" id="disciplinas">
-                                                    <option value="0"<?php echo $areas2 == '0' ? 'selected="selected"'  : '' ?>>Pendiente</option>
-                                                    <option value="1"<?php echo $areas2 == '1' ? 'selected="selected"'  : '' ?>>Revisado</option>
-                                                </select></td>
-                                            <td><select name="diciplinas2[]" class="form-control" id="disciplinas">
-                                                    <option value="0"<?php echo $areas == '0' ? 'selected="selected"'  : '' ?>>Calificacion</option>
-                                                    <option value="1"<?php echo $areas == '1' ? 'selected="selected"'  : '' ?>>1</option>
-                                                    <option value="2"<?php echo $areas == '2' ? 'selected="selected"'  : '' ?>>2</option>
-                                                    <option value="3"<?php echo $areas == '3' ? 'selected="selected"'  : '' ?>>3</option>
-                                                    <option value="4"<?php echo $areas == '4' ? 'selected="selected"'  : '' ?>>Rechazado</option>
-                                                </select></td>
+                                            <td><a href="<?php echo $mostrar['url'] ?>"  target="_blank">link</a></td>
+                                            <td ><?php
+                                                if ($x=='1'){
+                                                    echo '<p>Regular</p>';
+                                                }elseif ($x=='2'){
+                                                    echo '<p>Bien</p> ';
+                                                }elseif ($x=='3'){
+                                                    echo '<p>Excelente</p>';
+                                                }
+                                                ?></td>
                                             <td><?php echo $mostrar['nota'] ?></td>
                                         </form>
                                     </tr>

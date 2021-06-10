@@ -190,7 +190,8 @@ include 'php/conexion.php';
                         <tr>
                             <th>Nombre</th>
                             <th>Nombre del reto</th>
-                            <th style="text-align: center">Calificacion <img src="imgs/christmas-star_112199.png" alt="" width="30px"> <img src="imgs/christmas-star_112199.png" alt="" width="30px"> <img src="imgs/christmas-star_112199.png" alt="" width="30px"> </th>
+                            <th style="text-align: center"><img src="imgs/christmas-star_112199.png" alt="" width="30px"> <img src="imgs/christmas-star_112199.png" alt="" width="30px"> <img src="imgs/christmas-star_112199.png" alt="" width="30px"> </th>
+                            <th>Calificacion</th>
                         </tr>
                         <?php
                         $sql= "SELECT usuarios.nombre, creacion_reto.nombre_reto, retos_subidos.calificacion FROM retos_subidos INNER JOIN usuarios on usuarios.id=retos_subidos.usuarios_id INNER JOIN creacion_reto on creacion_reto.id=retos_subidos.creacion_reto_id WHERE retos_subidos.calificacion !=0
@@ -209,6 +210,15 @@ include 'php/conexion.php';
                                         echo '<img src="imgs/christmas-star_112199.png" alt="" width="30px"> <img src="imgs/christmas-star_112199.png" alt="" width="30px"> ';
                                     }elseif ($x=='3'){
                                         echo '<img src="imgs/christmas-star_112199.png" alt="" width="30px"> <img src="imgs/christmas-star_112199.png" alt="" width="30px"> <img src="imgs/christmas-star_112199.png" alt="" width="30px">';
+                                    }
+                                    ?></td>
+                                <td ><?php
+                                    if ($x=='1'){
+                                        echo '<p>Regular</p>';
+                                    }elseif ($x=='2'){
+                                        echo '<p>Bien</p> ';
+                                    }elseif ($x=='3'){
+                                        echo '<p>Excelente</p>';
                                     }
                                     ?></td>
                             </tr>
