@@ -3,7 +3,7 @@ session_start();
 
 $_SESSION['id_usuario'] = null;
 
-$_SESSION['matricula'] = null;
+$_SESSION['nombre'] = null;
 
 session_unset();
 

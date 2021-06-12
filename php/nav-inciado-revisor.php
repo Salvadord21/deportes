@@ -1,7 +1,7 @@
 
 <?php
 
-$matri = $_SESSION['matricula'];
+$matri = $_SESSION['nombre'];
 
 
 echo "

@@ -8,7 +8,7 @@ include 'php/conexion.php';
    <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Volim</title>
+      <title>Retos</title>
       <link rel="stylesheet" href="css/bootstrap.min.css">
       <link rel="stylesheet" href="css/style.css">
       <link rel="stylesheet" href="css/fontawesome.min.css">
@@ -22,11 +22,11 @@ include 'php/conexion.php';
       <div class="top_section">
          <div class="top_inner">
              <?php
-             if(!empty($_SESSION['matricula']) && $_SESSION['administrador'] == 0) {
+             if(!empty($_SESSION['nombre']) && $_SESSION['administrador'] == 0) {
                  include 'php/navbar-iniciado.php';
-             }elseif(!empty($_SESSION['matricula']) && $_SESSION['administrador'] == 1){
+             }elseif(!empty($_SESSION['nombre']) && $_SESSION['administrador'] == 1){
                  include 'php/nav-iniciado-admin.php';
-             }elseif(!empty($_SESSION['matricula']) && $_SESSION['administrador'] == 2){
+             }elseif(!empty($_SESSION['nombre']) && $_SESSION['administrador'] == 2){
                  include 'php/nav-inciado-revisor.php';
              }
              else{
