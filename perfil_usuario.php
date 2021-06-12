@@ -199,7 +199,7 @@ $idprueba=$_SESSION['id_usuario'];;
                                 </p>
                                 <div class="collapse" id="datos-calculo-imc">
                                     <div class="card card-body">
-                                        <form action="php/calcular-imc.php" method="post">
+                                        <form id="imc" method="post">
                                             <div class="row">
                                                 <div class="col">
                                                     <label for="peso-imc">Peso (KG)</label>
@@ -352,6 +352,38 @@ $idprueba=$_SESSION['id_usuario'];;
 
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+
+<script>
+    $("#imc").on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'php/calcular-imc.php',
+            data: $('#imc').serialize(),
+            cache: false,
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == "ok") {///////registro exitoso
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'IMC Generado',
+                        text: '',
+                        timer: 2000,
+                        showConfirmButton: false,
+                    });
+                } else if (data.status == "error") {///////registrado
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Error',
+                        text: 'No puedes registrate de nuevo',
+                        timer: 2000,
+                        showConfirmButton: false,
+                    });
+                }
+            }
+        });
+    });
+</script>
 </body>
 
 <?php

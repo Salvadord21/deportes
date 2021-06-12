@@ -571,15 +571,12 @@ require 'php/conexion.php';
                         $sql= "select id,nombre_torneo, fecha_inicio from creacion_torneo where disciplina = 'otro'";
                         $result=mysqli_query($conexion,$sql);
                         while($mostrar=mysqli_fetch_array($result)){
-
                             ?>
                             <tr>
                                 <td><?php echo $mostrar['nombre_torneo'] ?></td>
                                 <td><?php echo $mostrar['fecha_inicio'] ?>
                                 </td>
                                 <td><button type="button" class="btn btn-outline-primary" data-toggle="modal" onclick="ingresarTorneo(<?php echo $mostrar['id'] ?>)" >Ingresar</button></td>
-
-
                             </tr>
                             <?php
                         }

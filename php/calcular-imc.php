@@ -5,6 +5,7 @@ include 'conexion.php';
 $idusu = $_SESSION['id_usuario'];
 $peso = $_POST['peso'];
 $altura = $_POST['altura'];
+$data = array();
 
 if (!empty($idusu)){
 
@@ -14,13 +15,20 @@ if (!empty($idusu)){
 
     if ($query) {
 
-        header('location: ../perfil_usuario.php');
-
+        $select = "select  estatura, peso, fecha_creacion from imc where usuarios_id= '$idusu'";
+        $querys = mysqli_query($conexion, $select);
+        if ($querys){
+            $data['estatus']="ok";
+            $fila= mysqli_fetch_array($querys);
+            $data['select']=$fila;
+            $data['prueba']=$querys;
+        }
     } else {
+        $data['estatus']="error";
 
-        echo mysqli_error($conexion);
-        $_SESSION['msg_error'] = 'Error en sentencia sql: ' . mysqli_error($conexion);
     }
 }else{
-    $_SESSION['msg_error'] = 'Debes iniciar sesión para poder inscribirte al gimnasio';
+
 }
+
+echo json_encode($data);
