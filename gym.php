@@ -8,7 +8,7 @@ include 'php/conexion.php';
    <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Volim</title>
+      <title>Gym</title>
       <link rel="stylesheet" href="css/bootstrap.min.css">
       <link rel="stylesheet" href="css/style.css">
       <link rel="stylesheet" href="css/fontawesome.min.css">
@@ -32,11 +32,11 @@ include 'php/conexion.php';
          <div class="top_inner">
             <div id="header" class="header">
                 <?php
-                if(!empty($_SESSION['matricula']) && $_SESSION['administrador'] == 0) {
+                if(!empty($_SESSION['nombre']) && $_SESSION['administrador'] == 0) {
                     include 'php/navbar-iniciado.php';
-                }elseif(!empty($_SESSION['matricula']) && $_SESSION['administrador'] == 1){
+                }elseif(!empty($_SESSION['nombre']) && $_SESSION['administrador'] == 1){
                     include 'php/nav-iniciado-admin.php';
-                }elseif(!empty($_SESSION['matricula']) && $_SESSION['administrador'] == 2){
+                }elseif(!empty($_SESSION['nombre']) && $_SESSION['administrador'] == 2){
                     include 'php/nav-inciado-revisor.php';
                 }
                 else{
@@ -62,16 +62,6 @@ include 'php/conexion.php';
                <div class="col-md-7">
 
                   <p>En el área de pesas podrás desarrollar tus capacidades físicas de forma recreativa o mejorar tu condición física como parte de la disciplina deportiva que realizas.
-
-                     El ejercicio es una parte importante de un estilo de vida saludable, el cual te dará los siguientes beneficios:
-
-                     <ul>
-                        <li>Desarrollo de las capacidades físicas</li>
-                        <li>Prevención de enfermedades</li>
-                        <li>Reduce el estrés</li>
-                        <li>Incrementa la autoestima</li>
-                        <li>Conciliar el sueño</li>
-                     </ul>
 
                      El área de pesas se encuentra ubicado en el mezzanine dentro del Gimnasio del Campus Torrente Viver. </p>
                      <br>

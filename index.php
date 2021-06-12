@@ -32,26 +32,26 @@ if(!empty($_SESSION['msg_error'])){
 <!--BARRA DE MENU-->
 <div class="top_section">
     <div class="top_inner">
-        <div id="header" class="header">
-            <?php
-            if(!empty($_SESSION['matricula']) && $_SESSION['administrador'] == 0) {
-                include 'php/navbar-iniciado.php';
-            }elseif(!empty($_SESSION['matricula']) && $_SESSION['administrador'] == 1){
-                include 'php/nav-iniciado-admin.php';
-            }elseif(!empty($_SESSION['matricula']) && $_SESSION['administrador'] == 2){
-                include 'php/nav-inciado-revisor.php';
-            }
-            else{
 
-                require 'php/navbar.php';
-            }
-            ?>
-        </div>
+        <?php
+        if(!empty($_SESSION['nombre']) && $_SESSION['administrador'] == 0) {
+            include 'php/navbar-iniciado.php';
+        }elseif(!empty($_SESSION['nombre']) && $_SESSION['administrador'] == 1){
+            include 'php/nav-iniciado-admin.php';
+        }elseif(!empty($_SESSION['nombre']) && $_SESSION['administrador'] == 2){
+            include 'php/nav-inciado-revisor.php';
+        }
+        else{
+
+            require 'php/navbar.php';
+        }
+        ?>
+
     </div>
 </div>
 <!--FIN BARRA DE MENU-->
 
-<div class="top_section">
+<div class="top_section_car">
     <div id="main_slider" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#main_slider" data-slide-to="0" class="active"></li>
@@ -62,26 +62,22 @@ if(!empty($_SESSION['msg_error'])){
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img class="d-block w-100" src="imgs/prueba%20imagen.jpg" alt="slider_img">
-                <div class="ovarlay_slide_cont"></div>
             </div>
             <div class="carousel-item">
                 <img class="d-block w-100" src="imgs/SliderPáginaDeportes2.jpg" alt="slider_img"> <!--otra imagen*-->
-                <div class="ovarlay_slide_cont"></div>
             </div>
             <div class="carousel-item">
                 <img class="d-block w-100" src="imgs/SliderPáginaDeportes3.jpg" alt="slider_img"> <!--otra imagen*-->
-                <div class="ovarlay_slide_cont"></div>
             </div>
             <div class="carousel-item">
                 <img class="d-block w-100" src="imgs/SliderPáginaDeportes4.jpg" alt="slider_img"> <!--otra imagen*-->
-                <div class="ovarlay_slide_cont"></div>
             </div>
         </div>
     </div>
 </div>
 
 <!-- PARTE TORNEOS-->
-<div id="trainings_blog" class="layout_padding" style="background: #F2F2F2">
+<div id="trainings_blog" class="layout_padding" style="background: #ffffff">
     <div class="container">
         <div class="row">
             <div class="col-md-12 text_align_center">
@@ -117,39 +113,8 @@ if(!empty($_SESSION['msg_error'])){
     </div>
 </div>
 
-<!-- PARTE pesas-->
-<div id="classes" class="layout_padding" style="background: rgb(0,127,175);">
-    <div class="container">
-
-        <div class="row">
-            <div class="col-md-5">
-                <h3 class="text_align_left white_font">Área de pesas</h3>
-                <br>
-                <h6 class="white_font">
-                    En el área de pesas podrás desarrollar tus capacidades físicas de forma recreativa
-                    o mejorar tu condición física como parte de la disciplina deportiva que realizas.
-                    El ejercicio es una parte importante de un estilo de vida saludable, el cual te dará
-                    los siguientes beneficios:
-                    <br>
-                    <ul>
-                        <li>Desarrollo de las capacidades físicas</li>
-                        <li>Prevención de enfermedades</li>
-                        <li>Reduce el estrés</li>
-                        <li>Incrementa la autoestima</li>
-                        <li>Conciliar el sueño</li>
-                    </ul>
-                </h6><br>
-                <a class="btn btn-outline-light" href="gym.php" role="button">Inscríbete</a>
-            </div>
-            <div class="col-md-7 video_img">
-                <img class="img-responsive" src="imgs/ÁreaDePesas440x450.jpg" width="450px" alt="#" />
-            </div>
-        </div>
-    </div>
-</div>
-
 <!--PARTE reto-->
-<div id="trainings_blog" class="layout_padding" style="background: #F2F2F2">
+<div id="trainings_blog" class="layout_padding" style="background: rgb(0, 127, 175)">
     <div class="container">
         <div class="row">
 
@@ -163,25 +128,70 @@ if(!empty($_SESSION['msg_error'])){
                 $result= mysqli_query($conexion,$sql);
                 if($mostrar=mysqli_fetch_array($result)){
                     ?>
-                    <h3 class="text_align_left">RETOS</h3>
+                    <h3 class="text_align_left white_font">RETOS</h3>
                     <br><br>
-                    <h4><?php echo $mostrar['nombre_reto'] ?></h4>
-                    <h6> <?php echo $mostrar['descripcion'] ?><br><br><br>¿Te atreves a retarte a ti mismo?<br></h6>
+                    <h4 class="white_font"><?php echo $mostrar['nombre_reto'] ?></h4>
+                    <h6 class="white_font"> <?php echo $mostrar['descripcion'] ?><br><br><br>¿Te atreves a retarte a ti mismo?<br></h6>
                     <br>
-                    <h6>¿Te atreves a retarte a ti mismo?<br></h6>
-                    <a class="btn btn-info" href="retos.php" role="button">Iniciar retos</a>
+                    <h6 class="white_font">¿Te atreves a retarte a ti mismo?<br></h6>
+                    <a class="btn btn-outline-light" href="retos.php" role="button">Iniciar retos</a>
                     <?php
                 }else{
                     ?>
-                    <h3 class="text_align_left">RETOS<br><br></h3>
-                    <h6>Sabemos que no puedes esperar a ponerte a prueba<br><br><br></h6>
-                    <h6>¡Se paciente! Pronto se publicará un reto<br><br><br></h6>
+                    <h3 class="text_align_left white_font">RETOS<br><br></h3>
+                    <h6 class="white_font">Sabemos que no puedes esperar a ponerte a prueba<br><br><br></h6>
+                    <h6 class="white_font">¡Se paciente! Pronto se publicará un reto<br><br><br></h6>
                     <br>
-                    <a class="btn btn-outline-info" href="retos.php" role="button">Ver retos</a>
+                    <a class="btn btn-outline-light" href="retos.php" role="button">Ver retos</a>
                     <?php
                 }
                 ?>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- PARTE imc-->
+<div id="classes" class="layout_padding" style="background: #ffffff;">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-5">
+                <h3 class="text_align_left">Revisa tu IMC</h3>
+                <br>
+                <h6>
+                    ¡Lleva un control de tu IMC!
+                    Ve a tu perfil para poder iniciar
+                </h6>
+            </div>
+            <div class="col-md-7 video_img">
+                <img class="img-responsive" src="imgs/ÁreaDePesas440x450.jpg" width="450px" alt="#" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- PARTE pesas-->
+<div id="classes" class="layout_padding" style="background: rgb(0,127,175);">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-7 video_img">
+                <img class="img-responsive" src="imgs/ÁreaDePesas440x450.jpg" width="450px" alt="#" />
+            </div>
+
+            <div class="col-md-5">
+                <h3 class="text_align_left white_font">Área de pesas</h3>
+                <br>
+                <h6 class="white_font">
+                    En el área de pesas podrás desarrollar tus capacidades físicas de forma recreativa
+                    o mejorar tu condición física como parte de la disciplina deportiva que realizas.
+
+                </h6><br>
+                <a class="btn btn-outline-light" href="gym.php" role="button">Inscríbete</a>
+            </div>
+
         </div>
     </div>
 </div>
@@ -191,8 +201,8 @@ if(!empty($_SESSION['msg_error'])){
 <div id="shows">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12 text_align_center layout_padding" style="background: rgb(0,127,175);; min-height: 450px">
-                <h3 class="white_font">FACEBOOK<br><br></h3>
+            <div class="col-md-12 text_align_center layout_padding" style="background: #ffffff; min-height: 450px">
+                <h3>FACEBOOK<br><br></h3>
                 <div class="fb-page" data-href="https://www.facebook.com/AguilasUCC/" data-tabs="timeline" data-width="900" data-height="400" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/AguilasUCC/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/AguilasUCC/">UCC Educación Deportiva</a></blockquote></div>
             </div>
         </div>

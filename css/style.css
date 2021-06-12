@@ -106,6 +106,7 @@ nav.navbar a, nav.navbar ul li a {
     color: black !important;
 }
 
+
 nav.navbar ul li {
     padding: 0 15px;
     position: relative;
@@ -376,6 +377,12 @@ nav.navbar ul li a {
     background: rgb(0,127,175);
     padding: 90px 90px 0;
 }
+
+.top_section_car {
+    background: rgb(0,127,175);
+    padding: 90px 90px 0;
+}
+
 
 .carousel-indicators li {
     width: 30px;
@@ -1028,9 +1035,10 @@ footer .item p strong {
 footer {
     display: block;
     overflow: hidden;
-    background-color: rgb(0,80,116);
+    background-color: rgb(0,127,175);
     padding: 90px 0 0;
 }
+
 
 .cpy {
     margin: 0;
@@ -1371,8 +1379,13 @@ footer .item ul {
     }
 
     .top_section {
-        background: rgb(0,80,116);
+        background: rgb(0, 127, 175);
         padding: 50px 50px 0;
+    }
+
+    .top_section_car {
+        background: rgb(0, 127, 175);
+        padding: 0 50px 0;
     }
 
     .ovarlay_slide_cont h2 {
@@ -1475,7 +1488,7 @@ footer .item ul {
     }
 
     .navbar ul {
-        background-color: #222;
+        background-color: #e3f2fd;
         margin-top: 10px;
     }
 
@@ -1495,9 +1508,15 @@ footer .item ul {
     }
 
     .top_section {
-        background: rgb(147,149,152);
+        background: rgb(0, 127, 175);
         padding: 0 0 0;
     }
+
+    .top_section_car {
+        background: rgb(0, 127, 175);
+        padding: 0 0 0;
+    }
+
 
     #main_slider {
         margin-top: 0;
@@ -1508,7 +1527,7 @@ footer .item ul {
     }
 
     nav.navbar ul li a {
-        color: #fff !important;
+        color: #000000 !important;
     }
 
     .navbar-nav li a {
@@ -1604,97 +1623,6 @@ footer .item ul {
 }
 
 
-/*POPUP*/
-
-.overlay{
-    background: rgba(0,0,0,.3);
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    visibility: hidden;
-
-}
-
-.overlay.active{
-    visibility: visible;
-}
-
-.popup{
-    background: #f8f8f8;
-    box-shadow: 0px 0px 05px 0px rgba(0,0,0,0.3);
-    border-radius: 3px;
-    /*    font-family: 'Fjalla One', sans-serif;*/
-    font-family: 'Montserrat', sans-serif;
-    padding: 20px;
-    text-align: center;
-    width: 600px;
-
-    transition: .3s ease all;
-    transform: scale(0.7);
-    opacity: 0;
-
-}
-
-.popup .btn-close-pop {
-    font-size: 16px;
-    line-height: 16px;
-    display: block;
-    text-align: right;
-    color: #BBBBBB;
-    transition: .3s ease all;
-}
-
-.popup .btn-close-pop:hover {
-    color: #000;
-}
-
-.popup h3 {
-    font-size: 36px;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-
-.popup form .contenedor-formulario{}
-
-.popup form .contenedor-formulario input{
-    width: 100%;
-    margin-bottom: 20px;
-    height: 52px;
-    line-height: 52px;
-    font-size: 18px;
-    text-align: center;
-    border: 1px solid #BBBBBB;
-}
-
-.popup form .btn-submit {
-    padding: 0 20px;
-    height: 40px;
-    line-height: 40px;
-    border: none;
-    color: #fff;
-    background: #5E7DE3;
-    border-radius: 3px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 16px;
-    cursor: pointer;
-    transition: .3s ease all;
-}
-
-.popup form .btn-submit:hover{
-    background: rgba(94,125,227,.9);
-}
-
-/*POPUP FIN*/
-
-/*ANIMACIONES*/
-
-.popup.active{opacity: 1; transform: scale(1);}
-
 
 /* The switch - the box around the slider */
 .switch {
@@ -1758,6 +1686,3 @@ input:checked + .slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
-
-
-
