@@ -456,10 +456,11 @@ require 'php/conexion.php';
                             <tr>
                                 <th>#</th>
                                 <th>Jugador</th>
+                                <th>Equipo</th>
                                 <th>Goles</th>
                             </tr>
                             <?php
-                            $sql2= "SELECT usuarios.nombre, SUM(goleadores_fifa.goles) as goles FROM `goleadores_fifa` INNER JOIN usuarios on usuarios.id=goleadores_fifa.id_usuario";
+                            $sql2= "SELECT usuarios.nombre, SUM(goleadores_fifa.goles) as goles, equipos.nombre_equipo FROM `goleadores_fifa` INNER JOIN usuarios on usuarios.id=goleadores_fifa.id_usuario INNER JOIN equipos on equipos.id=goleadores_fifa.equipo_id";
                             $resulta=mysqli_query($conexion,$sql2);
                             $cont=1;
                             while($mostrar=mysqli_fetch_array($resulta)){
@@ -467,6 +468,7 @@ require 'php/conexion.php';
                                 <tr>
                                     <td><?php echo $cont ?></td>
                                     <td><?php echo $mostrar['nombre'] ?></td>
+                                    <td><?php echo $mostrar['nombre_equipo'] ?></td>
                                     <td><?php echo $mostrar['goles'] ?></td>
                                 </tr>
                                 <?

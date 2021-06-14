@@ -57,7 +57,7 @@ $id=$_POST['id_equipo'];
                                     ?>
                                 </select>
                             </td>
-                            <td><button type="button" onclick="guardar()" > Guardar Resultado</button> </td>
+                            <td><input type="text" value="<?php echo $id?>" id="equipo"><button type="button" onclick="guardar()" > Guardar Resultado</button> </td>
                         </tr>
                     </table>
                 </form>
@@ -68,13 +68,15 @@ $id=$_POST['id_equipo'];
                     var jugador=$('#jugador').val();
                     var jornada=$('#jornada').val();
                     var gol=$('#gol').val();
+                    var equipo=$('#equipo').val();
                     console.log(jornada);
                     console.log(gol,"GOL")
                     console.log(jugador,"JUGADOR");
+                    console.log(equipo)
                     $.ajax({
                         type: 'POST',
                         url: 'imc/goleadoresFIFA.php',
-                        data: {gol:gol,jugador:jugador,jornada:jornada},
+                        data: {gol:gol,jugador:jugador,jornada:jornada,equipo:equipo},
                         cache: false,
                         dataType: 'json',
                         success: function (data) {
@@ -120,6 +122,7 @@ $id=$_POST['id_equipo'];
                         <tr>
                             <th>matricula</th>
                             <th>nombre del jugador</th>
+                            <th>Equipo</th>
                         </tr>
                         </thead>
                         <tbody>
