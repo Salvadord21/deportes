@@ -30,7 +30,8 @@ include '../php/conexion.php';
                             <label class="control-label col-sm-2" for="email">Disciplina:</label>
                             <div class="col-sm-10">
                                 <select name="diciplinas[]" onChange="otrajornada(this.value);" class="form-control" id="disciplinas">
-                                    <option value="futbol bardas">Fútbol bardas</option>
+                                    <option value="futbol bardas">Fútbol bardas premier</option>
+                                    <option value="ascenso">Fútbol bardas ascenso</option>
                                     <option value="fifa">FIFA</option>
                                     <option value="voleibol">Voleibol</option>
                                     <option value="basquetbol">Basquetbol</option>

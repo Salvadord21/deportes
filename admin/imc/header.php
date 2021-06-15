@@ -67,7 +67,8 @@ $matri = $_SESSION['matricula'];
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="fut.php">Fútbol</a>
+                    <a class="collapse-item" href="fut.php">Fútbol Premier</a>
+                    <a class="collapse-item" href="ascenso.php">Fútbol Ascenso</a>
                     <a class="collapse-item " href="fifa.php">FIFA</a>
                     <a class="collapse-item " href="basket.php">Básquebol</a>
                     <a class="collapse-item " href="voleibol.php">Voleibol</a>

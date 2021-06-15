@@ -33,7 +33,7 @@ include '../php/conexion.php';
                                     <select name="local"  id="local">
                                         <option value="value1">Local</option>
                                         <?php
-                                        require 'imc/EquiposFifa.php';
+                                        require 'imc/EquiposFut2.php';
                                         ?>
                                     </select>
                                 </td>
@@ -43,14 +43,14 @@ include '../php/conexion.php';
                                 <td><select name="visita" id="visita">
                                         <option value="value1">Visitante</option>
                                         <?php
-                                        require 'imc/EquiposFifa.php';
+                                        require 'imc/EquiposFut2.php';
                                         ?>
                                     </select>
                                 </td>
                                 <td>
                                     <select name="jornada" id="jornada">
                                         <?php
-                                        $listado = "SELECT `jornadas` FROM `creacion_torneo` WHERE `id`=( SELECT id from creacion_torneo where creacion_torneo.fecha_creacion=( SELECT MAX(`fecha_creacion`) from creacion_torneo WHERE `disciplina`='fifa'))";
+                                        $listado = "SELECT `jornadas` FROM `creacion_torneo` WHERE `id`=( SELECT id from creacion_torneo where creacion_torneo.fecha_creacion=( SELECT MAX(`fecha_creacion`) from creacion_torneo WHERE `disciplina`='ascenso'))";
 
                                         $query = mysqli_query($conexion, $listado);
 
@@ -225,8 +225,7 @@ include '../php/conexion.php';
                             <th>ver jugadores</th>
                         </tr>
                         <?php
-                        $sql= "SELECT `id`,`nombre_equipo` FROM `equipos` WHERE 
-                                                 `id_torneo`=(SELECT id from creacion_torneo where creacion_torneo.fecha_creacion=(SELECT MAX(`fecha_creacion`) from creacion_torneo WHERE `disciplina`='fifa'))";
+                        $sql= "SELECT `id`,`nombre_equipo` FROM `equipos` WHERE `id_torneo`=(SELECT id from creacion_torneo where creacion_torneo.fecha_creacion=(SELECT MAX(`fecha_creacion`) from creacion_torneo WHERE `disciplina`='ascenso'))";
                         $result=mysqli_query($conexion,$sql);
                         while($mostrar=mysqli_fetch_array($result)) {
                             ?>
