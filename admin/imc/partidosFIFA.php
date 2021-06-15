@@ -12,7 +12,7 @@ if ($golVisita<$golLocal){//gano local
     $resultado=1;$puntosL=3;$puntosV=0;$jgl=1;$jel=0;$jpl=0;$jgv=0;$jev=0;$jpv=1;
 }else if($golVisita==$golLocal){
     $resultado=0;$puntosL=1;$puntosV=1;$jgl=0;$jel=1;$jpl=0;$jgv=0;$jev=1;$jpv=0;
-}else{$resultado=2;$puntosL=0;$puntosV=3;$jgl=0;$jel=0;$jpl=1;$jgv=0;$jev=0;$jpv=0;
+}else{$resultado=2;$puntosL=0;$puntosV=3;$jgl=0;$jel=0;$jpl=1;$jgv=1;$jev=0;$jpv=0;
 }///Gano visita
 
 $insert="INSERT INTO `partidos_fifa`(`gol_local`, `gol_visita`, `resultado`, `jornada`, `fecha`, `creacion_torneo_id`, `local_id`, `visita_id`) 

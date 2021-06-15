@@ -57,7 +57,7 @@ $id=$_POST['id_equipo'];
                                     ?>
                                 </select>
                             </td>
-                            <td><input type="text" value="<?php echo $id?>" id="equipo"><button type="button" onclick="guardar()" > Guardar Resultado</button> </td>
+                            <td><input type="hidden" value="<?php echo $id?>" id="equipo"><button type="button" onclick="guardar()" > Guardar Resultado</button> </td>
                         </tr>
                     </table>
                 </form>
