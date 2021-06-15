@@ -14,16 +14,10 @@ if (!empty($idusu)){
         $query = mysqli_query($conexion, $insertar);
 
         if ($query) {
+            $data['estatus'] = "ok";
 
-            $select = "select  estatura, peso, fecha_creacion from imc where usuarios_id= '$idusu'";
-            $querys = mysqli_query($conexion, $select);
-            if ($querys) {
-                $data['estatus'] = "ok";
-            }
         } else {
-
             $data['estatus'] = "error";
-
         }
 }
 

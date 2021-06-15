@@ -379,10 +379,11 @@ $idprueba=$_SESSION['id_usuario'];;
                     Swal.fire({
                         icon: 'info',
                         title: 'Error',
-                        text: 'No puedes registrate de nuevo',
+                        text: 'Datos invalidos',
                         timer: 2000,
                         showConfirmButton: false,
                     });
+                    error();
                 }
             }
         });
@@ -395,7 +396,10 @@ $idprueba=$_SESSION['id_usuario'];;
         $('#peso-imc').val('');
         $('#altura-imc').val('');
     }
-
+    function error(){
+        $('#peso-imc').val('');
+        $('#altura-imc').val('');
+    }
 
 </script>
 </body>
