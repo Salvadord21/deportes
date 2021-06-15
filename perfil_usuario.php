@@ -21,6 +21,8 @@ $idprueba=$_SESSION['id_usuario'];;
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
     <script src="https://www.w3.org/TR/wai-aria-practices/examples/disclosure/js/disclosureButton.js"></script>
 
 
@@ -225,7 +227,7 @@ $idprueba=$_SESSION['id_usuario'];;
                                     </div>
                                 </div>
 
-                                <table class="table table-sm">
+                                <table class="table table-sm" id="result">
                                     <thead>
 
                                     <tr>
@@ -235,10 +237,10 @@ $idprueba=$_SESSION['id_usuario'];;
                                         <th scope="col">Fecha</th>
                                     </tr>
                                     </thead>
-                                    <tbody id="result">
+                                    <tbody >
 
                                     <?php
-                                    $sql= "select  estatura, peso, fecha_creacion from imc where usuarios_id= '$_SESSION[id_usuario]'";
+                                    $sql= "select  estatura, peso, fecha_creacion from imc where usuarios_id= '$_SESSION[id_usuario]' ORDER BY `imc`.`fecha_creacion` DESC";
                                     $result=mysqli_query($conexion,$sql);
                                     while($mostrar=mysqli_fetch_array($result)){
 
@@ -285,16 +287,6 @@ $idprueba=$_SESSION['id_usuario'];;
                         </div>
                     </div>
 
-                    <script>
-                        $(document).ready(function() {
-
-                             $("#btncalcula").on("click", function() {
-                                 $( "#result" ).load( "perfil_usuario.php #result" );
-                             });
-
-
-                        });
-                    </script>
 
                     <!--RETOS-->
                     <div class="card">
@@ -374,7 +366,7 @@ $idprueba=$_SESSION['id_usuario'];;
             cache: false,
             dataType: 'json',
             success: function (data) {
-                if (data.status == "ok") {///////registro exitoso
+                if (data.estatus == "ok") {///////registro exitoso
                     Swal.fire({
                         icon: 'success',
                         title: 'IMC Generado',
@@ -382,7 +374,8 @@ $idprueba=$_SESSION['id_usuario'];;
                         timer: 2000,
                         showConfirmButton: false,
                     });
-                } else if (data.status == "error") {///////registrado
+                actualizar();
+                } else if (data.estatus == "error") {///////registrado
                     Swal.fire({
                         icon: 'info',
                         title: 'Error',
@@ -394,6 +387,16 @@ $idprueba=$_SESSION['id_usuario'];;
             }
         });
     });
+
+
+
+    function actualizar(){
+        $( "#result" ).load( "perfil_usuario.php #result" );
+        $('#peso-imc').val('');
+        $('#altura-imc').val('');
+    }
+
+
 </script>
 </body>
 

@@ -19,9 +19,6 @@ if (!empty($idusu)){
             $querys = mysqli_query($conexion, $select);
             if ($querys) {
                 $data['estatus'] = "ok";
-                $fila = mysqli_fetch_array($querys);
-                $data['select'] = $fila;
-                $data['prueba'] = $querys;
             }
         } else {
 
