@@ -216,7 +216,7 @@ $idprueba=$_SESSION['id_usuario'];;
                                                 <div class="col"></div>
                                                 <div class="col"></div>
                                                 <div class="col">
-                                                    <button class="btn btn-secondary" type="submit" data-toggle="collapse" data-target="#calculo-imc" aria-expanded="false" aria-controls="calculo-imc">
+                                                    <button class="btn btn-secondary" type="submit" id="btncalcula" name="btncalcula" data-toggle="collapse" data-target="#calculo-imc" aria-expanded="false" aria-controls="calculo-imc">
                                                         Calcular
                                                     </button>
                                                 </div>
@@ -235,7 +235,7 @@ $idprueba=$_SESSION['id_usuario'];;
                                         <th scope="col">Fecha</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="result">
 
                                     <?php
                                     $sql= "select  estatura, peso, fecha_creacion from imc where usuarios_id= '$_SESSION[id_usuario]'";
@@ -259,16 +259,16 @@ $idprueba=$_SESSION['id_usuario'];;
                                                     echo " Normal";
                                                 }
                                                 elseif(($x>25)and($x<=30)){
-                                                    echo " Sobrepeso de grado I";
+                                                    echo " Sobrepeso";
                                                 }
                                                 elseif(($x>30)and($x<=35)){
-                                                    echo " Sobrepeso de grado II";
+                                                    echo " Obesidad de grado I";
                                                 }
                                                 elseif(($x>35)and($x<=40)){
-                                                    echo " Sobrepeso de grado III";
+                                                    echo " Obesidad de grado II";
                                                 }
                                                 elseif($x>40){
-                                                    echo " Obesidad de grado IV";
+                                                    echo " Obesidad de grado III";
                                                 }
 
                                                 ?></td>
@@ -284,6 +284,17 @@ $idprueba=$_SESSION['id_usuario'];;
                             </div>
                         </div>
                     </div>
+
+                    <script>
+                        $(document).ready(function() {
+
+                             $("#btncalcula").on("click", function() {
+                                 $( "#result" ).load( "perfil_usuario.php #result" );
+                             });
+
+
+                        });
+                    </script>
 
                     <!--RETOS-->
                     <div class="card">
