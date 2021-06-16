@@ -4,6 +4,9 @@ include 'imc/header.php';
 include '../php/conexion.php';
 $id=$_POST['id_equipo'];
 ?>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <div class="col-xl-12 col-lg-7">
@@ -69,10 +72,6 @@ $id=$_POST['id_equipo'];
                     var jornada=$('#jornada').val();
                     var gol=$('#gol').val();
                     var equipo=$('#equipo').val();
-                    console.log(jornada);
-                    console.log(gol,"GOL")
-                    console.log(jugador,"JUGADOR");
-                    console.log(equipo)
                     $.ajax({
                         type: 'POST',
                         url: 'imc/goleadoresFIFA.php',
@@ -80,7 +79,7 @@ $id=$_POST['id_equipo'];
                         cache: false,
                         dataType: 'json',
                         success: function (data) {
-                            if (data.status == "ok") {///////registro exitoso
+                            if (data.estatus == "ok") {///////registro exitoso
                                 Swal.fire({
                                     icon: 'success',
                                     title: 'Estas registrado',
@@ -88,7 +87,8 @@ $id=$_POST['id_equipo'];
                                     timer: 2000,
                                     showConfirmButton: false,
                                 });
-                            } else if (data.status == "salida") {///////registrado
+                                actualizar();
+                            } else if (data.estatus == "salida") {///////registrado
                                 Swal.fire({
                                     icon: 'info',
                                     title: 'El torneo ya llego a su maximo de participantes',
@@ -99,7 +99,9 @@ $id=$_POST['id_equipo'];
                             }
                         }
                     });
-
+                }
+                function actualizar(){
+                    $("#result").load( "jugadoresFifa.php #result" );
                 }
             </script>
 
@@ -107,45 +109,112 @@ $id=$_POST['id_equipo'];
     </div>
 
     <!-- jugadores -->
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">jugadores</h6>
-        </div>
-        <!--tablas-->
-        <div class="card-body">
-            <div class="table-responsive">
-                <br>
-                <div class="table-responsive">
-                    <br>
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                        <tr>
-                            <th>matricula</th>
-                            <th>nombre del jugador</th>
-                            <th>Equipo</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                        $sql= "SELECT `integrantes`.`usuarios_id`, CONCAT(`usuarios`.`nombre`,' ', usuarios.apellido_paterno,' ',usuarios.apellido_materno) as nombre, `equipos`.`id` FROM `equipos` INNER JOIN `integrantes` ON `equipos`.`id` = `integrantes`.`equipos_id` INNER JOIN `usuarios` ON `integrantes`.`usuarios_id` = `usuarios`.`id`
-                        WHERE equipos.id='$id';";
-                        $result= mysqli_query($conexion,$sql);
-                        while($mostrar=mysqli_fetch_array($result)){
+    <div class="col-xl-12 col-lg-7" id="result">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Resultados</h6>
 
+            </div>
+            <?php
+            $sql= "SELECT * FROM `creacion_torneo` WHERE disciplina='FIFA'AND fecha_creacion = ( SELECT MAX(fecha_creacion) FROM `creacion_torneo` WHERE disciplina = 'FIFA')";
+            $result=mysqli_query($conexion,$sql);
+            while($mostrar=mysqli_fetch_array($result)) {
+                $id_torn=$mostrar['id'];
+                $jornadas = $mostrar['jornadas'];
+                $y= $mostrar['numero_equipos'];
+                if (($y%2)==0){
+                    $partidos=($y/2);
+                }else{
+                    $partidos=($y/2)-0.5;
+                }
+
+                $xsem=0;
+                ?>
+                <!-- Resultado de partidos  -->
+                <div class="card-body" id="">
+
+                    <!-- Muestran total de jornadas  -->
+                    <ul class="nav nav-tabs" id="tab-futbol" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="tab-futbol-general" data-toggle="tab" href="#semana1" role="tab" aria-controls="futbol-general" aria-selected="true">Semana 1</a>
+                        </li>
+                        <!-- imprime jornadas -->
+                        <?php
+                        for ($jornadascont=2; $jornadascont<$jornadas+1; $jornadascont++){
                             ?>
-                            <tr>
-                                <td><?php echo $mostrar['nombre'] ?></td>
-                            </tr>
+                            <li class="nav-item">
+                                <a class="nav-link" id="tab-futbol-jugadores" data-toggle="tab" href="#semana<?php echo $jornadascont; ?>" role="tab" aria-controls="futbol-jugadores" aria-selected="false">Semana <?php echo $jornadascont; ?></a>
+                            </li>
                             <?php
                         }
                         ?>
-                        </tbody>
-                    </table>
-                    <div class="modal-footer justify-content-center">
-                        <button type="submit" class="btn btn-primary"><a href="fut.php" style="color: white">Cancelar</a></button>
+                    </ul>
+                    <!-- Muestran los resultados de partidos en jornada 1 -->
+                    <div class="tab-content" id="tab-futbol-contenido">
+                        <div class="tab-pane fade show active" id="semana1" role="tabpanel" aria-labelledby="tab-futbol-general">
+                            <form action="imc/partidosFIFA.php" method="post">
+                                <table class="table table-hover">
+                                    <tr>
+                                        <th>Jugador</th>
+                                        <th>Goles</th>
+                                    </tr>
+                                    <?php
+                                    $sql2= "SELECT * FROM `goleadorfifa` WHERE jornada='1' and id='$id'";
+                                    $resulta=mysqli_query($conexion,$sql2);
+                                    $cont=1;
+                                    while($mostrar=mysqli_fetch_array($resulta)){
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $mostrar['nombre'] ?></td>
+                                            <td><?php echo $mostrar['goles'] ?></td>
+
+                                        </tr>
+                                        <?
+                                        $cont++;
+                                    }
+                                    ?>
+
+                                </table>
+                            </form>
+                        </div>
+
+
+                        <!-- muestra cuando hay mas de una jornada-->
+                        <?php
+                        for ($jornadascont2=2; $jornadascont2<$jornadas+1; $jornadascont2++){
+                            ?>
+                            <div class="tab-pane fade" id="semana<?php echo $jornadascont2; ?>" role="tabpanel" aria-labelledby="tab-futbol-jugadores">
+                                <form action="imc/partidosFIFA.php" method="post" >
+                                    <table class="table table-hover">
+                                        <tr>
+                                            <th>Jugador</th>
+                                            <th>Goles</th>
+                                        </tr>
+                                        <?php
+                                        $sql2= "SELECT * FROM `goleadorfifa` WHERE jornada='$jornadascont2' and id='$id'";
+                                        $resulta=mysqli_query($conexion,$sql2);
+                                        $cont=1;
+                                        while($mostrar=mysqli_fetch_array($resulta)){
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $mostrar['nombre'] ?></td>
+                                                <td><?php echo $mostrar['goles'] ?></td>
+
+                                            </tr>
+                                            <?
+                                            $cont++;
+                                        }
+                                        ?>
+                                    </table>
+                                </form>
+                            </div>
+                            <?php
+                        }
+                        ?>
                     </div>
-                </div>
-            </div>
+                </div >
+            <?php } ?>
 
         </div>
     </div>

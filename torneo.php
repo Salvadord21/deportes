@@ -261,7 +261,8 @@ require 'php/conexion.php';
 
         <!--Menu principal-->
         <div class="nav nav-pills nav-fill" id="menu-torneos-disciplinas" role="tablist">
-            <a class="nav-item nav-link active" id="menu-torneos-futbol" data-toggle="pill" href="#torneos-futbol" role="tab" aria-controls="torneos-futbol" aria-selected="true">Fútbol</a>
+            <a class="nav-item nav-link active" id="menu-torneos-futbol" data-toggle="pill" href="#torneos-futbol" role="tab" aria-controls="torneos-futbol" aria-selected="true">Bardas Premier</a>
+            <a class="nav-item nav-link " id="menu-torneos-futbol-2" data-toggle="pill" href="#torneos-asenso" role="tab" aria-controls="torneos-futbol" aria-selected="true">Bardas Ascenso</a>
             <a class="nav-item nav-link" id="menu-torneos-fifa" data-toggle="pill" href="#torneos-fifa" role="tab" aria-controls="torneos-fifa" aria-selected="false">FIFA</a>
             <a class="nav-item nav-link" id="menu-torneos-volley" data-toggle="pill" href="#torneos-volley" role="tab" aria-controls="torneos-volley" aria-selected="false">Voleibol</a>
             <a class="nav-item nav-link" id="menu-torneos-basquet" data-toggle="pill" href="#torneos-basquet" role="tab" aria-controls="torneos-basquet" aria-selected="false">Basquétbol</a>
@@ -363,7 +364,7 @@ require 'php/conexion.php';
                                 <th>Goles</th>
                             </tr>
                             <?php
-                            $sql2= "SELECT `nombre_equipo`, `golesC` FROM `tabla_fut` ORDER BY golesF DESC";
+                            $sql2= "SELECT `nombre_equipo`, `golesC` FROM `tabla_fut` ORDER BY golesC ";
                             $resulta=mysqli_query($conexion,$sql2);
                             $cont=1;
                             while($mostrar=mysqli_fetch_array($resulta)){
@@ -380,6 +381,140 @@ require 'php/conexion.php';
                             ?>
                         </table>
 
+                    </div>
+                </div>
+            </div>
+            <!--FUTBOL ascenso-->
+            <div class="tab-pane fade show " id="torneos-asenso" role="tabpanel" aria-labelledby="menu-torneos-futbol-2">
+                <ul class="nav nav-tabs" id="tab-futbol" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="tab-futbol-general-a" data-toggle="tab" href="#futbol-general-a" role="tab" aria-controls="futbol-general" aria-selected="true">Tabla General</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab-futbol-ofensiva-a" data-toggle="tab" href="#futbol-ofensiva-a" role="tab" aria-controls="futbol-ofensiva" aria-selected="false">Mejor ofensiva</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab-futbol-defensiva-a" data-toggle="tab" href="#futbol-defensiva-a" role="tab" aria-controls="futbol-defensiva" aria-selected="false">Mejor defensiva</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab-futbol-defensiva-ab" data-toggle="tab" href="#futbol-defensiva-ab" role="tab" aria-controls="futbol-defensiva" aria-selected="false">Goleadores</a>
+                    </li>
+                </ul>
+
+                <!--SUBMENU FUTBOL-->
+                <div class="tab-content" id="tab-futbol-contenido">
+                    <div class="tab-pane fade show active" id="futbol-general-a" role="tabpanel" aria-labelledby="tab-futbol-general-a">
+                        <table class="table table-hover">
+                            <tr>
+                                <th>#</th>
+                                <th>Equipo</th>
+                                <th data-toggle="tooltip" data-placement="top" title="Juegos jugados">JJ</th>
+                                <th data-toggle="tooltip" data-placement="top" title="Juegos ganados">JG</th>
+                                <th data-toggle="tooltip" data-placement="top" title="Juegos empatados">JE</th>
+                                <th data-toggle="tooltip" data-placement="top" title="Juegos perdidos">JP</th>
+                                <th data-toggle="tooltip" data-placement="top" title="Goles a favor">GF</th>
+                                <th data-toggle="tooltip" data-placement="top" title="Goles en contra">GE</th>
+                                <th data-toggle="tooltip" data-placement="top" title="Diferencia de goles">Dif</th>
+                                <th data-toggle="tooltip" data-placement="top" title="Puntos">Puntos</th>
+                            </tr>
+                            <?php
+                            $sql2= " Select nombre_equipo, golesF, golesC, df,jj, puntos,jg,jp,je FROM `tabla_ascenso`";
+                            $resulta=mysqli_query($conexion,$sql2);
+                            $cont=1;
+                            while($mostrar=mysqli_fetch_array($resulta)){
+                                ?>
+                                <tr>
+                                    <td><?php echo $cont ?></td>
+                                    <td><?php echo $mostrar['nombre_equipo'] ?></td>
+                                    <td><?php echo $mostrar['jj'] ?></td>
+                                    <td><?php echo $mostrar['jg'] ?></td>
+                                    <td><?php echo $mostrar['je'] ?></td>
+                                    <td><?php echo $mostrar['jp'] ?></td>
+                                    <td><?php echo $mostrar['golesF'] ?></td>
+                                    <td><?php echo $mostrar['golesC'] ?></td>
+                                    <td><?php echo $mostrar['df'] ?></td>
+                                    <td><?php echo $mostrar['puntos'] ?></td>
+                                </tr>
+                                <?
+                                $cont++;
+                            }
+                            ?>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="futbol-ofensiva-a" role="tabpanel" aria-labelledby="tab-futbol-ofensiva-a">
+                        <table class="table table-hover">
+                            <tr>
+                                <th>#</th>
+                                <th>Equipo</th>
+                                <th>Goles</th>
+                            </tr>
+                            <?php
+                            $sql2= "SELECT `nombre_equipo`, `golesF` FROM `tabla_ascenso` ORDER BY golesF DESC";
+                            $resulta=mysqli_query($conexion,$sql2);
+                            $cont=1;
+                            while($mostrar=mysqli_fetch_array($resulta)){
+                                ?>
+                                <tr>
+                                    <td><?php echo $cont ?></td>
+                                    <td><?php echo $mostrar['nombre_equipo'] ?></td>
+                                    <td><?php echo $mostrar['golesF'] ?></td>
+
+                                </tr>
+                                <?
+                                $cont++;
+                            }
+                            ?>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="futbol-defensiva-a" role="tabpanel" aria-labelledby="tab-futbol-defensiva-a">
+                        <table class="table table-hover">
+                            <tr>
+                                <th>#</th>
+                                <th>Equipo</th>
+                                <th>Goles</th>
+                            </tr>
+                            <?php
+                            $sql2= "SELECT `nombre_equipo`, `golesC` FROM `tabla_ascenso` ORDER BY golesF DESC";
+                            $resulta=mysqli_query($conexion,$sql2);
+                            $cont=1;
+                            while($mostrar=mysqli_fetch_array($resulta)){
+                                ?>
+                                <tr>
+                                    <td><?php echo $cont ?></td>
+                                    <td><?php echo $mostrar['nombre_equipo'] ?></td>
+                                    <td><?php echo $mostrar['golesC'] ?></td>
+
+                                </tr>
+                                <?
+                                $cont++;
+                            }
+                            ?>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="futbol-defensiva-ab" role="tabpanel" aria-labelledby="tab-futbol-defensiva-a">
+                        <table class="table table-hover">
+                            <tr>
+                                <th>#</th>
+                                <th>Equipo</th>
+                                <th></th>
+                            </tr>
+                            <?php
+                            $sql2= "SELECT `nombre_equipo`, `golesC` FROM `tabla_ascenso` ORDER BY golesF DESC";
+                            $resulta=mysqli_query($conexion,$sql2);
+                            $cont=1;
+                            while($mostrar=mysqli_fetch_array($resulta)){
+                                ?>
+                                <tr>
+                                    <td><?php echo $cont ?></td>
+                                    <td><?php echo $mostrar['nombre_equipo'] ?></td>
+                                    <td><?php echo $mostrar['golesC'] ?></td>
+
+                                </tr>
+                                <?
+                                $cont++;
+                            }
+                            ?>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -447,7 +582,7 @@ require 'php/conexion.php';
                                 <th>Goles</th>
                             </tr>
                             <?php
-                            $sql2= "SELECT usuarios.nombre, SUM(goleadores_fifa.goles) as goles, equipos.nombre_equipo FROM `goleadores_fifa` INNER JOIN usuarios on usuarios.id=goleadores_fifa.id_usuario INNER JOIN equipos on equipos.id=goleadores_fifa.equipo_id GROUP by goleadores_fifa.equipo_id";
+                            $sql2= "SELECT `nombre`, SUM(`goles`) as goles, `nombre_equipo` FROM `goleadorfifa` WHERE id='3'GROUP BY`nombre`";
                             $resulta=mysqli_query($conexion,$sql2);
                             $cont=1;
                             while($mostrar=mysqli_fetch_array($resulta)){

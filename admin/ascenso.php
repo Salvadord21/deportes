@@ -3,6 +3,8 @@ session_start();
 include 'imc/header.php';
 include '../php/conexion.php';
 ?>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 
 <!-- inicio pagina -->
 <div class="container-fluid">
@@ -84,12 +86,12 @@ include '../php/conexion.php';
                         console.log(equipov,"equipov");
                         $.ajax({
                             type: 'POST',
-                            url: 'imc/partidosFIFA.php',
+                            url: 'imc/partidosFut2.php',
                             data: {golL:goll,golV:golv,local:equipol,visita:equipov,jornada:jornada},
                             cache: false,
                             dataType: 'json',
                             success: function (data) {
-                                if (data.status == "ok") {///////registro exitoso
+                                if (data.estatus == "ok") {///////registro exitoso
                                     Swal.fire({
                                         icon: 'success',
                                         title: 'Estas registrado',
@@ -97,7 +99,8 @@ include '../php/conexion.php';
                                         timer: 2000,
                                         showConfirmButton: false,
                                     });
-                                } else if (data.status == "salida") {///////registrado
+                                    actualizar();
+                                } else if (data.estatus == "salida") {///////registrado
                                     Swal.fire({
                                         icon: 'info',
                                         title: 'El torneo ya llego a su maximo de participantes',
@@ -108,7 +111,10 @@ include '../php/conexion.php';
                                 }
                             }
                         });
+                    }
 
+                    function actualizar(){
+                        $( "#result" ).load( "ascenso.php #result" );
                     }
                 </script>
 
@@ -116,7 +122,7 @@ include '../php/conexion.php';
         </div>
 
         <!-- ver resltados -->
-        <div class="col-xl-12 col-lg-7">
+        <div class="col-xl-12 col-lg-7" id="result">
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3">
@@ -124,7 +130,7 @@ include '../php/conexion.php';
 
                 </div>
                 <?php
-                $sql= "SELECT * FROM `creacion_torneo` WHERE disciplina='FIFA'AND fecha_creacion = ( SELECT MAX(fecha_creacion) FROM `creacion_torneo` WHERE disciplina = 'FIFA')";
+                $sql= "SELECT * FROM `creacion_torneo` WHERE disciplina='ascenso'AND fecha_creacion = ( SELECT MAX(fecha_creacion) FROM `creacion_torneo` WHERE disciplina = 'ascenso')";
                 $result=mysqli_query($conexion,$sql);
                 while($mostrar=mysqli_fetch_array($result)) {
                     $id_torn=$mostrar['id'];
@@ -169,8 +175,24 @@ include '../php/conexion.php';
                                             <th></th>
                                             <th>vistante</th>
                                         </tr>
-                                        <!--imprime sino tiene valore-->
+                                        <?php
+                                        $sql2= "SELECT * FROM `partidos_ascenso` WHERE jornada='1'";
+                                        $resulta=mysqli_query($conexion,$sql2);
+                                        $cont=1;
+                                        while($mostrar=mysqli_fetch_array($resulta)){
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $mostrar['local_id'] ?></td>
+                                                <td><?php echo $mostrar['gol_local'] ?></td>
+                                                <td>vs</td>
+                                                <td><?php echo $mostrar['gol_visita'] ?></td>
+                                                <td><?php echo $mostrar['visita_id'] ?></td>
 
+                                            </tr>
+                                            <?
+                                            $cont++;
+                                        }
+                                        ?>
                                     </table>
                                 </form>
                             </div>
@@ -191,13 +213,24 @@ include '../php/conexion.php';
                                                 <th>vistante</th>
                                             </tr>
                                             <!--imprime valores -->
-                                            <tr>
-                                                <th>Local</th>
-                                                <th></th>
-                                                <th>vs</th>
-                                                <th></th>
-                                                <th>vistante</th>
-                                            </tr>
+                                            <?php
+                                            $sql2= "SELECT * FROM `partidos_ascenso` WHERE jornada='$jornadascont2'";
+                                            $resulta=mysqli_query($conexion,$sql2);
+                                            $cont=1;
+                                            while($mostrar=mysqli_fetch_array($resulta)){
+                                                ?>
+                                                <tr>
+                                                    <td><?php echo $mostrar['local_id'] ?></td>
+                                                    <td><?php echo $mostrar['gol_local'] ?></td>
+                                                    <td>vs</td>
+                                                    <td><?php echo $mostrar['gol_visita'] ?></td>
+                                                    <td><?php echo $mostrar['visita_id'] ?></td>
+
+                                                </tr>
+                                                <?
+                                                $cont++;
+                                            }
+                                            ?>
                                         </table>
                                     </form>
                                 </div>
