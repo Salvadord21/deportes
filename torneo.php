@@ -535,7 +535,6 @@ require 'php/conexion.php';
                     </div>
                 </div>
             </div>
-
             <!--FIFA-->
             <div class="tab-pane fade" id="torneos-fifa" role="tabpanel" aria-labelledby="menu-torneos-fifa">
                 <ul class="nav nav-tabs" id="tab-futbol" role="tablist">
@@ -621,7 +620,6 @@ require 'php/conexion.php';
 
 
             </div>
-
             <!--VOLLEY-->
             <div class="tab-pane fade" id="torneos-volley" role="tabpanel" aria-labelledby="menu-torneos-volley">
                 <table class="table table-hover">
@@ -675,7 +673,6 @@ require 'php/conexion.php';
                     </tr>
                 </table>
             </div>
-
             <!--BASQUET-->
             <div class="tab-pane fade" id="torneos-basquet" role="tabpanel" aria-labelledby="menu-torneos-basquet">
                 <table class="table table-hover">
@@ -684,52 +681,35 @@ require 'php/conexion.php';
                         <th>Equipo</th>
                         <th data-toggle="tooltip" data-placement="top" title="Juegos jugados">JJ</th>
                         <th data-toggle="tooltip" data-placement="top" title="Juegos ganados">JG</th>
-                        <th data-toggle="tooltip" data-placement="top" title="Juegos empatados">JE</th>
                         <th data-toggle="tooltip" data-placement="top" title="Juegos perdidos">JP</th>
                         <th data-toggle="tooltip" data-placement="top" title="Goles a favor">GF</th>
                         <th data-toggle="tooltip" data-placement="top" title="Goles en contra">GE</th>
                         <th data-toggle="tooltip" data-placement="top" title="Diferencia de goles">Dif</th>
                         <th data-toggle="tooltip" data-placement="top" title="Puntos">P</th>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Somos la noche</td>
-                        <td>5</td>
-                        <td>4</td>
-                        <td>0</td>
-                        <td>1</td>
-                        <td>22</td>
-                        <td>13</td>
-                        <td>9</td>
-                        <td>12</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Águilas</td>
-                        <td>5</td>
-                        <td>3</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>13</td>
-                        <td>9</td>
-                        <td>4</td>
-                        <td>10</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Deportivo MC</td>
-                        <td>5</td>
-                        <td>3</td>
-                        <td>0</td>
-                        <td>2</td>
-                        <td>20</td>
-                        <td>14</td>
-                        <td>6</td>
-                        <td>9</td>
-                    </tr>
+                    <?php
+                    $sql2= " Select * FROM `tabla_basquetbol`";
+                    $resulta=mysqli_query($conexion,$sql2);
+                    $cont=1;
+                    while($mostrar=mysqli_fetch_array($resulta)){
+                        ?>
+                        <tr>
+                            <td><?php echo $cont ?></td>
+                            <td><?php echo $mostrar['nombre_equipo'] ?></td>
+                            <td><?php echo $mostrar['jj'] ?></td>
+                            <td><?php echo $mostrar['jg'] ?></td>
+                            <td><?php echo $mostrar['jp'] ?></td>
+                            <td><?php echo $mostrar['gf'] ?></td>
+                            <td><?php echo $mostrar['gc'] ?></td>
+                            <td><?php echo $mostrar['df'] ?></td>
+                            <td><?php echo $mostrar['puntos'] ?></td>
+                        </tr>
+                        <?
+                        $cont++;
+                    }
+                    ?>
                 </table>
             </div>
-
             <!--OTROS TORNEOS-->
             <div class="tab-pane fade" id="torneos-otros" role="tabpanel" aria-labelledby="menu-torneos-otros">
                 <table class="table table-hover">
@@ -756,10 +736,8 @@ require 'php/conexion.php';
 
                 </table>
             </div>
-
             <!--EQUIPOS-->
             <div class="tab-pane fade" id="torneos-equipos" role="tabpanel" aria-labelledby="menu-torneos-equipos">
-
                 <table class="table table-hover">
                     <tr>
                         <th>Nombre del Equipo</th>
@@ -797,7 +775,6 @@ require 'php/conexion.php';
                             <?php } ?>
                     </tbody>
                 </table>
-
             </div>
         </div>
     </div>
