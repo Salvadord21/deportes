@@ -13,7 +13,7 @@ $id=$_POST['id_equipo'];
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Agregar Goles</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Agregar Goles FUT</h6>
 
             </div>
             <div class="card-body">
@@ -32,9 +32,7 @@ $id=$_POST['id_equipo'];
                                     <?php
                                     $listado = "SELECT `integrantes`.`usuarios_id`, CONCAT(`usuarios`.`nombre`,' ', usuarios.apellido_paterno,' ',usuarios.apellido_materno) as nombre, `equipos`.`id` FROM `equipos` INNER JOIN `integrantes` ON `equipos`.`id` = `integrantes`.`equipos_id` INNER JOIN `usuarios` ON `integrantes`.`usuarios_id` = `usuarios`.`id`
                         WHERE equipos.id='$id';";
-
                                     $query = mysqli_query($conexion, $listado);
-
                                     while ($FIFAequi = mysqli_fetch_array($query)){
                                         echo '<option value ="'.$FIFAequi['usuarios_id'].'">'.$FIFAequi['nombre'].'</option>';
                                     }
@@ -46,7 +44,7 @@ $id=$_POST['id_equipo'];
                             <td>
                                 <select name="jornada" id="jornada">
                                     <?php
-                                    $listado = "SELECT `jornadas` FROM `creacion_torneo` WHERE `id`=( SELECT id from creacion_torneo where creacion_torneo.fecha_creacion=( SELECT MAX(`fecha_creacion`) from creacion_torneo WHERE `disciplina`='fifa'))";
+                                    $listado = "SELECT `id`,`jornadas` FROM `creacion_torneo` WHERE `id`=( SELECT id from creacion_torneo where creacion_torneo.fecha_creacion=( SELECT MAX(`fecha_creacion`) from creacion_torneo WHERE `disciplina`='ascenso'))";
 
                                     $query = mysqli_query($conexion, $listado);
 
@@ -59,6 +57,13 @@ $id=$_POST['id_equipo'];
                                     }
                                     ?>
                                 </select>
+
+                                <?php
+                                $listado2 = "SELECT `id`,`jornadas` FROM `creacion_torneo` WHERE `id`=( SELECT id from creacion_torneo where creacion_torneo.fecha_creacion=( SELECT MAX(`fecha_creacion`) from creacion_torneo WHERE `disciplina`='ascenso'))";
+                                $query2 = mysqli_query($conexion, $listado2);
+                                $idTorneo = mysqli_fetch_array($query2)
+                                ?>
+                                <input type="hidden" value="<?php echo $idTorneo['id']?>" id="torneo">
                             </td>
                             <td><input type="hidden" value="<?php echo $id?>" id="equipo"><button type="button" onclick="guardar()" > Guardar Resultado</button> </td>
                         </tr>
@@ -72,17 +77,19 @@ $id=$_POST['id_equipo'];
                     var jornada=$('#jornada').val();
                     var gol=$('#gol').val();
                     var equipo=$('#equipo').val();
+                    var torneo=$('#torneo').val();
                     $.ajax({
                         type: 'POST',
-                        url: 'imc/goleadoresFIFA.php',
-                        data: {gol:gol,jugador:jugador,jornada:jornada,equipo:equipo},
+                        url: 'imc/goleadoresAscenso.php',
+                        data: {gol:gol,jugador:jugador,jornada:jornada,equipo:equipo, torneo:torneo},
                         cache: false,
                         dataType: 'json',
                         success: function (data) {
                             if (data.estatus == "ok") {///////registro exitoso
                                 Swal.fire({
                                     icon: 'success',
-                                    title: 'Goles Registrados',
+                                    title: 'Estas registrado',
+                                    text: 'Se te enviará un correo para ver los detalles del torneo',
                                     timer: 2000,
                                     showConfirmButton: false,
                                 });
@@ -99,9 +106,8 @@ $id=$_POST['id_equipo'];
                         }
                     });
                 }
-
                 function actualizar(){
-                    $("#result").load("jugadoresFifa.php #result");
+                    $("#result").load( "jugadoresFut.php #result" );
                 }
             </script>
 
@@ -109,15 +115,15 @@ $id=$_POST['id_equipo'];
     </div>
 
     <!-- jugadores -->
-    <div class="col-xl-12 col-lg-7" >
-        <div class="card shadow mb-4" id="result">
+    <div class="col-xl-12 col-lg-7" id="result">
+        <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Resultados</h6>
 
             </div>
             <?php
-            $sql= "SELECT * FROM `creacion_torneo` WHERE disciplina='FIFA'AND fecha_creacion = ( SELECT MAX(fecha_creacion) FROM `creacion_torneo` WHERE disciplina = 'FIFA')";
+            $sql= "SELECT * FROM `creacion_torneo` WHERE disciplina='ascenso'AND fecha_creacion = ( SELECT MAX(fecha_creacion) FROM `creacion_torneo` WHERE disciplina = 'ascenso')";
             $result=mysqli_query($conexion,$sql);
             while($mostrar=mysqli_fetch_array($result)) {
                 $id_torn=$mostrar['id'];
@@ -132,7 +138,7 @@ $id=$_POST['id_equipo'];
                 $xsem=0;
                 ?>
                 <!-- Resultado de partidos  -->
-                <div class="card-body">
+                <div class="card-body" id="">
 
                     <!-- Muestran total de jornadas  -->
                     <ul class="nav nav-tabs" id="tab-futbol" role="tablist">
@@ -160,7 +166,7 @@ $id=$_POST['id_equipo'];
                                         <th>Goles</th>
                                     </tr>
                                     <?php
-                                    $sql2= "SELECT * FROM `goleadoresfifa` WHERE jornada='1' and id='$id'";
+                                    $sql2= "SELECT * FROM `goleadoresascenso` WHERE jornada='1' and equipo_id='$id'";
                                     $resulta=mysqli_query($conexion,$sql2);
                                     $cont=1;
                                     while($mostrar=mysqli_fetch_array($resulta)){
@@ -192,7 +198,7 @@ $id=$_POST['id_equipo'];
                                             <th>Goles</th>
                                         </tr>
                                         <?php
-                                        $sql2= "SELECT * FROM `goleadoresfifa` WHERE jornada='$jornadascont2' and id='$id'";
+                                        $sql2= "SELECT * FROM `goleadoresascenso` WHERE jornada='$jornadascont2' and equipo_id='$id'";
                                         $resulta=mysqli_query($conexion,$sql2);
                                         $cont=1;
                                         while($mostrar=mysqli_fetch_array($resulta)){

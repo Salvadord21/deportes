@@ -286,6 +286,9 @@ require 'php/conexion.php';
                     <li class="nav-item">
                         <a class="nav-link" id="tab-futbol-defensiva" data-toggle="tab" href="#futbol-defensiva" role="tab" aria-controls="futbol-defensiva" aria-selected="false">Mejor defensiva</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab-futbol-defensiva" data-toggle="tab" href="#futbol-goleadores" role="tab" aria-controls="futbol-defensiva" aria-selected="false">Goleadores</a>
+                    </li>
                 </ul>
 
                 <!--SUBMENU FUTBOL-->
@@ -305,7 +308,7 @@ require 'php/conexion.php';
                                 <th data-toggle="tooltip" data-placement="top" title="Puntos">Puntos</th>
                             </tr>
                             <?php
-                            $sql2= " Select nombre_equipo, golesF, golesC, df,jj, puntos,jg,jp,je FROM `tabla_fut`";
+                            $sql2= " Select * FROM `tabla_fut`";
                             $resulta=mysqli_query($conexion,$sql2);
                             $cont=1;
                             while($mostrar=mysqli_fetch_array($resulta)){
@@ -317,8 +320,8 @@ require 'php/conexion.php';
                                     <td><?php echo $mostrar['jg'] ?></td>
                                     <td><?php echo $mostrar['je'] ?></td>
                                     <td><?php echo $mostrar['jp'] ?></td>
-                                    <td><?php echo $mostrar['golesF'] ?></td>
-                                    <td><?php echo $mostrar['golesC'] ?></td>
+                                    <td><?php echo $mostrar['gc'] ?></td>
+                                    <td><?php echo $mostrar['gf'] ?></td>
                                     <td><?php echo $mostrar['df'] ?></td>
                                     <td><?php echo $mostrar['puntos'] ?></td>
                                 </tr>
@@ -337,7 +340,7 @@ require 'php/conexion.php';
                                 <th>Goles</th>
                             </tr>
                             <?php
-                            $sql2= "SELECT `nombre_equipo`, `golesF` FROM `tabla_fut` ORDER BY golesF DESC";
+                            $sql2= "SELECT `nombre_equipo`, `gf` FROM `tabla_fut` ORDER BY gf DESC";
                             $resulta=mysqli_query($conexion,$sql2);
                             $cont=1;
                             while($mostrar=mysqli_fetch_array($resulta)){
@@ -345,7 +348,7 @@ require 'php/conexion.php';
                                 <tr>
                                     <td><?php echo $cont ?></td>
                                     <td><?php echo $mostrar['nombre_equipo'] ?></td>
-                                    <td><?php echo $mostrar['golesF'] ?></td>
+                                    <td><?php echo $mostrar['gf'] ?></td>
 
                                 </tr>
                                 <?
@@ -364,7 +367,7 @@ require 'php/conexion.php';
                                 <th>Goles</th>
                             </tr>
                             <?php
-                            $sql2= "SELECT `nombre_equipo`, `golesC` FROM `tabla_fut` ORDER BY golesC ";
+                            $sql2= "SELECT `nombre_equipo`, `gc` FROM `tabla_fut` ORDER BY gc ";
                             $resulta=mysqli_query($conexion,$sql2);
                             $cont=1;
                             while($mostrar=mysqli_fetch_array($resulta)){
@@ -372,7 +375,36 @@ require 'php/conexion.php';
                                 <tr>
                                     <td><?php echo $cont ?></td>
                                     <td><?php echo $mostrar['nombre_equipo'] ?></td>
-                                    <td><?php echo $mostrar['golesC'] ?></td>
+                                    <td><?php echo $mostrar['gc'] ?></td>
+
+                                </tr>
+                                <?
+                                $cont++;
+                            }
+                            ?>
+                        </table>
+
+                    </div>
+                    <div class="tab-pane fade" id="futbol-goleadores" role="tabpanel" aria-labelledby="tab-futbol-defensiva">
+
+                        <table class="table table-hover">
+                            <tr>
+                                <th>#</th>
+                                <th>Goleador</th>
+                                <th>Equipo</th>
+                                <th>Goles</th>
+                            </tr>
+                            <?php
+                            $sql2= "SELECT `nombre`,SUM( `goles`) as goles, `nombre_equipo`FROM `goleadoresfut` GROUP BY `nombre` ORDER BY `goles` DESC ";
+                            $resulta=mysqli_query($conexion,$sql2);
+                            $cont=1;
+                            while($mostrar=mysqli_fetch_array($resulta)){
+                                ?>
+                                <tr>
+                                    <td><?php echo $cont ?></td>
+                                    <td><?php echo $mostrar['nombre'] ?></td>
+                                    <td><?php echo $mostrar['nombre_equipo'] ?></td>
+                                    <td><?php echo $mostrar['goles'] ?></td>
 
                                 </tr>
                                 <?
@@ -418,7 +450,7 @@ require 'php/conexion.php';
                                 <th data-toggle="tooltip" data-placement="top" title="Puntos">Puntos</th>
                             </tr>
                             <?php
-                            $sql2= " Select nombre_equipo, golesF, golesC, df,jj, puntos,jg,jp,je FROM `tabla_ascenso`";
+                            $sql2= " Select nombre_equipo, gf, gc, df,jj, puntos,jg,jp,je FROM `tabla_ascenso`";
                             $resulta=mysqli_query($conexion,$sql2);
                             $cont=1;
                             while($mostrar=mysqli_fetch_array($resulta)){
@@ -430,8 +462,8 @@ require 'php/conexion.php';
                                     <td><?php echo $mostrar['jg'] ?></td>
                                     <td><?php echo $mostrar['je'] ?></td>
                                     <td><?php echo $mostrar['jp'] ?></td>
-                                    <td><?php echo $mostrar['golesF'] ?></td>
-                                    <td><?php echo $mostrar['golesC'] ?></td>
+                                    <td><?php echo $mostrar['gf'] ?></td>
+                                    <td><?php echo $mostrar['gc'] ?></td>
                                     <td><?php echo $mostrar['df'] ?></td>
                                     <td><?php echo $mostrar['puntos'] ?></td>
                                 </tr>
@@ -449,7 +481,7 @@ require 'php/conexion.php';
                                 <th>Goles</th>
                             </tr>
                             <?php
-                            $sql2= "SELECT `nombre_equipo`, `golesF` FROM `tabla_ascenso` ORDER BY golesF DESC";
+                            $sql2= "SELECT `nombre_equipo`, `gf` FROM `tabla_ascenso` ORDER BY gf DESC";
                             $resulta=mysqli_query($conexion,$sql2);
                             $cont=1;
                             while($mostrar=mysqli_fetch_array($resulta)){
@@ -457,7 +489,7 @@ require 'php/conexion.php';
                                 <tr>
                                     <td><?php echo $cont ?></td>
                                     <td><?php echo $mostrar['nombre_equipo'] ?></td>
-                                    <td><?php echo $mostrar['golesF'] ?></td>
+                                    <td><?php echo $mostrar['gf'] ?></td>
 
                                 </tr>
                                 <?
@@ -474,7 +506,7 @@ require 'php/conexion.php';
                                 <th>Goles</th>
                             </tr>
                             <?php
-                            $sql2= "SELECT `nombre_equipo`, `golesC` FROM `tabla_ascenso` ORDER BY golesF DESC";
+                            $sql2= "SELECT `nombre_equipo`, `gc` FROM `tabla_ascenso` ORDER BY gc ";
                             $resulta=mysqli_query($conexion,$sql2);
                             $cont=1;
                             while($mostrar=mysqli_fetch_array($resulta)){
@@ -482,7 +514,7 @@ require 'php/conexion.php';
                                 <tr>
                                     <td><?php echo $cont ?></td>
                                     <td><?php echo $mostrar['nombre_equipo'] ?></td>
-                                    <td><?php echo $mostrar['golesC'] ?></td>
+                                    <td><?php echo $mostrar['gc'] ?></td>
 
                                 </tr>
                                 <?
@@ -498,22 +530,7 @@ require 'php/conexion.php';
                                 <th>Equipo</th>
                                 <th></th>
                             </tr>
-                            <?php
-                            $sql2= "SELECT `nombre_equipo`, `golesC` FROM `tabla_ascenso` ORDER BY golesF DESC";
-                            $resulta=mysqli_query($conexion,$sql2);
-                            $cont=1;
-                            while($mostrar=mysqli_fetch_array($resulta)){
-                                ?>
-                                <tr>
-                                    <td><?php echo $cont ?></td>
-                                    <td><?php echo $mostrar['nombre_equipo'] ?></td>
-                                    <td><?php echo $mostrar['golesC'] ?></td>
 
-                                </tr>
-                                <?
-                                $cont++;
-                            }
-                            ?>
                         </table>
                     </div>
                 </div>
@@ -548,7 +565,7 @@ require 'php/conexion.php';
                                 <th data-toggle="tooltip" data-placement="top" title="Puntos">Puntos</th>
                             </tr>
                             <?php
-                            $sql2= " Select nombre_equipo, golesF, golesC, df,jj, puntos,jg,jp,je FROM `tabla_fifa`";
+                            $sql2= " Select * FROM `tabla_fifa`";
                             $resulta=mysqli_query($conexion,$sql2);
                             $cont=1;
                             while($mostrar=mysqli_fetch_array($resulta)){
@@ -560,8 +577,8 @@ require 'php/conexion.php';
                                     <td><?php echo $mostrar['jg'] ?></td>
                                     <td><?php echo $mostrar['je'] ?></td>
                                     <td><?php echo $mostrar['jp'] ?></td>
-                                    <td><?php echo $mostrar['golesF'] ?></td>
-                                    <td><?php echo $mostrar['golesC'] ?></td>
+                                    <td><?php echo $mostrar['gf'] ?></td>
+                                    <td><?php echo $mostrar['gc'] ?></td>
                                     <td><?php echo $mostrar['df'] ?></td>
                                     <td><?php echo $mostrar['puntos'] ?></td>
                                 </tr>
@@ -582,7 +599,7 @@ require 'php/conexion.php';
                                 <th>Goles</th>
                             </tr>
                             <?php
-                            $sql2= "SELECT `nombre`, SUM(`goles`) as goles, `nombre_equipo` FROM `goleadorfifa` WHERE id='3'GROUP BY`nombre`";
+                            $sql2= "SELECT `nombre`, SUM(`goles`) as goles, `nombre_equipo` FROM `goleadoresascenso` WHERE torneo_id='3' GROUP by nombre ORDER BY `goles` DESC";
                             $resulta=mysqli_query($conexion,$sql2);
                             $cont=1;
                             while($mostrar=mysqli_fetch_array($resulta)){

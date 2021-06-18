@@ -51,7 +51,7 @@ include '../php/conexion.php';
                                 <td>
                                     <select name="jornada" id="jornada">
                                         <?php
-                                        $listado = "SELECT `jornadas` FROM `creacion_torneo` WHERE `id`=( SELECT id from creacion_torneo where creacion_torneo.fecha_creacion=( SELECT MAX(`fecha_creacion`) from creacion_torneo WHERE `disciplina`='fifa'))";
+                                        $listado = "SELECT id,`jornadas` FROM `creacion_torneo` WHERE `id`=( SELECT id from creacion_torneo where creacion_torneo.fecha_creacion=( SELECT MAX(`fecha_creacion`) from creacion_torneo WHERE `disciplina`='fifa'))";
 
                                         $query = mysqli_query($conexion, $listado);
 
@@ -62,7 +62,10 @@ include '../php/conexion.php';
                                             }
 
                                         }
+                                        $query2 = mysqli_query($conexion, $listado);
+                                        $idTorneo=mysqli_fetch_array($query2);
                                         ?>
+                                        <input type="hidden" value="<?php echo $idTorneo['id']?>" id="torneo">
                                     </select>
                                 </td>
                                 <td><button type="button" onclick="guardar()" > Guardar Resultado</button> </td>
@@ -78,6 +81,7 @@ include '../php/conexion.php';
                         var goll=$('#golLocal').val();
                         var golv=$('#golVisita').val();
                         var jornada=$('#jornada').val();
+                        var torneo=$('#torneo').val();
                         console.log(jornada);
                         console.log(goll,"golLocal")
                         console.log(equipol,"equipol")
@@ -86,15 +90,14 @@ include '../php/conexion.php';
                         $.ajax({
                             type: 'POST',
                             url: 'imc/partidosFIFA.php',
-                            data: {golL:goll,golV:golv,local:equipol,visita:equipov,jornada:jornada},
+                            data: {golL:goll,golV:golv,local:equipol,visita:equipov,jornada:jornada, torneo:torneo},
                             cache: false,
                             dataType: 'json',
                             success: function (data) {
                                 if (data.estatus == "ok") {///////registro exitoso
                                     Swal.fire({
                                         icon: 'success',
-                                        title: 'Estas registrado',
-                                        text: 'Se te enviará un correo para ver los detalles del torneo',
+                                        title: 'Partido Registrado',
                                         timer: 2000,
                                         showConfirmButton: false,
                                     });
@@ -179,13 +182,21 @@ include '../php/conexion.php';
                                         $resulta=mysqli_query($conexion,$sql2);
                                         $cont=1;
                                         while($mostrar=mysqli_fetch_array($resulta)){
+                                            $locales=$mostrar['id_local'];
+                                            $visitantes=$mostrar['id_visita'];
+                                            $equipoL="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$locales'";
+                                            $resultaL=mysqli_query($conexion,$equipoL);
+                                            $equipoV="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$visitantes'";
+                                            $resultaV=mysqli_query($conexion,$equipoV);
+                                            $localL=mysqli_fetch_array($resultaL);
+                                            $visitaV=mysqli_fetch_array($resultaV);
                                             ?>
                                             <tr>
-                                                <td><?php echo $mostrar['local_id'] ?></td>
+                                                <td><?php echo $localL['nombre_equipo'] ?></td>
                                                 <td><?php echo $mostrar['gol_local'] ?></td>
                                                 <td>vs</td>
                                                 <td><?php echo $mostrar['gol_visita'] ?></td>
-                                                <td><?php echo $mostrar['visita_id'] ?></td>
+                                                <td><?php echo $visitaV['nombre_equipo'] ?></td>
 
                                             </tr>
                                             <?
@@ -218,13 +229,21 @@ include '../php/conexion.php';
                                             $resulta=mysqli_query($conexion,$sql2);
                                             $cont=1;
                                             while($mostrar=mysqli_fetch_array($resulta)){
+                                                $locales=$mostrar['id_local'];
+                                                $visitantes=$mostrar['id_visita'];
+                                                $equipoL="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$locales'";
+                                                $resultaL=mysqli_query($conexion,$equipoL);
+                                                $equipoV="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$visitantes'";
+                                                $resultaV=mysqli_query($conexion,$equipoV);
+                                                $localL=mysqli_fetch_array($resultaL);
+                                                $visitaV=mysqli_fetch_array($resultaV);
                                                 ?>
                                                 <tr>
-                                                    <td><?php echo $mostrar['local_id'] ?></td>
+                                                    <td><?php echo $localL['nombre_equipo'] ?></td>
                                                     <td><?php echo $mostrar['gol_local'] ?></td>
                                                     <td>vs</td>
                                                     <td><?php echo $mostrar['gol_visita'] ?></td>
-                                                    <td><?php echo $mostrar['visita_id'] ?></td>
+                                                    <td><?php echo $visitaV['nombre_equipo'] ?></td>
 
                                                 </tr>
                                                 <?

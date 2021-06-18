@@ -4,7 +4,7 @@ include '../../php/conexion.php';
 $jornada=$_POST['jornada'];
 $idLocal= $_POST['local'];
 $idVisita=$_POST['visita'];
-//$idTorneo=$_POST['idtor'];
+$idTorneo=$_POST['torneo'];
 $golVisita=$_POST['golV'];
 $golLocal=$_POST['golL'];
 $data = array();
@@ -15,8 +15,8 @@ if ($golVisita<$golLocal){//gano local
 }else{$resultado=2;$puntosL=0;$puntosV=3;$jgl=0;$jel=0;$jpl=1;$jgv=1;$jev=0;$jpv=0;
 }///Gano visita
 
-$insert="INSERT INTO `partidos_fifa`(`gol_local`, `gol_visita`, `resultado`, `jornada`, `fecha`, `creacion_torneo_id`, `local_id`, `visita_id`) 
-VALUES ('$golLocal','$golVisita','$resultado','$jornada',NOW(),'2','$idLocal','$idVisita')";
+$insert="INSERT INTO `partidos_fifa`(  `gol_local`, `gol_visita`, `resultado`, `jornada`, `fecha`, `torneo_id`, `id_local`, `id_visita`)
+ VALUES ('$golLocal','$golVisita','$resultado','$jornada',NOW(),'$idTorneo','$idLocal','$idVisita')";
 $query = mysqli_query($conexion, $insert);
 if ($query){
 
@@ -24,16 +24,18 @@ if ($query){
     $maxid="SELECT MAX(id) as id FROM `partidos_fifa`";
     $queryid=mysqli_query($conexion, $maxid);
     $fila3 = mysqli_fetch_assoc($queryid);
-    $idToreneo = $fila3['id'];
+    $idPartido = $fila3['id'];
 
-
-    $golesL="INSERT INTO `puntos_fifa`( `id_equipo`, `puntos`, `golesF`, `golesC`, `id_partido_fifa`, `jg`, `je`, `jp`) VALUES ('$idLocal','$puntosL','$golLocal','$golVisita','$idToreneo','$jgl','$jel','$jpl')";
-    $golesV="INSERT INTO `puntos_fifa`( `id_equipo`, `puntos`, `golesF`, `golesC`, `id_partido_fifa`, `jg`, `je`, `jp`) VALUES ('$idVisita','$puntosV','$golVisita','$golLocal','$idToreneo','$jgv','$jev','$jpv')";
+    $golesL="INSERT INTO `puntos_fifa`(`equipos_id`, `id_partido`, `golesF`, `golesC`, `puntos`, `jg`, `je`, `jp`,`jornada`)
+    VALUES ('$idLocal','$idPartido','$golLocal','$golVisita','$puntosL','$jgl','$jel','$jpl','$jornada')";
+    $golesV="INSERT INTO `puntos_fifa`( `equipos_id`, `id_partido`, `golesF`, `golesC`, `puntos`, `jg`, `je`, `jp`,`jornada`) 
+    VALUES ('$idVisita','$idPartido','$golVisita','$golLocal','$puntosV','$jgv','$jev','$jpv','$jornada')";
     $queryl=mysqli_query($conexion, $golesL);
     $queryv=mysqli_query($conexion, $golesV);
     if ($queryl and $queryv){
         $data['estatus']="ok";
     }
+
 
 }else{
     $data['estatus']="error";
