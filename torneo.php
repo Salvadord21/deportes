@@ -628,49 +628,37 @@ require 'php/conexion.php';
                         <th>Equipo</th>
                         <th data-toggle="tooltip" data-placement="top" title="Juegos jugados">JJ</th>
                         <th data-toggle="tooltip" data-placement="top" title="Juegos ganados">JG</th>
-                        <th data-toggle="tooltip" data-placement="top" title="Juegos empatados">JE</th>
                         <th data-toggle="tooltip" data-placement="top" title="Juegos perdidos">JP</th>
-                        <th data-toggle="tooltip" data-placement="top" title="Goles a favor">GF</th>
-                        <th data-toggle="tooltip" data-placement="top" title="Goles en contra">GE</th>
-                        <th data-toggle="tooltip" data-placement="top" title="Diferencia de goles">Dif</th>
-                        <th data-toggle="tooltip" data-placement="top" title="Puntos">P</th>
+                        <th data-toggle="tooltip" data-placement="top" title="Goles a favor">PF</th>
+                        <th data-toggle="tooltip" data-placement="top" title="Goles en contra">PE</th>
+                        <th data-toggle="tooltip" data-placement="top" title="Diferencia de goles">%P</th>
+                        <th data-toggle="tooltip" data-placement="top" title="Puntos">SetF</th>
+                        <th data-toggle="tooltip" data-placement="top" title="Puntos">SetC</th>
+                        <th data-toggle="tooltip" data-placement="top" title="Puntos">%S</th>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Somos la noche</td>
-                        <td>5</td>
-                        <td>4</td>
-                        <td>0</td>
-                        <td>1</td>
-                        <td>22</td>
-                        <td>13</td>
-                        <td>9</td>
-                        <td>12</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Águilas</td>
-                        <td>5</td>
-                        <td>3</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>13</td>
-                        <td>9</td>
-                        <td>4</td>
-                        <td>10</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Deportivo MC</td>
-                        <td>5</td>
-                        <td>3</td>
-                        <td>0</td>
-                        <td>2</td>
-                        <td>20</td>
-                        <td>14</td>
-                        <td>6</td>
-                        <td>9</td>
-                    </tr>
+                    <?php
+                    $sql2= " Select * FROM `tabla_vole`";
+                    $resulta=mysqli_query($conexion,$sql2);
+                    $cont=1;
+                    while($mostrar=mysqli_fetch_array($resulta)){
+                        ?>
+                        <tr>
+                            <td><?php echo $cont ?></td>
+                            <td><?php echo $mostrar['nombre_equipo'] ?></td>
+                            <td><?php echo $mostrar['jj'] ?></td>
+                            <td><?php echo $mostrar['jg'] ?></td>
+                            <td><?php echo $mostrar['jp'] ?></td>
+                            <td><?php echo $mostrar['pf'] ?></td>
+                            <td><?php echo $mostrar['pc'] ?></td>
+                            <td><?php echo $mostrar['pp'] ?></td>
+                            <td><?php echo $mostrar['setF'] ?></td>
+                            <td><?php echo $mostrar['setC'] ?></td>
+                            <td><?php echo $mostrar['ps'] ?></td>
+                        </tr>
+                        <?
+                        $cont++;
+                    }
+                    ?>
                 </table>
             </div>
             <!--BASQUET-->
