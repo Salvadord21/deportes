@@ -11,6 +11,8 @@ $set3l=$_POST['set3l'];
 $set1v=$_POST['set1v'];
 $set2v=$_POST['set2v'];
 $set3v=$_POST['set3v'];
+if ($set3l==''){$set3l=0;}
+if ($set3v==''){$set3v=0;}
 $ganadol=0;
 $perdidol=0;
 $ganadov=0;
@@ -35,8 +37,6 @@ if ($query){
 
     $golesL="INSERT INTO `puntos_vole`(`equipo_id`, `ptnF`, `ptnC`, `jg`, `jp`, `setF`, `setC`, `partidos_vole_id`, `creacion_torneo_id`) 
     VALUES ('$idLocal','$pfl','$pfv','$jgl','$jpl','$ganadol','$perdidol','$idPartido','$idTorneo')";
-
-
     $golesV="INSERT INTO `puntos_vole`(`equipo_id`, `ptnF`, `ptnC`, `jg`, `jp`, `setF`, `setC`, `partidos_vole_id`, `creacion_torneo_id`) 
     VALUES ('$idVisita','$pfv','$pfl','$jgv','$jpv','$ganadov','$perdidov','$idPartido','$idTorneo')";
     $queryl=mysqli_query($conexion, $golesL);

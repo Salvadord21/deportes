@@ -138,7 +138,7 @@ $id=$_POST['id_equipo'];
                 $xsem=0;
                 ?>
                 <!-- Resultado de partidos  -->
-                <div class="card-body" id="">
+                <div class="card-body" >
 
                     <!-- Muestran total de jornadas  -->
                     <ul class="nav nav-tabs" id="tab-futbol" role="tablist">
