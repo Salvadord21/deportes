@@ -63,7 +63,7 @@ $idprueba=$_SESSION['id_usuario'];;
             }else{
                 ?>
                 <div class="col-md-4">
-                    <img src="php/imagenes/<?php echo $archivo ?>" class="rounded-circle" alt="Cinque Terre" width="250px">
+                    <img src="php/imagenes/<?php echo $archivo ?>" width="250px">
                 </div>
                 <?php
             }
