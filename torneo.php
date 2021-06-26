@@ -266,6 +266,7 @@ require 'php/conexion.php';
             <a class="nav-item nav-link" id="menu-torneos-fifa" data-toggle="pill" href="#torneos-fifa" role="tab" aria-controls="torneos-fifa" aria-selected="false">FIFA</a>
             <a class="nav-item nav-link" id="menu-torneos-volley" data-toggle="pill" href="#torneos-volley" role="tab" aria-controls="torneos-volley" aria-selected="false">Voleibol</a>
             <a class="nav-item nav-link" id="menu-torneos-basquet" data-toggle="pill" href="#torneos-basquet" role="tab" aria-controls="torneos-basquet" aria-selected="false">Basquétbol</a>
+            <a class="nav-item nav-link" id="menu-torneos-basquet" data-toggle="pill" href="#resultado" role="tab" aria-controls="resultado" aria-selected="false">Resultados</a>
             <a class="nav-item nav-link" id="menu-torneos-otros" data-toggle="pill" href="#torneos-otros" role="tab" aria-controls="torneos-otros" aria-selected="false">  Otros torneos</a>
             <a class="nav-item nav-link" id="menu-torneos-equipos" data-toggle="pill" href="#torneos-equipos" role="tab" aria-controls="torneos-equipos" aria-selected="false">Equipos</a>
 
@@ -697,6 +698,226 @@ require 'php/conexion.php';
                     }
                     ?>
                 </table>
+            </div>
+            <!--Resultado-->
+            <div class="tab-pane fade" id="resultado" role="tabpanel" aria-labelledby="menu-resultado">
+                <ul class="nav nav-tabs" id="tab-futbol" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="tab-futbol-general" data-toggle="tab" href="#futbol-bardas" role="tab" aria-controls="futbol-bardas" aria-selected="true">Futbol Bardas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab-futbol-ofensiva" data-toggle="tab" href="#futbol-ascenso" role="tab" aria-controls="futbol-ascenso" aria-selected="false">Futbol Ascenso</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab-futbol-defensiva" data-toggle="tab" href="#fifa" role="tab" aria-controls="fifa" aria-selected="false">FIFA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab-futbol-defensiva" data-toggle="tab" href="#basquetbol" role="tab" aria-controls="futbol-defensiva" aria-selected="false">Basquetbol</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab-futbol-defensiva" data-toggle="tab" href="#voleibol" role="tab" aria-controls="futbol-defensiva" aria-selected="false">Voleibol</a>
+                    </li>
+                </ul>
+
+                <!--SUBMENU FUTBOL-->
+                <div class="tab-content" id="tab-futbol-contenido">
+                    <div class="tab-pane fade show active" id="futbol-bardas" role="tabpanel" aria-labelledby="tab-futbol-general">
+                        <table class="table table-hover">
+                            <tr>
+                                <th>Local</th>
+                                <th></th>
+                                <th>vs</th>
+                                <th></th>
+                                <th>Visita</th>
+                            </tr>
+                            <?php
+                            $sql2= " SELECT * FROM `partidos_futbol` WHERE jornada=(SELECT MAX(jornada) FROM partidos_futbol)";
+                            $resulta=mysqli_query($conexion,$sql2);
+                            $cont=1;
+                            while($mostrar=mysqli_fetch_array($resulta)){
+                                $locales=$mostrar['id_local'];
+                                $visitantes=$mostrar['id_visita'];
+                                $equipoL="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$locales'";
+                                $resultaL=mysqli_query($conexion,$equipoL);
+                                $equipoV="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$visitantes'";
+                                $resultaV=mysqli_query($conexion,$equipoV);
+                                $localL=mysqli_fetch_array($resultaL);
+                                $visitaV=mysqli_fetch_array($resultaV);
+                                ?>
+                                <tr>
+                                    <td><?php echo $localL['nombre_equipo'] ?></td>
+                                    <td><?php echo $mostrar['gol_local'] ?></td>
+                                    <td>vs</td>
+                                    <td><?php echo $mostrar['gol_visita'] ?></td>
+                                    <td><?php echo $visitaV['nombre_equipo'] ?></td>
+                                </tr>
+                                <?
+                                $cont++;
+                            }
+                            ?>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="futbol-ascenso" role="tabpanel" aria-labelledby="tab-futbol-ofensiva">
+
+                        <table class="table table-hover">
+                            <tr>
+                                <th>Local</th>
+                                <th></th>
+                                <th>vs</th>
+                                <th></th>
+                                <th>Visita</th>
+                            </tr>
+                            <?php
+                            $sql2= " SELECT * FROM `partidos_ascenso` WHERE jornada=(SELECT MAX(jornada) FROM partidos_ascenso)";
+                            $resulta=mysqli_query($conexion,$sql2);
+                            $cont=1;
+                            while($mostrar=mysqli_fetch_array($resulta)){
+                                $locales=$mostrar['id_local'];
+                                $visitantes=$mostrar['id_visita'];
+                                $equipoL="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$locales'";
+                                $resultaL=mysqli_query($conexion,$equipoL);
+                                $equipoV="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$visitantes'";
+                                $resultaV=mysqli_query($conexion,$equipoV);
+                                $localL=mysqli_fetch_array($resultaL);
+                                $visitaV=mysqli_fetch_array($resultaV);
+                                ?>
+                                <tr>
+                                    <td><?php echo $localL['nombre_equipo'] ?></td>
+                                    <td><?php echo $mostrar['gol_local'] ?></td>
+                                    <td>vs</td>
+                                    <td><?php echo $mostrar['gol_visita'] ?></td>
+                                    <td><?php echo $visitaV['nombre_equipo'] ?></td>
+                                </tr>
+                                <?
+                                $cont++;
+                            }
+                            ?>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="fifa" role="tabpanel" aria-labelledby="tab-futbol-defensiva">
+
+                        <table class="table table-hover">
+                            <tr>
+                                <th>Local</th>
+                                <th></th>
+                                <th>vs</th>
+                                <th></th>
+                                <th>Visita</th>
+                            </tr>
+                            <?php
+                            $sql2= " SELECT * FROM `partidos_fifa` WHERE jornada=(SELECT MAX(jornada) FROM partidos_fifa)";
+                            $resulta=mysqli_query($conexion,$sql2);
+                            $cont=1;
+                            while($mostrar=mysqli_fetch_array($resulta)){
+                                $locales=$mostrar['id_local'];
+                                $visitantes=$mostrar['id_visita'];
+                                $equipoL="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$locales'";
+                                $resultaL=mysqli_query($conexion,$equipoL);
+                                $equipoV="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$visitantes'";
+                                $resultaV=mysqli_query($conexion,$equipoV);
+                                $localL=mysqli_fetch_array($resultaL);
+                                $visitaV=mysqli_fetch_array($resultaV);
+                                ?>
+                                <tr>
+                                    <td><?php echo $localL['nombre_equipo'] ?></td>
+                                    <td><?php echo $mostrar['gol_local'] ?></td>
+                                    <td>vs</td>
+                                    <td><?php echo $mostrar['gol_visita'] ?></td>
+                                    <td><?php echo $visitaV['nombre_equipo'] ?></td>
+                                </tr>
+                                <?
+                                $cont++;
+                            }
+                            ?>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="basquetbol" role="tabpanel" aria-labelledby="tab-futbol-defensiva">
+
+                        <table class="table table-hover">
+                            <tr>
+                                <th>Local</th>
+                                <th></th>
+                                <th>vs</th>
+                                <th></th>
+                                <th>Visita</th>
+                            </tr>
+                            <?php
+                            $sql2= " SELECT * FROM `partidos_basquetbol` WHERE jornada=(SELECT MAX(jornada) FROM partidos_basquetbol)";
+                            $resulta=mysqli_query($conexion,$sql2);
+                            $cont=1;
+                            while($mostrar=mysqli_fetch_array($resulta)){
+                                $locales=$mostrar['idLocal'];
+                                $visitantes=$mostrar['idVisita'];
+                                $equipoL="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$locales'";
+                                $resultaL=mysqli_query($conexion,$equipoL);
+                                $equipoV="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$visitantes'";
+                                $resultaV=mysqli_query($conexion,$equipoV);
+                                $localL=mysqli_fetch_array($resultaL);
+                                $visitaV=mysqli_fetch_array($resultaV);
+                                ?>
+                                <tr>
+                                    <td><?php echo $localL['nombre_equipo'] ?></td>
+                                    <td><?php echo $mostrar['canastasL'] ?></td>
+                                    <td>vs</td>
+                                    <td><?php echo $mostrar['canastasV'] ?></td>
+                                    <td><?php echo $visitaV['nombre_equipo'] ?></td>
+                                </tr>
+                                <?
+                                $cont++;
+                            }
+                            ?>
+                        </table>
+
+                    </div>
+                    <div class="tab-pane fade" id="voleibol" role="tabpanel" aria-labelledby="tab-futbol-defensiva">
+
+                        <table class="table table-hover">
+                            <tr>
+                                <th>Local</th>
+                                <th>Set 1</th>
+                                <th>Set 2</th>
+                                <th>Set 3</th>
+                                <th>vs</th>
+                                <th>Set3</th>
+                                <th>Set 2</th>
+                                <th>Set 1</th>
+                                <th>Visita</th>
+                            </tr>
+                            <?php
+                            $sql2= "SELECT * FROM `partidos_vole` WHERE jornada=(SELECT MAX(jornada) FROM partidos_vole)";
+                            $resulta=mysqli_query($conexion,$sql2);
+                            $cont=1;
+                            while($mostrar=mysqli_fetch_array($resulta)){
+                                $locales=$mostrar['id_local'];
+                                $visitantes=$mostrar['id_visita'];
+                                $equipoL="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$locales'";
+                                $resultaL=mysqli_query($conexion,$equipoL);
+                                $equipoV="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$visitantes'";
+                                $resultaV=mysqli_query($conexion,$equipoV);
+                                $localL=mysqli_fetch_array($resultaL);
+                                $visitaV=mysqli_fetch_array($resultaV);
+                                ?>
+                                <tr>
+                                    <td><?php echo $localL['nombre_equipo'] ?></td>
+                                    <td><?php echo $mostrar['set1L'] ?></td>
+                                    <td><?php echo $mostrar['set2L'] ?></td>
+                                    <td><?php echo $mostrar['set3L'] ?></td>
+                                    <td>vs</td>
+                                    <td><?php echo $mostrar['set3V'] ?></td>
+                                    <td><?php echo $mostrar['set2V'] ?></td>
+                                    <td><?php echo $mostrar['set1V'] ?></td>
+                                    <td><?php echo $visitaV['nombre_equipo'] ?></td>
+
+                                </tr>
+                                <?
+                                $cont++;
+                            }
+                            ?>
+                        </table>
+
+                    </div>
+
+                </div>
             </div>
             <!--OTROS TORNEOS-->
             <div class="tab-pane fade" id="torneos-otros" role="tabpanel" aria-labelledby="menu-torneos-otros">
