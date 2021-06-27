@@ -528,10 +528,26 @@ require 'php/conexion.php';
                         <table class="table table-hover">
                             <tr>
                                 <th>#</th>
+                                <th>Jugador</th>
                                 <th>Equipo</th>
-                                <th></th>
+                                <th>Goles</th>
                             </tr>
-
+                            <?php
+                            $sql2= "SELECT `nombre`, SUM(`goles`) as goles, `nombre_equipo` FROM `goleadoresascenso` WHERE torneo_id='3' GROUP by nombre ORDER BY `goles` DESC";
+                            $resulta=mysqli_query($conexion,$sql2);
+                            $cont=1;
+                            while($mostrar=mysqli_fetch_array($resulta)){
+                                ?>
+                                <tr>
+                                    <td><?php echo $cont ?></td>
+                                    <td><?php echo $mostrar['nombre'] ?></td>
+                                    <td><?php echo $mostrar['nombre_equipo'] ?></td>
+                                    <td><?php echo $mostrar['goles'] ?></td>
+                                </tr>
+                                <?
+                                $cont++;
+                            }
+                            ?>
                         </table>
                     </div>
                 </div>
@@ -565,7 +581,7 @@ require 'php/conexion.php';
                                 <th data-toggle="tooltip" data-placement="top" title="Puntos">Puntos</th>
                             </tr>
                             <?php
-                            $sql2= " Select * FROM `tabla_fifa`";
+                            $sql2= " Select * FROM `tabla_fifa` ORDER BY `tabla_fifa`.`puntos` DESC, tabla_fifa.df, tabla_fifa.gf DESC";
                             $resulta=mysqli_query($conexion,$sql2);
                             $cont=1;
                             while($mostrar=mysqli_fetch_array($resulta)){
@@ -599,7 +615,7 @@ require 'php/conexion.php';
                                 <th>Goles</th>
                             </tr>
                             <?php
-                            $sql2= "SELECT `nombre`, SUM(`goles`) as goles, `nombre_equipo` FROM `goleadoresascenso` WHERE torneo_id='3' GROUP by nombre ORDER BY `goles` DESC";
+                            $sql2= "SELECT `nombre`, SUM(`goles`) as goles, `nombre_equipo` FROM `goleadoresfifa` WHERE torneo_id='2' GROUP by nombre ORDER BY `goles` DESC";
                             $resulta=mysqli_query($conexion,$sql2);
                             $cont=1;
                             while($mostrar=mysqli_fetch_array($resulta)){
