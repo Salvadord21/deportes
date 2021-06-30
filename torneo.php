@@ -2,6 +2,25 @@
 session_start();
 require 'php/conexion.php';
 
+$fbardas="SELECT MAX(`id`) as id FROM creacion_torneo WHERE disciplina='futbol bardas'";
+$resultadoB = mysqli_query($conexion, $fbardas);
+$mostrarB=mysqli_fetch_array($resultadoB);
+
+$fascenso="SELECT MAX(`id`) as id FROM creacion_torneo WHERE disciplina='ascenso'";
+$resultadoA = mysqli_query($conexion, $fascenso);
+$mostrarA=mysqli_fetch_array($resultadoA);
+
+$fifa="SELECT MAX(`id`) as id FROM creacion_torneo WHERE disciplina='fifa'";
+$resultadoF = mysqli_query($conexion, $fbardas);
+$mostrarF=mysqli_fetch_array($resultadoF);
+
+$voley="SELECT MAX(`id`) as id FROM creacion_torneo WHERE disciplina='voleibol'";
+$resultadoV = mysqli_query($conexion, $voley);
+$mostrarV=mysqli_fetch_array($resultadoV);
+
+$basquet="SELECT MAX(`id`) as id FROM creacion_torneo WHERE disciplina='Basquetbol'";
+$resultadoBa = mysqli_query($conexion, $basquet);
+$mostrarBa=mysqli_fetch_array($resultadoBa);
 ?>
 
 <!DOCTYPE html>
