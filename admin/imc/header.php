@@ -1,6 +1,6 @@
 <?php
 
-$matri = $_SESSION['matricula'];
+$matri = $_SESSION['nombre'];
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +14,7 @@ $matri = $_SESSION['matricula'];
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Tables</title>
+    <title>Administrador</title>
 
     <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -29,39 +29,33 @@ $matri = $_SESSION['matricula'];
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
-
 <body id="page-top">
 
 <!-- Page Wrapper -->
 <div id="wrapper">
     <!-- parte izquierda -->
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-admin sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../index.php">
-            <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
+        <a class="bg-top-adm sidebar-brand d-flex align-items-center justify-content-center" href="../index.php">
+            <div class="sidebar-brand-icon ">
+                <img src="../imgs/aguilas-ucc%20-%20copia.png" style="width: 65px; height: 60px">
             </div>
             <div class="sidebar-brand-text mx-3">Usuarios</div>
         </a>
 
 
-
-        <!-- Divider -->
-        <hr class="sidebar-divider my-0">
-
-
         <!-- Heading -->
         <li class="nav-item">
-            <a class="nav-link" href="index.php">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Retos</span></a>
+            <a class="btn bg-admin nav-link" style="box-shadow: none" href="index.php">
+                <img src="iconos/crearreto.png" style="width: 16px; height: 16px">
+                <span>Crear retos</span></a>
         </li>
         <li class="nav-item active">
-            <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+            <a class="btn bg-admin nav-link" style="box-shadow: none" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
                aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-cog"></i>
+                <img src="iconos/Jornadas.png" style="width: 16px; height: 16px">
                 <span>Jornadas</span>
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
@@ -79,38 +73,38 @@ $matri = $_SESSION['matricula'];
         <!-- Nav Item - Charts -->
 
         <li class="nav-item">
-            <a class="nav-link" href="crear_torneo.php">
-                <i class="fa fa-trophy" aria-hidden="true"></i>
-                <span>Crear Torneo</span></a>
+            <a class="btn bg-admin nav-link" style="box-shadow: none" href="crear_torneo.php">
+                <img src="iconos/CrearTorneo.png" style="width: 16px; height: 16px">
+                <span>Torneos</span></a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="otorneos.php">
-                <i class="fas fa-puzzle-piece"></i>
+            <a class="btn bg-admin nav-link" style="box-shadow: none" href="otorneos.php">
+                <img src="iconos/puzzle.png" style="width: 16px; height: 16px">
                 <span>Otros Torneos</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="equipos.php">
-                <i class="fas fa-fw fa-chart-area"></i>
+            <a class="btn bg-admin nav-link" style="box-shadow: none" href="equipos.php">
+                <img src="iconos/equipos.png" style="width: 16px; height: 16px">
                 <span>Equipos</span></a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="usuarios.php">
-                <i class="fas fa-fw fa-chart-area"></i>
+            <a class="btn bg-admin nav-link" style="box-shadow: none" href="usuarios.php">
+                <img src="iconos/user.png" style="width: 16px; height: 16px">
                 <span>Usuarios</span></a>
         </li>
 
         <!-- Nav Item - Tables -->
         <li class="nav-item">
-            <a class="nav-link" href="retos.php">
-                <i class="fas fa-fw fa-table"></i>
+            <a class="btn bg-admin nav-link" style="box-shadow: none" href="retos.php">
+                <img src="iconos/Retos.png" style="width: 16px; height: 16px">
                 <span>Retos</span></a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="gym.php">
-                <i class="fas fa-fw fa-table"></i>
+            <a class="btn bg-admin nav-link" style="box-shadow: none" href="gym.php">
+                <img src="iconos/gym.png" style="width: 16px; height: 13px">
                 <span>Área de Pesas</span></a>
         </li>
     </ul>
@@ -121,7 +115,7 @@ $matri = $_SESSION['matricula'];
         <!-- Main Content -->
         <div id="content">
 
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+            <nav class="navbar navbar-expand navbar-light bg-top-adm topbar mb-4 static-top shadow">
 
                 <!-- Sidebar Toggle (Topbar) -->
                 <form class="form-inline">
@@ -136,33 +130,30 @@ $matri = $_SESSION['matricula'];
                 <ul class="navbar-nav ml-auto">
 
                     <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                    <li class="nav-item dropdown no-arrow d-sm-none">
+                    <li class=" nav-item dropdown no-arrow d-sm-none">
                         <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-search fa-fw"></i>
                         </a>
                     </li>
 
 
 
                     <!-- Nav Item - User Information -->
-                    <li class="nav-item dropdown no-arrow">
+                    <li class="nav-item dropdown -arrow-down">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $matri ?></span>
-                            <img class="img-profile rounded-circle"
-                                 src="img/undraw_profile.svg">
+                            <span class="mr-2 d-none d-lg-inline text-white "><?php echo $matri ?></span>
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                              aria-labelledby="userDropdown">
                             <a class="dropdown-item" href="../perfil_usuario.php">
-                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                <img src="iconos/useradmin.png" style="width: 13px; height: 16px">
                                 Perfil
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="../php/cerrar.php">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                <img src="iconos/out.png" style="width: 16px; height: 16px">
                                 Cerrar sesión
                             </a>
                         </div>
