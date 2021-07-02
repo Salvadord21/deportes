@@ -138,7 +138,7 @@ $id=$_POST['id_equipo'];
                 $xsem=0;
                 ?>
                 <!-- Resultado de partidos  -->
-                <div class="card-body">
+                <div class="card-body" id="">
 
                     <!-- Muestran total de jornadas  -->
                     <ul class="nav nav-tabs" id="tab-futbol" role="tablist">
@@ -162,29 +162,25 @@ $id=$_POST['id_equipo'];
                             <form action="imc/partidosFIFA.php" method="post">
                                 <table class="table table-hover">
                                     <tr>
-                                        <th>Local</th>
-                                        <th></th>
-                                        <th>vs</th>
-                                        <th></th>
-                                        <th>vistante</th>
+                                        <th>Jugador</th>
+                                        <th>Goles</th>
                                     </tr>
                                     <?php
-                                    $sql2= "SELECT * FROM `goleadoresascenso`";
+                                    $sql2= "SELECT * FROM `goleadoresascenso` WHERE jornada='1' and equipo_id='$id'";
                                     $resulta=mysqli_query($conexion,$sql2);
                                     $cont=1;
                                     while($mostrar=mysqli_fetch_array($resulta)){
-
                                         ?>
                                         <tr>
-                                            <td><?php echo $mostrar['nombre_equipo'] ?></td>
-                                            <td><?php echo $mostrar['goles'] ?></td>
                                             <td><?php echo $mostrar['nombre'] ?></td>
+                                            <td><?php echo $mostrar['goles'] ?></td>
 
                                         </tr>
                                         <?
                                         $cont++;
                                     }
                                     ?>
+
                                 </table>
                             </form>
                         </div>
@@ -198,33 +194,18 @@ $id=$_POST['id_equipo'];
                                 <form action="imc/partidosFIFA.php" method="post" >
                                     <table class="table table-hover">
                                         <tr>
-                                            <th>Local</th>
-                                            <th></th>
-                                            <th>vs</th>
-                                            <th></th>
-                                            <th>vistante</th>
+                                            <th>Jugador</th>
+                                            <th>Goles</th>
                                         </tr>
-                                        <!--imprime valores -->
                                         <?php
-                                        $sql2= "SELECT * FROM `partidos_ascenso` WHERE jornada='$jornadascont2'";
+                                        $sql2= "SELECT * FROM `goleadoresascenso` WHERE jornada='$jornadascont2' and equipo_id='$id'";
                                         $resulta=mysqli_query($conexion,$sql2);
                                         $cont=1;
                                         while($mostrar=mysqli_fetch_array($resulta)){
-                                            $locales=$mostrar['id_local'];
-                                            $visitantes=$mostrar['id_visita'];
-                                            $equipoL="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$locales'";
-                                            $resultaL=mysqli_query($conexion,$equipoL);
-                                            $equipoV="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$visitantes'";
-                                            $resultaV=mysqli_query($conexion,$equipoV);
-                                            $localL=mysqli_fetch_array($resultaL);
-                                            $visitaV=mysqli_fetch_array($resultaV);
                                             ?>
                                             <tr>
-                                                <td><?php echo $localL['nombre_equipo'] ?></td>
-                                                <td><?php echo $mostrar['gol_local'] ?></td>
-                                                <td>vs</td>
-                                                <td><?php echo $mostrar['gol_visita'] ?></td>
-                                                <td><?php echo $visitaV['nombre_equipo'] ?></td>
+                                                <td><?php echo $mostrar['nombre'] ?></td>
+                                                <td><?php echo $mostrar['goles'] ?></td>
 
                                             </tr>
                                             <?
@@ -238,12 +219,11 @@ $id=$_POST['id_equipo'];
                         }
                         ?>
                     </div>
-                </div>
+                </div >
             <?php } ?>
 
         </div>
     </div>
-
 
 </div>
 
