@@ -26,10 +26,10 @@ if ($query){
     $fila3 = mysqli_fetch_assoc($queryid);
     $idPartido = $fila3['id'];
 
-    $golesL="INSERT INTO `puntos_fifa`(`equipos_id`, `id_partido`, `golesF`, `golesC`, `puntos`, `jg`, `je`, `jp`,`jornada`,`torneo_id`)
-    VALUES ('$idLocal','$idPartido','$golLocal','$golVisita','$puntosL','$jgl','$jel','$jpl','$jornada','$idTorneo')";
-    $golesV="INSERT INTO `puntos_fifa`( `equipos_id`, `id_partido`, `golesF`, `golesC`, `puntos`, `jg`, `je`, `jp`,`jornada`,`torneo_id`) 
-    VALUES ('$idVisita','$idPartido','$golVisita','$golLocal','$puntosV','$jgv','$jev','$jpv','$jornada','$idTorneo')";
+    $golesL="INSERT INTO `puntos_fifa`(`equipos_id`, `id_partido`, `golesF`, `golesC`, `puntos`, `jg`, `je`, `jp`,`jornada`)
+    VALUES ('$idLocal','$idPartido','$golLocal','$golVisita','$puntosL','$jgl','$jel','$jpl','$jornada')";
+    $golesV="INSERT INTO `puntos_fifa`( `equipos_id`, `id_partido`, `golesF`, `golesC`, `puntos`, `jg`, `je`, `jp`,`jornada`) 
+    VALUES ('$idVisita','$idPartido','$golVisita','$golLocal','$puntosV','$jgv','$jev','$jpv','$jornada')";
     $queryl=mysqli_query($conexion, $golesL);
     $queryv=mysqli_query($conexion, $golesV);
     if ($queryl and $queryv){

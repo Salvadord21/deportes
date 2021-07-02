@@ -24,9 +24,9 @@ if ($query){
     $fila3 = mysqli_fetch_assoc($queryid);
     $idPartido = $fila3['id'];
 
-    $golesL="INSERT INTO `puntos_basquetbol`(`equipo_id`,`canastasF`, `canastasC`, `puntos`, `jg`, `jp`, `jornada`, `partidos_basquetbol_id`, `torneo_id`) 
+    $golesL="INSERT INTO `puntos_basquetbol`(`equipo_id`,`canastasF`, `canastasC`, `puntos`, `jg`, `jp`, `jornada`, `partidos_basquetbol_id`, `creacion_torneo_id`) 
                         VALUES ('$idLocal','$golLocal','$golVisita','$puntosL','$jgl','$jpl','$jornada','$idPartido','$idTorneo')";
-    $golesV="INSERT INTO `puntos_basquetbol`(`equipo_id`,`canastasF`, `canastasC`, `puntos`, `jg`, `jp`, `jornada`, `partidos_basquetbol_id`, `torneo_id`) 
+    $golesV="INSERT INTO `puntos_basquetbol`(`equipo_id`,`canastasF`, `canastasC`, `puntos`, `jg`, `jp`, `jornada`, `partidos_basquetbol_id`, `creacion_torneo_id`) 
                         VALUES ('$idVisita','$golVisita','$golLocal','$puntosV','$jgv','$jpv','$jornada','$idPartido','$idTorneo')";
     $queryl=mysqli_query($conexion, $golesL);
     $queryv=mysqli_query($conexion, $golesV);
