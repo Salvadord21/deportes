@@ -14,7 +14,7 @@ $mostrarA=mysqli_fetch_array($resultadoA);
 $idAs = $mostrarA['id'];
 
 $fifa="SELECT MAX(`id`) as id FROM creacion_torneo WHERE disciplina='fifa'";
-$resultadoF = mysqli_query($conexion, $fbardas);
+$resultadoF = mysqli_query($conexion, $fifa);
 $mostrarF=mysqli_fetch_array($resultadoF);
 $idFif = $mostrarF['id'];
 

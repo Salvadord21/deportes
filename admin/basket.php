@@ -2,6 +2,11 @@
 session_start();
 include 'imc/header.php';
 include '../php/conexion.php';
+
+$basquet="SELECT MAX(`id`) as id FROM creacion_torneo WHERE disciplina='Basquetbol'";
+$resultadoBa = mysqli_query($conexion, $basquet);
+$mostrarBa=mysqli_fetch_array($resultadoBa);
+$idBasquet = $mostrarBa['id'];
 ?>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
@@ -69,7 +74,7 @@ include '../php/conexion.php';
                                     $result=mysqli_query($conexion,$sql);
                                     $idTorneo=mysqli_fetch_array($result);
                                     ?>
-                                    <input type="hidden"value="<?php echo $idTorneo['id'] ?>" id="torneo">
+                                        <input type="hidden"value="<?php echo $idTorneo['id'] ?>" id="torneo">
                                 </td>
                                 <td><button type="button" onclick="guardar()" > Guardar Resultado</button> </td>
                             </tr>
@@ -178,7 +183,7 @@ include '../php/conexion.php';
                                             <th>vistante</th>
                                         </tr>
                                         <?php
-                                        $sql= "SELECT * FROM `partidos_basquetbol`   WHERE jornada='1'";
+                                        $sql= "SELECT * FROM `partidos_basquetbol`   WHERE jornada='1' and `torneo_id`='$idBasquet'";
                                         $result=mysqli_query($conexion,$sql);
                                         while($mostrar=mysqli_fetch_array($result)){
                                             $locales=$mostrar['idLocal'];
@@ -221,7 +226,7 @@ include '../php/conexion.php';
                                             </tr>
                                             <!--imprime valores -->
                                             <?php
-                                            $sql= "SELECT * FROM `partidos_basquetbol`   WHERE jornada='1'";
+                                            $sql= "SELECT * FROM `partidos_basquetbol`   WHERE jornada='$jornadascont2' and `torneo_id`='$idBasquet'";
                                             $result=mysqli_query($conexion,$sql);
                                             while($mostrar=mysqli_fetch_array($result)){
                                                 $locales=$mostrar['idLocal'];

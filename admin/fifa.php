@@ -2,6 +2,11 @@
 session_start();
 include 'imc/header.php';
 include '../php/conexion.php';
+
+$fifa="SELECT MAX(`id`) as id FROM creacion_torneo WHERE disciplina='fifa'";
+$resultadoF = mysqli_query($conexion, $fifa);
+$mostrarF=mysqli_fetch_array($resultadoF);
+$idFif = $mostrarF['id'];
 ?>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
@@ -178,7 +183,7 @@ include '../php/conexion.php';
                                             <th>vistante</th>
                                         </tr>
                                         <?php
-                                        $sql= "SELECT * FROM `partidos_fifa`  WHERE jornada='1'";
+                                        $sql= "SELECT * FROM `partidos_fifa`  WHERE jornada='1' and `torneo_id`='$idFif'";
                                         $result=mysqli_query($conexion,$sql);
                                         while($mostrar=mysqli_fetch_array($result)){
                                             $locales=$mostrar['id_local'];
@@ -221,7 +226,7 @@ include '../php/conexion.php';
                                             </tr>
                                             <!--imprime valores -->
                                             <?php
-                                            $sql= "SELECT * FROM `partidos_fifa` WHERE jornada='$jornadascont2'";
+                                            $sql= "SELECT * FROM `partidos_fifa` WHERE jornada='$jornadascont2' and `torneo_id`='$idFif'";
                                             $result=mysqli_query($conexion,$sql);
                                             while($mostrar=mysqli_fetch_array($result)){
                                                 $locales=$mostrar['id_local'];
