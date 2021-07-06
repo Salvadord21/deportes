@@ -2,6 +2,11 @@
 session_start();
 include 'imc/header.php';
 include '../php/conexion.php';
+
+$voley="SELECT MAX(`id`) as id FROM creacion_torneo WHERE disciplina='ascenso'";
+$resultadoV = mysqli_query($conexion, $voley);
+$mostrarV=mysqli_fetch_array($resultadoV);
+$idVol = $mostrarV['id'];
 ?>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
@@ -59,7 +64,7 @@ include '../php/conexion.php';
                                 <td>
                                     <select name="jornada" id="jornada">
                                         <?php
-                                        $listado = "SELECT `jornadas` FROM `creacion_torneo` WHERE `id`=( SELECT id from creacion_torneo where creacion_torneo.fecha_creacion=( SELECT MAX(`fecha_creacion`) from creacion_torneo WHERE `disciplina`='voleibol'))";
+                                        $listado = "SELECT `jornadas` FROM `creacion_torneo` WHERE `id`=( SELECT id from creacion_torneo where creacion_torneo.fecha_creacion=( SELECT MAX(`fecha_creacion`) from creacion_torneo WHERE `disciplina`='voleibol' AND torneo_id= '$idVol'))";
 
                                         $query = mysqli_query($conexion, $listado);
 
@@ -73,7 +78,7 @@ include '../php/conexion.php';
                                         ?>
                                     </select>
                                     <?php
-                                    $sql= "SELECT * FROM `creacion_torneo` WHERE disciplina='voleibol'AND fecha_creacion = ( SELECT MAX(fecha_creacion) FROM `creacion_torneo` WHERE disciplina = 'voleibol')";
+                                    $sql= "SELECT * FROM `creacion_torneo` WHERE disciplina='voleibol'AND fecha_creacion = ( SELECT MAX(fecha_creacion) FROM `creacion_torneo` WHERE disciplina = 'voleibol' AND torneo_id= '$idVol')";
                                     $result=mysqli_query($conexion,$sql);
                                     $idTorneo=mysqli_fetch_array($result);
                                     ?>
@@ -142,7 +147,7 @@ include '../php/conexion.php';
 
                 </div>
                 <?php
-                $sql= "SELECT * FROM `creacion_torneo` WHERE disciplina='voleibol'AND fecha_creacion = ( SELECT MAX(fecha_creacion) FROM `creacion_torneo` WHERE disciplina = 'voleibol')";
+                $sql= "SELECT * FROM `creacion_torneo` WHERE disciplina='voleibol'AND fecha_creacion = ( SELECT MAX(fecha_creacion) FROM `creacion_torneo` WHERE disciplina = 'voleibol' torneo_id= '$idVol')";
                 $result=mysqli_query($conexion,$sql);
                 while($mostrar=mysqli_fetch_array($result)) {
                     $id_torn=$mostrar['id'];
@@ -244,7 +249,7 @@ include '../php/conexion.php';
                                             </tr>
                                             <!--imprime valores -->
                                             <?php
-                                            $sql= "SELECT * FROM `partidos_vole`   WHERE jornada='$jornadascont2'";
+                                            $sql= "SELECT * FROM `partidos_vole`   WHERE jornada='$jornadascont2' AND torneo_id= '$idVol'";
                                             $result=mysqli_query($conexion,$sql);
                                             while($mostrar=mysqli_fetch_array($result)){
                                                 $locales=$mostrar['id_local'];
