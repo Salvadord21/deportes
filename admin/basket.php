@@ -178,10 +178,9 @@ include '../php/conexion.php';
                                             <th>vistante</th>
                                         </tr>
                                         <?php
-                                        $sql2= "SELECT * FROM `partidos_basquetbol` WHERE jornada='1'";
-                                        $resulta=mysqli_query($conexion,$sql2);
-                                        $cont=1;
-                                        while($mostrar=mysqli_fetch_array($resulta)){
+                                        $sql= "SELECT * FROM `partidos_basquetbol`   WHERE jornada='1'";
+                                        $result=mysqli_query($conexion,$sql);
+                                        while($mostrar=mysqli_fetch_array($result)){
                                             $locales=$mostrar['idLocal'];
                                             $visitantes=$mostrar['idVisita'];
                                             $equipoL="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$locales'";
@@ -190,6 +189,7 @@ include '../php/conexion.php';
                                             $resultaV=mysqli_query($conexion,$equipoV);
                                             $localL=mysqli_fetch_array($resultaL);
                                             $visitaV=mysqli_fetch_array($resultaV);
+
                                             ?>
                                             <tr>
                                                 <td><?php echo $localL['nombre_equipo'] ?></td>
@@ -199,10 +199,7 @@ include '../php/conexion.php';
                                                 <td><?php echo $visitaV['nombre_equipo'] ?></td>
 
                                             </tr>
-                                            <?
-                                            $cont++;
-                                        }
-                                        ?>
+                                        <?php  } ?>
                                     </table>
                                 </form>
                             </div>
@@ -224,10 +221,9 @@ include '../php/conexion.php';
                                             </tr>
                                             <!--imprime valores -->
                                             <?php
-                                            $sql2= "SELECT * FROM `partidos_basquetbol` WHERE jornada='$jornadascont2'";
-                                            $resulta=mysqli_query($conexion,$sql2);
-                                            $cont=1;
-                                            while($mostrar=mysqli_fetch_array($resulta)){
+                                            $sql= "SELECT * FROM `partidos_basquetbol`   WHERE jornada='1'";
+                                            $result=mysqli_query($conexion,$sql);
+                                            while($mostrar=mysqli_fetch_array($result)){
                                                 $locales=$mostrar['idLocal'];
                                                 $visitantes=$mostrar['idVisita'];
                                                 $equipoL="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$locales'";
@@ -236,6 +232,7 @@ include '../php/conexion.php';
                                                 $resultaV=mysqli_query($conexion,$equipoV);
                                                 $localL=mysqli_fetch_array($resultaL);
                                                 $visitaV=mysqli_fetch_array($resultaV);
+
                                                 ?>
                                                 <tr>
                                                     <td><?php echo $localL['nombre_equipo'] ?></td>
@@ -245,10 +242,7 @@ include '../php/conexion.php';
                                                     <td><?php echo $visitaV['nombre_equipo'] ?></td>
 
                                                 </tr>
-                                                <?
-                                                $cont++;
-                                            }
-                                            ?>
+                                            <?php  } ?>
                                         </table>
                                     </form>
                                 </div>

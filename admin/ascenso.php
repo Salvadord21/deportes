@@ -182,10 +182,9 @@ include '../php/conexion.php';
                                             <th>vistante</th>
                                         </tr>
                                         <?php
-                                        $sql2= "SELECT * FROM `partidos_ascenso` WHERE jornada='1'";
-                                        $resulta=mysqli_query($conexion,$sql2);
-                                        $cont=1;
-                                        while($mostrar=mysqli_fetch_array($resulta)){
+                                        $sql= "SELECT * FROM `partidos_ascenso` WHERE jornada='1'";
+                                        $result=mysqli_query($conexion,$sql);
+                                        while($mostrar=mysqli_fetch_array($result)){
                                             $locales=$mostrar['id_local'];
                                             $visitantes=$mostrar['id_visita'];
                                             $equipoL="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$locales'";
@@ -203,10 +202,7 @@ include '../php/conexion.php';
                                                 <td><?php echo $visitaV['nombre_equipo'] ?></td>
 
                                             </tr>
-                                            <?
-                                            $cont++;
-                                        }
-                                        ?>
+                                        <?php  } ?>
                                     </table>
                                 </form>
                             </div>
@@ -228,10 +224,9 @@ include '../php/conexion.php';
                                             </tr>
                                             <!--imprime valores -->
                                             <?php
-                                            $sql2= "SELECT * FROM `partidos_ascenso` WHERE jornada='$jornadascont2'";
-                                            $resulta=mysqli_query($conexion,$sql2);
-                                            $cont=1;
-                                            while($mostrar=mysqli_fetch_array($resulta)){
+                                            $sql= "SELECT * FROM `partidos_ascenso` WHERE jornada='$jornadascont2'";
+                                            $result=mysqli_query($conexion,$sql);
+                                            while($mostrar=mysqli_fetch_array($result)){
                                                 $locales=$mostrar['id_local'];
                                                 $visitantes=$mostrar['id_visita'];
                                                 $equipoL="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$locales'";
@@ -249,10 +244,7 @@ include '../php/conexion.php';
                                                     <td><?php echo $visitaV['nombre_equipo'] ?></td>
 
                                                 </tr>
-                                                <?
-                                                $cont++;
-                                            }
-                                            ?>
+                                            <?php  } ?>
                                         </table>
                                     </form>
                                 </div>

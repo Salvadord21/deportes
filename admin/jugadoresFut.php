@@ -44,7 +44,7 @@ $id=$_POST['id_equipo'];
                             <td>
                                 <select name="jornada" id="jornada">
                                     <?php
-                                    $listado = "SELECT `id`,`jornadas` FROM `creacion_torneo` WHERE `id`=( SELECT id from creacion_torneo where creacion_torneo.fecha_creacion=( SELECT MAX(`fecha_creacion`) from creacion_torneo WHERE `disciplina`='fifa'))";
+                                    $listado = "SELECT `id`,`jornadas` FROM `creacion_torneo` WHERE `id`=( SELECT id from creacion_torneo where creacion_torneo.fecha_creacion=( SELECT MAX(`fecha_creacion`) from creacion_torneo WHERE `disciplina`='Futbol Bardas'))";
 
                                     $query = mysqli_query($conexion, $listado);
 
@@ -59,7 +59,7 @@ $id=$_POST['id_equipo'];
                                 </select>
 
                                 <?php
-                                $listado2 = "SELECT `id`,`jornadas` FROM `creacion_torneo` WHERE `id`=( SELECT id from creacion_torneo where creacion_torneo.fecha_creacion=( SELECT MAX(`fecha_creacion`) from creacion_torneo WHERE `disciplina`='fifa'))";
+                                $listado2 = "SELECT `id`,`jornadas` FROM `creacion_torneo` WHERE `id`=( SELECT id from creacion_torneo where creacion_torneo.fecha_creacion=( SELECT MAX(`fecha_creacion`) from creacion_torneo WHERE `disciplina`='Futbol Bardas'))";
                                 $query2 = mysqli_query($conexion, $listado2);
                                 $idTorneo = mysqli_fetch_array($query2)
                                 ?>
@@ -123,7 +123,7 @@ $id=$_POST['id_equipo'];
 
             </div>
             <?php
-            $sql= "SELECT * FROM `creacion_torneo` WHERE disciplina='FIFA'AND fecha_creacion = ( SELECT MAX(fecha_creacion) FROM `creacion_torneo` WHERE disciplina = 'FIFA')";
+            $sql= "SELECT * FROM `creacion_torneo` WHERE disciplina='Futbol Bardas'AND fecha_creacion = ( SELECT MAX(fecha_creacion) FROM `creacion_torneo` WHERE disciplina = 'Futbol Bardas')";
             $result=mysqli_query($conexion,$sql);
             while($mostrar=mysqli_fetch_array($result)) {
                 $id_torn=$mostrar['id'];
@@ -166,20 +166,16 @@ $id=$_POST['id_equipo'];
                                         <th>Goles</th>
                                     </tr>
                                     <?php
-                                    $sql2= "SELECT * FROM `goleadoresfut` WHERE jornada='1' and equipo_id='$id'";
-                                    $resulta=mysqli_query($conexion,$sql2);
-                                    $cont=1;
-                                    while($mostrar=mysqli_fetch_array($resulta)){
+                                    $sql= "SELECT * FROM `goleadoresfut` WHERE jornada='1' and equipo_id='$id'";
+                                    $result=mysqli_query($conexion,$sql);
+                                    while($mostrar=mysqli_fetch_array($result)){
                                         ?>
                                         <tr>
                                             <td><?php echo $mostrar['nombre'] ?></td>
                                             <td><?php echo $mostrar['goles'] ?></td>
 
                                         </tr>
-                                        <?
-                                        $cont++;
-                                    }
-                                    ?>
+                                    <?php  } ?>
 
                                 </table>
                             </form>
@@ -198,20 +194,16 @@ $id=$_POST['id_equipo'];
                                             <th>Goles</th>
                                         </tr>
                                         <?php
-                                        $sql2= "SELECT * FROM `goleadoresfut` WHERE jornada='$jornadascont2' and equipo_id='$id'";
-                                        $resulta=mysqli_query($conexion,$sql2);
-                                        $cont=1;
-                                        while($mostrar=mysqli_fetch_array($resulta)){
+                                        $sql= "SELECT * FROM `goleadoresfut` WHERE jornada='$jornadascont2' and equipo_id='$id'";
+                                        $result=mysqli_query($conexion,$sql);
+                                        while($mostrar=mysqli_fetch_array($result)){
                                             ?>
                                             <tr>
                                                 <td><?php echo $mostrar['nombre'] ?></td>
                                                 <td><?php echo $mostrar['goles'] ?></td>
 
                                             </tr>
-                                            <?
-                                            $cont++;
-                                        }
-                                        ?>
+                                        <?php  } ?>
                                     </table>
                                 </form>
                             </div>

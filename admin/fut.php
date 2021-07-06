@@ -165,7 +165,7 @@ include '../php/conexion.php';
                         </ul>
 
 
-                        <!-- Muestran los resultados de partidos en jornada 1 -->
+                        <!-- Muestran los resultados de partidos en jornada 1  va php-->
                         <div class="tab-content" id="tab-futbol-contenido">
                             <div class="tab-pane fade show active" id="semana1" role="tabpanel" aria-labelledby="tab-futbol-general">
                                 <form action="imc/partidosFIFA.php" method="post">
@@ -178,10 +178,9 @@ include '../php/conexion.php';
                                             <th>vistante</th>
                                         </tr>
                                         <?php
-                                        $sql2= "SELECT * FROM `partidos_futbol` WHERE jornada='1'";
-                                        $resulta=mysqli_query($conexion,$sql2);
-                                        $cont=1;
-                                        while($mostrar=mysqli_fetch_array($resulta)){
+                                        $sql= "SELECT * FROM `partidos_futbol` WHERE jornada='1'";
+                                        $result=mysqli_query($conexion,$sql);
+                                        while($mostrar=mysqli_fetch_array($result)){
                                             $locales=$mostrar['id_local'];
                                             $visitantes=$mostrar['id_visita'];
                                             $equipoL="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$locales'";
@@ -199,10 +198,7 @@ include '../php/conexion.php';
                                                 <td><?php echo $visitaV['nombre_equipo'] ?></td>
 
                                             </tr>
-                                            <?
-                                            $cont++;
-                                        }
-                                        ?>
+                                            <?php  } ?>
                                     </table>
                                 </form>
                             </div>
@@ -222,12 +218,11 @@ include '../php/conexion.php';
                                                 <th></th>
                                                 <th>vistante</th>
                                             </tr>
-                                            <!--imprime valores -->
+                                            <!--imprime valores  aqui va php -->
                                             <?php
-                                            $sql2= "SELECT * FROM `partidos_futbol` WHERE jornada='$jornadascont2'";
-                                            $resulta=mysqli_query($conexion,$sql2);
-                                            $cont=1;
-                                            while($mostrar=mysqli_fetch_array($resulta)){
+                                            $sql= "SELECT * FROM `partidos_futbol` WHERE jornada='$jornadascont2'";
+                                            $result=mysqli_query($conexion,$sql);
+                                            while($mostrar=mysqli_fetch_array($result)){
                                                 $locales=$mostrar['id_local'];
                                                 $visitantes=$mostrar['id_visita'];
                                                 $equipoL="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$locales'";
@@ -245,10 +240,7 @@ include '../php/conexion.php';
                                                     <td><?php echo $visitaV['nombre_equipo'] ?></td>
 
                                                 </tr>
-                                                <?
-                                                $cont++;
-                                            }
-                                            ?>
+                                                <?php  } ?>
                                         </table>
                                     </form>
                                 </div>
@@ -261,6 +253,7 @@ include '../php/conexion.php';
 
             </div>
         </div>
+
 
         <!-- ver equipos -->
         <div class="col-xl-12 col-lg-5">

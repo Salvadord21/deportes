@@ -159,22 +159,18 @@ $id=$_POST['id_equipo'];
                                         <th>Jugador</th>
                                         <th>Goles</th>
                                     </tr>
+
                                     <?php
-                                    $sql2= "SELECT * FROM `goleadoresfifa` WHERE jornada='1' and id='$id'";
-                                    $resulta=mysqli_query($conexion,$sql2);
-                                    $cont=1;
-                                    while($mostrar=mysqli_fetch_array($resulta)){
+                                    $sql= "SELECT * FROM `goleadoresfifa`  WHERE jornada='1' and equipo_id='$id'";
+                                    $result=mysqli_query($conexion,$sql);
+                                    while($mostrar=mysqli_fetch_array($result)){
                                         ?>
                                         <tr>
                                             <td><?php echo $mostrar['nombre'] ?></td>
                                             <td><?php echo $mostrar['goles'] ?></td>
 
                                         </tr>
-                                        <?
-                                        $cont++;
-                                    }
-                                    ?>
-
+                                    <?php  } ?>
                                 </table>
                             </form>
                         </div>
@@ -192,20 +188,16 @@ $id=$_POST['id_equipo'];
                                             <th>Goles</th>
                                         </tr>
                                         <?php
-                                        $sql2= "SELECT * FROM `goleadoresfifa` WHERE jornada='$jornadascont2' and id='$id'";
-                                        $resulta=mysqli_query($conexion,$sql2);
-                                        $cont=1;
-                                        while($mostrar=mysqli_fetch_array($resulta)){
+                                        $sql= "SELECT * FROM `goleadoresfifa`  WHERE jornada='$jornadascont2' and equipo_id='$id'";
+                                        $result=mysqli_query($conexion,$sql);
+                                        while($mostrar=mysqli_fetch_array($result)){
                                             ?>
                                             <tr>
                                                 <td><?php echo $mostrar['nombre'] ?></td>
                                                 <td><?php echo $mostrar['goles'] ?></td>
 
                                             </tr>
-                                            <?
-                                            $cont++;
-                                        }
-                                        ?>
+                                        <?php  } ?>
                                     </table>
                                 </form>
                             </div>
