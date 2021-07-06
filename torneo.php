@@ -2,6 +2,31 @@
 session_start();
 require 'php/conexion.php';
 
+
+$fbardas="SELECT MAX(`id`) as id FROM creacion_torneo WHERE disciplina='futbol bardas'";
+$resultadoB = mysqli_query($conexion, $fbardas);
+$mostrarB=mysqli_fetch_array($resultadoB);
+$idBaas=$mostrarB['id'];
+
+$fascenso="SELECT MAX(`id`) as id FROM creacion_torneo WHERE disciplina='ascenso'";
+$resultadoA = mysqli_query($conexion, $fascenso);
+$mostrarA=mysqli_fetch_array($resultadoA);
+$idAs = $mostrarA['id'];
+
+$fifa="SELECT MAX(`id`) as id FROM creacion_torneo WHERE disciplina='fifa'";
+$resultadoF = mysqli_query($conexion, $fbardas);
+$mostrarF=mysqli_fetch_array($resultadoF);
+$idFif = $mostrarF['id'];
+
+$voley="SELECT MAX(`id`) as id FROM creacion_torneo WHERE disciplina='voleibol'";
+$resultadoV = mysqli_query($conexion, $voley);
+$mostrarV=mysqli_fetch_array($resultadoV);
+$idVol = $mostrarV['id'];
+
+$basquet="SELECT MAX(`id`) as id FROM creacion_torneo WHERE disciplina='Basquetbol'";
+$resultadoBa = mysqli_query($conexion, $basquet);
+$mostrarBa=mysqli_fetch_array($resultadoBa);
+$idBasquet = $mostrarBa['id'];
 ?>
 
 <!DOCTYPE html>
@@ -272,6 +297,7 @@ require 'php/conexion.php';
 
         </div>
         <br>
+
         <div class="tab-content" id="menu-torneos-disciplinas-categorias">
 
             <!--FUTBOL-->
@@ -297,22 +323,18 @@ require 'php/conexion.php';
                     <div class="tab-pane fade show active" id="futbol-general" role="tabpanel" aria-labelledby="tab-futbol-general">
                         <table class="table table-hover">
                             <tr>
-                                <th>#</th>
-                                <th>Equipo</th>
-                                <th data-toggle="tooltip" data-placement="top" title="Juegos jugados">JJ</th>
-                                <th data-toggle="tooltip" data-placement="top" title="Juegos ganados">JG</th>
-                                <th data-toggle="tooltip" data-placement="top" title="Juegos empatados">JE</th>
-                                <th data-toggle="tooltip" data-placement="top" title="Juegos perdidos">JP</th>
-                                <th data-toggle="tooltip" data-placement="top" title="Goles a favor">GF</th>
-                                <th data-toggle="tooltip" data-placement="top" title="Goles en contra">GE</th>
-                                <th data-toggle="tooltip" data-placement="top" title="Diferencia de goles">Dif</th>
-                                <th data-toggle="tooltip" data-placement="top" title="Puntos">Puntos</th>
+                                <th>local</th>
+                                <th>gol</th>
+                                <th>vs</th>
+                                <th>Goles</th>
+                                <th>visitante</th>
                             </tr>
+                            <tbody>
                             <?php
-                            $sql2= " Select * FROM `tabla_fut` ORDER BY `tabla_fut`.`gf` DESC";
-                            $resulta=mysqli_query($conexion,$sql2);
-                            $cont=1;
-                            while($mostrar=mysqli_fetch_array($resulta)){
+                            $sql= " Select * FROM `tabla_fut` WHERE`torneo_id`='$idBaas' ORDER BY `tabla_fut`.`gf` DESC";
+                            $result=mysqli_query($conexion,$sql);
+                            $cont =1;
+                            while($mostrar=mysqli_fetch_array($result)){
                                 ?>
                                 <tr>
                                     <td><?php echo $cont ?></td>
@@ -326,25 +348,29 @@ require 'php/conexion.php';
                                     <td><?php echo $mostrar['df'] ?></td>
                                     <td><?php echo $mostrar['puntos'] ?></td>
                                 </tr>
-                                <?
-                                $cont++;
-                            }
-                            ?>
+
+                                <?php  $cont++; } ?>
+                            </tbody>
+
                         </table>
+
                     </div>
                     <div class="tab-pane fade" id="futbol-ofensiva" role="tabpanel" aria-labelledby="tab-futbol-ofensiva">
-
                         <table class="table table-hover">
                             <tr>
-                                <th>#</th>
-                                <th>Equipo</th>
+                                <th>local</th>
+                                <th>gol</th>
+                                <th>vs</th>
                                 <th>Goles</th>
+                                <th>visitante</th>
                             </tr>
+                            <tbody>
                             <?php
-                            $sql2= "SELECT `nombre_equipo`, `gf` FROM `tabla_fut` ORDER BY gf DESC";
-                            $resulta=mysqli_query($conexion,$sql2);
-                            $cont=1;
-                            while($mostrar=mysqli_fetch_array($resulta)){
+                            $sql= "SELECT `nombre_equipo`, `gf` FROM `tabla_fut` WHERE `torneo_id`='$idBaas' ORDER BY gf DESC";
+                            $result=mysqli_query($conexion,$sql);
+                            $cont =1;
+                            while($mostrar=mysqli_fetch_array($result)){
+
                                 ?>
                                 <tr>
                                     <td><?php echo $cont ?></td>
@@ -352,26 +378,28 @@ require 'php/conexion.php';
                                     <td><?php echo $mostrar['gf'] ?></td>
 
                                 </tr>
-                                <?
-                                $cont++;
-                            }
-                            ?>
-                        </table>
 
+                                <?php  $cont++; } ?>
+                            </tbody>
+
+                        </table>
                     </div>
                     <div class="tab-pane fade" id="futbol-defensiva" role="tabpanel" aria-labelledby="tab-futbol-defensiva">
-
                         <table class="table table-hover">
                             <tr>
-                                <th>#</th>
-                                <th>Equipo</th>
+                                <th>local</th>
+                                <th>gol</th>
+                                <th>vs</th>
                                 <th>Goles</th>
+                                <th>visitante</th>
                             </tr>
+                            <tbody>
                             <?php
-                            $sql2= "SELECT `nombre_equipo`, `gc` FROM `tabla_fut` ORDER BY gc ";
-                            $resulta=mysqli_query($conexion,$sql2);
-                            $cont=1;
-                            while($mostrar=mysqli_fetch_array($resulta)){
+                            $sql= "SELECT `nombre_equipo`, `gc` FROM `tabla_fut` WHERE`torneo_id`='$idBaas' ORDER BY gc";
+                            $result=mysqli_query($conexion,$sql);
+                            $cont =1;
+                            while($mostrar=mysqli_fetch_array($result)){
+
                                 ?>
                                 <tr>
                                     <td><?php echo $cont ?></td>
@@ -379,12 +407,11 @@ require 'php/conexion.php';
                                     <td><?php echo $mostrar['gc'] ?></td>
 
                                 </tr>
-                                <?
-                                $cont++;
-                            }
-                            ?>
-                        </table>
 
+                                <?php  $cont++; } ?>
+                            </tbody>
+
+                        </table>
                     </div>
                     <div class="tab-pane fade" id="futbol-goleadores" role="tabpanel" aria-labelledby="tab-futbol-defensiva">
 
@@ -395,23 +422,22 @@ require 'php/conexion.php';
                                 <th>Equipo</th>
                                 <th>Goles</th>
                             </tr>
+                            <tbody>
                             <?php
-                            $sql2= "SELECT `nombre`,SUM( `goles`) as goles, `nombre_equipo`FROM `goleadoresfut` GROUP BY `nombre` ORDER BY `goles` DESC ";
-                            $resulta=mysqli_query($conexion,$sql2);
-                            $cont=1;
-                            while($mostrar=mysqli_fetch_array($resulta)){
+                            $sql= "SELECT `nombre`,SUM( `goles`) as goles, `nombre_equipo`FROM `goleadoresfut` WHERE`torneo_id`='$idBaas' GROUP BY `nombre` ORDER BY `goles` DESC ";
+                            $result=mysqli_query($conexion,$sql);
+                            $pop = 0;
+
+                            while($mostrar=mysqli_fetch_array($result)){
                                 ?>
                                 <tr>
-                                    <td><?php echo $cont ?></td>
                                     <td><?php echo $mostrar['nombre'] ?></td>
-                                    <td><?php echo $mostrar['nombre_equipo'] ?></td>
                                     <td><?php echo $mostrar['goles'] ?></td>
 
                                 </tr>
-                                <?
-                                $cont++;
-                            }
-                            ?>
+                            <?php } ?>
+                            </tbody>
+
                         </table>
 
                     </div>
@@ -439,22 +465,19 @@ require 'php/conexion.php';
                     <div class="tab-pane fade show active" id="futbol-general-a" role="tabpanel" aria-labelledby="tab-futbol-general-a">
                         <table class="table table-hover">
                             <tr>
-                                <th>#</th>
-                                <th>Equipo</th>
-                                <th data-toggle="tooltip" data-placement="top" title="Juegos jugados">JJ</th>
-                                <th data-toggle="tooltip" data-placement="top" title="Juegos ganados">JG</th>
-                                <th data-toggle="tooltip" data-placement="top" title="Juegos empatados">JE</th>
-                                <th data-toggle="tooltip" data-placement="top" title="Juegos perdidos">JP</th>
-                                <th data-toggle="tooltip" data-placement="top" title="Goles a favor">GF</th>
-                                <th data-toggle="tooltip" data-placement="top" title="Goles en contra">GE</th>
-                                <th data-toggle="tooltip" data-placement="top" title="Diferencia de goles">Dif</th>
-                                <th data-toggle="tooltip" data-placement="top" title="Puntos">Puntos</th>
+                                <th>local</th>
+                                <th>gol</th>
+                                <th>vs</th>
+                                <th>Goles</th>
+                                <th>visitante</th>
                             </tr>
+                            <tbody>
                             <?php
-                            $sql2= " Select nombre_equipo, gf, gc, df,jj, puntos,jg,jp,je FROM `tabla_ascenso` ORDER BY `tabla_ascenso`.`df` DESC";
-                            $resulta=mysqli_query($conexion,$sql2);
-                            $cont=1;
-                            while($mostrar=mysqli_fetch_array($resulta)){
+                            $sql= " Select nombre_equipo, gf, gc, df,jj, puntos,jg,jp,je FROM `tabla_ascenso` WHERE 'torneo_id' = '$idAs' ORDER BY `tabla_ascenso`.`df` DESC";
+                            $result=mysqli_query($conexion,$sql);
+                            $cont =1;
+                            while($mostrar=mysqli_fetch_array($result)){
+
                                 ?>
                                 <tr>
                                     <td><?php echo $cont ?></td>
@@ -468,24 +491,28 @@ require 'php/conexion.php';
                                     <td><?php echo $mostrar['df'] ?></td>
                                     <td><?php echo $mostrar['puntos'] ?></td>
                                 </tr>
-                                <?
-                                $cont++;
-                            }
-                            ?>
+
+                                <?php  $cont++; } ?>
+                            </tbody>
+
                         </table>
                     </div>
                     <div class="tab-pane fade" id="futbol-ofensiva-a" role="tabpanel" aria-labelledby="tab-futbol-ofensiva-a">
                         <table class="table table-hover">
                             <tr>
-                                <th>#</th>
-                                <th>Equipo</th>
+                                <th>local</th>
+                                <th>gol</th>
+                                <th>vs</th>
                                 <th>Goles</th>
+                                <th>visitante</th>
                             </tr>
+                            <tbody>
                             <?php
-                            $sql2= "SELECT `nombre_equipo`, `gf` FROM `tabla_ascenso` ORDER BY gf DESC";
-                            $resulta=mysqli_query($conexion,$sql2);
-                            $cont=1;
-                            while($mostrar=mysqli_fetch_array($resulta)){
+                            $sql= "SELECT `nombre_equipo`, `gf` FROM `tabla_ascenso` WHERE 'torneo_id' = '$idAs' ORDER BY gf DESC";
+                            $result=mysqli_query($conexion,$sql);
+                            $cont =1;
+                            while($mostrar=mysqli_fetch_array($result)){
+
                                 ?>
                                 <tr>
                                     <td><?php echo $cont ?></td>
@@ -493,24 +520,29 @@ require 'php/conexion.php';
                                     <td><?php echo $mostrar['gf'] ?></td>
 
                                 </tr>
-                                <?
-                                $cont++;
-                            }
-                            ?>
+
+                                <?php  $cont++; } ?>
+                            </tbody>
+
                         </table>
+
                     </div>
                     <div class="tab-pane fade" id="futbol-defensiva-a" role="tabpanel" aria-labelledby="tab-futbol-defensiva-a">
                         <table class="table table-hover">
                             <tr>
-                                <th>#</th>
-                                <th>Equipo</th>
+                                <th>local</th>
+                                <th>gol</th>
+                                <th>vs</th>
                                 <th>Goles</th>
+                                <th>visitante</th>
                             </tr>
+                            <tbody>
                             <?php
-                            $sql2= "SELECT `nombre_equipo`, `gc` FROM `tabla_ascenso` ORDER BY gc ";
-                            $resulta=mysqli_query($conexion,$sql2);
-                            $cont=1;
-                            while($mostrar=mysqli_fetch_array($resulta)){
+                            $sql= "SELECT `nombre_equipo`, `gc` FROM `tabla_ascenso` WHERE 'torneo_id' = '$idAs' ORDER BY gc";
+                            $result=mysqli_query($conexion,$sql);
+                            $cont =1;
+                            while($mostrar=mysqli_fetch_array($result)){
+
                                 ?>
                                 <tr>
                                     <td><?php echo $cont ?></td>
@@ -518,25 +550,28 @@ require 'php/conexion.php';
                                     <td><?php echo $mostrar['gc'] ?></td>
 
                                 </tr>
-                                <?
-                                $cont++;
-                            }
-                            ?>
+                                <?php  $cont++; } ?>
+                            </tbody>
+
                         </table>
+
                     </div>
                     <div class="tab-pane fade" id="futbol-defensiva-ab" role="tabpanel" aria-labelledby="tab-futbol-defensiva-a">
                         <table class="table table-hover">
                             <tr>
-                                <th>#</th>
-                                <th>Jugador</th>
-                                <th>Equipo</th>
+                                <th>local</th>
+                                <th>gol</th>
+                                <th>vs</th>
                                 <th>Goles</th>
+                                <th>visitante</th>
                             </tr>
+                            <tbody>
                             <?php
-                            $sql2= "SELECT `nombre`, SUM(`goles`) as goles, `nombre_equipo` FROM `goleadoresascenso` WHERE torneo_id='3' GROUP by nombre ORDER BY `goles` DESC";
-                            $resulta=mysqli_query($conexion,$sql2);
-                            $cont=1;
-                            while($mostrar=mysqli_fetch_array($resulta)){
+                            $sql= "SELECT `nombre`, SUM(`goles`) as goles, `nombre_equipo` FROM `goleadoresascenso` WHERE 'torneo_id' = '$idAs' GROUP by nombre ORDER BY `goles` DESC";
+                            $result=mysqli_query($conexion,$sql);
+                            $cont =1;
+                            while($mostrar=mysqli_fetch_array($result)){
+
                                 ?>
                                 <tr>
                                     <td><?php echo $cont ?></td>
@@ -544,11 +579,11 @@ require 'php/conexion.php';
                                     <td><?php echo $mostrar['nombre_equipo'] ?></td>
                                     <td><?php echo $mostrar['goles'] ?></td>
                                 </tr>
-                                <?
-                                $cont++;
-                            }
-                            ?>
+                                <?php  $cont++; } ?>
+                            </tbody>
+
                         </table>
+
                     </div>
                 </div>
             </div>
@@ -569,22 +604,19 @@ require 'php/conexion.php';
                     <div class="tab-pane fade show active" id="fifa-general" role="tabpanel" aria-labelledby="tab-futbol-general">
                         <table class="table table-hover">
                             <tr>
-                                <th>#</th>
-                                <th>Equipo</th>
-                                <th data-toggle="tooltip" data-placement="top" title="Juegos jugados">JJ</th>
-                                <th data-toggle="tooltip" data-placement="top" title="Juegos ganados">JG</th>
-                                <th data-toggle="tooltip" data-placement="top" title="Juegos empatados">JE</th>
-                                <th data-toggle="tooltip" data-placement="top" title="Juegos perdidos">JP</th>
-                                <th data-toggle="tooltip" data-placement="top" title="Goles a favor">GF</th>
-                                <th data-toggle="tooltip" data-placement="top" title="Goles en contra">GE</th>
-                                <th data-toggle="tooltip" data-placement="top" title="Diferencia de goles">Dif</th>
-                                <th data-toggle="tooltip" data-placement="top" title="Puntos">Puntos</th>
+                                <th>local</th>
+                                <th>gol</th>
+                                <th>vs</th>
+                                <th>Goles</th>
+                                <th>visitante</th>
                             </tr>
+                            <tbody>
                             <?php
-                            $sql2= " Select * FROM `tabla_fifa` ORDER BY `tabla_fifa`.`puntos` DESC, tabla_fifa.df, tabla_fifa.gf DESC";
-                            $resulta=mysqli_query($conexion,$sql2);
-                            $cont=1;
-                            while($mostrar=mysqli_fetch_array($resulta)){
+                            $sql= "Select * FROM `tabla_fifa` WHERE 'torneo_id' = '$idFif' ORDER BY `tabla_fifa`.`puntos` DESC, tabla_fifa.df, tabla_fifa.gf DESC";
+                            $result=mysqli_query($conexion,$sql);
+                            $cont =1;
+                            while($mostrar=mysqli_fetch_array($result)){
+
                                 ?>
                                 <tr>
                                     <td><?php echo $cont ?></td>
@@ -598,10 +630,9 @@ require 'php/conexion.php';
                                     <td><?php echo $mostrar['df'] ?></td>
                                     <td><?php echo $mostrar['puntos'] ?></td>
                                 </tr>
-                                <?
-                                $cont++;
-                            }
-                            ?>
+                                <?php  $cont++; } ?>
+                            </tbody>
+
                         </table>
                     </div>
 
@@ -609,16 +640,18 @@ require 'php/conexion.php';
 
                         <table class="table table-hover">
                             <tr>
-                                <th>#</th>
-                                <th>Jugador</th>
-                                <th>Equipo</th>
+                                <th>local</th>
+                                <th>gol</th>
+                                <th>vs</th>
                                 <th>Goles</th>
+                                <th>visitante</th>
                             </tr>
+                            <tbody>
                             <?php
-                            $sql2= "SELECT `nombre`, SUM(`goles`) as goles, `nombre_equipo` FROM `goleadoresfifa` WHERE torneo_id='2' GROUP by nombre ORDER BY `goles` DESC";
-                            $resulta=mysqli_query($conexion,$sql2);
-                            $cont=1;
-                            while($mostrar=mysqli_fetch_array($resulta)){
+                            $sql= "SELECT `nombre`, SUM(`goles`) as goles, `nombre_equipo` FROM `goleadoresfifa` WHERE 'torneo_id' = '$idFif' GROUP by nombre ORDER BY `goles` DESC";                            $result=mysqli_query($conexion,$sql);
+                            $cont =1;
+                            while($mostrar=mysqli_fetch_array($result)){
+
                                 ?>
                                 <tr>
                                     <td><?php echo $cont ?></td>
@@ -626,12 +659,10 @@ require 'php/conexion.php';
                                     <td><?php echo $mostrar['nombre_equipo'] ?></td>
                                     <td><?php echo $mostrar['goles'] ?></td>
                                 </tr>
-                                <?
-                                $cont++;
-                            }
-                            ?>
-                        </table>
+                                <?php  $cont++; } ?>
+                            </tbody>
 
+                        </table>
                     </div>
                 </div>
 
@@ -641,23 +672,18 @@ require 'php/conexion.php';
             <div class="tab-pane fade" id="torneos-volley" role="tabpanel" aria-labelledby="menu-torneos-volley">
                 <table class="table table-hover">
                     <tr>
-                        <th>#</th>
-                        <th>Equipo</th>
-                        <th data-toggle="tooltip" data-placement="top" title="Juegos jugados">JJ</th>
-                        <th data-toggle="tooltip" data-placement="top" title="Juegos ganados">JG</th>
-                        <th data-toggle="tooltip" data-placement="top" title="Juegos perdidos">JP</th>
-                        <th data-toggle="tooltip" data-placement="top" title="Goles a favor">PF</th>
-                        <th data-toggle="tooltip" data-placement="top" title="Goles en contra">PE</th>
-                        <th data-toggle="tooltip" data-placement="top" title="Diferencia de goles">%P</th>
-                        <th data-toggle="tooltip" data-placement="top" title="Puntos">SetF</th>
-                        <th data-toggle="tooltip" data-placement="top" title="Puntos">SetC</th>
-                        <th data-toggle="tooltip" data-placement="top" title="Puntos">%S</th>
+                        <th>local</th>
+                        <th>gol</th>
+                        <th>vs</th>
+                        <th>Goles</th>
+                        <th>visitante</th>
                     </tr>
+                    <tbody>
                     <?php
-                    $sql2= " Select * FROM `tabla_vole`";
-                    $resulta=mysqli_query($conexion,$sql2);
-                    $cont=1;
-                    while($mostrar=mysqli_fetch_array($resulta)){
+                    $sql= " Select * FROM `tabla_vole` WHERE 'torneo_id' = '$idVol'";
+                    $cont =1;
+                    while($mostrar=mysqli_fetch_array($result)){
+
                         ?>
                         <tr>
                             <td><?php echo $cont ?></td>
@@ -672,31 +698,27 @@ require 'php/conexion.php';
                             <td><?php echo $mostrar['setC'] ?></td>
                             <td><?php echo $mostrar['ps'] ?></td>
                         </tr>
-                        <?
-                        $cont++;
-                    }
-                    ?>
+                        <?php  $cont++; } ?>
+                    </tbody>
+
                 </table>
+
             </div>
             <!--BASQUET-->
             <div class="tab-pane fade" id="torneos-basquet" role="tabpanel" aria-labelledby="menu-torneos-basquet">
                 <table class="table table-hover">
                     <tr>
-                        <th>#</th>
-                        <th>Equipo</th>
-                        <th data-toggle="tooltip" data-placement="top" title="Juegos jugados">JJ</th>
-                        <th data-toggle="tooltip" data-placement="top" title="Juegos ganados">JG</th>
-                        <th data-toggle="tooltip" data-placement="top" title="Juegos perdidos">JP</th>
-                        <th data-toggle="tooltip" data-placement="top" title="Goles a favor">GF</th>
-                        <th data-toggle="tooltip" data-placement="top" title="Goles en contra">GE</th>
-                        <th data-toggle="tooltip" data-placement="top" title="Diferencia de goles">Dif</th>
-                        <th data-toggle="tooltip" data-placement="top" title="Puntos">P</th>
+                        <th>local</th>
+                        <th>gol</th>
+                        <th>vs</th>
+                        <th>Goles</th>
+                        <th>visitante</th>
                     </tr>
+                    <tbody>
                     <?php
-                    $sql2= " Select * FROM `tabla_basquetbol`";
-                    $resulta=mysqli_query($conexion,$sql2);
-                    $cont=1;
-                    while($mostrar=mysqli_fetch_array($resulta)){
+                    $sql= "Select * FROM `tabla_basquetbol` WHERE 'torneo_id' = '$idBasquet'";
+                    $cont =1;
+                    while($mostrar=mysqli_fetch_array($result)){
                         ?>
                         <tr>
                             <td><?php echo $cont ?></td>
@@ -709,12 +731,14 @@ require 'php/conexion.php';
                             <td><?php echo $mostrar['df'] ?></td>
                             <td><?php echo $mostrar['puntos'] ?></td>
                         </tr>
-                        <?
-                        $cont++;
-                    }
-                    ?>
+                        <?php  $cont++; } ?>
+                    </tbody>
+
                 </table>
+
             </div>
+
+
             <!--Resultado-->
             <div class="tab-pane fade" id="resultado" role="tabpanel" aria-labelledby="menu-resultado">
                 <ul class="nav nav-tabs" id="tab-futbol" role="tablist">
@@ -740,17 +764,18 @@ require 'php/conexion.php';
                     <div class="tab-pane fade show active" id="futbol-bardas" role="tabpanel" aria-labelledby="tab-futbol-general">
                         <table class="table table-hover">
                             <tr>
-                                <th>Local</th>
-                                <th></th>
+                                <th>local</th>
+                                <th>gol</th>
                                 <th>vs</th>
-                                <th></th>
-                                <th>Visita</th>
+                                <th>Goles</th>
+                                <th>visitante</th>
                             </tr>
+                            <tbody>
                             <?php
-                            $sql2= " SELECT * FROM `partidos_futbol` WHERE jornada=(SELECT MAX(jornada) FROM partidos_futbol)";
-                            $resulta=mysqli_query($conexion,$sql2);
-                            $cont=1;
-                            while($mostrar=mysqli_fetch_array($resulta)){
+                            $sql= "SELECT * FROM `partidos_futbol` WHERE jornada=(SELECT MAX(jornada) FROM partidos_futbol)";
+                            $result=mysqli_query($conexion,$sql);
+                            $cont =1;
+                            while($mostrar=mysqli_fetch_array($result)){
                                 $locales=$mostrar['id_local'];
                                 $visitantes=$mostrar['id_visita'];
                                 $equipoL="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$locales'";
@@ -767,27 +792,27 @@ require 'php/conexion.php';
                                     <td><?php echo $mostrar['gol_visita'] ?></td>
                                     <td><?php echo $visitaV['nombre_equipo'] ?></td>
                                 </tr>
-                                <?
-                                $cont++;
-                            }
-                            ?>
+                            <?php  } ?>
+                            </tbody>
+
                         </table>
+
                     </div>
                     <div class="tab-pane fade" id="futbol-ascenso" role="tabpanel" aria-labelledby="tab-futbol-ofensiva">
-
                         <table class="table table-hover">
                             <tr>
-                                <th>Local</th>
-                                <th></th>
+                                <th>local</th>
+                                <th>gol</th>
                                 <th>vs</th>
-                                <th></th>
-                                <th>Visita</th>
+                                <th>Goles</th>
+                                <th>visitante</th>
                             </tr>
+                            <tbody>
                             <?php
-                            $sql2= " SELECT * FROM `partidos_ascenso` WHERE jornada=(SELECT MAX(jornada) FROM partidos_ascenso)";
-                            $resulta=mysqli_query($conexion,$sql2);
-                            $cont=1;
-                            while($mostrar=mysqli_fetch_array($resulta)){
+                            $sql= "SELECT * FROM `partidos_ascenso` WHERE jornada=(SELECT MAX(jornada) FROM partidos_ascenso)";
+                            $result=mysqli_query($conexion,$sql);
+                            $cont =1;
+                            while($mostrar=mysqli_fetch_array($result)){
                                 $locales=$mostrar['id_local'];
                                 $visitantes=$mostrar['id_visita'];
                                 $equipoL="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$locales'";
@@ -804,27 +829,27 @@ require 'php/conexion.php';
                                     <td><?php echo $mostrar['gol_visita'] ?></td>
                                     <td><?php echo $visitaV['nombre_equipo'] ?></td>
                                 </tr>
-                                <?
-                                $cont++;
-                            }
-                            ?>
+                            <?php  } ?>
+                            </tbody>
+
                         </table>
+
                     </div>
                     <div class="tab-pane fade" id="fifa" role="tabpanel" aria-labelledby="tab-futbol-defensiva">
-
                         <table class="table table-hover">
                             <tr>
-                                <th>Local</th>
-                                <th></th>
+                                <th>local</th>
+                                <th>gol</th>
                                 <th>vs</th>
-                                <th></th>
-                                <th>Visita</th>
+                                <th>Goles</th>
+                                <th>visitante</th>
                             </tr>
+                            <tbody>
                             <?php
-                            $sql2= " SELECT * FROM `partidos_fifa` WHERE jornada=(SELECT MAX(jornada) FROM partidos_fifa)";
-                            $resulta=mysqli_query($conexion,$sql2);
-                            $cont=1;
-                            while($mostrar=mysqli_fetch_array($resulta)){
+                            $sql= "SELECT * FROM `partidos_fifa` WHERE jornada=(SELECT MAX(jornada) FROM partidos_fifa)";
+                            $result=mysqli_query($conexion,$sql);
+                            $cont =1;
+                            while($mostrar=mysqli_fetch_array($result)){
                                 $locales=$mostrar['id_local'];
                                 $visitantes=$mostrar['id_visita'];
                                 $equipoL="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$locales'";
@@ -841,27 +866,27 @@ require 'php/conexion.php';
                                     <td><?php echo $mostrar['gol_visita'] ?></td>
                                     <td><?php echo $visitaV['nombre_equipo'] ?></td>
                                 </tr>
-                                <?
-                                $cont++;
-                            }
-                            ?>
+                            <?php  } ?>
+                            </tbody>
+
                         </table>
+
                     </div>
                     <div class="tab-pane fade" id="basquetbol" role="tabpanel" aria-labelledby="tab-futbol-defensiva">
-
                         <table class="table table-hover">
                             <tr>
-                                <th>Local</th>
-                                <th></th>
+                                <th>local</th>
+                                <th>gol</th>
                                 <th>vs</th>
-                                <th></th>
-                                <th>Visita</th>
+                                <th>Goles</th>
+                                <th>visitante</th>
                             </tr>
+                            <tbody>
                             <?php
-                            $sql2= " SELECT * FROM `partidos_basquetbol` WHERE jornada=(SELECT MAX(jornada) FROM partidos_basquetbol)";
-                            $resulta=mysqli_query($conexion,$sql2);
-                            $cont=1;
-                            while($mostrar=mysqli_fetch_array($resulta)){
+                            $sql= "SELECT * FROM `partidos_basquetbol` WHERE jornada=(SELECT MAX(jornada) FROM partidos_basquetbol)";
+                            $result=mysqli_query($conexion,$sql);
+                            $cont =1;
+                            while($mostrar=mysqli_fetch_array($result)){
                                 $locales=$mostrar['idLocal'];
                                 $visitantes=$mostrar['idVisita'];
                                 $equipoL="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$locales'";
@@ -878,32 +903,28 @@ require 'php/conexion.php';
                                     <td><?php echo $mostrar['canastasV'] ?></td>
                                     <td><?php echo $visitaV['nombre_equipo'] ?></td>
                                 </tr>
-                                <?
-                                $cont++;
-                            }
-                            ?>
+                            <?php  } ?>
+                            </tbody>
+
                         </table>
+
 
                     </div>
                     <div class="tab-pane fade" id="voleibol" role="tabpanel" aria-labelledby="tab-futbol-defensiva">
-
                         <table class="table table-hover">
                             <tr>
-                                <th>Local</th>
-                                <th>Set 1</th>
-                                <th>Set 2</th>
-                                <th>Set 3</th>
+                                <th>local</th>
+                                <th>gol</th>
                                 <th>vs</th>
-                                <th>Set3</th>
-                                <th>Set 2</th>
-                                <th>Set 1</th>
-                                <th>Visita</th>
+                                <th>Goles</th>
+                                <th>visitante</th>
                             </tr>
+                            <tbody>
                             <?php
-                            $sql2= "SELECT * FROM `partidos_vole` WHERE jornada=(SELECT MAX(jornada) FROM partidos_vole)";
-                            $resulta=mysqli_query($conexion,$sql2);
-                            $cont=1;
-                            while($mostrar=mysqli_fetch_array($resulta)){
+                            $sql= "SELECT * FROM `partidos_vole` WHERE jornada=(SELECT MAX(jornada) FROM partidos_vole)";
+                            $result=mysqli_query($conexion,$sql);
+                            $cont =1;
+                            while($mostrar=mysqli_fetch_array($result)){
                                 $locales=$mostrar['id_local'];
                                 $visitantes=$mostrar['id_visita'];
                                 $equipoL="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$locales'";
@@ -925,11 +946,11 @@ require 'php/conexion.php';
                                     <td><?php echo $visitaV['nombre_equipo'] ?></td>
 
                                 </tr>
-                                <?
-                                $cont++;
-                            }
-                            ?>
+                            <?php  } ?>
+                            </tbody>
+
                         </table>
+
 
                     </div>
 
@@ -943,20 +964,20 @@ require 'php/conexion.php';
                         <th>Disciplina</th>
                     </tr>
                     <tbody>
-                        <?php
-                        $sql= "select id,nombre_torneo, fecha_inicio from creacion_torneo where disciplina = 'otro'";
-                        $result=mysqli_query($conexion,$sql);
-                        while($mostrar=mysqli_fetch_array($result)){
-                            ?>
-                            <tr>
-                                <td><?php echo $mostrar['nombre_torneo'] ?></td>
-                                <td><?php echo $mostrar['fecha_inicio'] ?>
-                                </td>
-                                <td><button type="button" class="btn btn-outline-primary" data-toggle="modal" onclick="ingresarTorneo(<?php echo $mostrar['id'] ?>)" >Ingresar</button></td>
-                            </tr>
-                            <?php
-                        }
+                    <?php
+                    $sql= "select id,nombre_torneo, fecha_inicio from creacion_torneo where disciplina = 'otro'";
+                    $result=mysqli_query($conexion,$sql);
+                    while($mostrar=mysqli_fetch_array($result)){
                         ?>
+                        <tr>
+                            <td><?php echo $mostrar['nombre_torneo'] ?></td>
+                            <td><?php echo $mostrar['fecha_inicio'] ?>
+                            </td>
+                            <td><button type="button" class="btn btn-outline-primary" data-toggle="modal" onclick="ingresarTorneo(<?php echo $mostrar['id'] ?>)" >Ingresar</button></td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
                     </tbody>
 
                 </table>
@@ -971,16 +992,16 @@ require 'php/conexion.php';
                         <th></th>
                     </tr>
                     <tbody>
-                        <?php
-                        $sql= "SELECT `equipos`.`id`,`equipos`.`integrantes`, `equipos`.`contrasena`, 
+                    <?php
+                    $sql= "SELECT `equipos`.`id`,`equipos`.`integrantes`, `equipos`.`contrasena`, 
                                 `equipos`.`nombre_equipo`, `equipos`.`creacion`, `equipos`.`id_lider`, 
                                 `equipos`.`privado`, `equipos`.`torneo`, `equipos`.`id_torneo`, 
                                 `creacion_torneo`.`nombre_torneo` FROM `equipos` INNER JOIN `creacion_torneo` 
                                 ON `equipos`.`id_torneo` = creacion_torneo.id";
-                        $result=mysqli_query($conexion,$sql);
-                        $pop = 0;
+                    $result=mysqli_query($conexion,$sql);
+                    $pop = 0;
 
-                        while($mostrar=mysqli_fetch_array($result)){
+                    while($mostrar=mysqli_fetch_array($result)){
                         $pop = $mostrar['id'];
                         $pop2=$mostrar['id_torneo'];
                         ?>
@@ -993,20 +1014,22 @@ require 'php/conexion.php';
                                     <button type="button" class="btn btn-outline-primary" onclick="ingresarEquipoPublico(<?php echo $mostrar['id'] ?>,<?php echo $mostrar['id_torneo'] ?>,0)">Ingresar</button>
 
                                 </td>
-                                <?php }else{ ?><td><button type="button" class="btn btn-outline-primary" data-toggle="modal" name="unirse" value="<?php echo $mostrar['id'] ?>" data-target="#AgregarContraEquipo">Ingresar</button></td>
-                                <?php } ?>
+                            <?php }else{ ?><td><button type="button" class="btn btn-outline-primary" data-toggle="modal" name="unirse" value="<?php echo $mostrar['id'] ?>" data-target="#AgregarContraEquipo">Ingresar</button></td>
+                            <?php } ?>
 
                         </tr>
-                            <?php } ?>
+                    <?php } ?>
                     </tbody>
                 </table>
             </div>
         </div>
+
+
     </div>
 </div>
 
 <!--MODAL INGRESAR CONTRASEÑA DE EQUIPO-->
-<div class="modal fade" id="AgregarContraEquipo" tabindex="-1" role="dialog" aria-labelledby="ingresaContraEquipo" aria-hidden="true"e>
+<div class="modal fade" id="AgregarContraEquipo" tabindex="-1" role="dialog" aria-labelledby="ingresaContraEquipo" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -1052,6 +1075,7 @@ require 'php/conexion.php';
         </div>
     </div>
 </div>
+
 
 
 <script src="js/jquery-3.3.1.min.js"></script>
@@ -1163,9 +1187,9 @@ require 'php/conexion.php';
     function cerrarCrearEquipo(){
         $('#crearEquipo').modal('hide');
         $('#privado').val('');
-        $('#nombre-equipo-registro').val('')
-        $('#privado').val('false')
-        $('#contrasena-equipo-registro').val('')
+        $('#nombre-equipo-registro').val('');
+        $('#privado').val('false');
+        $('#contrasena-equipo-registro').val('');
 
     }
 
@@ -1284,10 +1308,6 @@ require 'php/conexion.php';
             });
         });
     });
-</script>
-
-<script>
-
 </script>
 </body>
 
