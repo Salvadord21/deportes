@@ -70,7 +70,7 @@ include 'php/conexion.php';
                                      <?php
                                      if (!empty($_SESSION['id_usuario'])){
 
-                                         $sql = "select * from retos_subidos where usuarios_id = '$_SESSION[id_usuario]'";
+                                         $sql = "select * from retos_subidos where usuarios_id = '$_SESSION[id_usuario]' and creacion_reto_id=(SELECT id FROM `creacion_reto` WHERE `fecha_inicio`<=CURDATE() AND fecha_fin>=CURDATE())";
                                          $resultado = mysqli_query($conexion, $sql);
 
                                          if ($resultado){
