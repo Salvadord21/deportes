@@ -3,7 +3,7 @@ session_start();
 include 'imc/header.php';
 include '../php/conexion.php';
 
-$voley="SELECT MAX(`id`) as id FROM creacion_torneo WHERE disciplina='ascenso'";
+$voley="SELECT MAX(`id`) as id FROM creacion_torneo WHERE disciplina='voleibol'";
 $resultadoV = mysqli_query($conexion, $voley);
 $mostrarV=mysqli_fetch_array($resultadoV);
 $idVol = $mostrarV['id'];
@@ -64,7 +64,7 @@ $idVol = $mostrarV['id'];
                                 <td>
                                     <select name="jornada" id="jornada">
                                         <?php
-                                        $listado = "SELECT `jornadas` FROM `creacion_torneo` WHERE `id`=( SELECT id from creacion_torneo where creacion_torneo.fecha_creacion=( SELECT MAX(`fecha_creacion`) from creacion_torneo WHERE `disciplina`='voleibol' AND torneo_id= '$idVol'))";
+                                        $listado = "SELECT `jornadas` FROM `creacion_torneo` WHERE `id`=( SELECT id from creacion_torneo where creacion_torneo.fecha_creacion=( SELECT MAX(`fecha_creacion`) from creacion_torneo WHERE `disciplina`='voleibol'))";
 
                                         $query = mysqli_query($conexion, $listado);
 
@@ -78,7 +78,7 @@ $idVol = $mostrarV['id'];
                                         ?>
                                     </select>
                                     <?php
-                                    $sql= "SELECT * FROM `creacion_torneo` WHERE disciplina='voleibol'AND fecha_creacion = ( SELECT MAX(fecha_creacion) FROM `creacion_torneo` WHERE disciplina = 'voleibol' AND torneo_id= '$idVol')";
+                                    $sql= "SELECT * FROM `creacion_torneo` WHERE disciplina='voleibol'AND fecha_creacion = ( SELECT MAX(fecha_creacion) FROM `creacion_torneo` WHERE disciplina = 'voleibol')";
                                     $result=mysqli_query($conexion,$sql);
                                     $idTorneo=mysqli_fetch_array($result);
                                     ?>
@@ -147,18 +147,11 @@ $idVol = $mostrarV['id'];
 
                 </div>
                 <?php
-                $sql= "SELECT * FROM `creacion_torneo` WHERE disciplina='voleibol'AND fecha_creacion = ( SELECT MAX(fecha_creacion) FROM `creacion_torneo` WHERE disciplina = 'voleibol' torneo_id= '$idVol')";
+                $sql= "SELECT * FROM `creacion_torneo` WHERE disciplina='voleibol'AND fecha_creacion = ( SELECT MAX(fecha_creacion) FROM `creacion_torneo` WHERE disciplina = 'voleibol')";
                 $result=mysqli_query($conexion,$sql);
                 while($mostrar=mysqli_fetch_array($result)) {
                     $id_torn=$mostrar['id'];
                     $jornadas = $mostrar['jornadas'];
-                    $y= $mostrar['numero_equipos'];
-                    if (($y%2)==0){
-                        $partidos=($y/2);
-                    }else{
-                        $partidos=($y/2)-0.5;
-                    }
-
                     $xsem=0;
                     ?>
                     <!-- Resultado de partidos  -->
@@ -180,8 +173,6 @@ $idVol = $mostrarV['id'];
                             }
                             ?>
                         </ul>
-
-
                         <!-- Muestran los resultados de partidos en jornada 1 -->
                         <div class="tab-content" id="tab-futbol-contenido">
                             <div class="tab-pane fade show active" id="semana1" role="tabpanel" aria-labelledby="tab-futbol-general">
@@ -249,11 +240,11 @@ $idVol = $mostrarV['id'];
                                             </tr>
                                             <!--imprime valores -->
                                             <?php
-                                            $sql= "SELECT * FROM `partidos_vole`   WHERE jornada='$jornadascont2' AND torneo_id= '$idVol'";
-                                            $result=mysqli_query($conexion,$sql);
-                                            while($mostrar=mysqli_fetch_array($result)){
-                                                $locales=$mostrar['id_local'];
-                                                $visitantes=$mostrar['id_visita'];
+                                            $sql3= "SELECT * FROM `partidos_vole` WHERE jornada='$jornadascont2' AND creacion_torneo_id= '$idVol'";
+                                            $result3=mysqli_query($conexion,$sql3);
+                                            while($mostrar3=mysqli_fetch_array($result3)){
+                                                $locales=$mostrar3['id_local'];
+                                                $visitantes=$mostrar3['id_visita'];
                                                 $equipoL="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$locales'";
                                                 $resultaL=mysqli_query($conexion,$equipoL);
                                                 $equipoV="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$visitantes'";
@@ -263,12 +254,12 @@ $idVol = $mostrarV['id'];
                                                 ?>
                                                 <tr>
                                                     <td><?php echo $localL['nombre_equipo'] ?></td>
-                                                    <td><?php echo $mostrar['set1L'] ?></td>
-                                                    <td><?php echo $mostrar['set2L'] ?></td>
-                                                    <td><?php echo $mostrar['set3L'] ?></td>
+                                                    <td><?php echo $mostrar3['set1L'] ?></td>
+                                                    <td><?php echo $mostrar3['set2L'] ?></td>
+                                                    <td><?php echo $mostrar3['set3L'] ?></td>
                                                     <td>vs</td>
-                                                    <td><?php echo $mostrar['set3V'] ?></td>
-                                                    <td><?php echo $mostrar['set2V'] ?></td>
+                                                    <td><?php echo $mostrar3['set3V'] ?></td>
+                                                    <td><?php echo $mostrar3['set2V'] ?></td>
                                                     <td><?php echo $mostrar['set1V'] ?></td>
                                                     <td><?php echo $visitaV['nombre_equipo'] ?></td>
 

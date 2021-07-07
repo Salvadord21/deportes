@@ -184,7 +184,7 @@ $idBaas=$mostrarB['id'];
                                             <th>vistante</th>
                                         </tr>
                                         <?php
-                                        $sql= "SELECT * FROM `partidos_futbol` WHERE jornada='1' and `torneo_id`='$baBaas' ";
+                                        $sql= "SELECT * FROM `partidos_futbol` WHERE jornada='1' and `torneo_id`='$idBaas' ";
                                         $result=mysqli_query($conexion,$sql);
                                         while($mostrar=mysqli_fetch_array($result)){
                                             $locales=$mostrar['id_local'];
@@ -226,7 +226,7 @@ $idBaas=$mostrarB['id'];
                                             </tr>
                                             <!--imprime valores  aqui va php -->
                                             <?php
-                                            $sql= "SELECT * FROM `partidos_futbol` WHERE jornada='$jornadascont2' and `torneo_id`='$baBaas'";
+                                            $sql= "SELECT * FROM `partidos_futbol` WHERE jornada='$jornadascont2' and `torneo_id`='$idBaas'";
                                             $result=mysqli_query($conexion,$sql);
                                             while($mostrar=mysqli_fetch_array($result)){
                                                 $locales=$mostrar['id_local'];
