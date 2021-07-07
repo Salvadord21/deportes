@@ -965,7 +965,7 @@ $idBasquet = $mostrarBa['id'];
                     </tr>
                     <tbody>
                     <?php
-                    $sql= "select id,nombre_torneo, fecha_inicio from creacion_torneo where disciplina = 'otro'";
+                    $sql= "SELECT * FROM `creacion_torneo` WHERE disciplina='otro' AND fecha_limite>=CURDATE()";
                     $result=mysqli_query($conexion,$sql);
                     while($mostrar=mysqli_fetch_array($result)){
                         ?>
@@ -993,23 +993,19 @@ $idBasquet = $mostrarBa['id'];
                     </tr>
                     <tbody>
                     <?php
-                    $sql= "SELECT `equipos`.`id`,`equipos`.`integrantes`, `equipos`.`contrasena`, 
-                                `equipos`.`nombre_equipo`, `equipos`.`creacion`, `equipos`.`id_lider`, 
-                                `equipos`.`privado`, `equipos`.`torneo`, `equipos`.`id_torneo`, 
-                                `creacion_torneo`.`nombre_torneo` FROM `equipos` INNER JOIN `creacion_torneo` 
-                                ON `equipos`.`id_torneo` = creacion_torneo.id";
-                    $result=mysqli_query($conexion,$sql);
+                    $sql10= "SELECT * from equipos WHERE `id_torneo`='$idAs' or   `id_torneo`='$idFif' or `id_torneo`='$idBaas' or `id_torneo`='$idVol' or `id_torneo`='$idBasquet'";
+                    $result10=mysqli_query($conexion,$sql10);
                     $pop = 0;
 
-                    while($mostrar=mysqli_fetch_array($result)){
-                        $pop = $mostrar['id'];
-                        $pop2=$mostrar['id_torneo'];
+                    while($mostrar10=mysqli_fetch_array($result10)){
+                        $pop = $mostrar10['id'];
+                        $pop2=$mostrar10['id_torneo'];
                         ?>
                         <tr>
-                            <td><?php echo $mostrar['nombre_equipo'] ?></td>
-                            <td><?php echo $mostrar['nombre_torneo'] ?></td>
-                            <td><?php if($mostrar['privado']==0){echo "publico";}else{echo "privado";} ?></td>
-                            <?php if ($mostrar['privado'] == 0){ ?>
+                            <td><?php echo $mostrar10['nombre_equipo'] ?></td>
+                            <td><?php echo $mostrar10['torneo'] ?></td>
+                            <td><?php if($mostrar10['privado']==0){echo "publico";}else{echo "privado";} ?></td>
+                            <?php if ($mostrar10['privado'] == 0){ ?>
                                 <td><!--BOTON PUBLICO-->
                                     <button type="button" class="btn btn-outline-primary" onclick="ingresarEquipoPublico(<?php echo $mostrar['id'] ?>,<?php echo $mostrar['id_torneo'] ?>,0)">Ingresar</button>
 
