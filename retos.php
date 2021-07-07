@@ -48,7 +48,7 @@ include 'php/conexion.php';
              <div class="row">
                  <div class="col-md-7">
                      <?php
-                     $sql= "SELECT * FROM `creacion_reto` WHERE fecha_inicio = ( SELECT MAX(fecha_inicio)  FROM creacion_reto)";
+                     $sql= "SELECT * FROM `creacion_reto` WHERE `fecha_inicio`<=CURDATE() AND fecha_fin>=CURDATE()";
                      $result= mysqli_query($conexion,$sql);
                      if($mostrar=mysqli_fetch_array($result)){
 
@@ -149,7 +149,7 @@ include 'php/conexion.php';
                  <div class="col-md-5">
                      <div class="embed-responsive embed-responsive-16by9">
                          <?php
-                         $sql= "SELECT * FROM `creacion_reto` WHERE fecha_inicio = ( SELECT MAX(fecha_inicio) FROM `creacion_reto`)";
+                         $sql= "SELECT * FROM `creacion_reto` WHERE `fecha_inicio`<=CURDATE() AND fecha_fin>=CURDATE()";
                          $result= mysqli_query($conexion,$sql);
                          if($mostrar=mysqli_fetch_array($result)){
                              $url=$mostrar['url'];
@@ -194,8 +194,7 @@ include 'php/conexion.php';
                             <th>Calificacion</th>
                         </tr>
                         <?php
-                        $sql= "SELECT usuarios.nombre, creacion_reto.nombre_reto, retos_subidos.calificacion FROM retos_subidos INNER JOIN usuarios on usuarios.id=retos_subidos.usuarios_id INNER JOIN creacion_reto on creacion_reto.id=retos_subidos.creacion_reto_id WHERE retos_subidos.calificacion !=0
-";
+                        $sql= "SELECT usuarios.nombre, creacion_reto.nombre_reto, retos_subidos.calificacion FROM retos_subidos INNER JOIN usuarios on usuarios.id=retos_subidos.usuarios_id INNER JOIN creacion_reto on creacion_reto.id=retos_subidos.creacion_reto_id WHERE retos_subidos.calificacion !=0 and creacion_reto.`fecha_inicio`<=CURDATE() AND creacion_reto.fecha_fin>=CURDATE()";
                         $result= mysqli_query($conexion,$sql);
                         while($mostrar=mysqli_fetch_array($result)){
                             $x=$mostrar['calificacion'];
