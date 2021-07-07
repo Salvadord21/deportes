@@ -772,7 +772,7 @@ $idBasquet = $mostrarBa['id'];
                             </tr>
                             <tbody>
                             <?php
-                            $sql= "SELECT * FROM `partidos_futbol` WHERE jornada=(SELECT MAX(jornada) FROM partidos_futbol)";
+                            $sql= "SELECT * FROM `partidos_futbol` WHERE jornada=(SELECT MAX(jornada) FROM partidos_futbol) AND torneo_id='$idBaas'";
                             $result=mysqli_query($conexion,$sql);
                             $cont =1;
                             while($mostrar=mysqli_fetch_array($result)){
@@ -809,7 +809,7 @@ $idBasquet = $mostrarBa['id'];
                             </tr>
                             <tbody>
                             <?php
-                            $sql= "SELECT * FROM `partidos_ascenso` WHERE jornada=(SELECT MAX(jornada) FROM partidos_ascenso)";
+                            $sql= "SELECT * FROM `partidos_ascenso` WHERE jornada=(SELECT MAX(jornada) FROM partidos_ascenso) and torneo_id='$idAs'";
                             $result=mysqli_query($conexion,$sql);
                             $cont =1;
                             while($mostrar=mysqli_fetch_array($result)){
@@ -846,7 +846,7 @@ $idBasquet = $mostrarBa['id'];
                             </tr>
                             <tbody>
                             <?php
-                            $sql= "SELECT * FROM `partidos_fifa` WHERE jornada=(SELECT MAX(jornada) FROM partidos_fifa)";
+                            $sql= "SELECT * FROM `partidos_fifa` WHERE jornada=(SELECT MAX(jornada) FROM partidos_fifa) and torneo_id='$idFif'";
                             $result=mysqli_query($conexion,$sql);
                             $cont =1;
                             while($mostrar=mysqli_fetch_array($result)){
@@ -883,7 +883,7 @@ $idBasquet = $mostrarBa['id'];
                             </tr>
                             <tbody>
                             <?php
-                            $sql= "SELECT * FROM `partidos_basquetbol` WHERE jornada=(SELECT MAX(jornada) FROM partidos_basquetbol)";
+                            $sql= "SELECT * FROM `partidos_basquetbol` WHERE jornada=(SELECT MAX(jornada) FROM partidos_basquetbol) and creacion_torneo_id='$idBasquet'";
                             $result=mysqli_query($conexion,$sql);
                             $cont =1;
                             while($mostrar=mysqli_fetch_array($result)){
@@ -921,7 +921,7 @@ $idBasquet = $mostrarBa['id'];
                             </tr>
                             <tbody>
                             <?php
-                            $sql= "SELECT * FROM `partidos_vole` WHERE jornada=(SELECT MAX(jornada) FROM partidos_vole)";
+                            $sql= "SELECT * FROM `partidos_vole` WHERE jornada=(SELECT MAX(jornada) FROM partidos_vole) and creacion_torneo_id='$idVol'";
                             $result=mysqli_query($conexion,$sql);
                             $cont =1;
                             while($mostrar=mysqli_fetch_array($result)){
