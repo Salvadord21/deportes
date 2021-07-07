@@ -124,7 +124,7 @@ if(!empty($_SESSION['msg_error'])){
 
             <div class="col-md-5">
                 <?php
-                $sql= "SELECT * FROM `creacion_reto` WHERE fecha_inicio = ( SELECT MAX(fecha_inicio)  FROM creacion_reto)";
+                $sql= "SELECT * FROM `creacion_reto` WHERE `fecha_inicio`<=CURDATE() AND fecha_fin>=CURDATE()";
                 $result= mysqli_query($conexion,$sql);
                 if($mostrar=mysqli_fetch_array($result)){
                     ?>
