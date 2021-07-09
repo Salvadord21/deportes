@@ -965,7 +965,7 @@ $idBasquet = $mostrarBa['id'];
                     </tr>
                     <tbody>
                     <?php
-                    $sql= "SELECT * FROM `creacion_torneo` WHERE disciplina='otro' AND fecha_limite>=CURDATE()";
+                    $sql= "SELECT * FROM `creacion_torneo` WHERE disciplina='otro' AND fecha_limite>=CURDATE() AND fecha_inicio<=CURDATE()";
                     $result=mysqli_query($conexion,$sql);
                     while($mostrar=mysqli_fetch_array($result)){
                         ?>
