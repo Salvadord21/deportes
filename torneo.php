@@ -1200,7 +1200,7 @@ $idBasquet = $mostrarBa['id'];
                 cache: false,
                 dataType: 'json',
                 success: function (data) {
-                    if (data.status == "entraprivado") {///////registro exitoso
+                    if (data.status == "entrapriv") {///////registro exitoso
                         Swal.fire({
                             icon: 'success',
                             title: 'Estás registrado',
