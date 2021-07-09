@@ -54,21 +54,23 @@ include '../php/conexion.php'
                                     </thead>
                                     <tbody>
                                     <?php
-                                    $sql= "SELECT equipos.`integrantes`, equipos.`nombre_equipo`, creacion_torneo.nombre_torneo FROM `equipos` INNER JOIN creacion_torneo on creacion_torneo.id=equipos.id_torneo";
+                                    $sql= "SELECT equipos.`id`,equipos.`integrantes`, equipos.`nombre_equipo`, creacion_torneo.nombre_torneo FROM `equipos` INNER JOIN creacion_torneo on creacion_torneo.id=equipos.id_torneo WHERE equipos.delete is null";
                                     $result=mysqli_query($conexion,$sql);
                                     while($mostrar=mysqli_fetch_array($result)){
 
                                     ?>
                                     <tr>
-                                        <form action="imc/EliEquipo.php" method="post">
+
                                         <td><?php echo $mostrar['nombre_equipo'] ?></td>
                                         <td><?php echo $mostrar['nombre_torneo'] ?></td>
                                         <td><?php echo $mostrar['integrantes'] ?></td>
                                         <td>
+                                            <form action="imc/EliEquipo.php" method="post">
                                             <input type="hidden" value="<?php echo $mostrar['id'] ?>" name="eliminar" size="0px">
                                             <button type="submit" class="btn btn-primary">Eliminar equipo</button>
+                                            </form>
                                         </td>
-                                        </form>
+
                                     </tr>
                                     <?php
                                     }

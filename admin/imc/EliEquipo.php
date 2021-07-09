@@ -3,11 +3,11 @@ include '../../php/conexion.php';
 $id = $_POST['eliminar'];
 
 
-$insert = "DELETE FROM equipos WHERE id = $id ";
+$insert = "UPDATE `equipos` SET `delete`=NOW() WHERE `id`= '$id'";
 
 $resultado = mysqli_query($conexion, $insert);
 if ($resultado) {
-    header('location: ../crear_torneo.php');
+    header('location: ../equipos.php');
 
 } else {
     echo mysqli_error($conexion);
