@@ -65,7 +65,7 @@ $id=$_POST['id_equipo'];
                                 ?>
                                 <input type="hidden" value="<?php echo $idTorneo['id']?>" id="torneo">
                             </td>
-                            <td><input type="hidden" value="<?php echo $id?>" id="equipo"><button type="button" onclick="guardar()" > Guardar Resultado</button> </td>
+                            <td><input type="hidden" value="<?php echo $id?>" id="equipo"><button class="btn btn-primary" type="button" onclick="guardar()" > Guardar</button> </td>
                         </tr>
                     </table>
                 </form>
@@ -107,7 +107,9 @@ $id=$_POST['id_equipo'];
                     });
                 }
                 function actualizar(){
-                    $("#result").load( "jugadoresFut.php #result" );
+                    $('#result').load('jugadoresFut2.php #result');
+                    $('#jugador').val('value1');
+                    $('#gol').val('');
                 }
             </script>
 
@@ -115,7 +117,7 @@ $id=$_POST['id_equipo'];
     </div>
 
     <!-- jugadores -->
-    <div class="col-xl-12 col-lg-7" id="result">
+    <div class="col-xl-12 col-lg-7" >
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3">
@@ -138,7 +140,7 @@ $id=$_POST['id_equipo'];
                 $xsem=0;
                 ?>
                 <!-- Resultado de partidos  -->
-                <div class="card-body" id="">
+                <div class="card-body" >
 
                     <!-- Muestran total de jornadas  -->
                     <ul class="nav nav-tabs" id="tab-futbol" role="tablist">
@@ -157,10 +159,9 @@ $id=$_POST['id_equipo'];
                         ?>
                     </ul>
                     <!-- Muestran los resultados de partidos en jornada 1 -->
-                    <div class="tab-content" id="tab-futbol-contenido">
+                    <div class="tab-content" id="tab-futbol-contenido" >
                         <div class="tab-pane fade show active" id="semana1" role="tabpanel" aria-labelledby="tab-futbol-general">
-                            <form action="imc/partidosFIFA.php" method="post">
-                                <table class="table table-hover">
+                                <table class="table table-hover" id="result" >
                                     <tr>
                                         <th>Jugador</th>
                                         <th>Goles</th>
@@ -178,7 +179,6 @@ $id=$_POST['id_equipo'];
                                     <?php  } ?>
 
                                 </table>
-                            </form>
                         </div>
 
 
@@ -187,8 +187,7 @@ $id=$_POST['id_equipo'];
                         for ($jornadascont2=2; $jornadascont2<$jornadas+1; $jornadascont2++){
                             ?>
                             <div class="tab-pane fade" id="semana<?php echo $jornadascont2; ?>" role="tabpanel" aria-labelledby="tab-futbol-jugadores">
-                                <form action="imc/partidosFIFA.php" method="post" >
-                                    <table class="table table-hover">
+                                    <table class="table table-hover" id="result" >
                                         <tr>
                                             <th>Jugador</th>
                                             <th>Goles</th>
@@ -205,7 +204,6 @@ $id=$_POST['id_equipo'];
                                             </tr>
                                         <?php  } ?>
                                     </table>
-                                </form>
                             </div>
                             <?php
                         }
