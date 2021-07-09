@@ -993,7 +993,7 @@ $idBasquet = $mostrarBa['id'];
                     </tr>
                     <tbody>
                     <?php
-                    $sql10= "SELECT * from equipos WHERE `id_torneo`='$idAs' or   `id_torneo`='$idFif' or `id_torneo`='$idBaas' or `id_torneo`='$idVol' or `id_torneo`='$idBasquet'";
+                    $sql10= "SELECT * FROM `fechaequipos`";
                     $result10=mysqli_query($conexion,$sql10);
                     $pop = 0;
 
