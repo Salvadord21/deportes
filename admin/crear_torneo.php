@@ -110,7 +110,7 @@ include '../php/conexion.php';
                             </thead>
                             <tbody>
                             <?php
-                            $sql= "select id, nombre_torneo, disciplina, numero_equipos,fecha_inicio,fecha_limite, jornadas from creacion_torneo";
+                            $sql= "select id, nombre_torneo, disciplina, numero_equipos,fecha_inicio,fecha_limite, jornadas from creacion_torneo WHERE `delete` is null";
                             $result= mysqli_query($conexion,$sql);
                             while($mostrar=mysqli_fetch_array($result)){
 

@@ -3,7 +3,7 @@ include '../../php/conexion.php';
 $id = $_POST['eliminar'];
 
 
-$insert = "DELETE FROM creacion_torneo WHERE id = $id ";
+$insert = "UPDATE `creacion_torneo` SET `delete`=NOW() WHERE `id`= '$id' ";
 
 $resultado = mysqli_query($conexion, $insert);
 if ($resultado) {

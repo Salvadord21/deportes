@@ -737,8 +737,6 @@ $idBasquet = $mostrarBa['id'];
                 </table>
 
             </div>
-
-
             <!--Resultado-->
             <div class="tab-pane fade" id="resultado" role="tabpanel" aria-labelledby="menu-resultado">
                 <ul class="nav nav-tabs" id="tab-futbol" role="tablist">
@@ -965,7 +963,7 @@ $idBasquet = $mostrarBa['id'];
                     </tr>
                     <tbody>
                     <?php
-                    $sql= "SELECT * FROM `creacion_torneo` WHERE disciplina='otro' AND fecha_limite>=CURDATE() AND fecha_inicio<=CURDATE()";
+                    $sql= "SELECT * FROM `creacion_torneo` WHERE disciplina='otro' AND fecha_limite>=CURDATE() AND fecha_inicio<=CURDATE() and `delete` is null";
                     $result=mysqli_query($conexion,$sql);
                     while($mostrar=mysqli_fetch_array($result)){
                         ?>
