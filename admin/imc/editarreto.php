@@ -10,7 +10,7 @@ $fecha_lim = $_POST['retoff1'];
 
 
 
-$insert = "UPDATE retos_deportivos SET nombre_reto = '$nombre_reto', descripcion = '$descri', url = '$url', fecha_creacion= '$fecha_crea', fecha_limite = '$fecha_lim' WHERE id = $id";
+$insert = "UPDATE creacion_reto SET nombre_reto = '$nombre_reto', descripcion = '$descri', url = '$url', fecha_inicio= '$fecha_crea', fecha_fin = '$fecha_lim' WHERE id = $id";
 
 $resultado = mysqli_query($conexion, $insert);
 if ($resultado) {

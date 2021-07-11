@@ -2,7 +2,7 @@
 session_start();
 include 'imc/header.php';
 include '../php/conexion.php';
-$id=$_POST['id_equipo'];
+$id=$_GET['id_equipo'];
 ?>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -107,9 +107,7 @@ $id=$_POST['id_equipo'];
                     });
                 }
                 function actualizar(){
-                    $('#result').load('jugadoresFut2.php #result');
-                    $('#jugador').val('value1');
-                    $('#gol').val('');
+                    $('#result').load(' #result');
                 }
             </script>
 
@@ -117,7 +115,7 @@ $id=$_POST['id_equipo'];
     </div>
 
     <!-- jugadores -->
-    <div class="col-xl-12 col-lg-7" >
+    <div class="col-xl-12 col-lg-7"  id="result">
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3">
@@ -161,7 +159,7 @@ $id=$_POST['id_equipo'];
                     <!-- Muestran los resultados de partidos en jornada 1 -->
                     <div class="tab-content" id="tab-futbol-contenido" >
                         <div class="tab-pane fade show active" id="semana1" role="tabpanel" aria-labelledby="tab-futbol-general">
-                                <table class="table table-hover" id="result" >
+                                <table class="table table-hover">
                                     <tr>
                                         <th>Jugador</th>
                                         <th>Goles</th>
@@ -187,7 +185,7 @@ $id=$_POST['id_equipo'];
                         for ($jornadascont2=2; $jornadascont2<$jornadas+1; $jornadascont2++){
                             ?>
                             <div class="tab-pane fade" id="semana<?php echo $jornadascont2; ?>" role="tabpanel" aria-labelledby="tab-futbol-jugadores">
-                                    <table class="table table-hover" id="result" >
+                                    <table class="table table-hover" >
                                         <tr>
                                             <th>Jugador</th>
                                             <th>Goles</th>

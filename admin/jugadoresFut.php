@@ -2,7 +2,7 @@
 session_start();
 include 'imc/header.php';
 include '../php/conexion.php';
-$id=$_POST['id_equipo'];
+$id=$_GET['id_equipo'];
 ?>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -107,7 +107,7 @@ $id=$_POST['id_equipo'];
                     });
                 }
                 function actualizar(){
-                    $("#result").load( "jugadoresFut.php #result" );
+                    $("#result").load( " #result" );
                 }
             </script>
 

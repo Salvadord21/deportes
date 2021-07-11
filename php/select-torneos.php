@@ -10,7 +10,7 @@ $resultadoA = mysqli_query($conexion, $fascenso);
 $mostrarA=mysqli_fetch_array($resultadoA);
 $idAs = $mostrarA['id'];
 
-$fifa="SELECT id FROM `creacion_torneo` WHERE `fecha_inicio`<=CURDATE() AND `fecha_limite`>=CURDATE() anddisciplina='fifa'";
+$fifa="SELECT id FROM `creacion_torneo` WHERE `fecha_inicio`<=CURDATE() AND `fecha_limite`>=CURDATE() and disciplina='fifa'";
 $resultadoF = mysqli_query($conexion, $fifa);
 $mostrarF=mysqli_fetch_array($resultadoF);
 $idFif = $mostrarF['id'];

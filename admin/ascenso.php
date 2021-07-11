@@ -282,7 +282,7 @@ $idAs = $mostrarA['id'];
                         while($mostrar=mysqli_fetch_array($result)) {
                             ?>
                             <tr>
-                                <form action="jugadoresFut2.php" method="post">
+                                <form action="jugadoresFut2.php" method="get">
                                     <td><?php echo $mostrar['nombre_equipo']?></td>
                                     <td>
                                         <input type="hidden" name="id_equipo" value="<?php echo $mostrar['id']?>">

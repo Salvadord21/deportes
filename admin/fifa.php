@@ -173,7 +173,6 @@ $idFif = $mostrarF['id'];
                         <!-- Muestran los resultados de partidos en jornada 1 -->
                         <div class="tab-content" id="tab-futbol-contenido">
                             <div class="tab-pane fade show active" id="semana1" role="tabpanel" aria-labelledby="tab-futbol-general">
-                                <form action="imc/partidosFIFA.php" method="post">
                                     <table class="table table-hover">
                                         <tr>
                                             <th>Local</th>
@@ -206,7 +205,6 @@ $idFif = $mostrarF['id'];
                                         <?php  } ?>
 
                                     </table>
-                                </form>
                             </div>
 
 
@@ -215,7 +213,6 @@ $idFif = $mostrarF['id'];
                             for ($jornadascont2=2; $jornadascont2<$jornadas+1; $jornadascont2++){
                                 ?>
                                 <div class="tab-pane fade" id="semana<?php echo $jornadascont2; ?>" role="tabpanel" aria-labelledby="tab-futbol-jugadores">
-                                    <form action="imc/partidosFIFA.php" method="post" >
                                         <table class="table table-hover">
                                             <tr>
                                                 <th>Local</th>
@@ -248,7 +245,6 @@ $idFif = $mostrarF['id'];
                                                 </tr>
                                             <?php  } ?>
                                         </table>
-                                    </form>
                                 </div>
                                 <?php
                             }
@@ -280,7 +276,7 @@ $idFif = $mostrarF['id'];
                         while($mostrar=mysqli_fetch_array($result)) {
                             ?>
                             <tr>
-                                <form action="jugadoresFifa.php" method="post">
+                                <form action="jugadoresFifa.php" method="get">
                                     <td><?php echo $mostrar['nombre_equipo']?></td>
                                     <td>
                                         <input type="hidden" name="id_equipo" value="<?php echo $mostrar['id']?>">
