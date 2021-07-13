@@ -6,27 +6,27 @@ require 'php/conexion.php';
 $fbardas="SELECT MAX(`id`) as id FROM creacion_torneo WHERE disciplina='futbol bardas'";
 $resultadoB = mysqli_query($conexion, $fbardas);
 $mostrarB=mysqli_fetch_array($resultadoB);
-$idBaas=$mostrarB['id'];
+$idBaas2=$mostrarB['id'];
 
-$fascenso="SELECT MAX(`id`) as id FROM creacion_torneo WHERE disciplina='ascenso'";
+$fascenso="SELECT MAX(`id`) as id2 FROM creacion_torneo WHERE disciplina='ascenso'";
 $resultadoA = mysqli_query($conexion, $fascenso);
 $mostrarA=mysqli_fetch_array($resultadoA);
-$idAs = $mostrarA['id'];
+$idAs2 = $mostrarA['id2'];
 
 $fifa="SELECT MAX(`id`) as id FROM creacion_torneo WHERE disciplina='fifa'";
 $resultadoF = mysqli_query($conexion, $fifa);
 $mostrarF=mysqli_fetch_array($resultadoF);
-$idFif = $mostrarF['id'];
+$idFif2 = $mostrarF['id'];
 
 $voley="SELECT MAX(`id`) as id FROM creacion_torneo WHERE disciplina='voleibol'";
 $resultadoV = mysqli_query($conexion, $voley);
 $mostrarV=mysqli_fetch_array($resultadoV);
-$idVol = $mostrarV['id'];
+$idVol2 = $mostrarV['id'];
 
 $basquet="SELECT MAX(`id`) as id FROM creacion_torneo WHERE disciplina='Basquetbol'";
 $resultadoBa = mysqli_query($conexion, $basquet);
 $mostrarBa=mysqli_fetch_array($resultadoBa);
-$idBasquet = $mostrarBa['id'];
+$idBasquet2 = $mostrarBa['id'];
 ?>
 
 <!DOCTYPE html>
@@ -331,7 +331,7 @@ $idBasquet = $mostrarBa['id'];
                             </tr>
                             <tbody>
                             <?php
-                            $sql= " Select * FROM `tabla_fut` WHERE`torneo_id`='$idBaas' ORDER BY `tabla_fut`.`gf` DESC";
+                            $sql= " Select * FROM `tabla_fut` WHERE`torneo_id`='$idBaas2' ORDER BY `tabla_fut`.`gf` DESC";
                             $result=mysqli_query($conexion,$sql);
                             $cont =1;
                             while($mostrar=mysqli_fetch_array($result)){
@@ -366,7 +366,7 @@ $idBasquet = $mostrarBa['id'];
                             </tr>
                             <tbody>
                             <?php
-                            $sql= "SELECT `nombre_equipo`, `gf` FROM `tabla_fut` WHERE `torneo_id`='$idBaas' ORDER BY gf DESC";
+                            $sql= "SELECT `nombre_equipo`, `gf` FROM `tabla_fut` WHERE `torneo_id`='$idBaas2' ORDER BY gf DESC";
                             $result=mysqli_query($conexion,$sql);
                             $cont =1;
                             while($mostrar=mysqli_fetch_array($result)){
@@ -395,7 +395,7 @@ $idBasquet = $mostrarBa['id'];
                             </tr>
                             <tbody>
                             <?php
-                            $sql= "SELECT `nombre_equipo`, `gc` FROM `tabla_fut` WHERE`torneo_id`='$idBaas' ORDER BY gc";
+                            $sql= "SELECT `nombre_equipo`, `gc` FROM `tabla_fut` WHERE`torneo_id`='$idBaas2' ORDER BY gc";
                             $result=mysqli_query($conexion,$sql);
                             $cont =1;
                             while($mostrar=mysqli_fetch_array($result)){
@@ -424,7 +424,7 @@ $idBasquet = $mostrarBa['id'];
                             </tr>
                             <tbody>
                             <?php
-                            $sql= "SELECT `nombre`,SUM( `goles`) as goles, `nombre_equipo`FROM `goleadoresfut` WHERE`torneo_id`='$idBaas' GROUP BY `nombre` ORDER BY `goles` DESC ";
+                            $sql= "SELECT `nombre`,SUM( `goles`) as goles, `nombre_equipo`FROM `goleadoresfut` WHERE`torneo_id`='$idBaas2' GROUP BY `nombre` ORDER BY `goles` DESC ";
                             $result=mysqli_query($conexion,$sql);
                             $pop = 0;
 
@@ -465,15 +465,15 @@ $idBasquet = $mostrarBa['id'];
                     <div class="tab-pane fade show active" id="futbol-general-a" role="tabpanel" aria-labelledby="tab-futbol-general-a">
                         <table class="table table-hover">
                             <tr>
-                                <th>local</th>
-                                <th>gol</th>
-                                <th>vs</th>
-                                <th>Goles</th>
-                                <th>visitante</th>
+                                <th><?php echo $idBaas2 ?></th>
+                                <th><?php echo $idAs2?></th>
+                                <th><?php echo $idFif2 ?></th>
+                                <th><?php echo $idVol2 ?></th>
+                                <th><?php echo $idBasquet2?></th>
                             </tr>
                             <tbody>
                             <?php
-                            $sql= " Select nombre_equipo, gf, gc, df,jj, puntos,jg,jp,je FROM `tabla_ascenso` WHERE `torneo_id` = '$idAs' ORDER BY `tabla_ascenso`.`df` DESC";
+                            $sql= " Select nombre_equipo, gf, gc, df,jj, puntos,jg,jp,je FROM `tabla_ascenso` WHERE `torneo_id` = '$idAs2' ORDER BY `tabla_ascenso`.`df` DESC";
                             $result=mysqli_query($conexion,$sql);
                             $cont =1;
                             while($mostrar=mysqli_fetch_array($result)){
@@ -508,7 +508,7 @@ $idBasquet = $mostrarBa['id'];
                             </tr>
                             <tbody>
                             <?php
-                            $sqlB1= "SELECT `nombre_equipo`, `gf` FROM `tabla_ascenso` WHERE `torneo_id` = '$idAs' ORDER BY gf DESC";
+                            $sqlB1= "SELECT `nombre_equipo`, `gf` FROM `tabla_ascenso` WHERE `torneo_id` = '$idAs2' ORDER BY gf DESC";
                             $resultB1=mysqli_query($conexion,$sqlB1);
                             $cont =1;
                             while($mostrarB1=mysqli_fetch_array($resultB1)){
@@ -538,7 +538,7 @@ $idBasquet = $mostrarBa['id'];
                             </tr>
                             <tbody>
                             <?php
-                            $sql= "SELECT `nombre_equipo`, `gc` FROM `tabla_ascenso` WHERE `torneo_id` = '$idAs' ORDER BY gc";
+                            $sql= "SELECT `nombre_equipo`, `gc` FROM `tabla_ascenso` WHERE `torneo_id` = '$idAs2' ORDER BY gc";
                             $result=mysqli_query($conexion,$sql);
                             $cont =1;
                             while($mostrar=mysqli_fetch_array($result)){
@@ -567,7 +567,7 @@ $idBasquet = $mostrarBa['id'];
                             </tr>
                             <tbody>
                             <?php
-                            $sql= "SELECT `nombre`, SUM(`goles`) as goles, `nombre_equipo` FROM `goleadoresascenso` WHERE `torneo_id` = '$idAs' GROUP by nombre ORDER BY `goles` DESC";
+                            $sql= "SELECT `nombre`, SUM(`goles`) as goles, `nombre_equipo` FROM `goleadoresascenso` WHERE `torneo_id` = '$idAs2' GROUP by nombre ORDER BY `goles` DESC";
                             $result=mysqli_query($conexion,$sql);
                             $cont =1;
                             while($mostrar=mysqli_fetch_array($result)){
@@ -612,7 +612,7 @@ $idBasquet = $mostrarBa['id'];
                             </tr>
                             <tbody>
                             <?php
-                            $sql= "Select * FROM `tabla_fifa` WHERE `torneo_id` = '3' ORDER BY `tabla_fifa`.`df` DESC, tabla_fifa.gf DESC";
+                            $sql= "Select * FROM `tabla_fifa` WHERE `torneo_id` = '$idFif2' ORDER BY `tabla_fifa`.`df` DESC, tabla_fifa.gf DESC";
                             $result=mysqli_query($conexion,$sql);
                             $cont =1;
                             while($mostrar=mysqli_fetch_array($result)){
@@ -648,7 +648,7 @@ $idBasquet = $mostrarBa['id'];
                             </tr>
                             <tbody>
                             <?php
-                            $sql= "SELECT `nombre`, SUM(`goles`) as goles, `nombre_equipo` FROM `goleadoresfifa` WHERE `torneo_id` = '$idFif' GROUP by nombre ORDER BY `goles` DESC";                            $result=mysqli_query($conexion,$sql);
+                            $sql= "SELECT `nombre`, SUM(`goles`) as goles, `nombre_equipo` FROM `goleadoresfifa` WHERE `torneo_id` = '$idFif2' GROUP by nombre ORDER BY `goles` DESC";                            $result=mysqli_query($conexion,$sql);
                             $cont =1;
                             while($mostrar=mysqli_fetch_array($result)){
 
@@ -680,7 +680,7 @@ $idBasquet = $mostrarBa['id'];
                     </tr>
                     <tbody>
                     <?php
-                    $sql= " Select * FROM `tabla_vole` WHERE `torneo_id` = '$idVol'";
+                    $sql= " Select * FROM `tabla_vole` WHERE `torneo_id` = '$idVol2'";
                     $cont =1;
                     while($mostrar=mysqli_fetch_array($result)){
 
@@ -716,7 +716,7 @@ $idBasquet = $mostrarBa['id'];
                     </tr>
                     <tbody>
                     <?php
-                    $sql= "Select * FROM `tabla_basquetbol` WHERE `torneo_id` = '$idBasquet'";
+                    $sql= "Select * FROM `tabla_basquetbol` WHERE `torneo_id` = '$idBasquet2'";
                     $cont =1;
                     $result=mysqli_query($conexion,$sql);
                     while($mostrar=mysqli_fetch_array($result)){
@@ -771,7 +771,7 @@ $idBasquet = $mostrarBa['id'];
                             </tr>
                             <tbody>
                             <?php
-                            $sql= "SELECT * FROM `partidos_futbol` WHERE jornada=(SELECT MAX(jornada) FROM partidos_futbol) AND torneo_id='$idBaas'";
+                            $sql= "SELECT * FROM `partidos_futbol` WHERE jornada=(SELECT MAX(jornada) FROM partidos_futbol) AND torneo_id='$idBaas2'";
                             $result=mysqli_query($conexion,$sql);
                             $cont =1;
                             while($mostrar=mysqli_fetch_array($result)){
@@ -808,7 +808,7 @@ $idBasquet = $mostrarBa['id'];
                             </tr>
                             <tbody>
                             <?php
-                            $sql= "SELECT * FROM `partidos_ascenso` WHERE jornada=(SELECT MAX(jornada) FROM partidos_ascenso) and torneo_id='$idAs'";
+                            $sql= "SELECT * FROM `partidos_ascenso` WHERE jornada=(SELECT MAX(jornada) FROM partidos_ascenso) and torneo_id='$idAs2'";
                             $result=mysqli_query($conexion,$sql);
                             $cont =1;
                             while($mostrar=mysqli_fetch_array($result)){
@@ -845,7 +845,7 @@ $idBasquet = $mostrarBa['id'];
                             </tr>
                             <tbody>
                             <?php
-                            $sql= "SELECT * FROM `partidos_fifa` WHERE jornada=(SELECT MAX(jornada) FROM partidos_fifa) and torneo_id='$idFif'";
+                            $sql= "SELECT * FROM `partidos_fifa` WHERE jornada=(SELECT MAX(jornada) FROM partidos_fifa) and torneo_id='$idFif2'";
                             $result=mysqli_query($conexion,$sql);
                             $cont =1;
                             while($mostrar=mysqli_fetch_array($result)){
@@ -882,7 +882,7 @@ $idBasquet = $mostrarBa['id'];
                             </tr>
                             <tbody>
                             <?php
-                            $sql= "SELECT * FROM `partidos_basquetbol` WHERE jornada=(SELECT MAX(jornada) FROM partidos_basquetbol) and creacion_torneo_id='$idBasquet'";
+                            $sql= "SELECT * FROM `partidos_basquetbol` WHERE jornada=(SELECT MAX(jornada) FROM partidos_basquetbol) and torneo_id='$idBasquet2'";
                             $result=mysqli_query($conexion,$sql);
                             $cont =1;
                             while($mostrar=mysqli_fetch_array($result)){
@@ -920,7 +920,7 @@ $idBasquet = $mostrarBa['id'];
                             </tr>
                             <tbody>
                             <?php
-                            $sql= "SELECT * FROM `partidos_vole` WHERE jornada=(SELECT MAX(jornada) FROM partidos_vole) and creacion_torneo_id='$idVol'";
+                            $sql= "SELECT * FROM `partidos_vole` WHERE jornada=(SELECT MAX(jornada) FROM partidos_vole) and torneo_id='$idVol2'";
                             $result=mysqli_query($conexion,$sql);
                             $cont =1;
                             while($mostrar=mysqli_fetch_array($result)){
