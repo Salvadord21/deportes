@@ -161,8 +161,7 @@ include '../php/conexion.php';
                                 </thead>
                                 <tbody>
                                 <?php
-                                $sql= "SELECT retos_subidos.id, CONCAT(usuarios.nombre,' ',usuarios.apellido_paterno,' ', usuarios.apellido_materno) as nombre, creacion_reto.nombre_reto, retos_subidos.url, retos_subidos.estado,retos_subidos.calificacion, retos_subidos.nota FROM retos_subidos INNER JOIN usuarios on usuarios.id= retos_subidos.usuarios_id INNER JOIN creacion_reto on creacion_reto.id= retos_subidos.creacion_reto_id WHERE estado=1 and creacion_reto.`fecha_inicio`<= CURDATE() AND creacion_reto.fecha_fin <= CURDATE()";
-
+                                $sql= "SELECT retos_subidos.id, CONCAT(usuarios.nombre,' ',usuarios.apellido_paterno,' ', usuarios.apellido_materno) as nombre, creacion_reto.nombre_reto, retos_subidos.url, retos_subidos.estado,retos_subidos.calificacion, retos_subidos.nota FROM retos_subidos INNER JOIN usuarios on usuarios.id= retos_subidos.usuarios_id INNER JOIN creacion_reto on creacion_reto.id= retos_subidos.creacion_reto_id WHERE estado=1 and creacion_reto.`fecha_inicio`< CURDATE() AND creacion_reto.fecha_fin < CURDATE();";
                                 $result= mysqli_query($conexion,$sql);
                                 while($mostrar=mysqli_fetch_array($result)){
                                     $areas = $mostrar['calificacion'];

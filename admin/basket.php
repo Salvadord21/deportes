@@ -183,7 +183,7 @@ $idBasquet = $mostrarBa['id'];
                                             <th>vistante</th>
                                         </tr>
                                         <?php
-                                        $sql= "SELECT * FROM `partidos_basquetbol` WHERE jornada='1' and `creacion_torneo_id`='$idBasquet'";
+                                        $sql= "SELECT * FROM `partidos_basquetbol` WHERE jornada='1' and `torneo_id`='$idBasquet'";
                                         $result=mysqli_query($conexion,$sql);
                                         while($mostrar=mysqli_fetch_array($result)){
                                             $locales=$mostrar['idLocal'];
@@ -226,7 +226,7 @@ $idBasquet = $mostrarBa['id'];
                                             </tr>
                                             <!--imprime valores -->
                                             <?php
-                                            $sql= "SELECT * FROM `partidos_basquetbol`   WHERE jornada='$jornadascont2' and `creacion_torneo_id`='$idBasquet'";
+                                            $sql= "SELECT * FROM `partidos_basquetbol`   WHERE jornada='$jornadascont2' and `torneo_id`='$idBasquet'";
                                             $result=mysqli_query($conexion,$sql);
                                             while($mostrar=mysqli_fetch_array($result)){
                                                 $locales=$mostrar['idLocal'];

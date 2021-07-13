@@ -14,7 +14,7 @@ if ($golVisita<$golLocal){//gano local
 }
 
 
-$insert="INSERT INTO `partidos_basquetbol`( `canastasL`, `canastasV`, `jornada`, `fecha`, `idLocal`, `idVisita`, `resultado`, `creacion_torneo_id`) 
+$insert="INSERT INTO `partidos_basquetbol`( `canastasL`, `canastasV`, `jornada`, `fecha`, `idLocal`, `idVisita`, `resultado`, `torneo_id`) 
             VALUES ('$golLocal','$golVisita','$jornada',NOW(),'$idLocal','$idVisita','$resultado', '$idTorneo')";
 $query = mysqli_query($conexion, $insert);
 if ($query){

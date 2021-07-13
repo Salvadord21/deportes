@@ -473,7 +473,7 @@ $idBasquet = $mostrarBa['id'];
                             </tr>
                             <tbody>
                             <?php
-                            $sql= " Select nombre_equipo, gf, gc, df,jj, puntos,jg,jp,je FROM `tabla_ascenso` WHERE 'torneo_id' = '$idAs' ORDER BY `tabla_ascenso`.`df` DESC";
+                            $sql= " Select nombre_equipo, gf, gc, df,jj, puntos,jg,jp,je FROM `tabla_ascenso` WHERE `torneo_id` = '$idAs' ORDER BY `tabla_ascenso`.`df` DESC";
                             $result=mysqli_query($conexion,$sql);
                             $cont =1;
                             while($mostrar=mysqli_fetch_array($result)){
@@ -508,16 +508,16 @@ $idBasquet = $mostrarBa['id'];
                             </tr>
                             <tbody>
                             <?php
-                            $sql= "SELECT `nombre_equipo`, `gf` FROM `tabla_ascenso` WHERE 'torneo_id' = '$idAs' ORDER BY gf DESC";
-                            $result=mysqli_query($conexion,$sql);
+                            $sqlB1= "SELECT `nombre_equipo`, `gf` FROM `tabla_ascenso` WHERE `torneo_id` = '$idAs' ORDER BY gf DESC";
+                            $resultB1=mysqli_query($conexion,$sqlB1);
                             $cont =1;
-                            while($mostrar=mysqli_fetch_array($result)){
+                            while($mostrarB1=mysqli_fetch_array($resultB1)){
 
                                 ?>
                                 <tr>
                                     <td><?php echo $cont ?></td>
-                                    <td><?php echo $mostrar['nombre_equipo'] ?></td>
-                                    <td><?php echo $mostrar['gf'] ?></td>
+                                    <td><?php echo $mostrarB1['nombre_equipo'] ?></td>
+                                    <td><?php echo $mostrarB1['gf'] ?></td>
 
                                 </tr>
 
@@ -538,7 +538,7 @@ $idBasquet = $mostrarBa['id'];
                             </tr>
                             <tbody>
                             <?php
-                            $sql= "SELECT `nombre_equipo`, `gc` FROM `tabla_ascenso` WHERE 'torneo_id' = '$idAs' ORDER BY gc";
+                            $sql= "SELECT `nombre_equipo`, `gc` FROM `tabla_ascenso` WHERE `torneo_id` = '$idAs' ORDER BY gc";
                             $result=mysqli_query($conexion,$sql);
                             $cont =1;
                             while($mostrar=mysqli_fetch_array($result)){
@@ -567,7 +567,7 @@ $idBasquet = $mostrarBa['id'];
                             </tr>
                             <tbody>
                             <?php
-                            $sql= "SELECT `nombre`, SUM(`goles`) as goles, `nombre_equipo` FROM `goleadoresascenso` WHERE 'torneo_id' = '$idAs' GROUP by nombre ORDER BY `goles` DESC";
+                            $sql= "SELECT `nombre`, SUM(`goles`) as goles, `nombre_equipo` FROM `goleadoresascenso` WHERE `torneo_id` = '$idAs' GROUP by nombre ORDER BY `goles` DESC";
                             $result=mysqli_query($conexion,$sql);
                             $cont =1;
                             while($mostrar=mysqli_fetch_array($result)){
@@ -612,7 +612,7 @@ $idBasquet = $mostrarBa['id'];
                             </tr>
                             <tbody>
                             <?php
-                            $sql= "Select * FROM `tabla_fifa` WHERE 'torneo_id' = '$idFif' ORDER BY `tabla_fifa`.`puntos` DESC, tabla_fifa.df, tabla_fifa.gf DESC";
+                            $sql= "Select * FROM `tabla_fifa` WHERE `torneo_id` = '3' ORDER BY `tabla_fifa`.`df` DESC, tabla_fifa.gf DESC";
                             $result=mysqli_query($conexion,$sql);
                             $cont =1;
                             while($mostrar=mysqli_fetch_array($result)){
@@ -648,7 +648,7 @@ $idBasquet = $mostrarBa['id'];
                             </tr>
                             <tbody>
                             <?php
-                            $sql= "SELECT `nombre`, SUM(`goles`) as goles, `nombre_equipo` FROM `goleadoresfifa` WHERE 'torneo_id' = '$idFif' GROUP by nombre ORDER BY `goles` DESC";                            $result=mysqli_query($conexion,$sql);
+                            $sql= "SELECT `nombre`, SUM(`goles`) as goles, `nombre_equipo` FROM `goleadoresfifa` WHERE `torneo_id` = '$idFif' GROUP by nombre ORDER BY `goles` DESC";                            $result=mysqli_query($conexion,$sql);
                             $cont =1;
                             while($mostrar=mysqli_fetch_array($result)){
 
@@ -680,7 +680,7 @@ $idBasquet = $mostrarBa['id'];
                     </tr>
                     <tbody>
                     <?php
-                    $sql= " Select * FROM `tabla_vole` WHERE 'torneo_id' = '$idVol'";
+                    $sql= " Select * FROM `tabla_vole` WHERE `torneo_id` = '$idVol'";
                     $cont =1;
                     while($mostrar=mysqli_fetch_array($result)){
 
@@ -716,8 +716,9 @@ $idBasquet = $mostrarBa['id'];
                     </tr>
                     <tbody>
                     <?php
-                    $sql= "Select * FROM `tabla_basquetbol` WHERE 'torneo_id' = '$idBasquet'";
+                    $sql= "Select * FROM `tabla_basquetbol` WHERE `torneo_id` = '$idBasquet'";
                     $cont =1;
+                    $result=mysqli_query($conexion,$sql);
                     while($mostrar=mysqli_fetch_array($result)){
                         ?>
                         <tr>
@@ -1005,10 +1006,10 @@ $idBasquet = $mostrarBa['id'];
                             <td><?php if($mostrar10['privado']==0){echo "publico";}else{echo "privado";} ?></td>
                             <?php if ($mostrar10['privado'] == 0){ ?>
                                 <td><!--BOTON PUBLICO-->
-                                    <button type="button" class="btn btn-outline-primary" onclick="ingresarEquipoPublico(<?php echo $mostrar['id'] ?>,<?php echo $mostrar['id_torneo'] ?>,0)">Ingresar</button>
+                                    <button type="button" class="btn btn-outline-primary" onclick="ingresarEquipoPublico(<?php echo $mostrar10['id'] ?>,<?php echo $mostrar10['id_torneo'] ?>,0)">Ingresar</button>
 
                                 </td>
-                            <?php }else{ ?><td><button type="button" class="btn btn-outline-primary" data-toggle="modal" name="unirse" value="<?php echo $mostrar['id'] ?>" data-target="#AgregarContraEquipo">Ingresar</button></td>
+                            <?php }else{ ?><td><button type="button" class="btn btn-outline-primary" data-toggle="modal" name="unirse" value="<?php echo $mostrar10['id'] ?>" data-target="#AgregarContraEquipo">Ingresar</button></td>
                             <?php } ?>
 
                         </tr>

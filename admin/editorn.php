@@ -54,8 +54,8 @@ if( !empty($_POST['editar']) ){
                             <label class="control-label col-sm-2" for="email">disciplina:</label>
                             <div class="col-sm-10">
                                 <select name="diciplinas[]" class="form-control" id="disciplinas">
-
                                     <option value="Futbol Bardas" <?php echo $areas == 'Futbol Bardas' ? 'selected="selected"'  : '' ?>>Futbol bardas</option>
+                                    <option value="ascenso" <?php echo $areas == 'ascenso' ? 'selected="selected"'  : '' ?>>Fútbol bardas ascenso</option>
                                     <option value="FIFA" <?php echo $areas == 'FIFA' ? 'selected="selected"'  : '' ?>>FIFA</option>
                                     <option value="Voleibol" <?php echo $areas == 'Voleibol' ? 'selected="selected"'  : '' ?>>Voleibol</option>
                                     <option value="Basquetbol" <?php echo $areas == 'Basquetbol' ? 'selected="selected"'  : '' ?>>Basquetbol</option>
