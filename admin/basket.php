@@ -15,85 +15,147 @@ $idBasquet = $mostrarBa['id'];
     <!-- Content Row -->
     <div class="row">
         <!-- Calendario de partidos -->
-        <div class="col-xl-12 col-lg-7">
+        <div class="col-xl-12 col-lg-7" id="result2">
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Agregar Resultado</h6>
-
                 </div>
                 <div class="card-body">
-                    <form id="basquetbol" method="post">
-                        <table class="table table-hover">
-                            <tr>
-                                <th>Local</th>
-                                <th></th>
-                                <th>vs</th>
-                                <th></th>
-                                <th>Vistante</th>
-                                <th>Jornada</th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <select name="local"  id="local">
-                                        <option value="value1">Local</option>
-                                        <?php
-                                        require 'imc/EquiposBas.php';
-                                        ?>
-                                    </select>
-                                </td>
-                                <td><input type="number" name="golLocal" id="golLocal"></td>
-                                <td>vs</td>
-                                <td><input type="number" name="golVisita" id="golVisita"></td>
-                                <td><select name="visita" id="visita">
-                                        <option value="value1">Visitante</option>
-                                        <?php
-                                        require 'imc/EquiposBas.php';
-                                        ?>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select name="jornada" id="jornada">
-                                        <?php
-                                        $listado = "SELECT `jornadas` FROM `creacion_torneo` WHERE `id`=( SELECT id from creacion_torneo where creacion_torneo.fecha_creacion=( SELECT MAX(`fecha_creacion`) from creacion_torneo WHERE `disciplina`='basquetbol'))";
+                    <?php
+                    $sql= "SELECT * FROM `creacion_torneo` WHERE disciplina='Basquetbol'AND fecha_creacion = ( SELECT MAX(fecha_creacion) FROM `creacion_torneo` WHERE disciplina = 'Basquetbol')";
+                    $result=mysqli_query($conexion,$sql);
+                    while($mostrar=mysqli_fetch_array($result)) {
+                        $id_torn=$mostrar['id'];
+                        $jornadas = $mostrar['jornadas'];
+                        $xsem=0;
+                        ?>
+                        <!-- Resultado de partidos  -->
+                        <div class="card-body">
 
-                                        $query = mysqli_query($conexion, $listado);
-
-                                        while ($FIFAequi = mysqli_fetch_array($query)){
-
-                                            for ($x=1;$x<$FIFAequi['jornadas']+1;$x++){
-                                                echo '<option value ="'.$x.'">'.$x.'</option>';
-                                            }
-
-                                        }
-                                        ?>
-                                    </select>
-                                    <?php
-                                    $sql= "SELECT `id` FROM `creacion_torneo` WHERE `id`=( SELECT id from creacion_torneo where creacion_torneo.fecha_creacion=( SELECT MAX(`fecha_creacion`) from creacion_torneo WHERE `disciplina`='basquetbol'))";
-                                    $result=mysqli_query($conexion,$sql);
-                                    $idTorneo=mysqli_fetch_array($result);
+                            <!-- Muestran total de jornadas  -->
+                            <ul class="nav nav-tabs" id="tab-futbol" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="tab-futbol-general" data-toggle="tab" href="#partidos" role="tab" aria-controls="futbol-general" aria-selected="true">Semana 1</a>
+                                </li>
+                                <!-- imprime jornadas -->
+                                <?php
+                                for ($jornadascont=2; $jornadascont<$jornadas+1; $jornadascont++){
                                     ?>
-                                        <input type="hidden"value="<?php echo $idTorneo['id'] ?>" id="torneo">
-                                </td>
-                                <td><button type="button" onclick="guardar()" > Guardar Resultado</button> </td>
-                            </tr>
-                        </table>
-                    </form>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="tab-futbol-jugadores" data-toggle="tab" href="#partidos<?php echo $jornadascont; ?>" role="tab" aria-controls="futbol-jugadores" aria-selected="false">Semana <?php echo $jornadascont; ?></a>
+                                    </li>
+                                    <?php
+                                }
+                                ?>
+                            </ul>
+
+
+                            <!-- Muestran los resultados de partidos en jornada 1  va php-->
+                            <div class="tab-content" id="tab-futbol-contenido">
+                                <div class="tab-pane fade show active" id="partidos" role="tabpanel" aria-labelledby="tab-futbol-general">
+                                    <table class="table table-hover">
+                                        <tr>
+                                            <th>Local</th>
+                                            <th></th>
+                                            <th>vs</th>
+                                            <th></th>
+                                            <th>vistante</th>
+                                        </tr>
+                                        <?php
+                                        $sql= "SELECT * FROM `partidos_basquetbol` WHERE jornada='1' and `torneo_id`='$idBasquet' and`resultado`is null";
+                                        $result=mysqli_query($conexion,$sql);
+                                        $cont=1;
+                                        while($mostrar=mysqli_fetch_array($result)){
+                                            $locales=$mostrar['idLocal'];
+                                            $visitantes=$mostrar['idVisita'];
+                                            $equipoL="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$locales'";
+                                            $resultaL=mysqli_query($conexion,$equipoL);
+                                            $equipoV="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$visitantes'";
+                                            $resultaV=mysqli_query($conexion,$equipoV);
+                                            $localL=mysqli_fetch_array($resultaL);
+                                            $visitaV=mysqli_fetch_array($resultaV);
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $localL['nombre_equipo']?> <input type="hidden" value="<?php echo $mostrar['idLocal']?>" id="idL1-<?php echo $cont?>"> </td>
+                                                <td><input type="text" value="" id="golL1-<?php echo $cont?>"></td>
+                                                <td>vs</td>
+                                                <td><input type="text" value="" id="golV1-<?php echo $cont?>"></td>
+                                                <td><?php echo $visitaV['nombre_equipo'] ?> <input type="hidden" value="<?php echo $mostrar['idVisita']?>"id="idV1-<?php echo $cont?>">
+                                                    <input type="hidden" value="<?php echo $mostrar['torneo_id']?>" id="torneo1-<?php echo $cont?>">
+                                                </td>
+                                                <td><button onclick="guardar(1,<?php echo $cont?>)">Guardar</button>
+                                                </td>
+                                            </tr>
+                                            <?php $cont++; } ?>
+                                    </table>
+
+                                </div>
+
+
+                                <!-- muestra cuando hay mas de una jornada-->
+                                <?php
+                                for ($jornadascont2=2; $jornadascont2<$jornadas+1; $jornadascont2++){
+                                    ?>
+                                    <div class="tab-pane fade" id="partidos<?php echo $jornadascont2; ?>" role="tabpanel" aria-labelledby="tab-futbol-jugadores">
+                                        <table class="table table-hover">
+                                            <tr>
+                                                <th>Local</th>
+                                                <th></th>
+                                                <th>vs</th>
+                                                <th></th>
+                                                <th>vistante</th>
+                                            </tr>
+                                            <!--imprime valores  aqui va php -->
+                                            <?php
+                                            $sql= "SELECT * FROM `partidos_basquetbol` WHERE jornada='$jornadascont2' and `torneo_id`='$idBasquet' and`resultado`is null";
+                                            $result=mysqli_query($conexion,$sql);
+                                            $cont2=0;
+                                            while($mostrar=mysqli_fetch_array($result)){
+                                                $locales=$mostrar['idLocal'];
+                                                $visitantes=$mostrar['idVisita'];
+                                                $equipoL="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$locales'";
+                                                $resultaL=mysqli_query($conexion,$equipoL);
+                                                $equipoV="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$visitantes'";
+                                                $resultaV=mysqli_query($conexion,$equipoV);
+                                                $localL=mysqli_fetch_array($resultaL);
+                                                $visitaV=mysqli_fetch_array($resultaV);
+                                                $cont2=1;
+                                                ?>
+                                                <tr>
+                                                    <td><?php echo $localL['nombre_equipo']?> <input type="hidden" value="<?php echo $mostrar['idLocal']?>" id="idL<?php echo $jornadascont2?>-<?php echo $cont?>"> </td>
+                                                    <td><input type="text" value="" id="golL<?php echo $jornadascont2?>-<?php echo $cont?>"></td>
+                                                    <td>vs</td>
+                                                    <td><input type="text" value="" id="golV<?php echo $jornadascont2?>-<?php echo $cont?>"></td>
+                                                    <td><?php echo $visitaV['nombre_equipo'] ?> <input type="hidden" value="<?php echo $mostrar['idVisita']?>"id="idV<?php echo $jornadascont2?>-<?php echo $cont?>">
+                                                        <input type="hidden" value="<?php echo $mostrar['torneo_id']?>" id="torneo<?php echo $jornadascont2?>-<?php echo $cont?>">
+                                                    </td>
+                                                    <td><button onclick="guardar(<?php echo $jornadascont2?>,<?php echo $cont2?>)">Guardar</button></td>
+                                                </tr>
+                                                <?php $cont2++; } ?>
+                                        </table>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
+                            </div>
+                        </div>
+                    <?php } ?>
+
                 </div>
 
                 <script>
-                    function guardar(){
-                        var equipov=$('#visita').val();
-                        var equipol=$('#local').val();
-                        var goll=$('#golLocal').val();
-                        var golv=$('#golVisita').val();
-                        var jornada=$('#jornada').val();
-                        var torneo=$('#torneo').val();
+                    function guardar(x,y){
+                        var equipoV=$('#idV'+x+'-'+y).val();
+                        var equipoL=$('#idL'+x+'-'+y).val();
+                        var golL=$('#golL'+x+'-'+y).val();
+                        var golV=$('#golV'+x+'-'+y).val();
+                        var jornada=x;
+                        var torneo=$('#torneo'+x+'-'+y).val();
                         $.ajax({
                             type: 'POST',
                             url: 'imc/partidoBas.php',
-                            data: {golL:goll,golV:golv,local:equipol,visita:equipov,jornada:jornada,torneo:torneo},
+                            data: {golL:golL,golV:golV,local:equipoL,visita:equipoV,jornada:jornada, torneo:torneo},
                             cache: false,
                             dataType: 'json',
                             success: function (data) {
@@ -120,6 +182,7 @@ $idBasquet = $mostrarBa['id'];
                     }
                     function actualizar(){
                         $( "#result" ).load( "basket.php #result" );
+                        $( "#result2" ).load( "basket.php #result2" );
                     }
                 </script>
 
@@ -183,7 +246,7 @@ $idBasquet = $mostrarBa['id'];
                                             <th>vistante</th>
                                         </tr>
                                         <?php
-                                        $sql= "SELECT * FROM `partidos_basquetbol` WHERE jornada='1' and `torneo_id`='$idBasquet'";
+                                        $sql= "SELECT * FROM `partidos_basquetbol` WHERE jornada='1' and `torneo_id`='$idBasquet' and`resultado`is not null";
                                         $result=mysqli_query($conexion,$sql);
                                         while($mostrar=mysqli_fetch_array($result)){
                                             $locales=$mostrar['idLocal'];
@@ -226,7 +289,7 @@ $idBasquet = $mostrarBa['id'];
                                             </tr>
                                             <!--imprime valores -->
                                             <?php
-                                            $sql= "SELECT * FROM `partidos_basquetbol`   WHERE jornada='$jornadascont2' and `torneo_id`='$idBasquet'";
+                                            $sql= "SELECT * FROM `partidos_basquetbol`   WHERE jornada='$jornadascont2' and `torneo_id`='$idBasquet' and`resultado`is not null";
                                             $result=mysqli_query($conexion,$sql);
                                             while($mostrar=mysqli_fetch_array($result)){
                                                 $locales=$mostrar['idLocal'];

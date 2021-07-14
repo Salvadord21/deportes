@@ -1,5 +1,6 @@
 <?php
 include '../../php/conexion.php';
+
 $jornada=$_POST['jornada'];
 $idLocal= $_POST['local'];
 $idVisita=$_POST['visita'];
@@ -14,8 +15,7 @@ if ($golVisita<$golLocal){//gano local
 }
 
 
-$insert="INSERT INTO `partidos_basquetbol`( `canastasL`, `canastasV`, `jornada`, `fecha`, `idLocal`, `idVisita`, `resultado`, `torneo_id`) 
-            VALUES ('$golLocal','$golVisita','$jornada',NOW(),'$idLocal','$idVisita','$resultado', '$idTorneo')";
+$insert="UPDATE `partidos_basquetbol` SET `canastasL`='$golLocal',`canastasV`='$golVisita',`fecha`=NOW(),`resultado`='$resultado' WHERE `idLocal`='$idLocal' and `idVisita`='$idVisita' and `jornada`='$jornada'";
 $query = mysqli_query($conexion, $insert);
 if ($query){
     //buscar el ultimo id  SELECT MAX(id) as id FROM `partidos_fifa`
@@ -32,7 +32,13 @@ if ($query){
     $queryv=mysqli_query($conexion, $golesV);
     if ($queryl and $queryv){
         $data['estatus']="ok";
+    }else{
+        $data['estatus']="error2";
+
     }
+
+}else{
+    $data['estatus']="error";
 
 }
 echo json_encode($data);
