@@ -52,6 +52,22 @@ $matri = $_SESSION['nombre'];
                 <img src="iconos/crearreto.png" style="width: 16px; height: 16px">
                 <span>Crear retos</span></a>
         </li>
+        <li class="nav-item">
+            <a class="btn bg-admin nav-link" style="box-shadow: none" href="crear_torneo.php">
+                <img src="iconos/CrearTorneo.png" style="width: 16px; height: 16px">
+                <span>Torneos</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="btn bg-admin nav-link" style="box-shadow: none" href="otorneos.php">
+                <img src="iconos/puzzle.png" style="width: 16px; height: 16px">
+                <span>Otros Torneos</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="btn bg-admin nav-link" style="box-shadow: none" href="partidos.php">
+                <img src="iconos/puzzle.png" style="width: 16px; height: 16px">
+                <span>Partidos</span></a>
+        </li>
         <li class="nav-item active">
             <a class="btn bg-admin nav-link" style="box-shadow: none" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
                aria-controls="collapseTwo">
@@ -72,17 +88,7 @@ $matri = $_SESSION['nombre'];
         <!-- Nav Item - Pages Collapse Menu -->
         <!-- Nav Item - Charts -->
 
-        <li class="nav-item">
-            <a class="btn bg-admin nav-link" style="box-shadow: none" href="crear_torneo.php">
-                <img src="iconos/CrearTorneo.png" style="width: 16px; height: 16px">
-                <span>Torneos</span></a>
-        </li>
 
-        <li class="nav-item">
-            <a class="btn bg-admin nav-link" style="box-shadow: none" href="otorneos.php">
-                <img src="iconos/puzzle.png" style="width: 16px; height: 16px">
-                <span>Otros Torneos</span></a>
-        </li>
         <li class="nav-item">
             <a class="btn bg-admin nav-link" style="box-shadow: none" href="equipos.php">
                 <img src="iconos/equipos.png" style="width: 16px; height: 16px">
@@ -101,12 +107,13 @@ $matri = $_SESSION['nombre'];
                 <img src="iconos/Retos.png" style="width: 16px; height: 16px">
                 <span>Retos</span></a>
         </li>
-
+        <!--
         <li class="nav-item">
             <a class="btn bg-admin nav-link" style="box-shadow: none" href="gym.php">
                 <img src="iconos/gym.png" style="width: 16px; height: 13px">
                 <span>Área de Pesas</span></a>
         </li>
+        -->
     </ul>
 
 
