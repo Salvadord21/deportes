@@ -15,8 +15,7 @@ if ($golVisita<$golLocal){//gano local
 }else{$resultado=2;$puntosL=0;$puntosV=3;$jgl=0;$jel=0;$jpl=1;$jgv=1;$jev=0;$jpv=0;
 }///Gano visita
 
-$insert="INSERT INTO `partidos_fifa`(  `gol_local`, `gol_visita`, `resultado`, `jornada`, `fecha`, `torneo_id`, `id_local`, `id_visita`)
- VALUES ('$golLocal','$golVisita','$resultado','$jornada',NOW(),'$idTorneo','$idLocal','$idVisita')";
+$insert="UPDATE `partidos_fifa` SET `gol_local`='$golLocal',`gol_visita`='$golVisita',`resultado`='$resultado',`fecha`=NOW() WHERE `id_local`='$idLocal' and `id_visita`='$idVisita' and `jornada`='$jornada'";
 $query = mysqli_query($conexion, $insert);
 if ($query){
 
