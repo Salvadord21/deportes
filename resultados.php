@@ -151,7 +151,10 @@ $idBasquet2 = $mostrarBa['id'];
                                             <td>vs</td>
                                             <td><?php echo $mostrar['gol_visita'] ?></td>
                                             <td><?php echo $visitaV['nombre_equipo'] ?></td>
-
+                                            <td><?php echo $mostrar['fecha'] ?></td>
+                                            <td><?php if ($mostrar['resultado']== NULL){
+                                                    echo "Por Jugar";
+                                                }else{echo "Jugado";}?></td>
                                         </tr>
                                     <?php  } ?>
                                 </table>
@@ -192,7 +195,10 @@ $idBasquet2 = $mostrarBa['id'];
                                                 <td>vs</td>
                                                 <td><?php echo $mostrar['gol_visita'] ?></td>
                                                 <td><?php echo $visitaV['nombre_equipo'] ?></td>
-
+                                                <td><?php echo $mostrar['fecha'] ?></td>
+                                                <td><?php if ($mostrar['resultado']== NULL){
+                                                        echo "Por Jugar";
+                                                    }else{echo "Jugado";}?></td>
                                             </tr>
                                         <?php  } ?>
                                     </table>
@@ -253,7 +259,7 @@ $idBasquet2 = $mostrarBa['id'];
                                             <th>vistante</th>
                                         </tr>
                                         <?php
-                                        $sql= "SELECT * FROM `partidos_ascenso` WHERE jornada='1' and `torneo_id`='$idAs2' and `resultado` is not null";
+                                        $sql= "SELECT * FROM `partidos_ascenso` WHERE jornada='1' and `torneo_id`='$idAs2'";
                                         $result=mysqli_query($conexion,$sql);
                                         while($mostrar=mysqli_fetch_array($result)){
                                             $locales=$mostrar['id_local'];
@@ -271,7 +277,10 @@ $idBasquet2 = $mostrarBa['id'];
                                                 <td>vs</td>
                                                 <td><?php echo $mostrar['gol_visita'] ?></td>
                                                 <td><?php echo $visitaV['nombre_equipo'] ?></td>
-
+                                                <td><?php echo $mostrar['fecha'] ?></td>
+                                                <td><?php if ($mostrar['resultado']== NULL){
+                                                        echo "Por Jugar";
+                                                    }else{echo "Jugado";}?></td>
                                             </tr>
                                         <?php  } ?>
                                     </table>
@@ -313,7 +322,10 @@ $idBasquet2 = $mostrarBa['id'];
                                                     <td>vs</td>
                                                     <td><?php echo $mostrar['gol_visita'] ?></td>
                                                     <td><?php echo $visitaV['nombre_equipo'] ?></td>
-
+                                                    <td><?php echo $mostrar['fecha'] ?></td>
+                                                    <td><?php if ($mostrar['resultado']== NULL){
+                                                            echo "Por Jugar";
+                                                        }else{echo "Jugado";}?></td>
                                                 </tr>
                                             <?php  } ?>
                                         </table>
@@ -374,7 +386,7 @@ $idBasquet2 = $mostrarBa['id'];
                                         <th>vistante</th>
                                     </tr>
                                     <?php
-                                    $sql= "SELECT * FROM `partidos_fifa`  WHERE jornada='1' and `torneo_id`='$idFif2' and`resultado`is not null ";
+                                    $sql= "SELECT * FROM `partidos_fifa`  WHERE jornada='1' and `torneo_id`='$idFif2'  ";
                                     $result=mysqli_query($conexion,$sql);
                                     while($mostrar=mysqli_fetch_array($result)){
                                         $locales=$mostrar['id_local'];
@@ -392,7 +404,10 @@ $idBasquet2 = $mostrarBa['id'];
                                             <td>vs</td>
                                             <td><?php echo $mostrar['gol_visita'] ?></td>
                                             <td><?php echo $visitaV['nombre_equipo'] ?></td>
-
+                                            <td><?php echo $mostrar['fecha'] ?></td>
+                                            <td><?php if ($mostrar['resultado']== NULL){
+                                                    echo "Por Jugar";
+                                                }else{echo "Jugado";}?></td>
                                         </tr>
                                     <?php  } ?>
 
@@ -415,7 +430,7 @@ $idBasquet2 = $mostrarBa['id'];
                                         </tr>
                                         <!--imprime valores -->
                                         <?php
-                                        $sql= "SELECT * FROM `partidos_fifa` WHERE jornada='$jornadascont2' and `torneo_id`='$idFif2' and`resultado`is not null ";
+                                        $sql= "SELECT * FROM `partidos_fifa` WHERE jornada='$jornadascont2' and `torneo_id`='$idFif2'";
                                         $result=mysqli_query($conexion,$sql);
                                         while($mostrar=mysqli_fetch_array($result)){
                                             $locales=$mostrar['id_local'];
@@ -433,7 +448,10 @@ $idBasquet2 = $mostrarBa['id'];
                                                 <td>vs</td>
                                                 <td><?php echo $mostrar['gol_visita'] ?></td>
                                                 <td><?php echo $visitaV['nombre_equipo'] ?></td>
-
+                                                <td><?php echo $mostrar['fecha'] ?></td>
+                                                <td><?php if ($mostrar['resultado']== NULL){
+                                                        echo "Por Jugar";
+                                                    }else{echo "Jugado";}?></td>
                                             </tr>
                                         <?php  } ?>
                                     </table>
@@ -491,7 +509,7 @@ $idBasquet2 = $mostrarBa['id'];
                                             <th>vistante</th>
                                         </tr>
                                         <?php
-                                        $sql= "SELECT * FROM `partidos_vole`   WHERE jornada='1' and torneo_id= '$idVol2' and `resultado` is not null ";
+                                        $sql= "SELECT * FROM `partidos_vole`   WHERE jornada='1' and torneo_id= '$idVol2' ";
                                         $result=mysqli_query($conexion,$sql);
                                         while($mostrar=mysqli_fetch_array($result)){
                                             $locales=$mostrar['id_local'];
@@ -513,6 +531,10 @@ $idBasquet2 = $mostrarBa['id'];
                                                 <td><?php echo $mostrar['set2V'] ?></td>
                                                 <td><?php echo $mostrar['set1V'] ?></td>
                                                 <td><?php echo $visitaV['nombre_equipo'] ?></td>
+                                                <td><?php echo $mostrar['fecha'] ?></td>
+                                                <td><?php if ($mostrar['resultado']== NULL){
+                                                        echo "Por Jugar";
+                                                    }else{echo "Jugado";}?></td>
                                             </tr>
                                         <?php  } ?>
                                     </table>
@@ -540,7 +562,7 @@ $idBasquet2 = $mostrarBa['id'];
                                             </tr>
                                             <!--imprime valores -->
                                             <?php
-                                            $sql3= "SELECT * FROM `partidos_vole` WHERE jornada='$jornadascont2' AND torneo_id= '$idVol2' and `resultado` is not null";
+                                            $sql3= "SELECT * FROM `partidos_vole` WHERE jornada='$jornadascont2' AND torneo_id= '$idVol2'";
                                             $result3=mysqli_query($conexion,$sql3);
                                             while($mostrar3=mysqli_fetch_array($result3)){
                                                 $locales=$mostrar3['id_local'];
@@ -562,7 +584,10 @@ $idBasquet2 = $mostrarBa['id'];
                                                     <td><?php echo $mostrar3['set2V'] ?></td>
                                                     <td><?php echo $mostrar3['set1V'] ?></td>
                                                     <td><?php echo $visitaV['nombre_equipo'] ?></td>
-
+                                                    <td><?php echo $mostrar['fecha'] ?></td>
+                                                    <td><?php if ($mostrar['resultado']== NULL){
+                                                            echo "Por Jugar";
+                                                        }else{echo "Jugado";}?></td>
                                                 </tr>
                                             <?php  } ?>
                                         </table>
@@ -626,7 +651,7 @@ $idBasquet2 = $mostrarBa['id'];
                                             <th>vistante</th>
                                         </tr>
                                         <?php
-                                        $sql= "SELECT * FROM `partidos_basquetbol` WHERE jornada='1' and `torneo_id`='$idBasquet2' and`resultado`is not null";
+                                        $sql= "SELECT * FROM `partidos_basquetbol` WHERE jornada='1' and `torneo_id`='$idBasquet2' ";
                                         $result=mysqli_query($conexion,$sql);
                                         while($mostrar=mysqli_fetch_array($result)){
                                             $locales=$mostrar['idLocal'];
@@ -645,7 +670,10 @@ $idBasquet2 = $mostrarBa['id'];
                                                 <td>vs</td>
                                                 <td><?php echo $mostrar['canastasV'] ?></td>
                                                 <td><?php echo $visitaV['nombre_equipo'] ?></td>
-
+                                                <td><?php echo $mostrar['fecha'] ?></td>
+                                                <td><?php if ($mostrar['resultado']== NULL){
+                                                        echo "Por Jugar";
+                                                    }else{echo "Jugado";}?></td>
                                             </tr>
                                         <?php  } ?>
                                     </table>
@@ -669,7 +697,7 @@ $idBasquet2 = $mostrarBa['id'];
                                             </tr>
                                             <!--imprime valores -->
                                             <?php
-                                            $sql= "SELECT * FROM `partidos_basquetbol`   WHERE jornada='$jornadascont2' and `torneo_id`='$idBasquet2' and`resultado`is not null";
+                                            $sql= "SELECT * FROM `partidos_basquetbol`   WHERE jornada='$jornadascont2' and `torneo_id`='$idBasquet2' ";
                                             $result=mysqli_query($conexion,$sql);
                                             while($mostrar=mysqli_fetch_array($result)){
                                                 $locales=$mostrar['idLocal'];
@@ -688,7 +716,10 @@ $idBasquet2 = $mostrarBa['id'];
                                                     <td>vs</td>
                                                     <td><?php echo $mostrar['canastasV'] ?></td>
                                                     <td><?php echo $visitaV['nombre_equipo'] ?></td>
-
+v                                                   <td><?php echo $mostrar['fecha'] ?></td>
+                                                    <td><?php if ($mostrar['resultado']== NULL){
+                                                        echo "Por Jugar";
+                                                        }else{echo "Jugado";}?></td>
                                                 </tr>
                                             <?php  } ?>
                                         </table>
