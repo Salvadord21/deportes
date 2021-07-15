@@ -12,7 +12,8 @@ echo "
 
                 <li class=\"nav-item\" role=\"none\"><a class=\"nav-link\" role=\"menuitem\" href=\"torneo.php\">Torneos</a> </li>
 
-                <li class=\"nav-item\" role=\"none\"><a class=\"nav-link\" role=\"menuitem\" href=\"gym.php\">Área de pesas</a> </li>
+                <li class=\"nav-item\" role=\"none\"><a class=\"nav-link\" role=\"menuitem\" href=\"resultados.php\">Resultados</a> </li>
+                <!--<li class=\"nav-item\" role=\"none\"><a class=\"nav-link\" role=\"menuitem\" href=\"gym.php\">Área de pesas</a> </li>-->
 
                 <li class=\"nav-item\" role=\"none\"><a class=\"nav-link\" role=\"menuitem\" href=\"retos.php\">Retos</a> </li>
 
