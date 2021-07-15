@@ -15,7 +15,7 @@ if ($golVisita<$golLocal){//gano local
 }
 
 
-$insert="UPDATE `partidos_basquetbol` SET `canastasL`='$golLocal',`canastasV`='$golVisita',`fecha`=NOW(),`resultado`='$resultado' WHERE `idLocal`='$idLocal' and `idVisita`='$idVisita' and `jornada`='$jornada'";
+$insert="UPDATE `partidos_basquetbol` SET `canastasL`='$golLocal',`canastasV`='$golVisita',`resultado`='$resultado' WHERE `idLocal`='$idLocal' and `idVisita`='$idVisita' and `jornada`='$jornada'";
 $query = mysqli_query($conexion, $insert);
 if ($query){
     //buscar el ultimo id  SELECT MAX(id) as id FROM `partidos_fifa`

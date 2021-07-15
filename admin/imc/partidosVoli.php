@@ -23,7 +23,7 @@ if ($set3l>$set3v){ $ganadol++;$perdidov++; }else{$ganadov++;$perdidol++; }
 if ($ganadol>$ganadov){$resultado=1;}else{$resultado=2;}
 
 
-$insert="UPDATE `partidos_vole` SET `set1L`='$set1l',`set2L`='$set2l',`set3L`='$set3l',`set1V`='$set2l',`set2V`='$set2v',`set3V`='$set3v',`fecha`=NOW() ,`resultado`='$resultado' WHERE `id_local`='$idLocal' and `id_visita`='$idVisita' and `jornada`='$jornada'";
+$insert="UPDATE `partidos_vole` SET `set1L`='$set1l',`set2L`='$set2l',`set3L`='$set3l',`set1V`='$set2l',`set2V`='$set2v',`set3V`='$set3v' ,`resultado`='$resultado' WHERE `id_local`='$idLocal' and `id_visita`='$idVisita' and `jornada`='$jornada'";
 $query = mysqli_query($conexion, $insert);
 if ($query){
         $pfl=$set1l+$set2l+$set3l;

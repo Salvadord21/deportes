@@ -6,11 +6,7 @@ include '../php/conexion.php';
 
 
 ?>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<script
-        src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
-        integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
-        crossorigin="anonymous"></script>
+
 
 <!-- inicio pagina -->
 <div class="container-fluid">
@@ -44,6 +40,7 @@ include '../php/conexion.php';
                                 <th>vs</th>
                                 <th>Vistante</th>
                                 <th>Jornada</th>
+                                <th>fecha</th>
                                 <th></th>
                             </tr>
                             <tr>
@@ -82,6 +79,7 @@ include '../php/conexion.php';
                                     </select>
 
                                 </td>
+                                <td><input type="datetime-local" id="fecha"></td>
                                 <td>
                                     <?php
                                     $sql= "SELECT * FROM `creacion_torneo` WHERE disciplina='futbol bardas'AND fecha_creacion = ( SELECT MAX(fecha_creacion) FROM `creacion_torneo` WHERE disciplina = 'futbol bardas')";
@@ -101,6 +99,7 @@ include '../php/conexion.php';
                                 <th>vs</th>
                                 <th>Vistante</th>
                                 <th>Jornada</th>
+                                <th>fecha</th>
                                 <th></th>
                             </tr>
                             <tr>
@@ -142,9 +141,9 @@ include '../php/conexion.php';
                                     $result=mysqli_query($conexion,$sql);
                                     $idTorneo=mysqli_fetch_array($result);
                                     ?>
-                                    <input type="text"value="<?php echo $idTorneo['id'] ?>" id="torneoA">
+                                    <input type="hidden"value="<?php echo $idTorneo['id'] ?>" id="torneoA">
                                 </td>
-
+                                <td><input type="datetime-local" id="fecha"></td>
                                 <td><button type="button" onclick="guardarAscenso()" > Guardar Resultado</button> </td>
                             </tr>
                         </table>
@@ -156,6 +155,7 @@ include '../php/conexion.php';
                                 <th>vs</th>
                                 <th>Vistante</th>
                                 <th>Jornada</th>
+                                <th>fecha</th>
                                 <th></th>
                             </tr>
                             <tr>
@@ -199,6 +199,7 @@ include '../php/conexion.php';
                                     ?>
                                     <input type="hidden"value="<?php echo $idTorneo['id'] ?>" id="torneoF">
                                 </td>
+                                <td><input type="datetime-local" id="fecha"></td>
                                 <td><button type="button" onclick="guardarFIFA()" > Guardar Resultado</button> </td>
                             </tr>
                         </table>
@@ -210,6 +211,7 @@ include '../php/conexion.php';
                                 <th>vs</th>
                                 <th>Vistante</th>
                                 <th>Jornada</th>
+                                <th>fecha</th>
                                 <th></th>
                             </tr>
                             <tr>
@@ -253,6 +255,8 @@ include '../php/conexion.php';
                                     ?>
                                     <input type="hidden"value="<?php echo $idTorneo['id'] ?>" id="torneoV">
                                 </td>
+                                <td><input type="datetime-local" id="fecha"></td>
+
                                 <td><button type="button" onclick="guardarVole()" > Guardar Resultado</button> </td>
                             </tr>
                         </table>
@@ -264,6 +268,7 @@ include '../php/conexion.php';
                                 <th>vs</th>
                                 <th>Vistante</th>
                                 <th>Jornada</th>
+                                <th>fecha</th>
                                 <th></th>
                             </tr>
                             <tr>
@@ -307,6 +312,7 @@ include '../php/conexion.php';
                                     ?>
                                     <input type="hidden"value="<?php echo $idTorneo['id'] ?>" id="torneoBa">
                                 </td>
+                                <td><input type="datetime-local" id="fecha"></td>
                                 <td><button type="button" onclick="guardarBas()" > Guardar Resultado</button> </td>
                             </tr>
                         </table>
@@ -355,11 +361,12 @@ include '../php/conexion.php';
                         var equipol=$('#localB').val();
                         var jornada=$('#jornadaB').val();
                         var torneo=$('#torneoB').val();
+                        var fecha=$('#fecha').val();
                         var tipo='bardas';
                         $.ajax({
                             type: 'POST',
                             url: 'imc/generarPartido.php',
-                            data: {local:equipol,visita:equipov,jornada:jornada, torneo:torneo,tipo:tipo},
+                            data: {local:equipol,visita:equipov,jornada:jornada, torneo:torneo,tipo:tipo, fecha:fecha},
                             cache: false,
                             dataType: 'json',
                             success: function (data) {
@@ -379,11 +386,12 @@ include '../php/conexion.php';
                         var equipol=$('#localA').val();
                         var jornada=$('#jornadaA').val();
                         var torneo=$('#torneoA').val();
+                        var fecha=$('#fecha').val();
                         var tipo='ascenso';
                         $.ajax({
                             type: 'POST',
                             url: 'imc/generarPartido.php',
-                            data: {local:equipol,visita:equipov,jornada:jornada, torneo:torneo,tipo:tipo},
+                            data: {local:equipol,visita:equipov,jornada:jornada, torneo:torneo,tipo:tipo,fecha:fecha},
                             cache: false,
                             dataType: 'json',
                             success: function (data) {
@@ -403,11 +411,12 @@ include '../php/conexion.php';
                         var equipol=$('#localF').val();
                         var jornada=$('#jornadaF').val();
                         var torneo=$('#torneoF').val();
+                        var fecha=$('#fecha').val();
                         var tipo='fifa';
                         $.ajax({
                             type: 'POST',
                             url: 'imc/generarPartido.php',
-                            data: {local:equipol,visita:equipov,jornada:jornada, torneo:torneo,tipo:tipo},
+                            data: {local:equipol,visita:equipov,jornada:jornada, torneo:torneo,tipo:tipo,fecha:fecha},
                             cache: false,
                             dataType: 'json',
                             success: function (data) {
@@ -427,11 +436,12 @@ include '../php/conexion.php';
                         var equipol=$('#localV').val();
                         var jornada=$('#jornadaV').val();
                         var torneo=$('#torneoV').val();
+                        var fecha=$('#fecha').val();
                         var tipo='vole';
                         $.ajax({
                             type: 'POST',
                             url: 'imc/generarPartido.php',
-                            data: {local:equipol,visita:equipov,jornada:jornada, torneo:torneo,tipo:tipo},
+                            data: {local:equipol,visita:equipov,jornada:jornada, torneo:torneo,tipo:tipo,fecha:fecha},
                             cache: false,
                             dataType: 'json',
                             success: function (data) {
@@ -451,11 +461,12 @@ include '../php/conexion.php';
                         var equipol=$('#localBa').val();
                         var jornada=$('#jornadaBa').val();
                         var torneo=$('#torneoBa').val();
+                        var fecha=$('#fecha').val();
                         var tipo='bas';
                         $.ajax({
                             type: 'POST',
                             url: 'imc/generarPartido.php',
-                            data: {local:equipol,visita:equipov,jornada:jornada, torneo:torneo,tipo:tipo},
+                            data: {local:equipol,visita:equipov,jornada:jornada, torneo:torneo,tipo:tipo,fecha:fecha},
                             cache: false,
                             dataType: 'json',
                             success: function (data) {
