@@ -2,16 +2,17 @@
 session_start();
 include 'imc/header.php';
 include '../php/conexion.php'
-?>
+?>       <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-                <!-- Begin Page Content -->
+
+<!-- Begin Page Content -->
                 <div class="container-fluid">
 
 
                     <div class="row">
 
                         <!-- crear reto -->
-                        <div class="col-xl-7 col-lg-7">
+                        <div class="col-xl-7 col-lg-7" id="result">
                             <div class="card shadow mb-4">
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -20,7 +21,7 @@ include '../php/conexion.php'
                                 </div>
                                 <!-- formulario reto -->
                                 <div class="card-body">
-                                    <form action="imc/reto.php" method="post">
+                                    <form id="crearReto" method="post">
                                         <div class="form-group">
                                             <label for="exampleFormControlInput1">Nombre del reto</label>
                                             <input type="text" class="form-control" id="anreto"name="reton">
@@ -51,7 +52,7 @@ include '../php/conexion.php'
                         </div>
 
                         <!-- tabla de retos -->
-                        <div class="col-xl-5 col-lg-5">
+                        <div class="col-xl-5 col-lg-5" id="result2">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div
@@ -93,6 +94,48 @@ include '../php/conexion.php'
                             </div>
                         </div>
                     </div>
+                    <script>
+                        $("#crearReto").on('submit', function (e) {
+                            e.preventDefault();
+                            $.ajax({
+                                type: 'POST',
+                                url: 'imc/reto.php',
+                                data: $('#crearReto').serialize(),
+                                cache: false,
+                                dataType: 'json',
+                                success: function (data) {
+                                    if (data.estatus == "ok") {///////registro exitoso
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'IMC Generado',
+                                            text: '',
+                                            timer: 2000,
+                                            showConfirmButton: false,
+                                        });
+                                        actualizar();
+                                    } else if (data.estatus == "error") {///////registrado
+                                        Swal.fire({
+                                            icon: 'info',
+                                            title: 'Error',
+                                            text: 'Datos invalidos',
+                                            timer: 2000,
+                                            showConfirmButton: false,
+                                        });
+                                        actualizar();
+                                    }
+                                }
+                            });
+                        });
+
+
+
+                        function actualizar(){
+                            $( "#result2" ).load( "index.php #result2" );
+                            $( "#result" ).load( "index.php #result" );
+                        }
+
+
+                    </script>
 
 
                 </div>

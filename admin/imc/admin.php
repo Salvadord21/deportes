@@ -3,6 +3,8 @@ include '../../php/conexion.php';
 $id=$_POST['idadmin'];
 $areas = $_POST['admin'];
 $areaselect=0;
+$data = array();
+
 
 for ($i = 0; $i < count($areas); $i ++){
     $areaselect = $areas[$i];
@@ -20,11 +22,13 @@ $insert = "UPDATE `usuarios` SET administrador = '$x' WHERE id = '$id'";
 
 $resultado = mysqli_query($conexion, $insert);
 if ($resultado) {
-    header('location: ../usuarios.php');
+    $data['estatus'] = "ok";
 
 } else {
     echo mysqli_error($conexion);
-    $_SESSION['msg_error'] = 'Error en sentencia sql: ' . mysqli_error($conexion);
+    $data['estatus'] = "error";
 }
+echo json_encode($data);
+
 
 ?>

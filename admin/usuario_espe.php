@@ -4,8 +4,7 @@ include 'imc/header.php';
 include '../php/conexion.php';
 $id_usua = 0;
 
-if( !empty($_POST['revisar']) ){
-    $id_usua = $_POST['revisar'];
+    $id_usua = $_GET['revisar'];
 
 
 
@@ -30,7 +29,7 @@ if( !empty($_POST['revisar']) ){
             $dirsubida="../php/imagenes/$archivo";
 
         }
-    }
+    
 }
 
 if ($admin==0){
@@ -74,13 +73,13 @@ if ($admin==0){
 
                                 </div>
                                 <!-- formulario reto -->
-                                <div class="card-body">
+                                <div class="card-body" id="result">
 
 
                                         <div class="form-group">
                                             <label class="control-label col-sm-2" for="email">Estado:</label>
                                             <div class="col-sm-10">
-                                                <form class="form-horizontal" action="imc/admin.php" method="post">
+                                                <form class="form-horizontal" id="adminAct" method="post">
                                                 <select name="admin[]" id="optadmin" class="form-control">
                                                     <option value="Usuario" <?php echo $usua == 'Usuario' ? 'selected="selected"'  : '' ?>>Usuario</option>
                                                     <option value="Administrador" <?php echo $usua == 'Administrador' ? 'selected="selected"'  : '' ?>>Administrador</option>
@@ -249,7 +248,47 @@ if ($admin==0){
                                 </div>
                             </div>
                         </div>
+                        <script>
+                            $("#adminAct").on('submit', function (e) {
+                                e.preventDefault();
+                                $.ajax({
+                                    type: 'POST',
+                                    url: 'imc/admin.php',
+                                    data: $('#adminAct').serialize(),
+                                    cache: false,
+                                    dataType: 'json',
+                                    success: function (data) {
+                                        if (data.estatus == "ok") {///////registro exitoso
+                                            Swal.fire({
+                                                icon: 'success',
+                                                title: 'IMC Generado',
+                                                text: '',
+                                                timer: 2000,
+                                                showConfirmButton: false,
+                                            });
+                                            actualizar();
+                                        } else if (data.estatus == "error") {///////registrado
+                                            Swal.fire({
+                                                icon: 'info',
+                                                title: 'Error',
+                                                text: 'Datos invalidos',
+                                                timer: 2000,
+                                                showConfirmButton: false,
+                                            });
+                                            actualizar();
+                                        }
+                                    }
+                                });
+                            });
 
+
+
+                            function actualizar(){
+                                $( "#result" ).load( " #result" );
+                            }
+
+
+                        </script>
 
 
                 </div>

@@ -14,7 +14,7 @@ include '../php/conexion.php'
                         </div>
                         <!--tablas-->
                         <div class="card-body">
-                            <form action="usuario_espe.php" method="post">
+                            <form action="usuario_espe.php" method="get">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
