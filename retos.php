@@ -16,6 +16,7 @@ include 'php/conexion.php';
 
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+       <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
    </head>
    <body>
@@ -46,7 +47,7 @@ include 'php/conexion.php';
                </div>
             </div>
              <div class="row">
-                 <div class="col-md-7">
+                 <div class="col-md-7" id="result">
                      <?php
                      $sql= "SELECT * FROM `creacion_reto` WHERE `fecha_inicio`<=CURDATE() AND fecha_fin>=CURDATE()";
                      $result= mysqli_query($conexion,$sql);
@@ -61,9 +62,9 @@ include 'php/conexion.php';
                          </p>
                          <p>Recuerda que sólo puedes participar una vez en cada reto</p>
 
-                         <form action="php/enviar-reto.php" method="post">
+                         <form id="enviarReto" method="post">
                              <div class="input-group" >
-                                 <input type="url" class="form-control" name="video" aria-label="subir-video" aria-describedby="basic-addon2">
+                                 <input type="url" class="form-control" name="video"  id="videoreto"    aria-label="subir-video" aria-describedby="basic-addon2">
                                  <div class="input-group-append">
                                      <input type="hidden" value="<?php echo $mostrar['id']?>" name="enviar">
 
@@ -98,6 +99,7 @@ include 'php/conexion.php';
                                                  <button class="btn btn-outline-secondary" type="submit">Enviar</button>
                                                  <?php
                                              }
+
                                          }
                                      }else{//NO HA INICIADO SESIÓN
                                          ?>
@@ -121,6 +123,60 @@ include 'php/conexion.php';
                      }
                      ?>
 
+                     <script>
+                         $("#enviarReto").on('submit', function (e) {
+                             e.preventDefault();
+                             $.ajax({
+                                 type: 'POST',
+                                 url: 'php/enviar-reto.php',
+                                 data: $('#enviarReto').serialize(),
+                                 cache: false,
+                                 dataType: 'json',
+                                 success: function (data) {
+                                     if (data.estatus == "ok") {///////registro exitoso
+                                         Swal.fire({
+                                             icon: 'success',
+                                             title: 'IMC Generado',
+                                             text: '',
+                                             timer: 2000,
+                                             showConfirmButton: false,
+                                         });
+                                         actualizar();
+                                     } else if (data.estatus == "datos vacios") {///////registrado
+                                         Swal.fire({
+                                             icon: 'info',
+                                             title: 'Error',
+                                             text: 'Datos invalidos',
+                                             timer: 2000,
+                                             showConfirmButton: false,
+                                         });
+                                         error();
+                                     }else if (data.estatus == "sesion") {///////registrado
+                                         Swal.fire({
+                                             icon: 'info',
+                                             title: 'Error',
+                                             text: 'Datos invalidos',
+                                             timer: 2000,
+                                             showConfirmButton: false,
+                                         });
+                                         error();
+                                     }
+                                 }
+                             });
+                         });
+
+
+
+                         function actualizar(){
+                             $( "#result" ).load( "reto.php #result" );
+                             $('#videoreto').val('');
+                         }
+                         function error(){
+                             $('#videoreto').val('');
+                         }
+
+
+                     </script>
 
                      <!--MENSAJE DE ERROR-->
                      <div class="modal fade" id="errorsesion" tabindex="-1" role="dialog" aria-labelledby="errorsesionTitle" aria-hidden="true">
