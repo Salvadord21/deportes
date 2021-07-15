@@ -15,128 +15,196 @@ $idVol = $mostrarV['id'];
     <!-- Content Row -->
     <div class="row">
         <!-- Calendario de partidos -->
-        <div class="col-12">
+        <div class="col-12" id="result2">
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Agregar Resultado</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Resultados</h6>
 
                 </div>
-                <div class="card-body form-group ">
-                    <form id="FIFA" method="post">
-                        <table class="table table-hover table-responsive">
-                            <tr>
-                                <th>Local</th>
-                                <th>SET 1</th>
-                                <th>SET 2</th>
-                                <th>SET 3</th>
-                                <th>vs</th>
-                                <th>SET 3</th>
-                                <th>SET 2</th>
-                                <th>SET 1</th>
-                                <th>Vistante</th>
-                                <th>Jornada</th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <select name="local"  id="local">
-                                        <option value="value1">Local</option>
-                                        <?php
-                                        require 'imc/EquiposVole.php';
-                                        ?>
-                                    </select>
-                                </td>
-                                <td><input type="number" style="width: 75px" id="set1l"></td>
-                                <td><input type="number"style="width: 75px"id="set2l"></td>
-                                <td><input type="number"style="width: 75px"id="set3l"></td>
-                                <td>vs</td>
-                                <td><input type="number"style="width: 75px" id="set3v"></td>
-                                <td><input type="number"style="width: 75px" id="set2v"></td>
-                                <td><input type="number"style="width: 75px" id="set1v"></td>
-                                <td><select name="visita" id="visita">
-                                        <option value="value1">Visitante</option>
-                                        <?php
-                                        require 'imc/EquiposVole.php';
-                                        ?>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select name="jornada" id="jornada">
-                                        <?php
-                                        $listado = "SELECT `jornadas` FROM `creacion_torneo` WHERE `id`=( SELECT id from creacion_torneo where creacion_torneo.fecha_creacion=( SELECT MAX(`fecha_creacion`) from creacion_torneo WHERE `disciplina`='voleibol'))";
+                <?php
+                $sql= "SELECT * FROM `creacion_torneo` WHERE disciplina='voleibol'AND fecha_creacion = ( SELECT MAX(fecha_creacion) FROM `creacion_torneo` WHERE disciplina = 'voleibol')";
+                $result=mysqli_query($conexion,$sql);
+                while($mostrar=mysqli_fetch_array($result)) {
+                    $id_torn=$mostrar['id'];
+                    $jornadas = $mostrar['jornadas'];
+                    $xsem=0;
+                    ?>
+                    <!-- Resultado de partidos  -->
+                    <div class="card-body">
 
-                                        $query = mysqli_query($conexion, $listado);
-
-                                        while ($FIFAequi = mysqli_fetch_array($query)){
-
-                                            for ($x=1;$x<$FIFAequi['jornadas']+1;$x++){
-                                                echo '<option value ="'.$x.'">'.$x.'</option>';
-                                            }
-
-                                        }
-                                        ?>
-                                    </select>
-                                    <?php
-                                    $sql= "SELECT * FROM `creacion_torneo` WHERE disciplina='voleibol'AND fecha_creacion = ( SELECT MAX(fecha_creacion) FROM `creacion_torneo` WHERE disciplina = 'voleibol')";
-                                    $result=mysqli_query($conexion,$sql);
-                                    $idTorneo=mysqli_fetch_array($result);
-                                    ?>
-                                    <input type="hidden"value="<?php echo $idTorneo['id'] ?>" id="torneo">
-                                </td>
-                                <td><button type="button" onclick="guardar()" > Guardar Resultado</button> </td>
-                            </tr>
-                        </table>
-                    </form>
-                </div>
-
-                <script>
-                    function guardar(){
-                        var equipov=$('#visita').val();
-                        var equipol=$('#local').val();
-                        var jornada=$('#jornada').val();
-                        var set1l=$('#set1l').val();
-                        var set2l=$('#set2l').val();
-                        var set3l=$('#set3l').val();
-                        var set1v=$('#set1v').val();
-                        var set2v=$('#set2v').val();
-                        var set3v=$('#set3v').val();
-                        var torneo=$('#torneo').val();
-                        $.ajax({
-                            type: 'POST',
-                            url: 'imc/partidosVoli.php',
-                            data: {local:equipol,visita:equipov,jornada:jornada,torneo:torneo,set1l:set1l,set2l:set2l,set3l:set3l,set1v:set1v,set2v:set2v,set3v:set3v},
-                            cache: false,
-                            dataType: 'json',
-                            success: function (data) {
-                                if (data.estatus == "ok") {///////registro exitoso
-                                    Swal.fire({
-                                        icon: 'success',
-                                        title: 'Partido Registrado',
-                                        timer: 2000,
-                                        showConfirmButton: false,
-                                    });
-                                    actualizar();
-                                } else if (data.estatus == "salida") {///////registrado
-                                    Swal.fire({
-                                        icon: 'info',
-                                        title: 'El torneo ya llego a su maximo de participantes',
-                                        text: 'Debes iniciar sesión para poder inscribirte',
-                                        timer: 2000,
-                                        showConfirmButton: false,
-                                    });
-                                }
+                        <!-- Muestran total de jornadas  -->
+                        <ul class="nav nav-tabs" id="tab-futbol" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="tab-futbol-general" data-toggle="tab" href="#pruena1" role="tab" aria-controls="futbol-general" aria-selected="true">Semana 1</a>
+                            </li>
+                            <!-- imprime jornadas -->
+                            <?php
+                            for ($jornadascont=2; $jornadascont<$jornadas+1; $jornadascont++){
+                                ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="tab-futbol-jugadores" data-toggle="tab" href="#pruena<?php echo $jornadascont; ?>" role="tab" aria-controls="futbol-jugadores" aria-selected="false">Semana <?php echo $jornadascont; ?></a>
+                                </li>
+                                <?php
                             }
-                        });
+                            ?>
+                        </ul>
+                        <!-- Muestran los resultados de partidos en jornada 1 -->
+                        <div class="tab-content" id="tab-futbol-contenido">
+                            <div class="tab-pane fade show active" id="pruena1" role="tabpanel" aria-labelledby="tab-futbol-general">
+                                <form action="imc/partidosFIFA.php" method="post">
+                                    <table class="table table-hover">
+                                        <tr>
+                                            <th>Local</th>
+                                            <th>SET 1</th>
+                                            <th>SET 2</th>
+                                            <th>SET 3</th>
+                                            <th>vs</th>
+                                            <th>SET 3</th>
+                                            <th>SET 2</th>
+                                            <th>SET 1</th>
+                                            <th>vistante</th>
+                                        </tr>
+                                        <?php
+                                        $sql= "SELECT * FROM `partidos_vole`   WHERE jornada='1' AND torneo_id= '$idVol' and `resultado` is null";
+                                        $result=mysqli_query($conexion,$sql);
+                                        $cont=1;
+                                        while($mostrar=mysqli_fetch_array($result)){
+                                            $locales=$mostrar['id_local'];
+                                            $visitantes=$mostrar['id_visita'];
+                                            $equipoL="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$locales'";
+                                            $resultaL=mysqli_query($conexion,$equipoL);
+                                            $equipoV="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$visitantes'";
+                                            $resultaV=mysqli_query($conexion,$equipoV);
+                                            $localL=mysqli_fetch_array($resultaL);
+                                            $visitaV=mysqli_fetch_array($resultaV);
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $localL['nombre_equipo'] ?> <input type="hidden" value="<?php echo $mostrar['id_local']?>"id="idL1-<?php echo $cont?>"></td>
+                                                <td><input type="text" id="setL1-1-<?php echo $cont?>" style="width: 75px"></td>
+                                                <td><input type="text"  id="setL2-1-<?php echo $cont?>"style="width: 75px"></td>
+                                                <td><input type="text"  id="setL3-1-<?php echo $cont?>" style="width: 75px"></td>
+                                                <td>vs</td>
+                                                <td><input type="text"  id="setV3-1-<?php echo $cont?>" style="width: 75px"></td>
+                                                <td><input type="text"  id="setV2-1-<?php echo $cont?>" style="width: 75px"></td>
+                                                <td><input type="text"  id="setV1-1-<?php echo $cont?>" style="width: 75px"></td>
+                                                <td><?php echo $visitaV['nombre_equipo'] ?> <input type="hidden" value="<?php echo $mostrar['id_visita']?>"id="idV1-<?php echo $cont?>">
+                                                    <input type="hidden" value="<?php echo $mostrar['torneo_id']?>" id="torneo1-<?php echo $cont?>"></td>
+                                                <td><button type="button" onclick="guardar(1,<?php echo $cont?>)" > Guardar Resultado</button> </td>
+                                            </tr>
+                                        <?php $cont++; } ?>
+                                    </table>
+                                </form>
+                            </div>
 
-                    }
-                    function actualizar(){
-                        $( "#result" ).load( "voleibol.php #result" );
-                    }
-                </script>
+
+                            <!-- muestra cuando hay mas de una jornada-->
+                            <?php
+                            for ($jornadascont2=2; $jornadascont2<$jornadas+1; $jornadascont2++){
+                                ?>
+                                <div class="tab-pane fade" id="pruena<?php echo $jornadascont2; ?>" role="tabpanel" aria-labelledby="tab-futbol-jugadores">
+                                    <form action="imc/partidosFIFA.php" method="post" >
+                                        <table class="table table-hover">
+                                            <tr>
+                                                <th>Local</th>
+                                                <th>SET 1</th>
+                                                <th>SET 2</th>
+                                                <th>SET 3</th>
+                                                <th>vs</th>
+                                                <th>SET 3</th>
+                                                <th>SET 2</th>
+                                                <th>SET 1</th>
+                                                <th>vistante</th>
+                                            </tr>
+                                            <!--imprime valores -->
+                                            <?php
+                                            $sql3= "SELECT * FROM `partidos_vole` WHERE jornada='$jornadascont2' AND torneo_id= '$idVol' and `resultado` is null";
+                                            $result3=mysqli_query($conexion,$sql3);
+                                            while($mostrar3=mysqli_fetch_array($result3)){
+                                                $locales=$mostrar3['id_local'];
+                                                $visitantes=$mostrar3['id_visita'];
+                                                $equipoL="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$locales'";
+                                                $resultaL=mysqli_query($conexion,$equipoL);
+                                                $equipoV="SELECT `nombre_equipo` FROM `equipos` WHERE `id`='$visitantes'";
+                                                $resultaV=mysqli_query($conexion,$equipoV);
+                                                $localL=mysqli_fetch_array($resultaL);
+                                                $visitaV=mysqli_fetch_array($resultaV);
+                                                $cont=1;
+                                                ?>
+                                                <tr>
+                                                    <td><?php echo $localL['nombre_equipo'] ?><input type="hidden" value="<?php echo $mostrar3['id_local']?>"id="idL<?php echo $jornadascont2?>-<?php echo $cont?>"></td>
+                                                    <td><input type="text" id="setL1-<?php echo $jornadascont2?>-<?php echo $cont?>" style="width: 75px"></td>
+                                                    <td><input type="text"  id="setL2-<?php echo $jornadascont2?>-<?php echo $cont?>"style="width: 75px"></td>
+                                                    <td><input type="text"  id="setL3-<?php echo $jornadascont2?>-<?php echo $cont?>" style="width: 75px"></td>
+                                                    <td>vs</td>
+                                                    <td><input type="text"  id="setV3-<?php echo $jornadascont2?>-<?php echo $cont?>" style="width: 75px"></td>
+                                                    <td><input type="text"  id="setV2-<?php echo $jornadascont2?>-<?php echo $cont?>" style="width: 75px"></td>
+                                                    <td><input type="text"  id="setV1-<?php echo $jornadascont2?>-<?php echo $cont?>" style="width: 75px"></td>
+                                                    <td><?php echo $visitaV['nombre_equipo'] ?><input type="hidden" value="<?php echo $mostrar3['id_visita']?>"id="idV<?php echo $jornadascont2?>-<?php echo $cont?>">
+                                                        <input type="hidden" value="<?php echo $mostrar3['torneo_id']?>" id="torneo<?php echo $jornadascont2?>-<?php echo $cont?>"></td>
+                                                    <td><button type="button" onclick="guardar(<?php echo $jornadascont2?>,<?php echo $cont?>)" > Guardar Resultado</button> </td>
+                                                </tr>
+                                            <?php  $cont++;} ?>
+                                        </table>
+                                    </form>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                    </div>
+                <?php } ?>
 
             </div>
         </div>
+
+        <script>
+            function guardar(x,y){
+                var equipoV=$('#idV'+x+'-'+y).val();
+                var equipoL=$('#idL'+x+'-'+y).val();
+                var set1L=$('#setL1-'+x+'-'+y).val();
+                var set2L=$('#setL2-'+x+'-'+y).val();
+                var set3L=$('#setL3-'+x+'-'+y).val();
+                var set1V=$('#setV1-'+x+'-'+y).val();
+                var set2V=$('#setV2-'+x+'-'+y).val();
+                var set3V=$('#setV3-'+x+'-'+y).val();
+                var jornada=x;
+                var torneo=$('#torneo'+x+'-'+y).val();
+                $.ajax({
+                    type: 'POST',
+                    url: 'imc/partidosVoli.php',
+                    data: {set1l:set1L,set2l:set2L,set3l:set3L,set1v:set1V,set2v:set2V,set3v:set3V,local:equipoL,visita:equipoV,jornada:jornada, torneo:torneo},
+                    cache: false,
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.estatus == "ok") {///////registro exitoso
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Partido Registrado',
+                                timer: 2000,
+                                showConfirmButton: false,
+                            });
+                            actualizar();
+                        } else if (data.estatus == "salida") {///////registrado
+                            Swal.fire({
+                                icon: 'info',
+                                title: 'El torneo ya llego a su maximo de participantes',
+                                text: 'Debes iniciar sesión para poder inscribirte',
+                                timer: 2000,
+                                showConfirmButton: false,
+                            });
+                        }
+                    }
+                });
+
+
+            }
+            function actualizar(){
+                $( "#result" ).load( "voleibol.php #result" );
+                $( "#result2" ).load( "voleibol.php #result2" );
+            }
+        </script>
+
 
         <!-- ver resltados -->
         <div class="col-12" id="result">
@@ -190,7 +258,7 @@ $idVol = $mostrarV['id'];
                                             <th>vistante</th>
                                         </tr>
                                         <?php
-                                        $sql= "SELECT * FROM `partidos_vole`   WHERE jornada='1'";
+                                        $sql= "SELECT * FROM `partidos_vole`   WHERE jornada='1' and torneo_id= '$idVol' and `resultado` is not null ";
                                         $result=mysqli_query($conexion,$sql);
                                         while($mostrar=mysqli_fetch_array($result)){
                                             $locales=$mostrar['id_local'];
@@ -212,7 +280,6 @@ $idVol = $mostrarV['id'];
                                                 <td><?php echo $mostrar['set2V'] ?></td>
                                                 <td><?php echo $mostrar['set1V'] ?></td>
                                                 <td><?php echo $visitaV['nombre_equipo'] ?></td>
-
                                             </tr>
                                         <?php  } ?>
                                     </table>
@@ -240,7 +307,7 @@ $idVol = $mostrarV['id'];
                                             </tr>
                                             <!--imprime valores -->
                                             <?php
-                                            $sql3= "SELECT * FROM `partidos_vole` WHERE jornada='$jornadascont2' AND creacion_torneo_id= '$idVol'";
+                                            $sql3= "SELECT * FROM `partidos_vole` WHERE jornada='$jornadascont2' AND torneo_id= '$idVol' and `resultado` is not null";
                                             $result3=mysqli_query($conexion,$sql3);
                                             while($mostrar3=mysqli_fetch_array($result3)){
                                                 $locales=$mostrar3['id_local'];
@@ -260,7 +327,7 @@ $idVol = $mostrarV['id'];
                                                     <td>vs</td>
                                                     <td><?php echo $mostrar3['set3V'] ?></td>
                                                     <td><?php echo $mostrar3['set2V'] ?></td>
-                                                    <td><?php echo $mostrar['set1V'] ?></td>
+                                                    <td><?php echo $mostrar3['set1V'] ?></td>
                                                     <td><?php echo $visitaV['nombre_equipo'] ?></td>
 
                                                 </tr>
