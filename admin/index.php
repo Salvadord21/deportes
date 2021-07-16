@@ -16,7 +16,7 @@ include '../php/conexion.php'
                             <div class="card shadow mb-4">
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Crear Reto</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Crear reto</h6>
 
                                 </div>
                                 <!-- formulario reto -->
@@ -27,7 +27,7 @@ include '../php/conexion.php'
                                             <input type="text" class="form-control" id="anreto"name="reton">
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleFormControlInput1">URL del video</label>
+                                            <label for="exampleFormControlInput1">URL del vídeo</label>
                                             <input type="url" class="form-control" id="aurlreto" name="returl">
                                         </div>
                                         <div class="form-group">
@@ -35,15 +35,15 @@ include '../php/conexion.php'
                                             <input type="date" class="form-control" id="afireto" name="retofi">
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleFormControlInput1">Fecha de Fin</label>
+                                            <label for="exampleFormControlInput1">Fecha de fin</label>
                                             <input type="date" class="form-control" id="affreto" name="retoff">
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleFormControlTextarea1">Descripcion</label>
+                                            <label for="exampleFormControlTextarea1">Descripción</label>
                                             <textarea class="form-control" id="adreto" rows="3" name="retod"></textarea>
                                         </div>
                                         <div class="modal-footer justify-content-center">
-                                            <button type="submit" class="btn btn-primary">crear reto</button>
+                                            <button type="submit" class="btn btn-primary">Crear reto</button>
                                         </div>
                                     </form>
 
@@ -63,8 +63,8 @@ include '../php/conexion.php'
                                 <div class="card-body">
                                     <table class="table table-hover">
                                         <tr>
-                                            <td>nombre</td>
-                                            <td>fecha inicio</td>
+                                            <td>Nombre</td>
+                                            <td>Fecha inicio</td>
                                             <td></td>
                                         </tr>
                                         <?php
@@ -78,12 +78,12 @@ include '../php/conexion.php'
                                                 <td>
                                                     <form action="editar_reto.php" method="post">
                                                         <input type="hidden" value="<?php echo $mostrar['id'] ?>" name="editar">
-                                                        <button type="submit" class="btn btn-primary">editar</button>
+                                                        <button type="submit" class="btn btn-primary">Editar</button>
                                                     </form>
                                                 </td>
                                                 <form action="imc/eliminar_reto.php" method="post">
                                                     <input type="hidden" value="<?php echo $mostrar['id'] ?>"name="eliminar">
-                                                    <td><button type="submit"  class="btn btn-primary">eliminar</button></td>
+                                                    <td><button type="submit"  class="btn btn-primary">Eliminar</button></td>
                                                 </form>
                                             </tr>
                                             <?php
@@ -107,7 +107,7 @@ include '../php/conexion.php'
                                     if (data.estatus == "ok") {///////registro exitoso
                                         Swal.fire({
                                             icon: 'success',
-                                            title: 'IMC Generado',
+                                            title: 'Se creo de manera correcta',
                                             text: '',
                                             timer: 2000,
                                             showConfirmButton: false,
@@ -116,8 +116,8 @@ include '../php/conexion.php'
                                     } else if (data.estatus == "error") {///////registrado
                                         Swal.fire({
                                             icon: 'info',
-                                            title: 'Error',
-                                            text: 'Datos invalidos',
+                                            title: 'Ups',
+                                            text: 'Hubo un error al guardar',
                                             timer: 2000,
                                             showConfirmButton: false,
                                         });
@@ -146,11 +146,9 @@ include '../php/conexion.php'
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
-                    </div>
-                </div>
+                <?php
+                require 'imc/footer.php';
+                ?>
             </footer>
             <!-- End of Footer -->
 
@@ -159,31 +157,6 @@ include '../php/conexion.php'
 
     </div>
     <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>

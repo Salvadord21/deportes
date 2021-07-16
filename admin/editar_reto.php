@@ -36,7 +36,7 @@ if( !empty($_POST['editar']) ){
             <div class="card shadow mb-4">
                 <div
                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">editar Reto</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Editar reto</h6>
 
                 </div>
                 <!-- formulario reto -->
@@ -47,7 +47,7 @@ if( !empty($_POST['editar']) ){
                             <input type="text" class="form-control" id="anreto" name="reton1" value="<?php echo $nombre_reto ?>">
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlInput1">URL del video</label>
+                            <label for="exampleFormControlInput1">URL del vídeo demostrativo</label>
                             <input type="text" class="form-control" id="aurlreto" name="returl1" value="<?php echo $url ?>">
                         </div>
                         <div class="form-group">
@@ -59,12 +59,12 @@ if( !empty($_POST['editar']) ){
                             <input type="date" class="form-control" id="affreto" name="retoff1" value="<?php echo $fecha_lim ?>">
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Descripcion</label>
+                            <label for="exampleFormControlTextarea1">Descripción</label>
                             <textarea class="form-control" id="adreto" rows="3" name="retod1"> <?php echo $descripcion ?></textarea>
                         </div>
                         <div class="modal-footer justify-content-center">
                             <input type="hidden" value="<?php echo $id_usua ?>" name="actualizar">
-                            <button type="submit" class="btn btn-primary">actualizar</button>
+                            <button type="submit" class="btn btn-primary">Actualizar</button>
                             <button type="submit" class="btn btn-primary"><a href="index.php" style="color: white">Cancelar</a></button>
                         </div>
                     </form>
@@ -83,11 +83,9 @@ if( !empty($_POST['editar']) ){
 
 <!-- Footer -->
 <footer class="sticky-footer bg-white">
-    <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2020</span>
-        </div>
-    </div>
+    <?php
+    include 'imc/footer.php';
+    ?>
 </footer>
 <!-- End of Footer -->
 

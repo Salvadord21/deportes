@@ -55,6 +55,12 @@ $matri = $_SESSION['nombre'];
         <li class="nav-item">
             <a class="btn bg-admin nav-link" style="box-shadow: none" href="index.php">
                 <img src="iconos/crearreto.png" style="width: 16px; height: 16px">
+                <span>Dashboard</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="btn bg-admin nav-link" style="box-shadow: none" href="index.php">
+                <img src="iconos/crearreto.png" style="width: 16px; height: 16px">
                 <span>Crear retos</span></a>
         </li>
         <li class="nav-item">

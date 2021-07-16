@@ -29,17 +29,12 @@ if( !empty($_POST['editar']) ){
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
-
     <div class="row">
-
         <!-- crear reto -->
         <div class="col-xl-12 col-lg-12">
             <div class="card shadow mb-4">
-                <div
-                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">editar Reto</h6>
-
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Editar Reto</h6>
                 </div>
                 <!-- formulario reto -->
                 <div class="card-body">
@@ -51,10 +46,10 @@ if( !empty($_POST['editar']) ){
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="email">disciplina:</label>
+                            <label class="control-label col-sm-2" for="email">Disciplina:</label>
                             <div class="col-sm-10">
                                 <select name="diciplinas[]" class="form-control" id="disciplinas">
-                                    <option value="Futbol Bardas" <?php echo $areas == 'Futbol Bardas' ? 'selected="selected"'  : '' ?>>Futbol bardas</option>
+                                    <option value="Futbol Bardas" <?php echo $areas == 'Futbol Bardas' ? 'selected="selected"'  : '' ?>>Fútbol bardas</option>
                                     <option value="ascenso" <?php echo $areas == 'ascenso' ? 'selected="selected"'  : '' ?>>Fútbol bardas ascenso</option>
                                     <option value="FIFA" <?php echo $areas == 'FIFA' ? 'selected="selected"'  : '' ?>>FIFA</option>
                                     <option value="Voleibol" <?php echo $areas == 'Voleibol' ? 'selected="selected"'  : '' ?>>Voleibol</option>
@@ -64,7 +59,7 @@ if( !empty($_POST['editar']) ){
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-10" for="email">numero de jornadas:</label>
+                            <label class="control-label col-sm-10" for="email">Número de jornadas:</label>
                             <div class="col-sm-10">
                                 <input type="number" class="form-control" id="nojornadas" name="nojorna" value="<?php echo $jornadas?>">
                             </div>
@@ -76,70 +71,35 @@ if( !empty($_POST['editar']) ){
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-10" for="email">Fecha limite de inscripcion:</label>
+                            <label class="control-label col-sm-10" for="email">Fecha límite de inscripción:</label>
                             <div class="col-sm-10">
                                 <input type="date" class="form-control" id="aflim"  name="felim" value="<?php echo $fecha_lim?>">
                             </div>
                         </div>
                         <div class="modal-footer justify-content-center">
                             <input type="hidden" value="<?php echo $id_usua ?>" name="actualizar">
-                            <button type="submit" class="btn btn-primary">actualizar</button>
+                            <button type="submit" class="btn btn-primary">Actualizar</button>
                             <button type="submit" class="btn btn-primary"><a href="index.php" style="color: white">Cancelar</a></button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-
-
-
-
     </div>
     <!-- /.container-fluid -->
-
 </div>
 <!-- End of Main Content -->
-
 <!-- Footer -->
 <footer class="sticky-footer bg-white">
-    <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2020</span>
-        </div>
-    </div>
+    <?
+    require 'imc/footer.php';
+    ?>
 </footer>
 <!-- End of Footer -->
-
 </div>
 <!-- End of Content Wrapper -->
-
 </div>
 <!-- End of Page Wrapper -->
-
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>
