@@ -24,7 +24,7 @@ $id=$_POST['ver'];
                             <th>Correo</th>
                         </tr>
                         <?php
-                        $sql= "SELECT CONCAT(usuarios.nombre,' ',usuarios.apellido_paterno,' ',usuarios.apellido_materno) as nombre, usuarios.correo, integrantes.equipos_id, IF(equipos.id_lider=usuarios.id,'capitan','jugador') as capitan FROM `usuarios` INNER JOIN integrantes on usuarios.id=integrantes.usuarios_id INNER JOIN equipos on equipos.id=integrantes.equipos_id WHERE equipos_id='$id'";
+                        $sql= "SELECT CONCAT(usuarios.nombre,' ',usuarios.apellido_paterno,' ',usuarios.apellido_materno) as nombre, usuarios.correo, integrantes.equipos_id, IF(equipos.id_lider=usuarios.id,'capitan','') as capitan FROM `usuarios` INNER JOIN integrantes on usuarios.id=integrantes.usuarios_id INNER JOIN equipos on equipos.id=integrantes.equipos_id WHERE equipos_id='$id'";
                         $result=mysqli_query($conexion,$sql);
                         while($mostrar=mysqli_fetch_array($result)) {
                             ?>
