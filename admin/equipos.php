@@ -6,35 +6,6 @@ include '../php/conexion.php'
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!--FORMULARIO ver jugadores-->
-                    <div class="modal fade" id="editarEquipo" tabindex="-1" role="dialog" aria-labelledby="crearEquipoTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="crearEquipoTitle">ver jugadores</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form class="form-horizontal" action="/action_page.php">
-                                        <div class="form-group">
-                                            <label class="control-label col-sm-10" for="email">Nombre de los jugadores</label>
-                                            <div class="col-sm-10">
-                                                <input type="email" class="form-control" id="email"  name="email" >
-                                            </div>
-                                        </div>
-
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-                    <!-- crear torneo -->
 
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -65,9 +36,9 @@ include '../php/conexion.php'
                                         <td><?php echo $mostrar['nombre_torneo'] ?></td>
                                         <td><?php echo $mostrar['integrantes'] ?></td>
                                         <td>
-                                            <form action="imc/EliEquipo.php" method="post">
-                                            <input type="hidden" value="<?php echo $mostrar['id'] ?>" name="eliminar" size="0px">
-                                            <button type="submit" class="btn btn-primary">Eliminar equipo</button>
+                                            <form action="verJugadores.php" method="post">
+                                            <input type="hidden" value="<?php echo $mostrar['id'] ?>" name="ver" size="0px">
+                                            <button type="submit" class="btn btn-primary">Ver equipo</button>
                                             </form>
                                         </td>
 
