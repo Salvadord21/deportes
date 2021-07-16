@@ -18,10 +18,10 @@ include '../php/conexion.php';
         <div>
             <ul class="nav nav-tabs" id="tab-retos" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="tab-futbol-general" data-toggle="tab" href="#reto-act" role="tab" aria-controls="futbol-general" aria-selected="true">Reto Actual</a>
+                    <a class="nav-link active" id="tab-futbol-general" data-toggle="tab" href="#reto-act" role="tab" aria-controls="futbol-general" aria-selected="true">Reto actual</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="tab-futbol-jugadores" data-toggle="tab" href="#retos-pasados" role="tab" aria-controls="futbol-jugadores" aria-selected="false">Retos Anteriores</a>
+                    <a class="nav-link" id="tab-futbol-jugadores" data-toggle="tab" href="#retos-pasados" role="tab" aria-controls="futbol-jugadores" aria-selected="false">Retos anteriores</a>
                 </li>
             </ul>
 

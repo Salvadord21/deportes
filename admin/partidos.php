@@ -17,20 +17,17 @@ include '../php/conexion.php';
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Agregar Partidos</h6>
-
+                    <h6 class="m-0 font-weight-bold text-primary">Agregar partidos</h6>
                 </div>
-                <div class="card-body">
+
+                <div class="card-body" id="result2">
                     <div class="col-12">
-                        <label class="required" for="inmueble_id">Seleccione un torneo</label>
                         <select class="form-control " name="torneo" id="torneo" required style="width:100%" >
                             <option value="">Seleccione un torneo</option>
                             <?php
                             include 'imc/select-torneo.php'
                             ?>
                         </select>
-
-
                     </div>
                     <br>
                     <form id="bardas" method="post">
@@ -40,7 +37,7 @@ include '../php/conexion.php';
                                 <th>vs</th>
                                 <th>Vistante</th>
                                 <th>Jornada</th>
-                                <th>fecha</th>
+                                <th>Fecha</th>
                                 <th></th>
                             </tr>
                             <tr>
@@ -87,7 +84,7 @@ include '../php/conexion.php';
                                     $idTorneo=mysqli_fetch_array($result);
                                     ?>
                                     <input type="hidden"value="<?php echo $idTorneo['id'] ?>" id="torneoB">
-                                    <button type="button" onclick="guardarBardas()" > Guardar Resultado</button>
+                                    <button type="button" onclick="guardarBardas()" >Guardar</button>
                                 </td>
                             </tr>
                         </table>
@@ -99,7 +96,7 @@ include '../php/conexion.php';
                                 <th>vs</th>
                                 <th>Vistante</th>
                                 <th>Jornada</th>
-                                <th>fecha</th>
+                                <th>Fecha</th>
                                 <th></th>
                             </tr>
                             <tr>
@@ -144,7 +141,7 @@ include '../php/conexion.php';
                                     <input type="hidden"value="<?php echo $idTorneo['id'] ?>" id="torneoA">
                                 </td>
                                 <td><input type="datetime-local" id="fechaA"></td>
-                                <td><button type="button" onclick="guardarAscenso()" > Guardar Resultado</button> </td>
+                                <td><button type="button" onclick="guardarAscenso()" >Guardar</button> </td>
                             </tr>
                         </table>
                     </form>
@@ -155,7 +152,7 @@ include '../php/conexion.php';
                                 <th>vs</th>
                                 <th>Vistante</th>
                                 <th>Jornada</th>
-                                <th>fecha</th>
+                                <th>Fecha</th>
                                 <th></th>
                             </tr>
                             <tr>
@@ -200,7 +197,7 @@ include '../php/conexion.php';
                                     <input type="hidden"value="<?php echo $idTorneo['id'] ?>" id="torneoF">
                                 </td>
                                 <td><input type="datetime-local" id="fechaF"></td>
-                                <td><button type="button" onclick="guardarFIFA()" > Guardar Resultado</button> </td>
+                                <td><button type="button" onclick="guardarFIFA()" >Guardar</button> </td>
                             </tr>
                         </table>
                     </form>
@@ -211,7 +208,7 @@ include '../php/conexion.php';
                                 <th>vs</th>
                                 <th>Vistante</th>
                                 <th>Jornada</th>
-                                <th>fecha</th>
+                                <th>Fecha</th>
                                 <th></th>
                             </tr>
                             <tr>
@@ -257,7 +254,7 @@ include '../php/conexion.php';
                                 </td>
                                 <td><input type="datetime-local" id="fechaV"></td>
 
-                                <td><button type="button" onclick="guardarVole()" > Guardar Resultado</button> </td>
+                                <td><button type="button" onclick="guardarVole()" >Guardar</button> </td>
                             </tr>
                         </table>
                     </form>
@@ -268,7 +265,7 @@ include '../php/conexion.php';
                                 <th>vs</th>
                                 <th>Vistante</th>
                                 <th>Jornada</th>
-                                <th>fecha</th>
+                                <th>Fecha</th>
                                 <th></th>
                             </tr>
                             <tr>
@@ -313,7 +310,7 @@ include '../php/conexion.php';
                                     <input type="hidden"value="<?php echo $idTorneo['id'] ?>" id="torneoBa">
                                 </td>
                                 <td><input type="datetime-local" id="fechaBa"></td>
-                                <td><button type="button" onclick="guardarBas()" > Guardar Resultado</button> </td>
+                                <td><button type="button" onclick="guardarBas()" >Guardar</button> </td>
                             </tr>
                         </table>
                     </form>
@@ -377,6 +374,7 @@ include '../php/conexion.php';
                                         timer: 2000,
                                         showConfirmButton: false,
                                     });
+                                    actualizar();
                                 }
                             }
                         });
@@ -402,6 +400,7 @@ include '../php/conexion.php';
                                         timer: 2000,
                                         showConfirmButton: false,
                                     });
+                                    actualizar();
                                 }
                             }
                         });
@@ -427,6 +426,7 @@ include '../php/conexion.php';
                                         timer: 2000,
                                         showConfirmButton: false,
                                     });
+                                    actualizar();
                                 }
                             }
                         });
@@ -452,6 +452,7 @@ include '../php/conexion.php';
                                         timer: 2000,
                                         showConfirmButton: false,
                                     });
+                                    actualizar();
                                 }
                             }
                         });
@@ -477,11 +478,17 @@ include '../php/conexion.php';
                                         timer: 2000,
                                         showConfirmButton: false,
                                     });
+                                    actualizar();
                                 }
                             }
                         });
                     }
 
+                    function actualizar(){
+                        $( "#result2" ).load( " #result2" );
+                        $( "#result" ).load( "partidos.php #result" );
+
+                    }
                 </script>
 
             </div>
@@ -516,7 +523,6 @@ include '../php/conexion.php';
                                 <a class="nav-link" id="tab-futbol-jugadores" data-toggle="tab" href="#basquetbol" role="tab" aria-controls="futbol-jugadores" aria-selected="false">Basquetbol</a>
                             </li>
                         </ul>
-
 
                         <!-- Muestran los resultados de partidos en jornada 1  va php-->
                         <div class="tab-content" id="tab-futbol-contenido">
