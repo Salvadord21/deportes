@@ -15,8 +15,8 @@ for ($i = 0; $i < count($disciplina); $i ++){
     $areaselect = $disciplina[$i];
 }
 
-$insert = "insert into creacion_torneo (nombre_torneo, disciplina,numero_equipos, jornadas, fecha_inicio, fecha_limite, fecha_creacion)
-        values ('$nombre', '$areaselect',0,'$numero_jornadas','$fecha_ini','$fecha_lim',NOW())";
+$insert = "insert into creacion_torneo (nombre_torneo, disciplina,numero_equipos, jornadas,fecha, fecha_inicio, fecha_limite, fecha_creacion)
+        values ('$nombre', '$areaselect',0,'$numero_jornadas',NOW(),'$fecha_ini','$fecha_lim',NOW())";
 
 $resultado = mysqli_query($conexion, $insert);
 if ($resultado) {
