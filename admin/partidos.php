@@ -485,8 +485,8 @@ include '../php/conexion.php';
                     }
 
                     function actualizar(){
-                        $( "#result2" ).load( " #result2" );
-                        $( "#result" ).load( "partidos.php #result" );
+                        $( "#result2" ).load(" #result2" );
+                        $( "#result" ).load("partidos.php #result" );
 
                     }
                 </script>
@@ -508,25 +508,25 @@ include '../php/conexion.php';
                         <!-- Muestran total de jornadas  -->
                         <ul class="nav nav-tabs" id="tab-futbol" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="tab-futbol-general" data-toggle="tab" href="#bardas" role="tab" aria-controls="futbol-general" aria-selected="true">Futbol Bardas</a>
+                                <a class="nav-link active" id="tab-futbol-general" data-toggle="tab" href="#bardas31" role="tab" aria-controls="futbol-general" aria-selected="true">Futbol Bardas</a>
                             </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="tab-futbol-jugadores" data-toggle="tab" href="#asenso" role="tab" aria-controls="futbol-jugadores" aria-selected="false">Ascenso</a>
+                                    <a class="nav-link" id="tab-futbol-jugadores" data-toggle="tab" href="#asenso31" role="tab" aria-controls="futbol-jugadores" aria-selected="false">Ascenso</a>
                                 </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="tab-futbol-jugadores" data-toggle="tab" href="#FIFA" role="tab" aria-controls="futbol-jugadores" aria-selected="false">FIFA</a>
+                                <a class="nav-link" id="tab-futbol-jugadores" data-toggle="tab" href="#FIFA31" role="tab" aria-controls="futbol-jugadores" aria-selected="false">FIFA</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="tab-futbol-jugadores" data-toggle="tab" href="#voleibol" role="tab" aria-controls="futbol-jugadores" aria-selected="false">Voleibol</a>
+                                <a class="nav-link" id="tab-futbol-jugadores" data-toggle="tab" href="#voleibol31" role="tab" aria-controls="futbol-jugadores" aria-selected="false">Voleibol</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="tab-futbol-jugadores" data-toggle="tab" href="#basquetbol" role="tab" aria-controls="futbol-jugadores" aria-selected="false">Basquetbol</a>
+                                <a class="nav-link" id="tab-futbol-jugadores" data-toggle="tab" href="#basquetbol31" role="tab" aria-controls="futbol-jugadores" aria-selected="false">Basquetbol</a>
                             </li>
                         </ul>
 
                         <!-- Muestran los resultados de partidos en jornada 1  va php-->
                         <div class="tab-content" id="tab-futbol-contenido">
-                            <div class="tab-pane fade show active" id="bardas" role="tabpanel" aria-labelledby="tab-futbol-general">
+                            <div class="tab-pane fade show active" id="bardas31" role="tabpanel" aria-labelledby="tab-futbol-general">
                                     <table class="table table-hover">
                                         <tr>
                                             <th>Local</th>
@@ -559,7 +559,7 @@ include '../php/conexion.php';
 
                             </div>
 
-                            <div class="tab-pane fade " id="asenso" role="tabpanel" aria-labelledby="tab-futbol-general">
+                            <div class="tab-pane fade " id="asenso31" role="tabpanel" aria-labelledby="tab-futbol-general">
                                 <table class="table table-hover">
                                     <tr>
                                         <th>Local</th>
@@ -592,7 +592,7 @@ include '../php/conexion.php';
 
                             </div>
 
-                            <div class="tab-pane fade " id="FIFA" role="tabpanel" aria-labelledby="tab-futbol-general">
+                            <div class="tab-pane fade " id="FIFA31" role="tabpanel" aria-labelledby="tab-futbol-general">
                                 <table class="table table-hover">
                                     <tr>
                                         <th>Local</th>
@@ -625,7 +625,7 @@ include '../php/conexion.php';
 
                             </div>
 
-                            <div class="tab-pane fade " id="voleibol" role="tabpanel" aria-labelledby="tab-futbol-general">
+                            <div class="tab-pane fade " id="voleibol31" role="tabpanel" aria-labelledby="tab-futbol-general">
                                 <table class="table table-hover">
                                     <tr>
                                         <th>Local</th>
@@ -658,7 +658,7 @@ include '../php/conexion.php';
 
                             </div>
 
-                            <div class="tab-pane fade " id="basquetbol" role="tabpanel" aria-labelledby="tab-futbol-general">
+                            <div class="tab-pane fade " id="basquetbol31" role="tabpanel" aria-labelledby="tab-futbol-general">
                                 <table class="table table-hover">
                                     <tr>
                                         <th>Local</th>
