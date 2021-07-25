@@ -6,12 +6,10 @@ $id=$_POST['id_tor'];
 ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
-
     <!-- jugadores -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">jugadores</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Voleibol - Jugadores</h6>
         </div>
         <!--tablas-->
         <div class="card-body">
@@ -20,8 +18,8 @@ $id=$_POST['id_tor'];
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                     <tr>
-                        <th>matricula</th>
-                        <th>nombre del jugador</th>
+                        <th>Matrícula</th>
+                        <th>Nombre del jugador</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -43,30 +41,21 @@ $id=$_POST['id_tor'];
                     </tbody>
                 </table>
                 <div class="modal-footer justify-content-center">
-                    <button type="submit" class="btn btn-primary"><a href="voleibol.php" style="color: white">Cancelar</a></button>
+                    <button type="submit" class="btn btn-primary"><a href="voleibol.php" style="color: white">Regresar</a></button>
                 </div>
             </div>
-
         </div>
     </div>
-
 </div>
-
-
 </div>
-
-
-
 
 <!-- End of Main Content -->
 
 <!-- Footer -->
 <footer class="sticky-footer bg-white">
-    <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2020</span>
-        </div>
-    </div>
+    <?php
+    require 'imc/footer.php';
+    ?>
 </footer>
 <!-- End of Footer -->
 
@@ -75,31 +64,6 @@ $id=$_POST['id_tor'];
 
 </div>
 <!-- End of Page Wrapper -->
-
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>

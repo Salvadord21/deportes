@@ -4,6 +4,9 @@ include 'imc/header.php';
 include '../php/conexion.php';
 
 ?>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <!--FORMULARIO torneo-->
@@ -63,7 +66,7 @@ include '../php/conexion.php';
                             <div class="invalid-feedback">Complete el campo</div>
                         </div>
                         <div class="modal-footer justify-content-center">
-                            <button type="submit" class="btn btn-outline-primary">Crear</button>
+                            <button type="submit" id="creaReto" class="btn btn-outline-primary">Crear</button>
                         </div>
                     </form>
                 </div>
@@ -182,11 +185,9 @@ include '../php/conexion.php';
 
 <!-- Footer -->
 <footer class="sticky-footer bg-white">
-    <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2020</span>
-        </div>
-    </div>
+    <?php
+    require 'imc/footer.php';
+    ?>
 </footer>
 <!-- End of Footer -->
 
@@ -235,6 +236,42 @@ include '../php/conexion.php';
             });
         }, false);
     })();
+
+    $("#creaReto").on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'imc/reto.php',
+            data: $('#crearReto').serialize(),
+            cache: false,
+            dataType: 'json',
+            success: function (data) {
+                if (data.estatus == "ok") {///////registro exitoso
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Se creo de manera correcta',
+                        text: '',
+                        timer: 2000,
+                        showConfirmButton: false,
+                    });
+                    actualizar();
+                } else if (data.estatus == "error") {///////registrado
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Ups',
+                        text: 'Hubo un error al guardar',
+                        timer: 2000,
+                        showConfirmButton: false,
+                    });
+                    $( "#result" ).load( "index.php #result" );
+                }
+            }
+        });
+    });
+    function actualizar(){
+        $( "#result2" ).load( " #result2" );
+        $( "#result" ).load( "index.php #result" );
+    }
 </script>
 
 </body>

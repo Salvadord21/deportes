@@ -34,7 +34,7 @@ if( !empty($_POST['editar']) ){
         <div class="col-xl-12 col-lg-12">
             <div class="card shadow mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Editar Reto</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Editar torneo</h6>
                 </div>
                 <!-- formulario reto -->
                 <div class="card-body">
@@ -42,7 +42,7 @@ if( !empty($_POST['editar']) ){
                         <div class="form-group">
                             <label class="control-label col-sm-10" for="email">Nombre del torneo:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="email"  name="nomtor" value="<?php echo $nombre?>" >
+                                <input type="text" class="form-control" id="email"  name="nomtor" value="<?php echo $nombre?>" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -67,13 +67,13 @@ if( !empty($_POST['editar']) ){
                         <div class="form-group">
                             <label class="control-label col-sm-10" for="email">Fecha de inicio:</label>
                             <div class="col-sm-10">
-                                <input type="date" class="form-control" id="afi"  name="feini" value="<?php echo $fech_ini?>">
+                                <input type="date" class="form-control" id="afi"  name="feini" value="<?php echo $fech_ini?>" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-10" for="email">Fecha límite de inscripción:</label>
                             <div class="col-sm-10">
-                                <input type="date" class="form-control" id="aflim"  name="felim" value="<?php echo $fecha_lim?>">
+                                <input type="date" class="form-control" id="aflim"  name="felim" value="<?php echo $fecha_lim?>" required>
                             </div>
                         </div>
                         <div class="modal-footer justify-content-center">

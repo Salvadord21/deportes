@@ -20,7 +20,7 @@ $idBaas=$mostrarB['id'];
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Agregar Resultado</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Fútbol premier - Agregar resultado</h6>
                 </div>
                 <div class="card-body">
                     <?php
@@ -61,7 +61,7 @@ $idBaas=$mostrarB['id'];
                                             <th></th>
                                             <th>vs</th>
                                             <th></th>
-                                            <th>vistante</th>
+                                            <th>Vistante</th>
                                         </tr>
                                         <?php
                                         $sql= "SELECT * FROM `partidos_futbol` WHERE jornada='1' and `torneo_id`='$idBaas' and`resultado`is null";
@@ -79,13 +79,13 @@ $idBaas=$mostrarB['id'];
                                             ?>
                                             <tr>
                                                 <td><?php echo $localL['nombre_equipo']?> <input type="hidden" value="<?php echo $mostrar['id_local']?>" id="idL1-<?php echo $cont?>"> </td>
-                                                <td><input type="text" value="" id="golL1-<?php echo $cont?>"></td>
+                                                <td><input type="text" class="form-control" value="" id="golL1-<?php echo $cont?>"></td>
                                                 <td>vs</td>
-                                                <td><input type="text" value="" id="golV1-<?php echo $cont?>"></td>
+                                                <td><input type="text" class="form-control" value="" id="golV1-<?php echo $cont?>"></td>
                                                 <td><?php echo $visitaV['nombre_equipo'] ?> <input type="hidden" value="<?php echo $mostrar['id_visita']?>"id="idV1-<?php echo $cont?>">
                                                     <input type="hidden" value="<?php echo $mostrar['torneo_id']?>" id="torneo1-<?php echo $cont?>">
                                                 </td>
-                                                <td><button onclick="guardar(1,<?php echo $cont?>)">Guardar</button>
+                                                <td><button class="btn btn-primary" onclick="guardar(1,<?php echo $cont?>)">Guardar</button>
                                                 </td>
                                             </tr>
                                         <?php $cont++; } ?>
@@ -105,7 +105,7 @@ $idBaas=$mostrarB['id'];
                                                 <th></th>
                                                 <th>vs</th>
                                                 <th></th>
-                                                <th>vistante</th>
+                                                <th>Vistante</th>
                                             </tr>
                                             <!--imprime valores  aqui va php -->
                                             <?php
@@ -125,13 +125,13 @@ $idBaas=$mostrarB['id'];
                                                 ?>
                                                 <tr>
                                                     <td><?php echo $localL['nombre_equipo']?> <input type="hidden" value="<?php echo $mostrar['id_local']?>" id="idL<?php echo $jornadascont2?>-<?php echo $cont?>"> </td>
-                                                    <td><input type="text" value="" id="golL<?php echo $jornadascont2?>-<?php echo $cont?>"></td>
+                                                    <td><input type="text" class="form-control" value="" id="golL<?php echo $jornadascont2?>-<?php echo $cont?>"></td>
                                                     <td>vs</td>
-                                                    <td><input type="text" value="" id="golV<?php echo $jornadascont2?>-<?php echo $cont?>"></td>
+                                                    <td><input type="text" class="form-control" value="" id="golV<?php echo $jornadascont2?>-<?php echo $cont?>"></td>
                                                     <td><?php echo $visitaV['nombre_equipo'] ?> <input type="hidden" value="<?php echo $mostrar['id_visita']?>"id="idV<?php echo $jornadascont2?>-<?php echo $cont?>">
                                                         <input type="hidden" value="<?php echo $mostrar['torneo_id']?>" id="torneo<?php echo $jornadascont2?>-<?php echo $cont?>">
                                                     </td>
-                                                    <td><button onclick="guardar(<?php echo $jornadascont2?>,<?php echo $cont2?>)">Guardar</button></td>
+                                                    <td><button class="btn btn-primary" onclick="guardar(<?php echo $jornadascont2?>,<?php echo $cont2?>)">Guardar</button></td>
                                                 </tr>
                                             <?php $cont2++; } ?>
                                         </table>
@@ -164,7 +164,7 @@ $idBaas=$mostrarB['id'];
                                 if (data.estatus == "ok") {///////registro exitoso
                                     Swal.fire({
                                         icon: 'success',
-                                        title: 'Partido Registrado',
+                                        title: 'Partido registrado correctamente',
                                         timer: 2000,
                                         showConfirmButton: false,
                                     });
@@ -172,8 +172,8 @@ $idBaas=$mostrarB['id'];
                                 } else if (data.estatus == "salida") {///////registrado
                                     Swal.fire({
                                         icon: 'info',
-                                        title: 'El torneo ya llego a su maximo de participantes',
-                                        text: 'Debes iniciar sesión para poder inscribirte',
+                                        title: 'El torneo ya llegó a su máximo de participantes',
+                                        text: '',
                                         timer: 2000,
                                         showConfirmButton: false,
                                     });
@@ -237,7 +237,7 @@ $idBaas=$mostrarB['id'];
                                             <th></th>
                                             <th>vs</th>
                                             <th></th>
-                                            <th>vistante</th>
+                                            <th>Vistante</th>
                                         </tr>
                                         <?php
                                         $sql= "SELECT * FROM `partidos_futbol` WHERE jornada='1' and `torneo_id`='$idBaas' and resultado is not null";
@@ -277,7 +277,7 @@ $idBaas=$mostrarB['id'];
                                                 <th></th>
                                                 <th>vs</th>
                                                 <th></th>
-                                                <th>vistante</th>
+                                                <th>Vistante</th>
                                             </tr>
                                             <!--imprime valores  aqui va php -->
                                             <?php
@@ -326,7 +326,7 @@ $idBaas=$mostrarB['id'];
                     <table class="table table-hover">
                         <tr>
                             <th>Equipo</th>
-                            <th>ver jugadores</th>
+                            <th>Jugadores</th>
                         </tr>
                         <?php
                         $sql= "SELECT `id`,`nombre_equipo` FROM `equipos` WHERE `id_torneo`=(SELECT id from creacion_torneo where creacion_torneo.fecha_creacion=(SELECT MAX(`fecha_creacion`) from creacion_torneo WHERE `disciplina`='futbol bardas'))";
@@ -339,7 +339,7 @@ $idBaas=$mostrarB['id'];
                                     <td>
                                         <input type="hidden" name="id_equipo" value="<?php echo $mostrar['id']?>">
                                         <button type="submit" class="btn btn-primary justify-content-md-end" data-toggle="modal" data-target="#crearEquipo"data-toggle="modal" data-target="#crearEquipo">
-                                            jugadores
+                                            Ver
                                         </button>
                                     </td>
                                 </form>
@@ -362,11 +362,9 @@ $idBaas=$mostrarB['id'];
 
 <!-- Footer -->
 <footer class="sticky-footer bg-white">
-    <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2020</span>
-        </div>
-    </div>
+    <?php
+    require 'imc/footer.php';
+    ?>
 </footer>
 <!-- End of Footer -->
 

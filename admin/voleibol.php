@@ -19,7 +19,7 @@ $idVol = $mostrarV['id'];
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Resultados</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Voleibol - Agregar resultados</h6>
 
                 </div>
                 <?php
@@ -63,7 +63,7 @@ $idVol = $mostrarV['id'];
                                             <th>SET 3</th>
                                             <th>SET 2</th>
                                             <th>SET 1</th>
-                                            <th>vistante</th>
+                                            <th>Vistante</th>
                                         </tr>
                                         <?php
                                         $sql= "SELECT * FROM `partidos_vole`   WHERE jornada='1' AND torneo_id= '$idVol' and `resultado` is null";
@@ -81,16 +81,16 @@ $idVol = $mostrarV['id'];
                                             ?>
                                             <tr>
                                                 <td><?php echo $localL['nombre_equipo'] ?> <input type="hidden" value="<?php echo $mostrar['id_local']?>"id="idL1-<?php echo $cont?>"></td>
-                                                <td><input type="text" id="setL1-1-<?php echo $cont?>" style="width: 75px"></td>
-                                                <td><input type="text"  id="setL2-1-<?php echo $cont?>"style="width: 75px"></td>
-                                                <td><input type="text"  id="setL3-1-<?php echo $cont?>" style="width: 75px"></td>
+                                                <td><input type="text" class="form-control" id="setL1-1-<?php echo $cont?>" style="width: 75px"></td>
+                                                <td><input type="text" class="form-control" id="setL2-1-<?php echo $cont?>"style="width: 75px"></td>
+                                                <td><input type="text" class="form-control" id="setL3-1-<?php echo $cont?>" style="width: 75px"></td>
                                                 <td>vs</td>
-                                                <td><input type="text"  id="setV3-1-<?php echo $cont?>" style="width: 75px"></td>
-                                                <td><input type="text"  id="setV2-1-<?php echo $cont?>" style="width: 75px"></td>
-                                                <td><input type="text"  id="setV1-1-<?php echo $cont?>" style="width: 75px"></td>
+                                                <td><input type="text" class="form-control" id="setV3-1-<?php echo $cont?>" style="width: 75px"></td>
+                                                <td><input type="text" class="form-control" id="setV2-1-<?php echo $cont?>" style="width: 75px"></td>
+                                                <td><input type="text" class="form-control" id="setV1-1-<?php echo $cont?>" style="width: 75px"></td>
                                                 <td><?php echo $visitaV['nombre_equipo'] ?> <input type="hidden" value="<?php echo $mostrar['id_visita']?>"id="idV1-<?php echo $cont?>">
                                                     <input type="hidden" value="<?php echo $mostrar['torneo_id']?>" id="torneo1-<?php echo $cont?>"></td>
-                                                <td><button type="button" onclick="guardar(1,<?php echo $cont?>)" > Guardar Resultado</button> </td>
+                                                <td><button type="button" class="btn btn-primary" onclick="guardar(1,<?php echo $cont?>)" >Guardar</button> </td>
                                             </tr>
                                         <?php $cont++; } ?>
                                     </table>
@@ -114,7 +114,7 @@ $idVol = $mostrarV['id'];
                                                 <th>SET 3</th>
                                                 <th>SET 2</th>
                                                 <th>SET 1</th>
-                                                <th>vistante</th>
+                                                <th>Vistante</th>
                                             </tr>
                                             <!--imprime valores -->
                                             <?php
@@ -133,16 +133,16 @@ $idVol = $mostrarV['id'];
                                                 ?>
                                                 <tr>
                                                     <td><?php echo $localL['nombre_equipo'] ?><input type="hidden" value="<?php echo $mostrar3['id_local']?>"id="idL<?php echo $jornadascont2?>-<?php echo $cont?>"></td>
-                                                    <td><input type="text" id="setL1-<?php echo $jornadascont2?>-<?php echo $cont?>" style="width: 75px"></td>
-                                                    <td><input type="text"  id="setL2-<?php echo $jornadascont2?>-<?php echo $cont?>"style="width: 75px"></td>
-                                                    <td><input type="text"  id="setL3-<?php echo $jornadascont2?>-<?php echo $cont?>" style="width: 75px"></td>
+                                                    <td><input type="text" class="form-control" id="setL1-<?php echo $jornadascont2?>-<?php echo $cont?>" style="width: 75px"></td>
+                                                    <td><input type="text" class="form-control" id="setL2-<?php echo $jornadascont2?>-<?php echo $cont?>"style="width: 75px"></td>
+                                                    <td><input type="text" class="form-control" id="setL3-<?php echo $jornadascont2?>-<?php echo $cont?>" style="width: 75px"></td>
                                                     <td>vs</td>
-                                                    <td><input type="text"  id="setV3-<?php echo $jornadascont2?>-<?php echo $cont?>" style="width: 75px"></td>
-                                                    <td><input type="text"  id="setV2-<?php echo $jornadascont2?>-<?php echo $cont?>" style="width: 75px"></td>
-                                                    <td><input type="text"  id="setV1-<?php echo $jornadascont2?>-<?php echo $cont?>" style="width: 75px"></td>
+                                                    <td><input type="text" class="form-control" id="setV3-<?php echo $jornadascont2?>-<?php echo $cont?>" style="width: 75px"></td>
+                                                    <td><input type="text" class="form-control" id="setV2-<?php echo $jornadascont2?>-<?php echo $cont?>" style="width: 75px"></td>
+                                                    <td><input type="text" class="form-control" id="setV1-<?php echo $jornadascont2?>-<?php echo $cont?>" style="width: 75px"></td>
                                                     <td><?php echo $visitaV['nombre_equipo'] ?><input type="hidden" value="<?php echo $mostrar3['id_visita']?>"id="idV<?php echo $jornadascont2?>-<?php echo $cont?>">
                                                         <input type="hidden" value="<?php echo $mostrar3['torneo_id']?>" id="torneo<?php echo $jornadascont2?>-<?php echo $cont?>"></td>
-                                                    <td><button type="button" onclick="guardar(<?php echo $jornadascont2?>,<?php echo $cont?>)" > Guardar Resultado</button> </td>
+                                                    <td><button type="button" class="btn btn-primary" onclick="guardar(<?php echo $jornadascont2?>,<?php echo $cont?>)" >Guardar</button> </td>
                                                 </tr>
                                             <?php  $cont++;} ?>
                                         </table>
@@ -255,7 +255,7 @@ $idVol = $mostrarV['id'];
                                             <th>SET 3</th>
                                             <th>SET 2</th>
                                             <th>SET 1</th>
-                                            <th>vistante</th>
+                                            <th>Vistante</th>
                                         </tr>
                                         <?php
                                         $sql= "SELECT * FROM `partidos_vole`   WHERE jornada='1' and torneo_id= '$idVol' and `resultado` is not null ";
@@ -303,7 +303,7 @@ $idVol = $mostrarV['id'];
                                                 <th>SET 3</th>
                                                 <th>SET 2</th>
                                                 <th>SET 1</th>
-                                                <th>vistante</th>
+                                                <th>Vistante</th>
                                             </tr>
                                             <!--imprime valores -->
                                             <?php
@@ -356,7 +356,7 @@ $idVol = $mostrarV['id'];
                     <table class="table table-hover">
                         <tr>
                             <th>Equipo</th>
-                            <th>ver jugadores</th>
+                            <th>Jugadores</th>
                         </tr>
                         <?php
                         $sql= "SELECT `id`,`nombre_equipo` FROM `equipos` WHERE `id_torneo`=(SELECT id from creacion_torneo where creacion_torneo.fecha_creacion=(SELECT MAX(`fecha_creacion`) from creacion_torneo WHERE `disciplina`='voleibol'))";
@@ -364,12 +364,12 @@ $idVol = $mostrarV['id'];
                         while($mostrar=mysqli_fetch_array($result)) {
                             ?>
                             <tr>
-                                <form action="jugadoresFut.php" method="post">
+                                <form action="jugadoresV.php" method="post">
                                     <td><?php echo $mostrar['nombre_equipo']?></td>
                                     <td>
                                         <input type="hidden" name="id_equipo" value="<?php echo $mostrar['id']?>">
-                                        <button type="submit" class="btn btn-primary justify-content-md-end" data-toggle="modal" data-target="#crearEquipo"data-toggle="modal" data-target="#crearEquipo">
-                                            jugadores
+                                        <button type="submit" class="btn btn-primary justify-content-md-end" data-toggle="modal" data-target="#crearEquipo">
+                                            Ver
                                         </button>
                                     </td>
                                 </form>
@@ -392,11 +392,9 @@ $idVol = $mostrarV['id'];
 
 <!-- Footer -->
 <footer class="sticky-footer bg-white">
-    <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2020</span>
-        </div>
-    </div>
+    <?php
+    require 'imc/footer.php';
+    ?>
 </footer>
 <!-- End of Footer -->
 
@@ -405,32 +403,6 @@ $idVol = $mostrarV['id'];
 
 </div>
 <!-- End of Page Wrapper -->
-
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

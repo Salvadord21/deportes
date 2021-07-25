@@ -13,7 +13,7 @@ $id=$_GET['id_equipo'];
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Agregar Goles</h6>
+                <h6 class="m-0 font-weight-bold text-primary">FIFA - Agregar goles</h6>
 
             </div>
             <div class="card-body">
@@ -21,13 +21,13 @@ $id=$_GET['id_equipo'];
                     <table class="table table-hover">
                         <tr>
                             <th>Jugador</th>
-                            <th>Goles</th>
+                            <th>No. goles</th>
                             <th>Jornada</th>
                             <th></th>
                         </tr>
                         <tr>
                             <td>
-                                <select name="jugador"  id="jugador">
+                                <select name="jugador"  class="form-control" id="jugador">
                                     <option value="value1">Jugador</option>
                                     <?php
                                     $listado = "SELECT `integrantes`.`usuarios_id`, CONCAT(`usuarios`.`nombre`,' ', usuarios.apellido_paterno,' ',usuarios.apellido_materno) as nombre, `equipos`.`id` FROM `equipos` INNER JOIN `integrantes` ON `equipos`.`id` = `integrantes`.`equipos_id` INNER JOIN `usuarios` ON `integrantes`.`usuarios_id` = `usuarios`.`id`
@@ -42,9 +42,9 @@ $id=$_GET['id_equipo'];
                                     ?>
                                 </select>
                             </td>
-                            <td><input type="number" name="gol" id="gol"></td>
+                            <td><input type="number"  class="form-control" name="gol" id="gol"></td>
                             <td>
-                                <select name="jornada" id="jornada">
+                                <select name="jornada"  class="form-control" id="jornada">
                                     <?php
                                     $listado = "SELECT `jornadas` FROM `creacion_torneo` WHERE `id`=( SELECT id from creacion_torneo where creacion_torneo.fecha_creacion=( SELECT MAX(`fecha_creacion`) from creacion_torneo WHERE `disciplina`='fifa'))";
 
@@ -60,7 +60,8 @@ $id=$_GET['id_equipo'];
                                     ?>
                                 </select>
                             </td>
-                            <td><input type="hidden" value="<?php echo $id?>" id="equipo"><button type="button" onclick="guardar()" > Guardar Resultado</button> </td>
+                            <td><input type="hidden" value="<?php echo $id?>" id="equipo">
+                                <button type="button" onclick="guardar()" class="btn btn-primary">Guardar</button> </td>
                         </tr>
                     </table>
                 </form>
@@ -82,7 +83,8 @@ $id=$_GET['id_equipo'];
                             if (data.estatus == "ok") {///////registro exitoso
                                 Swal.fire({
                                     icon: 'success',
-                                    title: 'Goles Registrados',
+                                    title: 'Se guardó de manera correcta',
+                                    text: '',
                                     timer: 2000,
                                     showConfirmButton: false,
                                 });
@@ -90,17 +92,20 @@ $id=$_GET['id_equipo'];
                             } else if (data.estatus == "salida") {///////registrado
                                 Swal.fire({
                                     icon: 'info',
-                                    title: 'El torneo ya llego a su maximo de participantes',
-                                    text: 'Debes iniciar sesión para poder inscribirte',
+                                    title: 'Ups',
+                                    text: 'Ocurrió un error, intentelo nuevamente',
                                     timer: 2000,
                                     showConfirmButton: false,
                                 });
+                                actualizar();
                             }
                         }
                     });
                 }
 
                 function actualizar(){
+                    $('#jugador').val('value1');
+                    $('#gol').val('');
                     $("#result").load(" #result");
                 }
             </script>
@@ -109,8 +114,8 @@ $id=$_GET['id_equipo'];
     </div>
 
     <!-- jugadores -->
-    <div class="col-xl-12 col-lg-7" >
-        <div class="card shadow mb-4" id="result">
+    <div class="col-xl-12 col-lg-7" id="result">
+        <div class="card shadow mb-4" >
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Resultados</h6>
@@ -157,7 +162,7 @@ $id=$_GET['id_equipo'];
                                 <table class="table table-hover">
                                     <tr>
                                         <th>Jugador</th>
-                                        <th>Goles</th>
+                                        <th>No. goles</th>
                                     </tr>
 
                                     <?php
@@ -185,7 +190,7 @@ $id=$_GET['id_equipo'];
                                     <table class="table table-hover">
                                         <tr>
                                             <th>Jugador</th>
-                                            <th>Goles</th>
+                                            <th>No. goles</th>
                                         </tr>
                                         <?php
                                         $sql= "SELECT * FROM `goleadoresfifa`  WHERE jornada='$jornadascont2' and equipo_id='$id'";
@@ -207,27 +212,18 @@ $id=$_GET['id_equipo'];
                     </div>
                 </div >
             <?php } ?>
-
         </div>
     </div>
-
 </div>
-
-
 </div>
-
-
-
 
 <!-- End of Main Content -->
 
 <!-- Footer -->
 <footer class="sticky-footer bg-white">
-    <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2020</span>
-        </div>
-    </div>
+    <?php
+    require 'imc/footer.php';
+    ?>
 </footer>
 <!-- End of Footer -->
 
@@ -236,31 +232,6 @@ $id=$_GET['id_equipo'];
 
 </div>
 <!-- End of Page Wrapper -->
-
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>

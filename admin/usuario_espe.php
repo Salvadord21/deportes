@@ -69,7 +69,7 @@ if ($admin==0){
                             <div class="card shadow mb-4">
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Area de pesas</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Información</h6>
 
                                 </div>
                                 <!-- formulario reto -->
@@ -91,33 +91,33 @@ if ($admin==0){
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-sm-2" for="email">Nombre:</label>
+                                            <label class="control-label col-sm-2" for="email"><strong>Nombre:</strong></label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="anombre" value="<?php echo $nombre ?> <?php echo $apellidopat ?> <?php echo $apellidomat ?>" name="email" readonly>
+                                                <input type="text" class="form-control-plaintext" id="anombre" value="<?php echo $nombre ?> <?php echo $apellidopat ?> <?php echo $apellidomat ?>" name="email" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-sm-2" for="email">Matricula:</label>
+                                            <label class="control-label col-sm-2" for="email"><strong>Matrícula:</strong></label>
                                             <div class="col-sm-10">
-                                                <input type="number" class="form-control" id="amatricula" value="<?php echo $matricula ?>" name="email" readonly>
+                                                <input type="number" class="form-control-plaintext" id="amatricula" value="<?php echo $matricula ?>" name="email" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-sm-2" for="email">Carrera/Area:</label>
+                                            <label class="control-label col-sm-2" for="email"><strong>Área:</strong></label>
                                             <div class="col-sm-10">
-                                                <input type="email" class="form-control" id="acarrera" value="<?php echo $are ?>" name="email" readonly>
+                                                <input type="email" class="form-control-plaintext" id="acarrera" value="<?php echo $are ?>" name="email" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-sm-2" for="email">Correo:</label>
+                                            <label class="control-label col-sm-2" for="email"><strong>Correo:</strong></label>
                                             <div class="col-sm-10">
-                                                <input type="email" class="form-control" id="aemail" value="<?php echo $correo ?>" name="email" readonly>
+                                                <input type="email" class="form-control-plaintext" id="aemail" value="<?php echo $correo ?>" name="email" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-sm-2" for="email">Telefono:</label>
+                                            <label class="control-label col-sm-2" for="email"><strong>Teléfono:</strong></label>
                                             <div class="col-sm-10">
-                                                <input type="email" class="form-control" id="acel" value="<?php echo $cel ?>" name="email" readonly>
+                                                <input type="email" class="form-control-plaintext" id="acel" value="<?php echo $cel ?>" name="email" readonly>
                                             </div>
                                         </div>
 
@@ -138,10 +138,10 @@ if ($admin==0){
                                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                                             <thead>
                                                             <tr>
-                                                                <th>estatura</th>
-                                                                <th>peso</th>
+                                                                <th>Estatura</th>
+                                                                <th>Peso</th>
                                                                 <th>IMC</th>
-                                                                <th>fecha</th>
+                                                                <th>Fecha</th>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
@@ -206,10 +206,10 @@ if ($admin==0){
                                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                                             <thead>
                                                             <tr>
-                                                                <th>nombre del reto</th>
-                                                                <th>descripcion</th>
-                                                                <th>calificacion</th>
-                                                                <th>fecha</th>
+                                                                <th>Reto</th>
+                                                                <th>Descripción</th>
+                                                                <th>Calificación</th>
+                                                                <th>Fecha</th>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
@@ -280,30 +280,20 @@ if ($admin==0){
                                     }
                                 });
                             });
-
-
-
                             function actualizar(){
                                 $( "#result" ).load( " #result" );
                             }
-
-
                         </script>
-
-
                 </div>
                 <!-- /.container-fluid -->
-
             </div>
             <!-- End of Main Content -->
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
-                    </div>
-                </div>
+                <?php
+                require 'imc/footer.php';
+                ?>
             </footer>
             <!-- End of Footer -->
 
@@ -312,32 +302,6 @@ if ($admin==0){
 
     </div>
     <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

@@ -20,7 +20,7 @@ $idAs = $mostrarA['id'];
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Agregar Resultado</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Fútbol ascenso - Agregar resultados</h6>
                 </div>
                 <div class="card-body">
                     <?php
@@ -61,7 +61,7 @@ $idAs = $mostrarA['id'];
                                             <th></th>
                                             <th>vs</th>
                                             <th></th>
-                                            <th>vistante</th>
+                                            <th>Vistante</th>
                                         </tr>
                                         <?php
                                         $sql= "SELECT * FROM `partidos_ascenso` WHERE jornada='1' and `torneo_id`='$idAs' and`resultado`is null";
@@ -79,13 +79,13 @@ $idAs = $mostrarA['id'];
                                             ?>
                                             <tr>
                                                 <td><?php echo $localL['nombre_equipo']?> <input type="hidden" value="<?php echo $mostrar['id_local']?>" id="idL1-<?php echo $cont?>"> </td>
-                                                <td><input type="text" value="" id="golL1-<?php echo $cont?>"></td>
+                                                <td><input type="text" value="" class="form-control" id="golL1-<?php echo $cont?>"></td>
                                                 <td>vs</td>
-                                                <td><input type="text" value="" id="golV1-<?php echo $cont?>"></td>
+                                                <td><input type="text" value="" class="form-control" id="golV1-<?php echo $cont?>"></td>
                                                 <td><?php echo $visitaV['nombre_equipo'] ?> <input type="hidden" value="<?php echo $mostrar['id_visita']?>"id="idV1-<?php echo $cont?>">
                                                     <input type="hidden" value="<?php echo $mostrar['torneo_id']?>" id="torneo1-<?php echo $cont?>">
                                                 </td>
-                                                <td><button onclick="guardar(1,<?php echo $cont?>)">Guardar</button>
+                                                <td><button class="btn btn-primary" onclick="guardar(1,<?php echo $cont?>)">Guardar</button>
                                                 </td>
                                             </tr>
                                             <?php $cont++; } ?>
@@ -105,7 +105,7 @@ $idAs = $mostrarA['id'];
                                                 <th></th>
                                                 <th>vs</th>
                                                 <th></th>
-                                                <th>vistante</th>
+                                                <th>Vistante</th>
                                             </tr>
                                             <!--imprime valores  aqui va php -->
                                             <?php
@@ -125,13 +125,13 @@ $idAs = $mostrarA['id'];
                                                 ?>
                                                 <tr>
                                                     <td><?php echo $localL['nombre_equipo']?> <input type="hidden" value="<?php echo $mostrar['id_local']?>" id="idL<?php echo $jornadascont2?>-<?php echo $cont?>"> </td>
-                                                    <td><input type="text" value="" id="golL<?php echo $jornadascont2?>-<?php echo $cont?>"></td>
+                                                    <td><input type="text" value="" class="form-control" id="golL<?php echo $jornadascont2?>-<?php echo $cont?>"></td>
                                                     <td>vs</td>
-                                                    <td><input type="text" value="" id="golV<?php echo $jornadascont2?>-<?php echo $cont?>"></td>
+                                                    <td><input type="text" value="" class="form-control" id="golV<?php echo $jornadascont2?>-<?php echo $cont?>"></td>
                                                     <td><?php echo $visitaV['nombre_equipo'] ?> <input type="hidden" value="<?php echo $mostrar['id_visita']?>"id="idV<?php echo $jornadascont2?>-<?php echo $cont?>">
                                                         <input type="hidden" value="<?php echo $mostrar['torneo_id']?>" id="torneo<?php echo $jornadascont2?>-<?php echo $cont?>">
                                                     </td>
-                                                    <td><button onclick="guardar(<?php echo $jornadascont2?>,<?php echo $cont2?>)">Guardar</button></td>
+                                                    <td><button class="btn btn-primary" onclick="guardar(<?php echo $jornadascont2?>,<?php echo $cont2?>)">Guardar</button></td>
                                                 </tr>
                                                 <?php $cont2++; } ?>
                                         </table>
@@ -243,7 +243,7 @@ $idAs = $mostrarA['id'];
                                             <th></th>
                                             <th>vs</th>
                                             <th></th>
-                                            <th>vistante</th>
+                                            <th>Vistante</th>
                                         </tr>
                                         <?php
                                         $sql= "SELECT * FROM `partidos_ascenso` WHERE jornada='1' and `torneo_id`='$idAs' and `resultado` is not null";
@@ -284,7 +284,7 @@ $idAs = $mostrarA['id'];
                                                 <th></th>
                                                 <th>vs</th>
                                                 <th></th>
-                                                <th>vistante</th>
+                                                <th>Vistante</th>
                                             </tr>
                                             <!--imprime valores -->
                                             <?php
@@ -333,7 +333,7 @@ $idAs = $mostrarA['id'];
                     <table class="table table-hover">
                         <tr>
                             <th>Equipo</th>
-                            <th>ver jugadores</th>
+                            <th>Jugadores</th>
                         </tr>
                         <?php
                         $sql= "SELECT `id`,`nombre_equipo` FROM `equipos` WHERE `id_torneo`=(SELECT id from creacion_torneo where creacion_torneo.fecha_creacion=(SELECT MAX(`fecha_creacion`) from creacion_torneo WHERE `disciplina`='ascenso'))";
@@ -346,7 +346,7 @@ $idAs = $mostrarA['id'];
                                     <td>
                                         <input type="hidden" name="id_equipo" value="<?php echo $mostrar['id']?>">
                                         <button type="submit" class="btn btn-primary justify-content-md-end" data-toggle="modal" data-target="#crearEquipo"data-toggle="modal" data-target="#crearEquipo">
-                                            jugadores
+                                            Ver
                                         </button>
                                     </td>
                                 </form>
@@ -369,11 +369,9 @@ $idAs = $mostrarA['id'];
 
 <!-- Footer -->
 <footer class="sticky-footer bg-white">
-    <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2020</span>
-        </div>
-    </div>
+    <?php
+    require 'imc/footer.php';
+    ?>
 </footer>
 <!-- End of Footer -->
 
@@ -382,32 +380,6 @@ $idAs = $mostrarA['id'];
 
 </div>
 <!-- End of Page Wrapper -->
-
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

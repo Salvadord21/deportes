@@ -3,10 +3,8 @@ session_start();
 include 'imc/header.php';
 include '../php/conexion.php';
 
-
-
 ?>
-
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 <!-- inicio pagina -->
 <div class="container-fluid">
@@ -17,12 +15,13 @@ include '../php/conexion.php';
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Agregar partidos</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Partidos</h6>
                 </div>
 
                 <div class="card-body" id="result2">
                     <div class="col-12">
-                        <select class="form-control " name="torneo" id="torneo" required style="width:100%" >
+                        <p>Agregar partidos</p>
+                        <select class="form-control" name="torneo" id="torneo" required style="width:100%" >
                             <option value="">Seleccione un torneo</option>
                             <?php
                             include 'imc/select-torneo.php'
@@ -42,7 +41,7 @@ include '../php/conexion.php';
                             </tr>
                             <tr>
                                 <td>
-                                    <select name="local"  id="localB">
+                                    <select name="local" class="form-control" id="localB">
                                         <option value="value1">Local</option>
                                         <?php
                                         require 'imc/EquiposFut.php';
@@ -51,7 +50,7 @@ include '../php/conexion.php';
                                 </td>
                                 <td>vs</td>
                                 <td>
-                                    <select name="visita" id="visitaB">
+                                    <select name="visita" class="form-control" id="visitaB">
                                         <option value="value1">Visitante</option>
                                         <?php
                                         require 'imc/EquiposFut.php';
@@ -59,7 +58,7 @@ include '../php/conexion.php';
                                     </select>
                                 </td>
                                 <td>
-                                    <select name="jornada" id="jornadaB">
+                                    <select name="jornada" class="form-control" id="jornadaB">
                                         <?php
                                         $listado = "SELECT `jornadas` FROM `creacion_torneo` WHERE `id`=( SELECT id from creacion_torneo where creacion_torneo.fecha_creacion=( SELECT MAX(`fecha_creacion`) from creacion_torneo WHERE `disciplina`='futbol bardas'))";
 
@@ -76,7 +75,7 @@ include '../php/conexion.php';
                                     </select>
 
                                 </td>
-                                <td><input type="datetime-local" id="fechaB"></td>
+                                <td><input type="datetime-local" class="form-control" id="fechaB"></td>
                                 <td>
                                     <?php
                                     $sql= "SELECT * FROM `creacion_torneo` WHERE disciplina='futbol bardas'AND fecha_creacion = ( SELECT MAX(fecha_creacion) FROM `creacion_torneo` WHERE disciplina = 'futbol bardas')";
@@ -84,7 +83,7 @@ include '../php/conexion.php';
                                     $idTorneo=mysqli_fetch_array($result);
                                     ?>
                                     <input type="hidden"value="<?php echo $idTorneo['id'] ?>" id="torneoB">
-                                    <button type="button" onclick="guardarBardas()" >Guardar</button>
+                                    <button class="btn btn-primary" type="button" onclick="guardarBardas()" >Guardar</button>
                                 </td>
                             </tr>
                         </table>
@@ -101,7 +100,7 @@ include '../php/conexion.php';
                             </tr>
                             <tr>
                                 <td>
-                                    <select name="local"  id="localA">
+                                    <select name="local" class="form-control" id="localA">
                                         <option value="value1">Local</option>
                                         <?php
                                         require 'imc/EquiposFut2.php';
@@ -110,7 +109,7 @@ include '../php/conexion.php';
                                 </td>
                                 <td>vs</td>
                                 <td>
-                                    <select name="visita" id="visitaA">
+                                    <select name="visita" class="form-control" id="visitaA">
                                         <option value="value1">Visitante</option>
                                         <?php
                                         require 'imc/EquiposFut2.php';
@@ -118,7 +117,7 @@ include '../php/conexion.php';
                                     </select>
                                 </td>
                                 <td>
-                                    <select name="jornada" id="jornadaA">
+                                    <select name="jornada" class="form-control" id="jornadaA">
                                         <?php
                                         $listado = "SELECT `jornadas` FROM `creacion_torneo` WHERE `id`=( SELECT id from creacion_torneo where creacion_torneo.fecha_creacion=( SELECT MAX(`fecha_creacion`) from creacion_torneo WHERE `disciplina`='ascenso'))";
 
@@ -140,8 +139,8 @@ include '../php/conexion.php';
                                     ?>
                                     <input type="hidden"value="<?php echo $idTorneo['id'] ?>" id="torneoA">
                                 </td>
-                                <td><input type="datetime-local" id="fechaA"></td>
-                                <td><button type="button" onclick="guardarAscenso()" >Guardar</button> </td>
+                                <td><input type="datetime-local" class="form-control" id="fechaA"></td>
+                                <td><button class="btn btn-primary" type="button" onclick="guardarAscenso()" >Guardar</button> </td>
                             </tr>
                         </table>
                     </form>
@@ -157,7 +156,7 @@ include '../php/conexion.php';
                             </tr>
                             <tr>
                                 <td>
-                                    <select name="local"  id="localF">
+                                    <select name="local" class="form-control" id="localF">
                                         <option value="value1">Local</option>
                                         <?php
                                         require 'imc/equiposFifa.php';
@@ -166,7 +165,7 @@ include '../php/conexion.php';
                                 </td>
                                 <td>vs</td>
                                 <td>
-                                    <select name="visita" id="visitaF">
+                                    <select name="visita" class="form-control" id="visitaF">
                                         <option value="value1">Visitante</option>
                                         <?php
                                         require 'imc/equiposFifa.php';
@@ -174,7 +173,7 @@ include '../php/conexion.php';
                                     </select>
                                 </td>
                                 <td>
-                                    <select name="jornada" id="jornadaF">
+                                    <select name="jornada" class="form-control" id="jornadaF">
                                         <?php
                                         $listado = "SELECT `jornadas` FROM `creacion_torneo` WHERE `id`=( SELECT id from creacion_torneo where creacion_torneo.fecha_creacion=( SELECT MAX(`fecha_creacion`) from creacion_torneo WHERE `disciplina`='FIFA'))";
 
@@ -196,8 +195,8 @@ include '../php/conexion.php';
                                     ?>
                                     <input type="hidden"value="<?php echo $idTorneo['id'] ?>" id="torneoF">
                                 </td>
-                                <td><input type="datetime-local" id="fechaF"></td>
-                                <td><button type="button" onclick="guardarFIFA()" >Guardar</button> </td>
+                                <td><input type="datetime-local" class="form-control" id="fechaF"></td>
+                                <td><button type="button" class="btn btn-primary" onclick="guardarFIFA()" >Guardar</button> </td>
                             </tr>
                         </table>
                     </form>
@@ -213,7 +212,7 @@ include '../php/conexion.php';
                             </tr>
                             <tr>
                                 <td>
-                                    <select name="local"  id="localV">
+                                    <select name="local" class="form-control" id="localV">
                                         <option value="value1">Local</option>
                                         <?php
                                         require 'imc/EquiposVole.php';
@@ -222,7 +221,7 @@ include '../php/conexion.php';
                                 </td>
                                 <td>vs</td>
                                 <td>
-                                    <select name="visita" id="visitaV">
+                                    <select name="visita" class="form-control" id="visitaV">
                                         <option value="value1">Visitante</option>
                                         <?php
                                         require 'imc/EquiposVole.php';
@@ -230,7 +229,7 @@ include '../php/conexion.php';
                                     </select>
                                 </td>
                                 <td>
-                                    <select name="jornada" id="jornadaV">
+                                    <select name="jornada" class="form-control" id="jornadaV">
                                         <?php
                                         $listado = "SELECT `jornadas` FROM `creacion_torneo` WHERE `id`=( SELECT id from creacion_torneo where creacion_torneo.fecha_creacion=( SELECT MAX(`fecha_creacion`) from creacion_torneo WHERE `disciplina`='Voleibol'))";
 
@@ -252,9 +251,9 @@ include '../php/conexion.php';
                                     ?>
                                     <input type="hidden"value="<?php echo $idTorneo['id'] ?>" id="torneoV">
                                 </td>
-                                <td><input type="datetime-local" id="fechaV"></td>
+                                <td><input type="datetime-local" class="form-control" id="fechaV"></td>
 
-                                <td><button type="button" onclick="guardarVole()" >Guardar</button> </td>
+                                <td><button type="button" class="btn btn-primary" onclick="guardarVole()" >Guardar</button> </td>
                             </tr>
                         </table>
                     </form>
@@ -270,7 +269,7 @@ include '../php/conexion.php';
                             </tr>
                             <tr>
                                 <td>
-                                    <select name="local"  id="localBa">
+                                    <select name="local" class="form-control" id="localBa">
                                         <option value="value1">Local</option>
                                         <?php
                                         require 'imc/EquiposBas.php';
@@ -279,7 +278,7 @@ include '../php/conexion.php';
                                 </td>
                                 <td>vs</td>
                                 <td>
-                                    <select name="visita" id="visitaBa">
+                                    <select name="visita" class="form-control" id="visitaBa">
                                         <option value="value1">Visitante</option>
                                         <?php
                                         require 'imc/EquiposBas.php';
@@ -287,7 +286,7 @@ include '../php/conexion.php';
                                     </select>
                                 </td>
                                 <td>
-                                    <select name="jornada" id="jornadaBa">
+                                    <select name="jornada" class="form-control" id="jornadaBa">
                                         <?php
                                         $listado = "SELECT `jornadas` FROM `creacion_torneo` WHERE `id`=( SELECT id from creacion_torneo where creacion_torneo.fecha_creacion=( SELECT MAX(`fecha_creacion`) from creacion_torneo WHERE `disciplina`='Basquetbol'))";
 
@@ -309,8 +308,8 @@ include '../php/conexion.php';
                                     ?>
                                     <input type="hidden"value="<?php echo $idTorneo['id'] ?>" id="torneoBa">
                                 </td>
-                                <td><input type="datetime-local" id="fechaBa"></td>
-                                <td><button type="button" onclick="guardarBas()" >Guardar</button> </td>
+                                <td><input type="datetime-local" class="form-control" id="fechaBa"></td>
+                                <td><button type="button" class="btn btn-primary" onclick="guardarBas()" >Guardar</button> </td>
                             </tr>
                         </table>
                     </form>
@@ -531,7 +530,7 @@ include '../php/conexion.php';
                                         <tr>
                                             <th>Local</th>
                                             <th>vs</th>
-                                            <th>vistante</th>
+                                            <th>Vistante</th>
                                             <th>Jornada</th>
                                         </tr>
                                         <?php
@@ -564,8 +563,8 @@ include '../php/conexion.php';
                                     <tr>
                                         <th>Local</th>
                                         <th>vs</th>
-                                        <th>vistante</th>
-                                        <th>Jornada2</th>
+                                        <th>Vistante</th>
+                                        <th>Jornada</th>
                                     </tr>
                                     <?php
                                     $sql= "SELECT * FROM `partidos_ascenso` WHERE `torneo_id`=(SELECT MAX(id) FROM creacion_torneo WHERE `disciplina`='ascenso');";
@@ -597,7 +596,7 @@ include '../php/conexion.php';
                                     <tr>
                                         <th>Local</th>
                                         <th>vs</th>
-                                        <th>vistante</th>
+                                        <th>Vistante</th>
                                         <th>Jornada</th>
                                     </tr>
                                     <?php
@@ -630,7 +629,7 @@ include '../php/conexion.php';
                                     <tr>
                                         <th>Local</th>
                                         <th>vs</th>
-                                        <th>vistante</th>
+                                        <th>Vistante</th>
                                         <th>Jornada</th>
                                     </tr>
                                     <?php
@@ -663,7 +662,7 @@ include '../php/conexion.php';
                                     <tr>
                                         <th>Local</th>
                                         <th>vs</th>
-                                        <th>vistante</th>
+                                        <th>Vistante</th>
                                         <th>Jornada</th>
                                     </tr>
                                     <?php
@@ -707,11 +706,9 @@ include '../php/conexion.php';
 
 <!-- Footer -->
 <footer class="sticky-footer bg-white">
-    <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2020</span>
-        </div>
-    </div>
+    <?php
+    require 'imc/footer.php';
+    ?>
 </footer>
 <!-- End of Footer -->
 
@@ -720,32 +717,6 @@ include '../php/conexion.php';
 
 </div>
 <!-- End of Page Wrapper -->
-
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

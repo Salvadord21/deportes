@@ -6,10 +6,7 @@ include '../php/conexion.php';
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
     <!-- Page Heading -->
-
-
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Retos</h6>
@@ -49,8 +46,8 @@ include '../php/conexion.php';
                                                 <th>Nombre</th>
                                                 <th>Reto</th>
                                                 <th>URL</th>
-                                                <th>calificacion</th>
-                                                <th>nota</th>
+                                                <th>Calificación</th>
+                                                <th>Nota</th>
                                                 <th></th>
                                             </tr>
                                             </thead>
@@ -73,7 +70,7 @@ include '../php/conexion.php';
                                                         <td><?php echo $mostrar['nombre_reto'] ?></td>
                                                         <td><a href="<?php echo $mostrar['url'] ?>">link</a></td>
                                                         <td><select name="diciplinas2[]" class="form-control" id="disciplinas">
-                                                                <option value="0"<?php echo $areas == '0' ? 'selected="selected"'  : '' ?>>Calificacion</option>
+                                                                <option value="0"<?php echo $areas == '0' ? 'selected="selected"'  : '' ?>>Calificación</option>
                                                                 <option value="1"<?php echo $areas == '1' ? 'selected="selected"'  : '' ?>>Regular</option>
                                                                 <option value="2"<?php echo $areas == '2' ? 'selected="selected"'  : '' ?>>Bien</option>
                                                                 <option value="3"<?php echo $areas == '3' ? 'selected="selected"'  : '' ?>>Excelente</option>
@@ -104,8 +101,8 @@ include '../php/conexion.php';
                                                 <th>Nombre</th>
                                                 <th>Reto</th>
                                                 <th>URL</th>
-                                                <th>calificacion</th>
-                                                <th>nota</th>
+                                                <th>Calificación</th>
+                                                <th>Nota</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -121,7 +118,7 @@ include '../php/conexion.php';
                                                     <form action="imc/calificar_reto.php" method="post">
                                                         <td><?php echo $mostrar['nombre'] ?></td>
                                                         <td><?php echo $mostrar['nombre_reto'] ?></td>
-                                                        <td><a href="<?php echo $mostrar['url'] ?>"  target="_blank">link</a></td>
+                                                        <td><a href="<?php echo $mostrar['url'] ?>"  target="_blank">Link</a></td>
                                                         <td ><?php
                                                             if ($x=='1'){
                                                                 echo '<p>Regular</p>';
@@ -147,7 +144,7 @@ include '../php/conexion.php';
                 </div>
                 <!-- reto pasados -->
                 <div class="tab-pane fade show" id="retos-pasados" role="tabpanel" aria-labelledby="tab-futbol-jugadores">
-                    <br>
+                    <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
@@ -155,8 +152,8 @@ include '../php/conexion.php';
                                     <th>Nombre</th>
                                     <th>Reto</th>
                                     <th>URL</th>
-                                    <th>calificacion</th>
-                                    <th>nota</th>
+                                    <th>Calificación</th>
+                                    <th>Nota</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -172,7 +169,7 @@ include '../php/conexion.php';
                                         <form action="imc/calificar_reto.php" method="post">
                                             <td><?php echo $mostrar['nombre'] ?></td>
                                             <td><?php echo $mostrar['nombre_reto'] ?></td>
-                                            <td><a href="<?php echo $mostrar['url'] ?>"  target="_blank">link</a></td>
+                                            <td><a href="<?php echo $mostrar['url'] ?>"  target="_blank">Link</a></td>
                                             <td ><?php
                                                 if ($x=='1'){
                                                     echo '<p>Regular</p>';
@@ -191,15 +188,12 @@ include '../php/conexion.php';
                                 ?>
                                 </tbody>
                             </table>
-                        </div>
+                    </div>
+                    </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
 </div>
 <!-- /.container-fluid -->
 
@@ -208,11 +202,9 @@ include '../php/conexion.php';
 
 <!-- Footer -->
 <footer class="sticky-footer bg-white">
-    <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2020</span>
-        </div>
-    </div>
+    <?php
+    include 'imc/footer.php';
+    ?>
 </footer>
 <!-- End of Footer -->
 
@@ -221,31 +213,6 @@ include '../php/conexion.php';
 
 </div>
 <!-- End of Page Wrapper -->
-
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>
