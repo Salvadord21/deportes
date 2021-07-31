@@ -287,6 +287,7 @@ $idBasquet2 = $mostrarBa['id'];
         <!--Menu principal-->
         <div class="nav nav-pills nav-fill" id="menu-torneos-disciplinas" role="tablist">
             <a class="nav-item nav-link active" id="menu-torneos-basquet" data-toggle="pill" href="#resultado" role="tab" aria-controls="resultado" aria-selected="false">Torneos</a>
+            <a class="nav-item nav-link" id="menu-torneos-equipos" data-toggle="pill" href="#torneos-equipos" role="tab" aria-controls="torneos-equipos" aria-selected="false">Equipos</a>
             <a class="nav-item nav-link " id="menu-torneos-futbol" data-toggle="pill" href="#torneos-futbol" role="tab" aria-controls="torneos-futbol" aria-selected="true">Bardas Premier</a>
             <a class="nav-item nav-link " id="menu-torneos-futbol-2" data-toggle="pill" href="#torneos-asenso" role="tab" aria-controls="torneos-futbol" aria-selected="true">Bardas Ascenso</a>
             <a class="nav-item nav-link" id="menu-torneos-fifa" data-toggle="pill" href="#torneos-fifa" role="tab" aria-controls="torneos-fifa" aria-selected="false">FIFA</a>
@@ -349,11 +350,16 @@ $idBasquet2 = $mostrarBa['id'];
                     <div class="tab-pane fade show active" id="futbol-general" role="tabpanel" aria-labelledby="tab-futbol-general">
                         <table class="table table-hover">
                             <tr>
-                                <th>local</th>
-                                <th>gol</th>
-                                <th>vs</th>
-                                <th>Goles</th>
-                                <th>visitante</th>
+                                <th>#</th>
+                                <th>Equipo</th>
+                                <th>JJ</th>
+                                <th>JG</th>
+                                <th>JE</th>
+                                <th>JP</th>
+                                <th>GF</th>
+                                <th>GC</th>
+                                <th>DF</th>
+                                <th>Puntos</th>
                             </tr>
                             <tbody>
                             <?php
@@ -384,11 +390,9 @@ $idBasquet2 = $mostrarBa['id'];
                     <div class="tab-pane fade" id="futbol-ofensiva" role="tabpanel" aria-labelledby="tab-futbol-ofensiva">
                         <table class="table table-hover">
                             <tr>
-                                <th>local</th>
-                                <th>gol</th>
-                                <th>vs</th>
+                                <th>#</th>
+                                <th>Equippo</th>
                                 <th>Goles</th>
-                                <th>visitante</th>
                             </tr>
                             <tbody>
                             <?php
@@ -413,11 +417,9 @@ $idBasquet2 = $mostrarBa['id'];
                     <div class="tab-pane fade" id="futbol-defensiva" role="tabpanel" aria-labelledby="tab-futbol-defensiva">
                         <table class="table table-hover">
                             <tr>
-                                <th>local</th>
-                                <th>gol</th>
-                                <th>vs</th>
+                                <th>#</th>
+                                <th>Equippo</th>
                                 <th>Goles</th>
-                                <th>visitante</th>
                             </tr>
                             <tbody>
                             <?php
@@ -444,8 +446,7 @@ $idBasquet2 = $mostrarBa['id'];
                         <table class="table table-hover">
                             <tr>
                                 <th>#</th>
-                                <th>Goleador</th>
-                                <th>Equipo</th>
+                                <th>Jugador</th>
                                 <th>Goles</th>
                             </tr>
                             <tbody>
@@ -453,15 +454,17 @@ $idBasquet2 = $mostrarBa['id'];
                             $sql= "SELECT `nombre`,SUM( `goles`) as goles, `nombre_equipo`FROM `goleadoresfut` WHERE`torneo_id`='$idBaas2' GROUP BY `nombre` ORDER BY `goles` DESC ";
                             $result=mysqli_query($conexion,$sql);
                             $pop = 0;
-
+                            $cont=1;
                             while($mostrar=mysqli_fetch_array($result)){
                                 ?>
                                 <tr>
+                                    <td><?php echo $cont ?></td>
                                     <td><?php echo $mostrar['nombre'] ?></td>
+                                    <td><?php echo $mostrar['nombre_equipo'] ?></td>
                                     <td><?php echo $mostrar['goles'] ?></td>
 
                                 </tr>
-                            <?php } ?>
+                            <?php $cont++;} ?>
                             </tbody>
 
                         </table>
@@ -491,11 +494,16 @@ $idBasquet2 = $mostrarBa['id'];
                     <div class="tab-pane fade show active" id="futbol-general-a" role="tabpanel" aria-labelledby="tab-futbol-general-a">
                         <table class="table table-hover">
                             <tr>
-                                <th><?php echo $idBaas2 ?></th>
-                                <th><?php echo $idAs2?></th>
-                                <th><?php echo $idFif2 ?></th>
-                                <th><?php echo $idVol2 ?></th>
-                                <th><?php echo $idBasquet2?></th>
+                                <th>#</th>
+                                <th>Equipo</th>
+                                <th>JJ</th>
+                                <th>JG</th>
+                                <th>JE</th>
+                                <th>JP</th>
+                                <th>GF</th>
+                                <th>GC</th>
+                                <th>DF</th>
+                                <th>Puntos</th>
                             </tr>
                             <tbody>
                             <?php
@@ -526,11 +534,9 @@ $idBasquet2 = $mostrarBa['id'];
                     <div class="tab-pane fade" id="futbol-ofensiva-a" role="tabpanel" aria-labelledby="tab-futbol-ofensiva-a">
                         <table class="table table-hover">
                             <tr>
-                                <th>local</th>
-                                <th>gol</th>
-                                <th>vs</th>
+                                <th>#</th>
+                                <th>Equipo</th>
                                 <th>Goles</th>
-                                <th>visitante</th>
                             </tr>
                             <tbody>
                             <?php
@@ -556,11 +562,9 @@ $idBasquet2 = $mostrarBa['id'];
                     <div class="tab-pane fade" id="futbol-defensiva-a" role="tabpanel" aria-labelledby="tab-futbol-defensiva-a">
                         <table class="table table-hover">
                             <tr>
-                                <th>local</th>
-                                <th>gol</th>
-                                <th>vs</th>
+                                <th>#</th>
+                                <th>Equipo</th>
                                 <th>Goles</th>
-                                <th>visitante</th>
                             </tr>
                             <tbody>
                             <?php
@@ -585,11 +589,10 @@ $idBasquet2 = $mostrarBa['id'];
                     <div class="tab-pane fade" id="futbol-defensiva-ab" role="tabpanel" aria-labelledby="tab-futbol-defensiva-a">
                         <table class="table table-hover">
                             <tr>
-                                <th>local</th>
-                                <th>gol</th>
-                                <th>vs</th>
+                                <th>#</th>
+                                <th>Jugador</th>
+                                <th>Equipo</th>
                                 <th>Goles</th>
-                                <th>visitante</th>
                             </tr>
                             <tbody>
                             <?php
@@ -630,11 +633,16 @@ $idBasquet2 = $mostrarBa['id'];
                     <div class="tab-pane fade show active" id="fifa-general" role="tabpanel" aria-labelledby="tab-futbol-general">
                         <table class="table table-hover">
                             <tr>
-                                <th>local</th>
-                                <th>gol</th>
-                                <th>vs</th>
-                                <th>Goles</th>
-                                <th>visitante</th>
+                                <th>#</th>
+                                <th>Equipo</th>
+                                <th>JJ</th>
+                                <th>JG</th>
+                                <th>JE</th>
+                                <th>JP</th>
+                                <th>GF</th>
+                                <th>GC</th>
+                                <th>DF</th>
+                                <th>Puntos</th>
                             </tr>
                             <tbody>
                             <?php
@@ -666,11 +674,10 @@ $idBasquet2 = $mostrarBa['id'];
 
                         <table class="table table-hover">
                             <tr>
-                                <th>local</th>
-                                <th>gol</th>
-                                <th>vs</th>
+                                <th>#</th>
+                                <th>Jugador</th>
+                                <th>Equipo</th>
                                 <th>Goles</th>
-                                <th>visitante</th>
                             </tr>
                             <tbody>
                             <?php
@@ -698,11 +705,17 @@ $idBasquet2 = $mostrarBa['id'];
             <div class="tab-pane fade" id="torneos-volley" role="tabpanel" aria-labelledby="menu-torneos-volley">
                 <table class="table table-hover">
                     <tr>
-                        <th>local</th>
-                        <th>gol</th>
-                        <th>vs</th>
-                        <th>Goles</th>
-                        <th>visitante</th>
+                        <th>#</th>
+                        <th>Equipo</th>
+                        <th>JJ</th>
+                        <th>JG</th>
+                        <th>JP</th>
+                        <th>PF</th>
+                        <th>PC</th>
+                        <th>PP</th>
+                        <th>SetF</th>
+                        <th>SetC</th>
+                        <th>PS</th>
                     </tr>
                     <tbody>
                     <?php
@@ -734,11 +747,15 @@ $idBasquet2 = $mostrarBa['id'];
             <div class="tab-pane fade" id="torneos-basquet" role="tabpanel" aria-labelledby="menu-torneos-basquet">
                 <table class="table table-hover">
                     <tr>
-                        <th>local</th>
-                        <th>gol</th>
-                        <th>vs</th>
-                        <th>Goles</th>
-                        <th>visitante</th>
+                        <th>#</th>
+                        <th>Equipo</th>
+                        <th>JJ</th>
+                        <th>JG</th>
+                        <th>JP</th>
+                        <th>GF</th>
+                        <th>GC</th>
+                        <th>DF</th>
+                        <th>Puntos</th>
                     </tr>
                     <tbody>
                     <?php
