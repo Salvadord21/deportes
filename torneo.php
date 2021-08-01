@@ -294,7 +294,6 @@ $idBasquet2 = $mostrarBa['id'];
             <a class="nav-item nav-link" id="menu-torneos-volley" data-toggle="pill" href="#torneos-volley" role="tab" aria-controls="torneos-volley" aria-selected="false">Voleibol</a>
             <a class="nav-item nav-link" id="menu-torneos-basquet" data-toggle="pill" href="#torneos-basquet" role="tab" aria-controls="torneos-basquet" aria-selected="false">Basquétbol</a>
             <a class="nav-item nav-link" id="menu-torneos-otros" data-toggle="pill" href="#torneos-otros" role="tab" aria-controls="torneos-otros" aria-selected="false">  Otros torneos</a>
-            <a class="nav-item nav-link" id="menu-torneos-equipos" data-toggle="pill" href="#torneos-equipos" role="tab" aria-controls="torneos-equipos" aria-selected="false">Equipos</a>
 
         </div>
         <br>
