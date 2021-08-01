@@ -2,7 +2,7 @@
 session_start();
 include 'imc/header.php';
 include '../php/conexion.php';
-$id=$_POST['id_tor'];
+$id=$_POST['id_equipo'];
 ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -24,16 +24,15 @@ $id=$_POST['id_tor'];
                     </thead>
                     <tbody>
                     <?php
-                    $sql= "SELECT usuarios.nombre, usuarios.apellidos, usuarios.matricula FROM `integrantes` 
-                    LEFT JOIN `usuarios` ON usuarios.id = integrantes.id_usuario LEFT JOIN `equipos` ON 
-                    equipos.id = integrantes.id_equipo WHERE integrantes.id_equipo = $id";
+                    $sql= "SELECT usuarios.matricula, CONCAT(`usuarios`.`nombre`,' ', usuarios.apellido_paterno,' ',usuarios.apellido_materno) as nombre, `equipos`.`id` FROM `equipos` INNER JOIN `integrantes` ON `equipos`.`id` = `integrantes`.`equipos_id` INNER JOIN `usuarios` ON `integrantes`.`usuarios_id` = `usuarios`.`id`
+                        WHERE equipos.id='$id';";
                     $result= mysqli_query($conexion,$sql);
                     while($mostrar=mysqli_fetch_array($result)){
 
                         ?>
                         <tr>
                             <td><?php echo $mostrar['matricula'] ?></td>
-                            <td><?php echo $mostrar['nombre'] ?> <?php echo $mostrar['apellidos'] ?></td>
+                            <td><?php echo $mostrar['nombre'] ?> </td>
                         </tr>
                         <?php
                     }
