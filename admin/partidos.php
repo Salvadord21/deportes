@@ -18,7 +18,7 @@ include '../php/conexion.php';
                     <h6 class="m-0 font-weight-bold text-primary">Partidos</h6>
                 </div>
 
-                <div class="card-body" id="result2">
+                <div class="card-body">
                     <div class="col-12">
                         <p>Agregar partidos</p>
                         <select class="form-control" name="torneo" id="torneo" required style="width:100%" >
@@ -484,7 +484,7 @@ include '../php/conexion.php';
                     }
 
                     function actualizar(){
-                        $( "#result2" ).load(" #result2" );
+                        $( "#result2" ).load("partidos.php #result2" );
                         $( "#result" ).load("partidos.php #result" );
 
                     }

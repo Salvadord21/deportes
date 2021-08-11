@@ -1,6 +1,4 @@
 <?php
-
-
 include '../../php/conexion.php';
 
 
@@ -13,7 +11,7 @@ $data = array();
 
 
 
-$insert = "insert into creacion_reto(nombre_reto, descripcion, url, fecha_inicio, fecha_fin)
+$insert = "insert into creacion_reto(`nombre_reto`, `descripcion`, `url`, `fecha_inicio`, `fecha_fin`)
         values ('$nombrereto', '$descrip','$url','$fecha_ini','$fecha_fin')";
 
 $resultado = mysqli_query($conexion, $insert);
